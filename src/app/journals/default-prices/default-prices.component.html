@@ -1,0 +1,122 @@
+<div class="container">
+    <!-- <div class="dropdown">
+        <button class="dropbtn">Journals</button>
+        <div class="dropdown-content">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Reports</button>
+        <div class="dropdown-content">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+        </div>
+      </div>
+     -->
+    
+    <h1 style="text-transform:capitalize; color: brown;"> Manage Default</h1>
+
+    <h5 style="color: grey; margin-top: 10px;">Selected Sites</h5>
+    <select class="select"name="chapter" id="chapter">
+        <option value="" selected="selected">Please select site</option>
+      </select>
+      
+    
+    
+    <form class="form">
+        <h5 style="color: grey; margin-top: 10px;">Default Price</h5>
+        <table class=" table">
+            <tr class="thline">
+                <th></th>
+                <th>Currency</th>
+                <th>Forsale</th>
+                <th>Price</th>
+                <th>Access Panel</th>
+            </tr>
+            <tr >
+                <td class="isar">Issue</td>
+                <td>  <div class="input-group input-group-sm ">
+                    <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" placeholder="USD"></div></td>
+                <td><label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label></td>
+                <td>
+                    <div class="input-group input-group-sm ">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">$</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm" >
+                    </div>
+                </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            24 Hours
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                            <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                        </ul>
+                    </div>
+                </td>
+                <td><button type="button" class="btn btn-danger">-Remove</button></td>
+                
+            </tr>
+            <tr>
+                <td class="isar">Article</td>
+                <td>  <div class="input-group input-group-sm ">
+                    <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" placeholder="USD"></div></td>
+                <td>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+
+                </td>
+                <td>
+                    <div class="input-group input-group-sm ">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">$</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            24 Hours
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                            <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                        </ul>
+                    </div>
+                </td>
+                <td><button type="button" class="btn btn-danger">-Remove</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" class="btn btn-info">Add Price</button></td>
+            </tr>
+           
+            <tr>
+                <td><button type="button" class="btn btn-danger">Cancel</button></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><div><button type="button" class="btn btn-info">Save</button></div></td>
+                
+            </tr>
+
+            
+
+
+        </table>
+    </form>
+</div>

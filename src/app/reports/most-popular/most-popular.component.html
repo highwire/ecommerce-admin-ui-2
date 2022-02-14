@@ -1,0 +1,143 @@
+<div class="container">
+
+    <div class="container  mt-3">
+        <h4 style="color: brown; font-size:x-large;">Most Popular</h4>
+
+        <div class="dateframe" style="height: 100px; width:100%">
+
+            <div class="df" style="margin-left: 870px;">
+
+                <mat-form-field appearance="legacy">
+
+                    <mat-label style="color: white; position:relative; margin-left: 10px;">Set Date Range</mat-label>
+
+                    <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange"
+                        style="background-color: brown; color:white;">
+                        <input matStartDate formControlName="start" placeholder="Start Date" style="color: white;">
+                        <input matEndDate formControlName="end" placeholder="End Date" style="color: white;">
+                    </mat-date-range-input>
+
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+
+                </mat-form-field>
+
+                <h5>
+                    Start: {{dateRange.value.start | date}}
+                    End: {{dateRange.value.end | date}}
+                </h5>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row rf">
+        <div class="col-sm-3  text-white">
+            <ul style="width: 95%; height: 100px; border: 1px solid grey;">No.of Items sold
+                <li>0</li>
+            </ul>
+        </div>
+
+        <div class="col-sm-3  text-white">
+            <ul style="width: 95%; height: 100px; border: 1px solid grey;">Total Revenue-USD
+                <li>$ 0</li>
+            </ul>
+        </div>
+        <div class="col-sm-3  text-white">
+            <ul style="width: 95%; height: 100px; border: 1px solid grey;">Total Issues Sold
+                <li>0</li>
+            </ul>
+        </div>
+        <div class="col-sm-3  text-white">
+            <ul style="width: 95%; height: 100px; border: 1px solid grey;">Total Article Sold
+                <li>0</li>
+            </ul>
+        </div>
+        <div class="col-sm-6 my-4 text-white">
+            <ul style="width: 98%; height: 100px; border: 1px solid grey;">Most Popular Access Period
+                <li>No Data</li>
+            </ul>
+        </div>
+
+
+
+
+    </div>
+
+    <div>
+
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+
+
+
+
+        <div class="row p-2">
+            <div class="col-sm-12 my-3" style="background-color: brown; height:8vh; padding: 15px; color: white;">
+
+                Most Popular Content
+            </div>
+        </div>
+
+
+        <div class="serchbtn" style="display: flex; height: 35px;">
+
+            <button type="button" class="btn btn-primary">ALL</button>
+            <button type="button" class="btn btn-primary">USD($)</button>
+            <button type="button" class="btn btn-primary">EXPORT(.CSV)</button>
+
+
+            <div class="serch" style="width: 60%; margin-left: 250px;">
+                <div>
+                    <!-- <h5>Search Report</h5> -->
+                    <input style="width:90%; border:1px solid grey;" type="text" placeholder="Search.."
+                        name="Search Report">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+    </div>
+    <div class="row">
+
+        <table class="table table-bordered mt-5 ">
+
+
+
+            <thead>
+
+                <tr>
+                    <th>DOI/ISBN/ISSN</th>
+                    <th>Item Title</th>
+                    <th>Publication Type</th>
+                    <th>Price</th>
+                    <th>Access Period</th>
+                    <th>Quality Sold</th>
+                    <th>Total Revenue</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+</div>

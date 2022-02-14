@@ -1,0 +1,113 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+body {
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+}
+
+.font-13 {
+    font-size: 13px;
+}
+
+.font-12 {
+    font-size: 12px;
+}
+
+.font-14 {
+    font-size: 14px;
+}
+
+.form-control {
+    font-size: 14px;
+    border-radius: 0;
+}
+
+.bg-primary {
+    background-color: #4a90e2!important;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #4a90e2;
+    border-color: #4a90e2;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #a81732;
+    border-color: #a81732;
+}
+
+a {
+    color: #a81732;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #8e132a;
+}
+
+.color-theme1 {
+    color: #a81732;
+}
+
+.common-gray {
+    background: #eae8e8;
+}
+
+.mid-wrapper {
+    min-height: calc(100vh - 309px)
+}
+
+.wsn {
+    white-space: normal;
+}
+
+.nav-text {
+    padding-left: 8px;
+}
+
+.header-shadow {
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 28%)!important;
+}
+
+.nav-logotype {
+    margin-top: 3px;
+}
+
+.nav-product-name {
+    font-weight: 600;
+    font-size: 13px;
+    color: #a81732;
+    line-height: 16px;
+}
+
+.custom-nav .navbar-nav li a.nav-link {
+    border-left: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
+    line-height: 52px;
+}
+
+.footer {
+    background: #e6e6e6;
+    margin-top: 10px;
+    box-shadow: 0 -2px 2px 0 rgb(0 0 0 / 25%);
+}
+
+.table-sm td,
+th {
+    padding-top: 2px!important;
+    padding-bottom: 2px!important;
+}
+
+@media only screen and (max-width: 767px) {
+    .custom-nav .navbar-nav li a.nav-link {
+        border-left: none;
+        border-right: none;
+        line-height: 30px;
+    }
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

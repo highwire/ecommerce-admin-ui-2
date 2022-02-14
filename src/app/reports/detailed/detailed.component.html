@@ -1,0 +1,90 @@
+<div class="container mt-3">
+    <p style="color: brown; font-size:x-large;">Ecommerce Report</p>
+
+    <div class="dateframe" style="margin-left:897px;height: 100px; width:100%">
+
+
+        <mat-form-field appearance="legacy">
+
+            <mat-label style="color: white; position:relative; margin-left: 10px;">Set Date Range</mat-label>
+
+            <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange"
+                style="background-color: brown; color:white;">
+                <input matStartDate formControlName="start" placeholder="Start Date" style="color: white;">
+                <input matEndDate formControlName="end" placeholder="End Date" style="color: white;">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+        <h5>
+            Start: {{dateRange.value.start | date}}
+            End: {{dateRange.value.end | date}}
+        </h5>
+        <button class="btn btn-info p-1" style="color: white;">EXPORT(.CSV)</button>
+        </div>
+
+
+
+        <table class="table table-striped mt-5 " style="border:1px solid grey;">
+            <thead>
+                <tr>
+                    <th scope="col">Transaction ID</th>
+                    <th scope="col">Transaction Date & Time(UTC)</th>
+                    <th scope="col">Transaction Date & Time(IST)</th>
+                    <th scope="col">Product Total</th>
+                    <th scope="col">Discount Total</th>
+                    <th scope="col">Net Revenue</th>
+                    <th scope="col">Currency</th>
+                    <th scope="col">Customer Country</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Customer Email</th>
+                    <th scope="col">Journal Code(s)</th>
+                    <th scope="col">Title(s)</th>
+                    <th scope="col">Publication Type</th>
+                    <th scope="col">DOI</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+
+                    <td>demo</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>$demo</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+
+                <!--this is just for demo line after backend can remove-->
+                <tr>
+
+                    <td>demo</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>$demo</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>

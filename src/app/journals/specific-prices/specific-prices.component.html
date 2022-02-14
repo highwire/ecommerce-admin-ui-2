@@ -1,0 +1,77 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+<div class="container">
+    <div class="table">
+        <div class="container ng-scope" ng-show="catalog.initialized">
+            <div class="totals row">
+                <div class="col-md-3 col-xs-3">
+                    <h3 style="color: brown;">Journal Pricing</h3>
+                </div>
+                <div class="col-md-9 col-xs-9">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-6">
+                            <h6>No. of specific prices</h6>
+                            <h1 class="stat ng-binding" style="color: brown;">0&nbsp;</h1>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                                
+
+            
+                
+                   
+                            <div class ="serchbtn"style="display: flex; justify-content:space-between;">
+
+                                <button type="button" class="btn btn-primary">ALL</button>
+                                <button type="button" class="btn btn-primary">USD($)</button>
+                                <button type="button" class="btn btn-primary">ADD</button>
+                                
+                                
+                                <div class="serch" style="width: 60%; margin-left: 250px;">
+                                    
+                                    <input style="width:90%; border:1px solid grey;" type="text" placeholder="Search.." name="search">
+                                    <button type="submit"><i class="fa fa-search"></i></button>    
+                                </div>
+                                
+                            </div>
+                                
+                                
+                                
+                                
+
+                <!--<div class="search-container">
+                <form action="/action_page.php">
+                  <input type="text" placeholder="Search.." name="search"><i class="fa fa-search"></i>
+                  <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+              </div>-->
+            </div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>DOI</th>
+                        <th class="sortable" ng-click="sortContent('entryDescription', !reverse)"
+                            ng-class="{sorting: sort === 'entryDescription'}">
+                            <span>Item Title<span>
+                                    <span class="stack-vertical">
+
+                                    </span>
+                                </span></span>
+                        </th>
+                        <th>Price Type</th>
+                        <th>Price</th>
+                        <th>Access Period</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
+
+        </div>

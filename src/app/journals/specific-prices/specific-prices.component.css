@@ -1,0 +1,15 @@
+.btn{ border-radius:0px!important;}
+
+.table>:not(:first-child) {
+    border-top: 0px solid currentColor !important;
+}
+
+@media screen and (max-width: 780px) {
+    .serchbtn {
+        height: 50px;}
+
+        .serch {
+            margin-left: 4px!important;
+            display: contents;
+        }
+  }
