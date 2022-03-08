@@ -1,20 +1,3 @@
-// import { Injectable } from '@angular/core';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class HTTPService {
- 
-
-//   constructor() { }
-//   getdata(){
-//     // $http({url: hwpSecurityConfig.authVerifyServicePoint, method: 'POST', data: {token: token}})
-//   }
-// }
-
-
-
-
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -46,8 +29,31 @@ export class HTTPService {
     // return this.http.get<Config>(this.configUrl);
   }
   getDatawithPost(URL:any, data:any) {
+    var token= localStorage.getItem('hwp-login');    
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer '+ token
+      })
+    }
+    return this.http.post(URL,data,httpOptions);
+  }
+
+  getDatawithPut(URL:any, data:any) {
+    var token= localStorage.getItem('hwp-login');    
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer '+ token
+      })
+    }
+    return this.http.put(URL,data,httpOptions);
+  }
+
+
+  getDatawithGet(URL:any, data:any) {
     var token= localStorage.getItem('hwp-login');
-    // var data={Authorization: 'Bearer '+ token};
+    
     var httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -55,9 +61,28 @@ export class HTTPService {
       })
     }
     
-    return this.http.post(URL,data,httpOptions);
+    return this.http.get(URL,httpOptions);
   
   }
+
+
+  getDatawithDelete(URL:any, data:any) {
+    var token= localStorage.getItem('hwp-login');
+    
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer '+ token
+      })
+    }
+
+    return this.http.delete(URL,httpOptions);
+  
+  }
+
+
+
+
 }
 
 //   user: user,

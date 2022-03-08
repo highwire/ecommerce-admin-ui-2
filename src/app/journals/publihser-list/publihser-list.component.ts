@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HTTPService } from '../../services/http.service';
 import { BaseService } from 'src/app/services/base.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-publihser-list',
   templateUrl: './publihser-list.component.html',
@@ -10,7 +11,8 @@ export class PublihserListComponent implements OnInit {
 publihserlist: any;
   constructor(
     public http: HTTPService,
-    public base: BaseService
+    public base: BaseService,
+    public router:Router
   ) {
 
    }
@@ -29,6 +31,11 @@ publihserlist: any;
         this.publihserlist= data[this.base.APP_ROLE];
     })
 
+  }
+  selectPublishers(item:any){
+    localStorage.setItem('publisher',item.term)
+    this.router.navigateByUrl('journals/specific');
+    console.log(item);
   }
 
 }

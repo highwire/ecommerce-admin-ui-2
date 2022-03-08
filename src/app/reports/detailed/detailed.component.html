@@ -15,18 +15,134 @@
             </mat-date-range-input>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 
+           
+
+
+
             <mat-date-range-picker #picker></mat-date-range-picker>
         </mat-form-field>
         <h5>
             Start: {{dateRange.value.start | date}}
             End: {{dateRange.value.end | date}}
         </h5>
-        <button class="btn btn-info p-1" style="color: white;">EXPORT(.CSV)</button>
+        
+        </div>
+ 
+        <div class="row">
+          <div class="col-md-8"></div>
+          <div class="col-md-4">
+            <button class="btn btn-info p-1" style="color: white;">EXPORT(.CSV)</button>
+          </div>
         </div>
 
+<div class="row">
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+            <!-- Position Column -->
+            <ng-container matColumnDef="highwireTransactionId">
+              <th mat-header-cell *matHeaderCellDef>Transaction ID.</th>
+              <td mat-cell *matCellDef="let element">{{element.highwireTransactionId }}</td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="transactionDateTime">
+              <th mat-header-cell *matHeaderCellDef>Transaction Date & Time(UTC)</th>
+              <td mat-cell *matCellDef="let element">{{element.transactionDateTime | date}}</td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <!-- <ng-container matColumnDef="transactionDateTime">
+              <th mat-header-cell *matHeaderCellDef>Transaction Date & Time(IST)</th>
+              <td mat-cell *matCellDef="let element">{{element.transactionDateTime | titlecase}}</td>
+            </ng-container> -->
 
 
-        <table class="table table-striped mt-5 " style="border:1px solid grey;">
+            <ng-container matColumnDef="amount">
+              <th mat-header-cell *matHeaderCellDef>Product Total</th>
+              <td mat-cell *matCellDef="let element">{{element.amount}} Hours</td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="discounts">
+              <th mat-header-cell *matHeaderCellDef>Discount Total</th>
+              <td mat-cell *matCellDef="let element">{{element.discounts[0]}}</td>
+            </ng-container>
+
+
+
+            <ng-container matColumnDef="currency">
+              <th mat-header-cell *matHeaderCellDef>Currency</th>
+              <td mat-cell *matCellDef="let element">{{element.currency}}</td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="customerCountry">
+              <th mat-header-cell *matHeaderCellDef>Customer Country</th>
+              <td mat-cell *matCellDef="let element">{{element.customerCountry}}</td>
+            </ng-container>
+          
+
+          
+            <ng-container matColumnDef="name">
+              
+                <th mat-header-cell *matHeaderCellDef>Customer Name	</th>
+              <td mat-cell *matCellDef="let element">{{element.name}}</td>
+                
+   
+            </ng-container>
+
+            
+
+            <ng-container matColumnDef="journalCode">
+              
+              <th mat-header-cell *matHeaderCellDef>Journal Code</th>
+            <td mat-cell *matCellDef="let element">{{element.journalCode}}</td>
+          </ng-container>
+              
+            <ng-container matColumnDef="journalName">
+              
+              <th mat-header-cell *matHeaderCellDef>Journal Name</th>
+            <td mat-cell *matCellDef="let element">{{element.journalName}}</td>
+          </ng-container>
+            <ng-container matColumnDef="contentId">
+              
+              <th mat-header-cell *matHeaderCellDef>DOI</th>
+            <td mat-cell *matCellDef="let element">{{element.contentId}}</td>
+              
+          </ng-container>
+
+
+            <ng-container matColumnDef="email">
+              
+              <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let element">{{element.email}}</td>
+              
+
+
+           
+          </ng-container>
+
+
+           
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            
+            <tr mat-row [class.demo-row-is-clicked]="clickedRows.has(row)"
+                *matRowDef="let row; columns: displayedColumns;">
+              </tr>
+          </table>                      
+
+
+
+        <mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
+[pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
+</mat-paginator>
+
+</div>
+
+
+
+        <!-- <table class="table table-striped mt-5 " style="border:1px solid grey;">
             <thead>
                 <tr>
                     <th scope="col">Transaction ID</th>
@@ -65,7 +181,7 @@
 
                 </tr>
 
-                <!--this is just for demo line after backend can remove-->
+                
                 <tr>
 
                     <td>demo</td>
@@ -86,5 +202,10 @@
                 </tr>
 
             </tbody>
-        </table>
+        </table> -->
     </div>
+
+
+
+
+

@@ -6,7 +6,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { RouterModule } from '@angular/router';
 import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleAnalytics } from 'angulartics2';
-import { AuthresolverService } from './/authresolver.service';
+import { AuthresolverService } from './authresolver.service';
 import { MessageService } from './message.service';
 // import { JwtModule } from "@auth0/angular-jwt";
 import { BrowserModule } from '@angular/platform-browser';
@@ -32,11 +32,13 @@ import { SignupComponent } from './signup/signup.component';
 // whitelistedDomains: ['localhost:4300'],
 // import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { LogoutComponent } from './logout/logout.component';
 
 
 @NgModule({
   declarations: [
-    SignupComponent
+    SignupComponent,
+    LogoutComponent
   ],
   imports: [
     
@@ -52,7 +54,7 @@ import { ReactiveFormsModule,FormsModule } from '@angular/forms';
     
   ],
   providers:[
-    AuthresolverService,
+    
     MessageService
   ]
 })

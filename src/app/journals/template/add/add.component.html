@@ -1,0 +1,85 @@
+<div class=" container p-2 my-3 ">
+    <h4>View/Add/EditPrices</h4>
+    <div class="sm-4 my-2 mx-0 row" *ngIf="data">
+       <div class="mb-3 row">
+          <label for="inputtext" class="col-sm-5 col-form-label">Publication Details</label>
+          <div class="col-sm-6">
+             <input type="text" class="form-control-plaintext p-2" class="form-control" value="{{data.title}}" placeholder="Details"
+                id="Details">
+          </div>
+       </div>
+       <div class="mb-3 row">
+          <label for="inputtext" class="col-sm-5 col-form-label">Product Type</label>
+          <div class="col-sm-6">
+             <input style="border-radius: 0px;" value="{{basedata.productType}}" type="text" class="form-control-plaintext p-2" class="form-control"
+                placeholder="Article" id="Details">
+          </div>
+       </div>
+       <!--  title name -->
+       <table class="table">
+          <thead>
+             <tr>
+                <th scope="col"> Price Type</th>
+                <th scope="col"> CURRENCY</th>
+                <th scope="col"> FOR SALE</th>
+                <th scope="col"> PRICE</th>
+                <th scope="col">ACCESS PERIOD </th>
+                <th scope="col"> </th>
+             </tr>
+          </thead>
+          <tbody *ngIf="basedata.prices">
+             <tr *ngFor="let item of basedata.prices;let ind=index">
+                <th scope="col"> {{item.productType | titlecase}}</th>
+                <td>
+                   <select id="dropdown" class="form-select"  aria-label="#" [(ngModel)]="item.price_currency">
+                      <option  *ngFor="let curr of currency" value='{{curr}}'>{{curr}}</option>
+                   </select>
+                </td>
+                <td>
+                   <label class="switch">
+                   <input type="checkbox" checked>
+                   <span class="slider round"></span>
+                   </label>
+                </td>
+                <td>
+                   <div class="input-group mb-3">
+                      <span style="border-radius: 0px; border: none;" class="input-group-text" id="#">$</span>
+                      <input style="border-radius: 0px;background-color: #e9ecef ; border: none;" type="text"
+                      [(ngModel)]="item.price_amount"
+                      class="form-control"
+                         placeholder="Not for sale" aria-label="price" aria-describedby="#">
+                   </div>
+                </td>
+                <td>
+                   <div class="input-group mb-3 hour">
+                      <select id='dropdown'
+                      [(ngModel)]="item.price_interval"
+                       class="form-select" aria-label="#">
+                         <option  *ngFor="let inter of accessPeriods"  value="{{inter.value}}">{{inter.label}}</option>
+                      </select>
+                   </div>
+                </td>
+                <td>
+                   <button class="btn btn-primary me-md-2 can" type="button" (click)="removeitem(ind)">
+                   <i class="fa-solid fa-minus"></i>REMOVE</button>
+                </td>
+             </tr>
+             <tr>
+                <td>
+                   <div class="input-group mb-3 hour">
+                     <button class="btn btn-primary mx-2 sav" (click)="addPrice()" type="button">Article</button>
+                      <!-- <select id='dropdown' class="form-select" aria-label="#"> -->
+                         <!-- <option selected (click)="addPrice()">Article </option> -->
+                      <!-- </select> -->
+                   </div>
+                </td>
+             </tr>
+             <tr>
+             <td class="button_td"><button class="btn btn-primary can" (click)="closeDialog(false)" type="button">Cancel</button>
+             <button class="btn btn-primary mx-2 sav" type="button" (click)="update()">Save</button>
+             </td>
+             </tr>
+          </tbody>
+       </table>
+       </div>
+    </div>

@@ -13,7 +13,7 @@ import { Angulartics2 } from 'angulartics2';
 
 import { AuthresolverService } from '../authresolver.service';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BaseService } from '../../services/base.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -30,7 +30,8 @@ export class SignupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private angulartics2: Angulartics2,
-    private authz: AuthresolverService
+    private authz: AuthresolverService,
+    private base :BaseService
   ) { 
 
     this.registerForm = this.formBuilder.group({
@@ -86,7 +87,7 @@ export class SignupComponent implements OnInit {
         //     }
         //   });
         // });
-
+        this.base.openSnackBar(5,'Login successfully.');
         this.router.navigateByUrl('journals/publishers');
       }
       // ,

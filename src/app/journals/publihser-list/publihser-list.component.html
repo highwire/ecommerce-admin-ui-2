@@ -32,8 +32,8 @@
         <hr />
         <div>
           <div class="list-group">
-            <a href="" class="list-group-item" *ngFor="let login of publihserlist">
-              {{login.label}}
+            <a href="javascript:void(0);" (click)="selectPublishers(item)" class="list-group-item" *ngFor="let item of publihserlist">
+              {{item.label}}
             </a>
           </div>
         </div>

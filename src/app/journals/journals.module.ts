@@ -7,10 +7,23 @@ import { SpecificPricesComponent } from './specific-prices/specific-prices.compo
 import { SettingsComponent } from './settings/settings.component';
 import { PromocodeComponent } from './promocode/promocode.component';
 import { IncrementDiscountComponent } from './increment-discount/increment-discount.component';
-// import { FormsModule } from '@angular/forms';
+
  // <--- JavaScript import from Angular
+ import {MatPaginatorModule} from '@angular/material/paginator';
 
 import {PublihserListComponent} from './publihser-list/publihser-list.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FormsModule } from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
+import { EditComponent } from './template/edit/edit.component';
+import { AddComponent } from './template/add/add.component';
+import { CitationComponent } from './template/citation/citation.component';
+import { DeleteComponent } from './template/delete/delete.component';
+
 
 @NgModule({
   declarations: [
@@ -19,12 +32,24 @@ import {PublihserListComponent} from './publihser-list/publihser-list.component'
     SettingsComponent,
     PromocodeComponent,
     IncrementDiscountComponent,
-    PublihserListComponent
+    PublihserListComponent,
+    EditComponent,
+    AddComponent,
+    CitationComponent,
+    DeleteComponent
   ],
   imports: [
     
     CommonModule,
-    JournalsRoutingModule
+    MatTableModule,
+    JournalsRoutingModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    FormsModule
   ]
 })
 export class JournalsModule { }

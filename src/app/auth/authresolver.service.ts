@@ -15,8 +15,12 @@ import { MessageService } from './message.service';
 import { environment } from '../../environments/environment';
 
 import { LoginResponse } from './login-response';
+import { Subject } from "rxjs";
+import { BaseService } from '../services/base.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthresolverService {
   private loginUrl = environment.loginUrl;
   public role = environment.appRole;
@@ -24,6 +28,11 @@ export class AuthresolverService {
   private privs: any = [];
   // public authMenu: BehaviorSubject<AuthMenu> = new BehaviorSubject(null);
   // public hwpUser: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+  private hwpUser = new Subject<boolean>();
+  authMenu = this.hwpUser.asObservable();
+
+
   public publishers = [];
   public publisherSites = {};
   // public corpusSelection: BehaviorSubject<Corpus> = new BehaviorSubject(null);
@@ -33,7 +42,8 @@ export class AuthresolverService {
     private http: HttpClient,
     private messageService: MessageService,
     private router: Router,
-    public jwtHelper: JwtHelperService
+    public jwtHelper: JwtHelperService,
+    private base :BaseService
   ) { }
 
   login(user: string, password: string, persistLogin: boolean): any {
@@ -52,10 +62,10 @@ export class AuthresolverService {
           localStorage.setItem('hwp-login', response.token);
           // todo: need better way to determine internal users from backend servers
           if (this.username === 'ddt' || this.username === 'admin@highwire.org') {
-            // this.hwpUser.next(true);
+            this.hwpUser.next(true);
           }
           else {
-            // this.hwpUser.next(false);
+            this.hwpUser.next(false);
           }
         }
 
@@ -71,7 +81,7 @@ export class AuthresolverService {
     this.publishers = [];
     this.publisherName.next('');
     localStorage.clear();
-    // this.authMenu.next(null);
+    this.hwpUser.next(false);
     this.router.navigate(['/login'], {});
   }
 
@@ -99,10 +109,10 @@ export class AuthresolverService {
       }
       // todo: need better way to determine internal users from backend servers
       if (this.username === 'ddt' || this.username === 'admin@highwire.org') {
-        // this.hwpUser.next(true);
+        this.hwpUser.next(true);
       }
       else {
-        // this.hwpUser.next(false);
+        this.hwpUser.next(false);
       }
       if (privs[this.role].length === 1) {
         this.publisherName.next(privs[this.role][0].label);
@@ -172,8 +182,10 @@ export class AuthresolverService {
   // }
 
   private handleError<T> (operation = 'operation', result?: T) {
+    
     return (error: any): Observable<T> => {
       console.error(error);
+      this.base.openSnackBar(5,'Login fail.');
       this.log(`${operation} failed: ${error || error.message}`);
       return of(result as T);
     }

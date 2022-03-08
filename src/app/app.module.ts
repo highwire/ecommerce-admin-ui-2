@@ -13,11 +13,19 @@ import { LoggerModule, NgxLoggerLevel } from "ngx-logger";
 import {  FormsModule,ReactiveFormsModule } from '@angular/forms';
 // import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
+import { NgHttpLoaderModule } from 'ng-http-loader';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from "@auth0/angular-jwt";
-    
+import {MatTableModule} from '@angular/material/table';
+// import { MatTableModule } from '@angular/material/table'  
+// import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MessagepopupComponent } from './common/messagepopup/messagepopup.component';
+
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+
 export function tokenGetter() {
   return localStorage.getItem('hwp-login');
 }
@@ -28,14 +36,20 @@ export function tokenGetter() {
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    MessagepopupComponent,
    
    
   ],
   imports: [
+    MatTableModule,
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MatSnackBarModule,
+    
+    NgHttpLoaderModule.forRoot(),
+    
     
     // FormsModule,
     // ReactiveFormsModule,
