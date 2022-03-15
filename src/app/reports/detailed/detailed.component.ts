@@ -8,6 +8,7 @@ import {MatPaginator,PageEvent} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {hwValidator} from '../../services/hwvalidator.service'
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-detailed',
@@ -15,10 +16,13 @@ import {hwValidator} from '../../services/hwvalidator.service'
   styleUrls: ['./detailed.component.css']
 })
 export class DetailedComponent implements OnInit {
+  
   dateRange = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
   });
+
+
   displayedColumns: string[] = ['highwireTransactionId','transactionDateTime',
   'amount','discounts', 'currency', 'customerCountry',
    'name','email' ,
@@ -48,6 +52,13 @@ export class DetailedComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    //   endDate: "2022-02-17T18:30:00.000Z"
+// pub: "hw-demo"
+// startDate: "2021-11-01T18:30:00.000Z"
+    this.dateRange.patchValue({
+      start: "2021-11-01T18:30:00.000Z",
+      end: "2022-02-17T18:30:00.000Z"
+   });
     this.selectAllPublishers();
   }
   
@@ -61,14 +72,27 @@ export class DetailedComponent implements OnInit {
     this.currentPage = event.pageIndex;
     this.selectAllPublishers();
   }
+
+  setDate(){
+    // Start: {{dateRange.value.start | date}}
+    // End: {{dateRange.value.end | date}}
+  }
+
+  addEvent(event: any) {
+
+    // console.log('event.value',event.value);
+    // this.events.push(`${type}: ${event.value}`);
+  }
+
+
   selectAllPublishers(){
     let publisher = localStorage.getItem('publisher')  ;
     let URL= this.base.DETAILED_REPORT;
     let DATA= {
       // "endDate": this.dateRange.value.s
-      "endDate": "2022-03-07",
+      "endDate": this.dateRange.value.end,
       "pub": publisher,
-      "startDate": "2021-12-01"
+      "startDate": this.dateRange.value.start
     }
     this.http.getDatawithPost(URL,DATA).subscribe((data:any)=>{
       this.dataSource.data= data.transactions;
@@ -177,27 +201,4 @@ extractPrice(data:any){
 
 
 
-amount: 35
-ancestors: [{contentId: "2041-479X", contentIdType: "eissn", resourceType: "journal"}]
-contentId: "10.1144/gsjgs.156.4.0731"
-contentIdType: "doi"
-currency: "USD"
-customerCountry: "US"
-customerNumber: "25189325"
-discounts: []
-email: "ppv@rpdesk.com"
-highwireTransactionId: "1919690161"
-interval: 24
-ipAddress: "54.218.135.100"
-issueNumber: null
-journalCode: "jgs"
-journalName: "Journal of the Geological Society"
-name: "Reprints Desk"
-resourceId: "/jgs/156/4/731.atom"
-resourceType: "article"
-subscriptionCode: "N/A"
-subscriptionExpDate: null
-title: "Numerical age control for the Miocene-Pliocene succession at Lothagam, a hominoid-bearing sequence in the northern Kenya Rift"
-
-vendorId: null
-vendorName: "payflowpro"
+// amount:

@@ -24,6 +24,7 @@ import {MatTableModule} from '@angular/material/table';
 import { MessagepopupComponent } from './common/messagepopup/messagepopup.component';
 
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { NgxDateRangeModule } from 'ngx-daterange';
 
 
 export function tokenGetter() {
@@ -47,6 +48,7 @@ export function tokenGetter() {
     AppRoutingModule,
     HttpClientModule,
     MatSnackBarModule,
+    NgxDateRangeModule,
     
     NgHttpLoaderModule.forRoot(),
     

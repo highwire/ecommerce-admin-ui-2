@@ -20,12 +20,18 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import { MatTableExporterModule } from 'mat-table-exporter';
+// import { DoughnutChartComponent, PieChartComponent, BarChartComponent } from 'angular-d3-charts'; // this is needed!
+// DoughnutChartComponent, 
+// PieChartComponent, 
+// BarChartComponent,
 @NgModule({
   declarations: [
+   
     DetailedComponent,
     ChartsComponent,
-    MostPopularComponent
+    MostPopularComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -35,7 +41,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatNativeDateModule,
     ReactiveFormsModule,
     MatPaginatorModule,
-    
+    MatTableExporterModule,
     MatSelectModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,

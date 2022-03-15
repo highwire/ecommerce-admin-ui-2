@@ -15,10 +15,24 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.auth.authMenu.subscribe((message) => (
-        this.hwpUser = message
-      ));
+var auth:any= localStorage.getItem('auth');
+
+if(JSON.parse(auth)){
+  this.hwpUser=  true;
+}else{
+  this.hwpUser=  false;
+}
+
+    this.auth.authMenu.subscribe((message) => {
+      this.hwpUser = message
+      localStorage.setItem('auth','true');
+    }
+      
+
+      );
 
   }
+
+  
 
 }

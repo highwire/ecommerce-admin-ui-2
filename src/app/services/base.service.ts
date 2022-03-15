@@ -16,9 +16,10 @@ export class BaseService {
   SITE_LIST=environment.apiBase+  '/authorized-sites';
   OPEN_URL=  environment.apiBase+ '/openurl/jnl/';
   DELETE_PRICE=  environment.apiBase+ '/catalogadm/publishers/';
-  CURRENCY_LIST= environment.apiBase+ '/catalog/publishers/' 
-  DETAILED_REPORT=  environment.apiBase+ '/ecommerceadm/retrieve-report'
-  
+  CURRENCY_LIST= environment.apiBase+ '/catalog/publishers/' ;
+  DETAILED_REPORT=  environment.apiBase+ '/ecommerceadm/retrieve-report';
+  MOST_POPULAR= environment.apiBase+ '/reports/product/';
+
   LIVE_REPORT='https://ecommerce.highwire.org/api/ecommerceadm/retrieve-report'
   
  

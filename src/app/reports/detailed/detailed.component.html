@@ -5,22 +5,21 @@
 
 
         <mat-form-field appearance="legacy">
-
             <mat-label style="color: white; position:relative; margin-left: 10px;">Set Date Range</mat-label>
-
-            <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange"
+              
+            <mat-date-range-input 
+             
+            [rangePicker]="picker" [formGroup]="dateRange"
                 style="background-color: brown; color:white;">
-                <input matStartDate formControlName="start" placeholder="Start Date" style="color: white;">
+                <input  matStartDate formControlName="start" placeholder="Start Date" style="color: white;">
                 <input matEndDate formControlName="end" placeholder="End Date" style="color: white;">
             </mat-date-range-input>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-
-           
-
-
+            
 
             <mat-date-range-picker #picker></mat-date-range-picker>
         </mat-form-field>
+        <button class="btn btn-info pl-1" (click)="selectAllPublishers()">Run Report</button>
         <h5>
             Start: {{dateRange.value.start | date}}
             End: {{dateRange.value.end | date}}
@@ -31,13 +30,14 @@
         <div class="row">
           <div class="col-md-8"></div>
           <div class="col-md-4">
-            <button class="btn btn-info p-1" style="color: white;">EXPORT(.CSV)</button>
+            <button class="btn btn-info p-1" (click)="exporter.exportTable('csv')" style="color: white;">EXPORT(.CSV)</button>
+            <!-- <button type="button" class="m-1 btn btn-primary" (click)="exporter.exportTable('csv')">Csv</button> -->
           </div>
         </div>
 
 <div class="row">
 
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+        <table mat-table [dataSource]="dataSource" matTableExporter #exporter="matTableExporter" class="mat-elevation-z8 demo-table">
             <!-- Position Column -->
             <ng-container matColumnDef="highwireTransactionId">
               <th mat-header-cell *matHeaderCellDef>Transaction ID.</th>
@@ -142,67 +142,6 @@
 
 
 
-        <!-- <table class="table table-striped mt-5 " style="border:1px solid grey;">
-            <thead>
-                <tr>
-                    <th scope="col">Transaction ID</th>
-                    <th scope="col">Transaction Date & Time(UTC)</th>
-                    <th scope="col">Transaction Date & Time(IST)</th>
-                    <th scope="col">Product Total</th>
-                    <th scope="col">Discount Total</th>
-                    <th scope="col">Net Revenue</th>
-                    <th scope="col">Currency</th>
-                    <th scope="col">Customer Country</th>
-                    <th scope="col">Customer Name</th>
-                    <th scope="col">Customer Email</th>
-                    <th scope="col">Journal Code(s)</th>
-                    <th scope="col">Title(s)</th>
-                    <th scope="col">Publication Type</th>
-                    <th scope="col">DOI</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-
-                    <td>demo</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>$demo</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-
-                </tr>
-
-                
-                <tr>
-
-                    <td>demo</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>$demo</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-
-                </tr>
-
-            </tbody>
-        </table> -->
     </div>
 
 
