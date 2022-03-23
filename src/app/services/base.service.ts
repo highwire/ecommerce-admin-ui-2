@@ -19,9 +19,15 @@ export class BaseService {
   CURRENCY_LIST= environment.apiBase+ '/catalog/publishers/' ;
   DETAILED_REPORT=  environment.apiBase+ '/ecommerceadm/retrieve-report';
   MOST_POPULAR= environment.apiBase+ '/reports/product/';
+SEND_RECEIPT=  environment.apiBase+   '/report/publishers/';  
 
+
+// atom/lite/demonews.atom
   LIVE_REPORT='https://ecommerce.highwire.org/api/ecommerceadm/retrieve-report'
   
+  
+  ATOM_LOOKUP=environment.atomBase+ '/lookup/corpus/';
+  ATOM_LITE=environment.atomBase+ '/lite/'
  
   // constructor(private _snackBar: MatSnackBar) {}
   constructor(

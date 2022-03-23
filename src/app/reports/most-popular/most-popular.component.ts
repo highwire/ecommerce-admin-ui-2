@@ -173,7 +173,7 @@ extractPrice(data:any){
   var self= this;
   var pricearray:any= [];
   data.forEach((element:any) => {
-    console.log(element);
+    // console.log(element);
     if(element.prices && Array.isArray(element.prices)){
        element.prices.forEach((elements:any) => {      
         pricearray.push({

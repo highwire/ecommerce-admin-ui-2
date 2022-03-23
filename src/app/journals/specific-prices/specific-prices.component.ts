@@ -12,6 +12,11 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import {AddComponent} from '../template/add/add.component';
 
 import {hwValidator} from '../../services/hwvalidator.service'
+// import { } from '../'
+
+import {AddNewPriceComponent}  from '../template/add-new-price/add-new-price.component';
+
+
 
 interface USER {
   name: string;
@@ -92,7 +97,7 @@ extractPrice(data:any){
   var self= this;
   var pricearray:any= [];
   data.forEach((element:any) => {
-    console.log(element);
+    // console.log(element);
     if(element.prices && Array.isArray(element.prices)){
        element.prices.forEach((elements:any) => {      
         pricearray.push({
@@ -139,7 +144,7 @@ extractPrice(data:any){
 
 
   delete(element:any){
-    console.log(element);
+    // console.log(element);
 
     const dialogRef = this.dialog.open(DeleteComponent, {
       width: '950px',
@@ -166,7 +171,7 @@ extractPrice(data:any){
   }
 
   viewAdd(element:any){
-    console.log(element);
+    // console.log(element);
     var p= this.getCurrentPrices(element)
 
     const dialogRef = this.dialog.open(AddComponent, {
@@ -202,9 +207,25 @@ extractPrice(data:any){
     return prices
   }
 
+  addData(){
+    // console.log();
+    // var p= this.getCurrentPrices(element)
+   
+    const dialogRef = this.dialog.open(AddNewPriceComponent, {
+      width: '950px',
+      height: '400px',
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
+
 
   edit(element:any){
-    console.log(element);
+    // console.log(element);
     var p= this.getCurrentPrices(element)
    
     const dialogRef = this.dialog.open(EditComponent, {

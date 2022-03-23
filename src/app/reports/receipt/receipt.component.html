@@ -1,0 +1,89 @@
+
+
+
+<div class="container p-2 my-3 " >
+    <h2>Send Receipt </h2>
+     <div class="sm-4 my-2 mx-0 row" style="border: 1px solid grey;" *ngIf="data.element">
+       <div class="mb-3 row">
+          <label for="inputtext" class="col-sm-5 col-form-label">Transaction ID</label>
+          <div class="col-sm-6">
+             <input type="text" class="form-control-plaintext p-2" name="highwireTransactionId" value="{{data.element.highwireTransactionId}}"  class="form-control"  placeholder="Details"
+                id="Details">
+          </div>
+       </div>
+       <div class="mb-3 row">
+          <label for="inputtext" class="col-sm-5 col-form-label">Transaction Date & Time(UTC)</label>
+          <div class="col-sm-6">
+             <input type="text" name="transactionDateTime" class="form-control p-2" class="form-control" value="{{data.element.transactionDateTime}}" placeholder="Article" id="Details">
+          </div>
+       </div>
+       <div class="mb-3 row">
+          <label for="inputtext" class="col-sm-5 col-form-label">amount</label>
+          <div class="col-sm-6">
+             <input type="text" class="form-control p-2" name="amount" value="{{data.element.amount}}" class="form-control"  placeholder="EUR" id="amount">
+          </div>
+       </div>
+       <div class="mb-3 row">
+          <label for="inputtext" class="col-sm-5 col-form-label">Currency</label>
+          <div class="col-sm-6">
+             <div class="input-group mb-3">
+                <span class="input-group-text" id="#">€</span>
+                <input type="text" class="form-control" name="currency"  [(ngModel)]="data.element.currency"  placeholder="price" aria-label="price"
+                   aria-describedby="#">
+             </div>
+          </div>
+       </div>
+
+
+       <div class="mb-3 row">
+        <label for="inputtext" class="col-sm-5 col-form-label">Customer Country</label>
+        <div class="col-sm-6">
+           <div class="input-group mb-3">
+              <span class="input-group-text" id="#">€</span>
+              <input type="text" class="form-control" name="customerCountry"  [(ngModel)]="data.element.customerCountry"  placeholder="price" aria-label="price"
+                 aria-describedby="#">
+           </div>
+        </div>
+     </div>
+
+
+     <div class="mb-3 row">
+        <label for="inputtext" class="col-sm-5 col-form-label">Customer Name</label>
+        <div class="col-sm-6">
+           <div class="input-group mb-3">
+              <!-- <span class="input-group-text" id="#">€</span> -->
+              <input type="text" class="form-control" name="name"  [(ngModel)]="data.element.name"  placeholder="price" aria-label="price"
+                 aria-describedby="#">
+           </div>
+        </div>
+     </div>
+
+     <div class="mb-3 row">
+        <label for="inputtext" class="col-sm-5 col-form-label">Email</label>
+        <div class="col-sm-6">
+           <div class="input-group mb-3">
+              <!-- <span class="input-group-text" id="#">€</span> -->
+              <input type="text" class="form-control" name="email"  [(ngModel)]="data.element.email"  placeholder="price" aria-label="email"
+                 aria-describedby="#">
+           </div>
+        </div>
+     </div>
+      
+       
+
+   
+
+    </div>
+    <div class="mb-3 row">
+       <label for="inputtext" class="col-sm-5 col-form-label"></label>
+       <div class="col-sm-6 cs">
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+             <!-- <button class="btn btn-primary me-md-2 can" type="button">Cancel</button> -->
+             <button class="btn btn-danger me-md-2 can" (click)="closeDialog(false)"  mat-button mat-dialog-close>Cancel</button>
+
+             <button class="btn btn-primary sav" (click)="update()"  type="button">Save</button>
+          </div>
+       </div>
+    </div>
+ </div>
+ 

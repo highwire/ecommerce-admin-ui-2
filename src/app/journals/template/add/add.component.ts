@@ -27,12 +27,13 @@ export class AddComponent implements OnInit {
     public http: HTTPService,
     public base: BaseService,
     public dialogRef: MatDialogRef<AddComponent>,
+    
     @Inject(MAT_DIALOG_DATA) public basedata: any
   ) { }
   // constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-    console.log(this.basedata.element.name)
+    // console.log(this.basedata.element.name)
     console.log(this.basedata.prices);
     this.selectAllPublishers();
     this.getCurrencyList();

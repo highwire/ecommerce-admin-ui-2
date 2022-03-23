@@ -21,6 +21,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatTableExporterModule } from 'mat-table-exporter';
+import { ReceiptComponent } from './receipt/receipt.component';
 // import { DoughnutChartComponent, PieChartComponent, BarChartComponent } from 'angular-d3-charts'; // this is needed!
 // DoughnutChartComponent, 
 // PieChartComponent, 
@@ -31,6 +32,7 @@ import { MatTableExporterModule } from 'mat-table-exporter';
     DetailedComponent,
     ChartsComponent,
     MostPopularComponent,
+    ReceiptComponent,
     
   ],
   imports: [

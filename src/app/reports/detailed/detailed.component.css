@@ -1,1 +1,649 @@
+/* :host {
+    height: 100%;
+}
+:host mat-sidenav-container {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
+}
+:host mat-sidenav-container mat-sidenav {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-width: 300px;
+    max-width: 300px;
+    overflow-y: hidden;
+    background: white;
+    padding: 0 6px 0 18px;
+}
+:host mat-sidenav-container mat-sidenav-content {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+    height: 100%;
+    overflow-y: hidden;
+    background: white;
+}
+:host mat-sidenav-container mat-sidenav-content .table-container {
+    width: 100vw;
+}
+:host mat-sidenav-container mat-sidenav-content .mat-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+} */
 
+
+.mat-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+}
+
+
+
+.table-column-0 {
+    min-width: 0px;
+}
+.table-column-2 {
+    min-width: 2px;
+}
+.table-column-4 {
+    min-width: 4px;
+}
+.table-column-6 {
+    min-width: 6px;
+}
+.table-column-8 {
+    min-width: 8px;
+}
+.table-column-10 {
+    min-width: 10px;
+}
+.table-column-12 {
+    min-width: 12px;
+}
+.table-column-14 {
+    min-width: 14px;
+}
+.table-column-16 {
+    min-width: 16px;
+}
+.table-column-18 {
+    min-width: 18px;
+}
+.table-column-20 {
+    min-width: 20px;
+}
+.table-column-22 {
+    min-width: 22px;
+}
+.table-column-24 {
+    min-width: 24px;
+}
+.table-column-26 {
+    min-width: 26px;
+}
+.table-column-28 {
+    min-width: 28px;
+}
+.table-column-30 {
+    min-width: 30px;
+}
+.table-column-32 {
+    min-width: 32px;
+}
+.table-column-34 {
+    min-width: 34px;
+}
+.table-column-36 {
+    min-width: 36px;
+}
+.table-column-38 {
+    min-width: 38px;
+}
+.table-column-40 {
+    min-width: 40px;
+}
+.table-column-42 {
+    min-width: 42px;
+}
+.table-column-44 {
+    min-width: 44px;
+}
+.table-column-46 {
+    min-width: 46px;
+}
+.table-column-48 {
+    min-width: 48px;
+}
+.table-column-50 {
+    min-width: 50px;
+}
+.table-column-52 {
+    min-width: 52px;
+}
+.table-column-54 {
+    min-width: 54px;
+}
+.table-column-56 {
+    min-width: 56px;
+}
+.table-column-58 {
+    min-width: 58px;
+}
+.table-column-60 {
+    min-width: 60px;
+}
+.table-column-62 {
+    min-width: 62px;
+}
+.table-column-64 {
+    min-width: 64px;
+}
+.table-column-66 {
+    min-width: 66px;
+}
+.table-column-68 {
+    min-width: 68px;
+}
+.table-column-70 {
+    min-width: 70px;
+}
+.table-column-72 {
+    min-width: 72px;
+}
+.table-column-74 {
+    min-width: 74px;
+}
+.table-column-76 {
+    min-width: 76px;
+}
+.table-column-78 {
+    min-width: 78px;
+}
+.table-column-80 {
+    min-width: 80px;
+}
+.table-column-82 {
+    min-width: 82px;
+}
+.table-column-84 {
+    min-width: 84px;
+}
+.table-column-86 {
+    min-width: 86px;
+}
+.table-column-88 {
+    min-width: 88px;
+}
+.table-column-90 {
+    min-width: 90px;
+}
+.table-column-92 {
+    min-width: 92px;
+}
+.table-column-94 {
+    min-width: 94px;
+}
+.table-column-96 {
+    min-width: 96px;
+}
+.table-column-98 {
+    min-width: 98px;
+}
+.table-column-100 {
+    min-width: 100px;
+}
+.table-column-102 {
+    min-width: 102px;
+}
+.table-column-104 {
+    min-width: 104px;
+}
+.table-column-106 {
+    min-width: 106px;
+}
+.table-column-108 {
+    min-width: 108px;
+}
+.table-column-110 {
+    min-width: 110px;
+}
+.table-column-112 {
+    min-width: 112px;
+}
+.table-column-114 {
+    min-width: 114px;
+}
+.table-column-116 {
+    min-width: 116px;
+}
+.table-column-118 {
+    min-width: 118px;
+}
+.table-column-120 {
+    min-width: 120px;
+}
+.table-column-122 {
+    min-width: 122px;
+}
+.table-column-124 {
+    min-width: 124px;
+}
+.table-column-126 {
+    min-width: 126px;
+}
+.table-column-128 {
+    min-width: 128px;
+}
+.table-column-130 {
+    min-width: 130px;
+}
+.table-column-132 {
+    min-width: 132px;
+}
+.table-column-134 {
+    min-width: 134px;
+}
+.table-column-136 {
+    min-width: 136px;
+}
+.table-column-138 {
+    min-width: 138px;
+}
+.table-column-140 {
+    min-width: 140px;
+}
+.table-column-142 {
+    min-width: 142px;
+}
+.table-column-144 {
+    min-width: 144px;
+}
+.table-column-146 {
+    min-width: 146px;
+}
+.table-column-148 {
+    min-width: 148px;
+}
+.table-column-150 {
+    min-width: 150px;
+}
+.table-column-152 {
+    min-width: 152px;
+}
+.table-column-154 {
+    min-width: 154px;
+}
+.table-column-156 {
+    min-width: 156px;
+}
+.table-column-158 {
+    min-width: 158px;
+}
+.table-column-160 {
+    min-width: 160px;
+}
+.table-column-162 {
+    min-width: 162px;
+}
+.table-column-164 {
+    min-width: 164px;
+}
+.table-column-166 {
+    min-width: 166px;
+}
+.table-column-168 {
+    min-width: 168px;
+}
+.table-column-170 {
+    min-width: 170px;
+}
+.table-column-172 {
+    min-width: 172px;
+}
+.table-column-174 {
+    min-width: 174px;
+}
+.table-column-176 {
+    min-width: 176px;
+}
+.table-column-178 {
+    min-width: 178px;
+}
+.table-column-180 {
+    min-width: 180px;
+}
+.table-column-182 {
+    min-width: 182px;
+}
+.table-column-184 {
+    min-width: 184px;
+}
+.table-column-186 {
+    min-width: 186px;
+}
+.table-column-188 {
+    min-width: 188px;
+}
+.table-column-190 {
+    min-width: 190px;
+}
+.table-column-192 {
+    min-width: 192px;
+}
+.table-column-194 {
+    min-width: 194px;
+}
+.table-column-196 {
+    min-width: 196px;
+}
+.table-column-198 {
+    min-width: 198px;
+}
+.table-column-200 {
+    min-width: 200px;
+}
+.table-column-202 {
+    min-width: 202px;
+}
+.table-column-204 {
+    min-width: 204px;
+}
+.table-column-206 {
+    min-width: 206px;
+}
+.table-column-208 {
+    min-width: 208px;
+}
+.table-column-210 {
+    min-width: 210px;
+}
+.table-column-212 {
+    min-width: 212px;
+}
+.table-column-214 {
+    min-width: 214px;
+}
+.table-column-216 {
+    min-width: 216px;
+}
+.table-column-218 {
+    min-width: 218px;
+}
+.table-column-220 {
+    min-width: 220px;
+}
+.table-column-222 {
+    min-width: 222px;
+}
+.table-column-224 {
+    min-width: 224px;
+}
+.table-column-226 {
+    min-width: 226px;
+}
+.table-column-228 {
+    min-width: 228px;
+}
+.table-column-230 {
+    min-width: 230px;
+}
+.table-column-232 {
+    min-width: 232px;
+}
+.table-column-234 {
+    min-width: 234px;
+}
+.table-column-236 {
+    min-width: 236px;
+}
+.table-column-238 {
+    min-width: 238px;
+}
+.table-column-240 {
+    min-width: 240px;
+}
+.table-column-242 {
+    min-width: 242px;
+}
+.table-column-244 {
+    min-width: 244px;
+}
+.table-column-246 {
+    min-width: 246px;
+}
+.table-column-248 {
+    min-width: 248px;
+}
+.table-column-250 {
+    min-width: 250px;
+}
+.table-column-252 {
+    min-width: 252px;
+}
+.table-column-254 {
+    min-width: 254px;
+}
+.table-column-256 {
+    min-width: 256px;
+}
+.table-column-258 {
+    min-width: 258px;
+}
+.table-column-260 {
+    min-width: 260px;
+}
+.table-column-262 {
+    min-width: 262px;
+}
+.table-column-264 {
+    min-width: 264px;
+}
+.table-column-266 {
+    min-width: 266px;
+}
+.table-column-268 {
+    min-width: 268px;
+}
+.table-column-270 {
+    min-width: 270px;
+}
+.table-column-272 {
+    min-width: 272px;
+}
+.table-column-274 {
+    min-width: 274px;
+}
+.table-column-276 {
+    min-width: 276px;
+}
+.table-column-278 {
+    min-width: 278px;
+}
+.table-column-280 {
+    min-width: 280px;
+}
+.table-column-282 {
+    min-width: 282px;
+}
+.table-column-284 {
+    min-width: 284px;
+}
+.table-column-286 {
+    min-width: 286px;
+}
+.table-column-288 {
+    min-width: 288px;
+}
+.table-column-290 {
+    min-width: 290px;
+}
+.table-column-292 {
+    min-width: 292px;
+}
+.table-column-294 {
+    min-width: 294px;
+}
+.table-column-296 {
+    min-width: 296px;
+}
+.table-column-298 {
+    min-width: 298px;
+}
+.table-column-300 {
+    min-width: 300px;
+}
+.table-column-302 {
+    min-width: 302px;
+}
+.table-column-304 {
+    min-width: 304px;
+}
+.table-column-306 {
+    min-width: 306px;
+}
+.table-column-308 {
+    min-width: 308px;
+}
+.table-column-310 {
+    min-width: 310px;
+}
+.table-column-312 {
+    min-width: 312px;
+}
+.table-column-314 {
+    min-width: 314px;
+}
+.table-column-316 {
+    min-width: 316px;
+}
+.table-column-318 {
+    min-width: 318px;
+}
+.table-column-320 {
+    min-width: 320px;
+}
+.table-column-322 {
+    min-width: 322px;
+}
+.table-column-324 {
+    min-width: 324px;
+}
+.table-column-326 {
+    min-width: 326px;
+}
+.table-column-328 {
+    min-width: 328px;
+}
+.table-column-330 {
+    min-width: 330px;
+}
+.table-column-332 {
+    min-width: 332px;
+}
+.table-column-334 {
+    min-width: 334px;
+}
+.table-column-336 {
+    min-width: 336px;
+}
+.table-column-338 {
+    min-width: 338px;
+}
+.table-column-340 {
+    min-width: 340px;
+}
+.table-column-342 {
+    min-width: 342px;
+}
+.table-column-344 {
+    min-width: 344px;
+}
+.table-column-346 {
+    min-width: 346px;
+}
+.table-column-348 {
+    min-width: 348px;
+}
+.table-column-350 {
+    min-width: 350px;
+}
+.table-column-352 {
+    min-width: 352px;
+}
+.table-column-354 {
+    min-width: 354px;
+}
+.table-column-356 {
+    min-width: 356px;
+}
+.table-column-358 {
+    min-width: 358px;
+}
+.table-column-360 {
+    min-width: 360px;
+}
+.table-column-362 {
+    min-width: 362px;
+}
+.table-column-364 {
+    min-width: 364px;
+}
+.table-column-366 {
+    min-width: 366px;
+}
+.table-column-368 {
+    min-width: 368px;
+}
+.table-column-370 {
+    min-width: 370px;
+}
+.table-column-372 {
+    min-width: 372px;
+}
+.table-column-374 {
+    min-width: 374px;
+}
+.table-column-376 {
+    min-width: 376px;
+}
+.table-column-378 {
+    min-width: 378px;
+}
+.table-column-380 {
+    min-width: 380px;
+}
+.table-column-382 {
+    min-width: 382px;
+}
+.table-column-384 {
+    min-width: 384px;
+}
+.table-column-386 {
+    min-width: 386px;
+}
+.table-column-388 {
+    min-width: 388px;
+}
+.table-column-390 {
+    min-width: 390px;
+}
+.table-column-392 {
+    min-width: 392px;
+}
+.table-column-394 {
+    min-width: 394px;
+}
+.table-column-396 {
+    min-width: 396px;
+}
+.table-column-398 {
+    min-width: 398px;
+}
+.table-column-400 {
+    min-width: 400px;
+}

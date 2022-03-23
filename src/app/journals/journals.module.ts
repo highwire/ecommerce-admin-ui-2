@@ -23,7 +23,8 @@ import { EditComponent } from './template/edit/edit.component';
 import { AddComponent } from './template/add/add.component';
 import { CitationComponent } from './template/citation/citation.component';
 import { DeleteComponent } from './template/delete/delete.component';
-
+import { AddNewPriceComponent } from './template/add-new-price/add-new-price.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { DeleteComponent } from './template/delete/delete.component';
     EditComponent,
     AddComponent,
     CitationComponent,
-    DeleteComponent
+    DeleteComponent,
+    AddNewPriceComponent
   ],
   imports: [
     
@@ -49,7 +51,8 @@ import { DeleteComponent } from './template/delete/delete.component';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class JournalsModule { }

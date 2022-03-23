@@ -1,0 +1,56 @@
+<div class="container p-2 my-3">
+    <h2>Add New Price</h2>
+    <!-- <div class="alert alert-dark" role="alert">
+        Are you sure you want to delete the price below?
+      </div> -->
+      <!-- formGroup="fromModel"  -->
+      <form action=""  [formGroup]="fromModel">
+    <div class="sm-4 my-2 mx-0" style="border: 1px solid grey;">
+        <div class="p-3 row">
+            <label for="inputtext" class="col-sm-5 col-form-label">Product Type</label>
+            <div class="col-sm-6">
+                <input type="text" [readonly]="true" class="form-control-plaintext p-2"  class="form-control" placeholder="Details" id="Details" />
+            </div>
+        </div>
+        <div class="p-3 row">
+            <label for="inputtext" class="col-sm-5 col-form-label">Selected Sites</label>
+            <!-- <h5 style="color: grey; margin-top: 10px;">Selected Sites</h5> -->
+            <div class="col-sm-6">
+                <select class="select" name="chapter" formControlName="selected_site"  class="form-control p-2" id="chapter">
+                    <option value="" selected="selected">Please select site</option>
+                    <option value="{{site.site_code}}" *ngFor="let site of sitedata">{{site.site_name}}</option>
+                </select>
+        </div>
+          
+        </div>
+        <div class="p-3 row">
+            <!-- <label for="inputtext" class="col-sm-4 col-form-label">Currency</label> -->
+            <div class="col-sm-4">
+                <input type="text" [readonly]="true" class="form-control p-2"  class="form-control" placeholder="DOI" id="Details" />
+            </div>
+            <div class="col-sm-4">
+                <input type="text"  class="form-control p-2" formControlName="doi"  name="DOI" class="form-control" placeholder="Enter unique identifier ..."  />
+            </div>
+
+            <div class="col-sm-4">
+                <button class="btn btn-danger sav" (click)="update()" type="button">Look up</button>
+            </div>
+            
+        </div>
+        
+        
+    </div>
+    <div class="p-3 row">
+        <label for="inputtext" class="col-sm-5 col-form-label"></label>
+        <div class="col-sm-6 cs">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <!-- <button class="btn btn-primary me-md-2 can" type="button">Cancel</button> -->
+                <button class="btn btn-primary me-md-2 can btn-danger" mat-button mat-dialog-close>Cancel</button>
+
+                <button class="btn btn-primary sav " type="button">ADD</button>
+            </div>
+        </div>
+    </div>
+
+</form>
+</div>

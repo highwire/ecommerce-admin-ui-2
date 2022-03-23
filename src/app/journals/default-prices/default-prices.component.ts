@@ -37,6 +37,7 @@ export class DefaultPricesComponent implements OnInit {
   ]
 
 sitedata:any;
+
   constructor(
     public http: HTTPService,
     public base: BaseService,
@@ -70,7 +71,7 @@ sitedata:any;
     }
     this.http.getDatawithPost(URL,data).subscribe((data:any)=>{
         console.log(data);             
-        this.sitedata=  data.sites;
+        this.sitedata =  data.sites;
     })
   }
 
@@ -102,7 +103,7 @@ extractPrice(data:any){
   var self= this;
   var pricearray:any= [];
   data.forEach((element:any) => {
-    console.log(element);
+    // console.log(element);
     if(element.prices && Array.isArray(element.prices)){
       element.prices.forEach((elements:any) => {   
         if(elements.name=='chapter-price'  || elements.name=='edition-price' )

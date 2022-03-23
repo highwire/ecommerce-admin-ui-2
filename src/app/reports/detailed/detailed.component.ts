@@ -9,7 +9,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {hwValidator} from '../../services/hwvalidator.service'
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
-
+import { ReceiptComponent } from '../receipt/receipt.component';
 @Component({
   selector: 'app-detailed',
   templateUrl: './detailed.component.html',
@@ -26,7 +26,7 @@ export class DetailedComponent implements OnInit {
   displayedColumns: string[] = ['highwireTransactionId','transactionDateTime',
   'amount','discounts', 'currency', 'customerCountry',
    'name','email' ,
-  'journalCode','journalName','contentId'
+  'journalCode','journalName','contentId', 'edit'
     ];
   
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
@@ -122,7 +122,7 @@ extractPrice(data:any){
   var self= this;
   var pricearray:any= [];
   data.forEach((element:any) => {
-    console.log(element);
+    // console.log(element);
     if(element.prices && Array.isArray(element.prices)){
        element.prices.forEach((elements:any) => {      
         pricearray.push({
@@ -194,6 +194,20 @@ extractPrice(data:any){
   }
 
 
+  send(element:any){
+    // console.log(element);
+
+    const dialogRef = this.dialog.open(ReceiptComponent, {
+      width: '950px',
+      height: '500px',
+      data: {element},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
 
 }
 
