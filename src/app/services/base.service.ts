@@ -18,6 +18,8 @@ export class BaseService {
   DELETE_PRICE=  environment.apiBase+ '/catalogadm/publishers/';
   CURRENCY_LIST= environment.apiBase+ '/catalog/publishers/' ;
   DETAILED_REPORT=  environment.apiBase+ '/ecommerceadm/retrieve-report';
+  CHART_REPORT=  environment.apiBase+ '/reports/charts/';
+  
   MOST_POPULAR= environment.apiBase+ '/reports/product/';
 SEND_RECEIPT=  environment.apiBase+   '/report/publishers/';  
 
@@ -27,7 +29,8 @@ SEND_RECEIPT=  environment.apiBase+   '/report/publishers/';
   
   
   ATOM_LOOKUP=environment.atomBase+ '/lookup/corpus/';
-  ATOM_LITE=environment.atomBase+ '/lite/'
+  ATOM_LITE=environment.atomBase+ '/lite/';
+  ATOM_LITE_TWO=environment.atomBase+ '/lite'
  
   // constructor(private _snackBar: MatSnackBar) {}
   constructor(

@@ -1,7 +1,4 @@
 
-
-
-// import { Component, OnInit } from '@angular/core';
 import {HTTPService } from '../../../services/http.service';
 import { BaseService } from '../../../services/base.service';
 import { Component, OnInit,Inject } from '@angular/core';
@@ -17,12 +14,36 @@ import { Observable } from 'rxjs';
   styleUrls: ['./add-new-price.component.css']
 })
 export class AddNewPriceComponent implements OnInit {
-  currency=[];
+  entry:any;
+  currency:any;
   sitedata:any;
+  pricedata:any= [];
   fromModel = new FormGroup({
     doi : new FormControl(''),
     selected_site : new FormControl('')
   });
+
+  priceobj= new FormGroup({
+    productType : new FormControl(''),
+    accessPeriod : new FormControl(''),
+    price:  new FormControl(''),
+    forsale:  new FormControl(''),
+    currency: new FormControl(''),
+    name:new FormControl('')
+  });
+
+
+  accessPeriods= [
+    {label: '24 Hours', value: 24, sort: 24},
+    {label: '48 Hours', value: 48, sort: 48},
+    {label: '72 Hours', value: 72, sort: 72},
+    {label: '7 Days', value: 168, sort: 168},
+    {label: '3 Months', value: 2160, sort: 2160},
+    {label: '6 Months', value: 4320, sort: 4320},
+    {label: '1 Year', value: 8760, sort: 8760},
+    {label: '2 Years', value: 17520, sort: 17520},
+    {label: 'Perpetual', value: -1, sort: 99999}
+  ];
 
  
 
@@ -38,8 +59,35 @@ export class AddNewPriceComponent implements OnInit {
   // constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-   
+    // console.log(this.basedata.prices);
     this.getSiteData();
+    
+    var curr= localStorage.getItem('currency')+'';
+    this.currency=  JSON.parse(curr);
+  }
+  
+  filterPrice(){
+    
+    this.basedata.prices.forEach((element:any) => {
+      console.log(element.name,'  ',this.fromModel.value.doi);
+    if(element.name==this.fromModel.value.doi){
+      this.pricedata.push(element);
+    }
+    });
+    console.log("Filter data", this.pricedata);
+
+    
+
+    
+
+    this.priceobj.patchValue({
+      price: this.pricedata[0].price_amount,
+      currency: this.pricedata[0].price_currency,
+      accessPeriod:this.pricedata[0].price_interval,
+      productType:this.pricedata[0].productType,
+      name:this.pricedata[0].price_name,
+   });
+
   }
 
   getSiteData(){
@@ -67,8 +115,8 @@ export class AddNewPriceComponent implements OnInit {
     var httpOptions = {
       headers: new HttpHeaders({
         "accept": "application/vnd.hw.citation-ui+json",
-    "Accept-Encoding": "gzip, deflate, br",
-"Accept-Language": "en-US,en;q=0.9",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Accept-Language": "en-US,en;q=0.9",
         Authorization: 'Bearer '+ token,
 
       })
@@ -98,47 +146,86 @@ handleResponse(res:any){
 
 }
 
-  addPrice(){
-    this.basedata.prices[0]
+addPrice(){
+var priceArray:any={};
+priceArray.productType = this.pricedata[0].productType;
+priceArray.corpus = this.pricedata[0].corpus;
+priceArray.name = this.pricedata[0].name;
+priceArray.description = this.pricedata[0].description;
+priceArray.prices= []
+  this.pricedata.forEach((element:any) => {
+    priceArray.prices.push(element.price)
+  });
+
+
     var add= {
-        description: this.basedata.prices[0].description,
-        identifier: this.basedata.prices[0].identifier ,
-        name: this.basedata.prices[0].name,
-        price_name:this.basedata.prices[0].price_name,
-        price_amount:'',
-        price_currency:'',
-        price_interval:'',                
-        productType:this.basedata.prices[0].productType,
+      name:this.priceobj.value.name,
+      amount: this.priceobj.value.price,
+      currency: this.priceobj.value.currency ,
+      interval: this.priceobj.value.accessPeriod,
+      
+       
     }
     
-    this.basedata.prices.push(add);
-    console.log('Add price',this.basedata.prices)
+
+
+
+
+
+    priceArray.prices.push(add)
+  
+
+    console.log('Add price',priceArray)
+
+
+    
   }
 
   closeDialog(update:any) {
     this.dialogRef.close(update);
   }
 
+  
+
   update(){
+    this.filterPrice();
+
     let publisher = this.fromModel.value.selected_site //localStorage.getItem('publisher')  ;
     // var name = this.basedata.element.name.replace('/', '!2F')
     let URL= this.base.ATOM_LOOKUP+ publisher +'?'+'doi='+this.fromModel.value.doi;
-    debugger;
+    
   
     
     var data={
-     
-  
+      
     }
-    https://ecommerce.highwire.org/atom/lookup/corpus/hwdjpt?doi=test
+    
     console.log(data);
     this.http.getDatawithGet(URL,data).subscribe((res:any)=>{
-      alert(res);
+      this.getUriData(res);
       // this.closeDialog(true);
     })
   
   }
+  getUriData(data:any){
+    // var arr= data.splite('/')
+    // console.log(arr);
+    var URL= this.base.ATOM_LITE_TWO+data.results.entry.uri;
+    console.log(URL);
+    var token= localStorage.getItem('hwp-login');
+    var header:any=    {
+      'Content-Type':  'application/json',
+      'Authorization': 'Bearer '+ token,
+      'accept':'application/vnd.hw.citation-ui+json',
+      'Accept-Encoding':'gzip, deflate, br'
+    }
+    this.http.getDatawithGet(URL,'',header).subscribe((res:any)=>{
+      console.log('res 2     ',res);
+      this.entry=  res;
+      // alert(res.results.entry.uri);
+      // this.closeDialog(true);
+      
+    })
+  }
  
-  
-
 }

@@ -1,11 +1,8 @@
-
-
-
-
 import { Component, OnInit } from '@angular/core';
 import{Chart,registerables} from'chart.js';
 import { FormControl, FormGroup } from '@angular/forms';
-
+import {HTTPService } from '../../services/http.service';
+import { BaseService } from 'src/app/services/base.service';
 @Component({
   selector: 'app-charts',
   templateUrl: './charts.component.html',
@@ -20,13 +17,52 @@ export class ChartsComponent implements OnInit {
     start: new FormControl(),
     end: new FormControl()
   });
-  constructor() { }
+  constructor(
+    public http: HTTPService,
+    public base: BaseService,
+    
+  ) { }
 
   ngOnInit(): void {
     this.chart=document.getElementById("my-first-chart");
   Chart.register(...registerables);
   this.loadChart();
+  this.selectAllPublishers();
   }
+
+  selectAllPublishers(){
+    let publisher = localStorage.getItem('publisher')  ;
+    let URL= this.base.CHART_REPORT+publisher;
+    var data={"options":
+    {
+      "start":"2022-02-28T01:48:36.610Z",
+    "end":"2022-03-07T01:48:38.366Z",
+    "dateFormat":"day",
+    "bookSites":[],
+    "publications":[]
+    }}
+
+    // let DATA= {
+    //   // "endDate": this.dateRange.value.s
+    //   "endDate": this.dateRange.value.end,
+    //   "pub": publisher,
+    //   "startDate": this.dateRange.value.start
+
+      
+    // }
+    this.http.getDatawithPost(URL,data).subscribe((data:any)=>{
+      console.log(data);
+      // this.dataSource.data= data.transactions;
+      // setTimeout(() => {
+      //   this.paginator.pageIndex = this.currentPage;
+      //   this.paginator.length = data.total;
+      // },1000);
+        
+       
+    })
+  }
+
+
   loadChart():void{
     new Chart(this.chart,{
       type:'bar',

@@ -195,26 +195,35 @@ extractPrice(data:any){
     });
   }
   
-  getCurrentPrices(element:any){
+  getCurrentPrices(element?:any){
     let prices:any
       prices=[]
-     debugger;
-    this.dataSource.data.forEach((item:any) => {
-      if(element.name==item.name){        
-        prices.push(item);
-      }    
-    });
+     if(element){
+      this.dataSource.data.forEach((item:any) => {
+        if(element.name==item.name){        
+          prices.push(item);
+        }    
+      });
+     }else{
+      this.dataSource.data.forEach((item:any) => {
+        
+          prices.push(item);
+        
+      });
+     }
+    
     return prices
   }
 
   addData(){
     // console.log();
-    // var p= this.getCurrentPrices(element)
+    var p= this.getCurrentPrices()
    
     const dialogRef = this.dialog.open(AddNewPriceComponent, {
       width: '950px',
       height: '400px',
-      data: {},
+      data: {
+        prices:p},
     });
 
     dialogRef.afterClosed().subscribe(result => {

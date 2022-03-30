@@ -51,15 +51,24 @@ export class HTTPService {
     return this.http.put(URL,data,httpOptions);
   }
 
+  
 
-  getDatawithGet(URL:any, data:any) {
+  getDatawithGet(URL:any, data:any, header?:any) {
     var token= localStorage.getItem('hwp-login');
-    
-    var httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        Authorization: 'Bearer '+ token
-      })
+    var httpOptions:any;
+    if(header)
+     httpOptions = {
+      headers: new HttpHeaders(header)
+    }
+    else{
+       httpOptions = {
+        headers: new HttpHeaders(
+          {
+          'Content-Type':  'application/json',
+          Authorization: 'Bearer '+ token
+        }
+        )
+      } 
     }
     
     return this.http.get(URL,httpOptions);
