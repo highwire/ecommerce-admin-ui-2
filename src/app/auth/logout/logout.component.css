@@ -1,0 +1,25 @@
+.alert-info {
+    background-color: #4A90E2;
+    height: 62px;}
+
+    @media (max-width: 768px){
+    .lead {
+        font-size: 21px;
+    }}
+    .alert {
+        padding: 15px;
+        margin-bottom: 22px;
+        border-radius: 0px!important;}
+
+        .lead {
+           
+            font-weight: 300;
+            line-height: 1.4;
+        }
+        p.lead {
+            color: white;
+        }
+        .col-lg-12.col-md-12 {
+            height: 220px;
+        }
+    h2{font-family:Verdana, Geneva, Tahoma, sans-serif}
