@@ -1,4 +1,8 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<head>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
 
 
 
@@ -30,27 +34,44 @@
                    
                             <div class ="serchbtn"style="display: flex; justify-content:space-between;">
 
-                                <button type="button" class="btn btn-primary">ALL</button>
+                              <div class="dropdown">
+                                <button type="button" class="dropbtn">ALL<i class="fa fa-sort-down" style="font-size:12px; vertical-align: 3px;"></i></button>
+                                <div class="dropdown-content" role="menu">
+                                  <a href="#" >All</a>
+                                  <a href="#" >Issue</a>
+                                  <a href="#" >Article</a>
+                                </div>
+                              </div>
+                              
+
+                                <!-- <button type="button" class="btn btn-primary">ALL
+                                  <ul class="dropdown-menu" uib-dropdown-menu="" role="menu">
+                                    <li><a href="" ng-click="priceType(null)">All</a></li>
+                                    
+                                    <li><a href="" ng-click="priceType('issue')">Issue</a></li>
+                                    <li><a href="" ng-click="priceType('article')">Article</a></li>
+                                  </ul>
+                                </button> -->
                                 <button type="button" class="btn btn-primary">USD($)</button>
                                 <button type="button" class="btn btn-primary" (click)="addData()" href="javascript:void(0)">ADD</button>
                                 
                                 
                                 <div class="serch" style="width: 60%; margin-left: 250px;">
                                     
-                                    <input style="width:90%; border:1px solid grey;" type="text" placeholder="Search.." name="search">
-                                    <button type="submit"><i class="fa fa-search"></i></button>    
+                                    <input style="width:90%; border:1px solid grey;" type="text" placeholder="Search.." name="search" >
+                                    <button class="bino" type="submit" style=" border: none; margin-right: 10px;" ><i class="fa fa-search" ></i></button>    
                                 </div>
                                 
                             </div>
-                                
-                                
-                                
+
+
+                            
                                 
 
             
             </div>
 
-           
+           <hr>
 
 
 
@@ -84,7 +105,7 @@
 
                 <ng-container matColumnDef="price_amount">
                   <th mat-header-cell *matHeaderCellDef>Price</th>
-                  <td mat-cell *matCellDef="let element">{{element.price_amount}}</td>
+                  <td mat-cell *matCellDef="let element">{{element.price_amount |currency}}</td>
                 </ng-container>
 
 
@@ -121,7 +142,7 @@
     [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
   </mat-paginator>
 
-              <div>
+              <!-- <div>
                 <h3>
                   Click Log
                 </h3>
@@ -136,8 +157,8 @@
                   Clicked on {{clickedRow.name}}
                 </li>
               </ul>
-              
-        </div>
+               -->
+        <!-- </div> -->
 
 
 
