@@ -43,11 +43,7 @@ export class AddNewPriceComponent implements OnInit {
     {label: '1 Year', value: 8760, sort: 8760},
     {label: '2 Years', value: 17520, sort: 17520},
     {label: 'Perpetual', value: -1, sort: 99999}
-  ];
-
- 
-
- 
+  ]; 
   constructor(
     public client :HttpClient,
     public http: HTTPService,
@@ -60,8 +56,7 @@ export class AddNewPriceComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.basedata.prices);
-    this.getSiteData();
-    
+    this.getSiteData();    
     var curr= localStorage.getItem('currency')+'';
     this.currency=  JSON.parse(curr);
   }
@@ -75,11 +70,6 @@ export class AddNewPriceComponent implements OnInit {
     }
     });
     console.log("Filter data", this.pricedata);
-
-    
-
-    
-
     this.priceobj.patchValue({
       price: this.pricedata[0].price_amount,
       currency: this.pricedata[0].price_currency,
@@ -87,7 +77,6 @@ export class AddNewPriceComponent implements OnInit {
       productType:this.pricedata[0].productType,
       name:this.pricedata[0].price_name,
    });
-
   }
 
   getSiteData(){
@@ -110,15 +99,13 @@ export class AddNewPriceComponent implements OnInit {
 
   public requestDataFromMultipleSources(): Observable<any[]> {
     var arr: any[]=[]
-    var token= localStorage.getItem('hwp-login');
-    
+    var token= localStorage.getItem('hwp-login');    
     var httpOptions = {
       headers: new HttpHeaders({
         "accept": "application/vnd.hw.citation-ui+json",
         "Accept-Encoding": "gzip, deflate, br",
         "Accept-Language": "en-US,en;q=0.9",
-        Authorization: 'Bearer '+ token,
-
+        Authorization: 'Bearer '+ token
       })
     }
     
@@ -162,48 +149,42 @@ priceArray.prices= []
       name:this.priceobj.value.name,
       amount: this.priceobj.value.price,
       currency: this.priceobj.value.currency ,
-      interval: this.priceobj.value.accessPeriod,
-      
-       
+      interval: this.priceobj.value.accessPeriod             
     }
-    
-
-
-
-
-
+ 
     priceArray.prices.push(add)
-  
-
-    console.log('Add price',priceArray)
-
-
+    console.log('Add price',priceArray);
+    let publisher = localStorage.getItem('publisher')  ;
+    var name = this.pricedata[0].name.replace('/', '!2F')
+    let URL= this.base.DELETE_PRICE+ publisher +'/products/'+ name;
+    console.log(URL);
     
+    this.http.getDatawithPut(URL,priceArray).subscribe((res:any)=>{
+      this.base.openSnackBar(5,'Updated successful.');    
+    })    
   }
 
   closeDialog(update:any) {
     this.dialogRef.close(update);
   }
-
-  
-
   update(){
+    if(!this.fromModel.value.doi){
+      this.base.openSnackBar(5,'Please enter doi.');
+      return;
+    }
+    if(!this.fromModel.value.selected_site){
+
+      this.base.openSnackBar(5,'Please select site.');
+      return;
+    }
     this.filterPrice();
 
     let publisher = this.fromModel.value.selected_site //localStorage.getItem('publisher')  ;
     // var name = this.basedata.element.name.replace('/', '!2F')
-    let URL= this.base.ATOM_LOOKUP+ publisher +'?'+'doi='+this.fromModel.value.doi;
-    
-  
-    
-    var data={
-      
-    }
-    
-    console.log(data);
-    this.http.getDatawithGet(URL,data).subscribe((res:any)=>{
+    let URL= this.base.ATOM_LOOKUP+ publisher +'?'+'doi='+this.fromModel.value.doi;  
+    this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
       this.getUriData(res);
-      // this.closeDialog(true);
+
     })
   
   }

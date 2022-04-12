@@ -1,4 +1,4 @@
-.btn{ border-radius:0px!important;}
+/* .btn{ border-radius:0px!important;}
 
 .table>:not(:first-child) {
     border-top: 0px solid currentColor !important;
@@ -17,3 +17,107 @@
   table {
     width: 100%;
   }
+
+
+
+
+
+
+ */
+
+
+
+
+
+
+  .btn{ border-radius:0px!important;}
+
+.table>:not(:first-child) {
+    border-top: 0px solid currentColor !important;
+}
+
+@media screen and (max-width: 968px) {
+    .serchbtn {
+        height: 50px;
+        width:100%;
+      }
+
+        .serch {
+            margin-left: 4px!important;
+            display: contents;
+        }
+
+
+        .dropbtn {
+          
+        
+          padding: 15px!important;
+          font-size: 16px;
+          
+          width: 65px;
+      }
+  }
+
+
+  button.bino {
+    margin: -38px;
+}
+
+
+
+  table {
+    width: 100%;
+  }
+  table th{    font-size: 16px;
+              
+  }
+    thead {
+     
+      border-width: 1px;
+      
+  }
+
+  table.mat-table.cdk-table.mat-elevation-z8.demo-table {
+    box-shadow: none;
+    border: 1px solid black;}
+
+
+  /*alldropdown css  */
+  .dropbtn {
+    background-color: #4a90e2;
+    color: white;
+    padding: 11px;
+    font-size: 16px;
+    border: none;
+    margin: 10px;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color:blue;}
+
+
+  

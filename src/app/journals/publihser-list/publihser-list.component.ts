@@ -2,17 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import {HTTPService } from '../../services/http.service';
 import { BaseService } from 'src/app/services/base.service';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { AuthresolverService } from 'src/app/auth/authresolver.service';
 @Component({
   selector: 'app-publihser-list',
   templateUrl: './publihser-list.component.html',
   styleUrls: ['./publihser-list.component.css']
 })
 export class PublihserListComponent implements OnInit {
+// private journalslect= new Subject<boolean>();
+// authMenu
+  // private hwp = new Subject<boolean>();
+  // authMenu = this.hwpUser.asObservable();
 publihserlist: any;
   constructor(
     public http: HTTPService,
     public base: BaseService,
-    public router:Router
+    public router:Router,
+    public auth: AuthresolverService,
   ) {
 
    }
@@ -35,6 +42,7 @@ publihserlist: any;
   selectPublishers(item:any){
     localStorage.setItem('publisher',item.term)
     this.router.navigateByUrl('journals/specific');
+    this.auth.jouranlselect(true);
     console.log(item);
   }
 

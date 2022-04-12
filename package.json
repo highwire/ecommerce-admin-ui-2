@@ -27,13 +27,16 @@
     "bootstrap": "^5.1.3",
     "chart.js": "^3.7.1",
     "jquery": "^3.6.0",
+    "jwt-decode": "^3.1.2",
     "mat-table-exporter": "^10.2.4",
+    "moment": "^2.29.2",
     "ng-http-loader": "^11.0.1",
     "ngx-daterange": "^1.0.46",
     "ngx-logger": "^5.0.6",
     "popper.js": "^1.14.3",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
+    "twix": "^1.3.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

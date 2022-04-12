@@ -1,9 +1,4 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-
-
-
 <div class="container">
     <div class="table">
         <div class="container ng-scope" ng-show="catalog.initialized">
@@ -22,16 +17,59 @@
                 </div>
             </div>
         </div>
-
-                                
-
-            
-                
-                   
+                             
                             <div class ="serchbtn"style="display: flex; justify-content:space-between;">
 
-                                <button type="button" class="btn btn-primary">ALL</button>
-                                <button type="button" class="btn btn-primary">USD($)</button>
+
+                              <!-- <div class="dropdown">	
+                                <button type="button" class="dropbtn">ALL<i class="fa fa-sort-down" style="font-size:12px; vertical-align: 3px;"></i></button>	
+                                <div class="dropdown-content" role="menu">	
+                                  <a href="#" >All</a>	
+                                  <a href="#" >Issue</a>	
+                                  <a href="#" >Article</a>	
+                                </div>	
+                              </div>	 -->
+
+
+
+                              <div class="dropdown">	
+                                <button type="button" class="dropbtn">ALL<i class="fa fa-sort-down" style="font-size:12px; vertical-align: 3px;"></i></button>	
+                                <div class="dropdown-content" role="menu">	
+                                  <a class="dropdown-item" *ngFor= "let item  of currency"  >{{item}}</a>
+                                </div>	
+
+                                <button type="button" class="dropbtn">Currency<i class="fa fa-sort-down" style="font-size:12px; vertical-align: 3px;"></i></button>	
+                                <!-- <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false"> -->
+                                  
+                                <!-- </button> -->
+                                <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" *ngFor= "let item  of currency"  >{{item}}</a></li>
+                                </ul>
+
+                                <!-- <button type="button" class="btn btn-primary" (click)="addData()" href="javascript:void(0)">ADD</button> -->
+                                <button type="button"  (click)="addData()" class="dropbtn">ADD</button>	
+                              </div>	
+                          
+
+
+
+
+<!-- 
+                              <div class="btn-group">
+                                <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Currency
+                                </button>
+                                <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" *ngFor= "let item  of currency"  >{{item}}</a></li>
+                                </ul>
+                              </div>
+ -->
+
+                                
+                                  
+
+                              <!-- <button type="button" class="btn btn-primary" (click)="addData()" href="javascript:void(0)">ADD</button> -->
+                                <!-- <button type="button" class="btn btn-primary">USD($)</button>
                                 <button type="button" class="btn btn-primary" (click)="addData()" href="javascript:void(0)">ADD</button>
                                 
                                 
@@ -39,7 +77,7 @@
                                     
                                     <input style="width:90%; border:1px solid grey;" type="text" placeholder="Search.." name="search">
                                     <button type="submit"><i class="fa fa-search"></i></button>    
-                                </div>
+                                </div> -->
                                 
                             </div>
                                 
@@ -121,15 +159,7 @@
     [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
   </mat-paginator>
 
-              <div>
-                <h3>
-                  Click Log
-                </h3>
-              </div>
-              
-              <div *ngIf="!clickedRows.size">
-                Clicked rows will be logged here
-              </div>
+         
               
               <ul>
                 <li *ngFor="let clickedRow of clickedRows">

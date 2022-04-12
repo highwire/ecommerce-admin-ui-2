@@ -10,7 +10,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '../../environments/environment';
 // import { HttpHeaders } from '@angular/common/http';
 
-
+import jwt_decode from "jwt-decode";
 @Injectable({
     providedIn: 'root'
   })
@@ -30,7 +30,13 @@ export class HTTPService {
     // return this.http.get<Config>(this.configUrl);
   }
   getDatawithPost(URL:any, data:any) {
-    var token= localStorage.getItem('hwp-login');    
+    var token:any= localStorage.getItem('hwp-login');
+    
+ 
+
+    var decodedHeader = jwt_decode(token, { header: true });
+    console.log(decodedHeader);
+    // var token= localStorage.getItem('hwp-login');    
     var httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -54,7 +60,12 @@ export class HTTPService {
   
 
   getDatawithGet(URL:any, data:any, header?:any) {
-    var token= localStorage.getItem('hwp-login');
+    var token:any= localStorage.getItem('hwp-login');
+    
+ 
+
+    // var decodedHeader = jwt_decode(token, { header: true });
+    // console.log(decodedHeader);
     var httpOptions:any;
     if(header)
      httpOptions = {
@@ -77,6 +88,8 @@ export class HTTPService {
 
 
   getDatawithDelete(URL:any, data:any) {
+
+
     var token= localStorage.getItem('hwp-login');
     
     var httpOptions = {

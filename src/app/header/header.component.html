@@ -16,7 +16,7 @@
 
 
      <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-      <ul class="navbar-nav" *ngIf="hwpUser">
+      <ul class="navbar-nav" *ngIf="hwpUser && jouralslect ">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="javascript void(0)" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             journals
@@ -24,9 +24,9 @@
           <ul class="dropdown-menu " aria-labelledby="navbarDarkDropdownMenuLink">
             <li><a class="dropdown-item" routerLink="/journals/default"> Default Prices</a></li>
            <li><a class="dropdown-item" routerLink="/journals/specific"> Specific Prices</a></li>
-           <li><a class="dropdown-item" routerLink="/journals/promocode"> promocode </a></li>
-           <li><a class="dropdown-item" routerLink="/journals/increment"> increment</a></li>
-           <li><a class="dropdown-item" routerLink="/journals/setting">setting </a></li>
+           <!-- <li><a class="dropdown-item" routerLink="/journals/promocode"> promocode </a></li> -->
+           <!-- <li><a class="dropdown-item" routerLink="/journals/increment"> increment</a></li> -->
+           <!-- <li><a class="dropdown-item" routerLink="/journals/setting">setting </a></li> -->
           </ul>
         </li>
 
@@ -59,7 +59,7 @@
      
    <!-- ng-show="hasPendingRequests()" -->
   <div class="collapse navbar-collapse" id="navbarSupportedContent" >
-     <ul class="navbar-nav ms-auto  mb-lg-0" *ngIf="hwpUser">
+     <ul class="navbar-nav ms-auto  mb-lg-0" *ngIf="hwpUser && jouralslect">
         <li class="nav-item dropdown">
            <a class="nav-link dropdown-toggle" rhref="javascript void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
            HighWire Press

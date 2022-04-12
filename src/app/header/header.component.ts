@@ -10,6 +10,7 @@ import { BaseService } from 'src/app/services/base.service';
 })
 export class HeaderComponent implements OnInit {
   hwpUser: any;
+  jouralslect:any;
   authz= {
     publisherName:''
   }
@@ -20,40 +21,62 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-var auth:any= localStorage.getItem('auth');
-
-if(JSON.parse(auth)){
-  this.hwpUser=  true;
-}else{
-  this.hwpUser=  false;
-}
-
+    var menu:any= localStorage.getItem('menu');
+    if(JSON.parse(menu)){
+      this.jouralslect=  true;
+    }else{
+      this.jouralslect=  false;
+    }
     this.auth.authMenu.subscribe((message) => {
       this.hwpUser = message
-      localStorage.setItem('auth','true');
-      this.getCurrencyList();
-    }
-      
-
-      );
-
+      localStorage.setItem('auth','true');      
+    });
+    this.joural();
   }
+
+  joural(){
+    this.auth.jouralMenu.subscribe((message) => {
+      this.jouralslect = message;
+      localStorage.setItem('menu','true');
+      this.getCurrencyList();
+      this.getDefalutCurrencyList();
+    })
+  }
+
+
+
   getCurrencyList(){
     var currency:any= localStorage.getItem('currency');
     if(currency){
-      currency= JSON.parse(currency)  ;
+        currency= JSON.parse(currency) ;
     }else{
 
-    let publisher = localStorage.getItem('publisher')  ;
-    // var name =  window.encodeURIComponent(this.basedata.element.name)
-    let URL= this.base.CURRENCY_LIST+publisher+ '/currencies';
-    this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
+      let publisher = localStorage.getItem('publisher')  ;
+      // var name =  window.encodeURIComponent(this.basedata.element.name)
+      let URL= this.base.CURRENCY_LIST+publisher+ '/currencies';
+      this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
       // this.currency  =  res;
       localStorage.setItem('currency',JSON.stringify(res));
         console.log(res);       
-    })
+      })
+    }
+  
   }
   
+  getDefalutCurrencyList(){
+    var currency:any= localStorage.getItem('defalut');
+    if(currency){
+        currency= JSON.parse(currency) ;
+    }else{
+      let publisher = localStorage.getItem('publisher')  ;
+      
+      let URL= this.base.CURRENCY_LIST+publisher+ '/defaultcurrency';
+      this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
+      // this.currency  =  res;
+      localStorage.setItem('defalut',JSON.stringify(res));
+        console.log('defalut', res);       
+      })
+    }  
   }
   
 

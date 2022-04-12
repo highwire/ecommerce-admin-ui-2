@@ -24,6 +24,8 @@ export class BaseService {
 SEND_RECEIPT=  environment.apiBase+   '/report/publishers/';  
 
 
+
+
 // atom/lite/demonews.atom
   LIVE_REPORT='https://ecommerce.highwire.org/api/ecommerceadm/retrieve-report'
   

@@ -33,7 +33,7 @@ interface USER {
 })
 export class SpecificPricesComponent implements OnInit {
   displayedColumns: string[] = ['name', 'description', 'productType','price_interval','price_amount','options',];
-  
+  currency:any;
   dataSource: MatTableDataSource<USER> = new MatTableDataSource();
   freeLabel= 'Free';
   notForSaleLabel= 'Not for Sale';
@@ -58,6 +58,8 @@ export class SpecificPricesComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectAllPublishers();
+    var curr= localStorage.getItem('currency')+'';
+    this.currency=  JSON.parse(curr);
   }
   
 

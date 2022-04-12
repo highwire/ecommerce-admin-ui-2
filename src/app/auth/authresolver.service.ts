@@ -31,6 +31,8 @@ export class AuthresolverService {
 
   private hwpUser = new Subject<boolean>();
   authMenu = this.hwpUser.asObservable();
+  private joural = new Subject<boolean>();
+  jouralMenu = this.joural.asObservable();
 
 
   public publishers = [];
@@ -62,10 +64,10 @@ export class AuthresolverService {
           localStorage.setItem('hwp-login', response.token);
           // todo: need better way to determine internal users from backend servers
           if (this.username === 'ddt' || this.username === 'admin@highwire.org') {
-            this.hwpUser.next(true);
+            this.authselect(true);
           }
           else {
-            this.hwpUser.next(false);
+            this.authselect(false);
           }
         }
 
@@ -81,10 +83,17 @@ export class AuthresolverService {
     this.publishers = [];
     this.publisherName.next('');
     localStorage.clear();
-    this.hwpUser.next(false);
+    this.authselect(false);
+
     this.router.navigate(['/login'], {});
   }
-
+  jouranlselect(parms:any){
+    this.joural.next(parms);
+    
+  }
+  authselect(parms:any){
+      this.hwpUser.next(parms);
+  }
   authz(): boolean {
     const self = this;
     const token = localStorage.getItem('hwp-login');
@@ -109,10 +118,10 @@ export class AuthresolverService {
       }
       // todo: need better way to determine internal users from backend servers
       if (this.username === 'ddt' || this.username === 'admin@highwire.org') {
-        this.hwpUser.next(true);
+        this.authselect(true);
       }
       else {
-        this.hwpUser.next(false);
+        this.authselect(false);
       }
       if (privs[this.role].length === 1) {
         this.publisherName.next(privs[this.role][0].label);
