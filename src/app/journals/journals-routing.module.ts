@@ -6,16 +6,18 @@ import { SpecificPricesComponent } from './specific-prices/specific-prices.compo
 import { SettingsComponent } from './settings/settings.component';
 import { PromocodeComponent } from './promocode/promocode.component';
 import { IncrementDiscountComponent } from './increment-discount/increment-discount.component';
+import { DefaultPriceComponent } from './default-price/default-price.component';
 
 
 const routes: Routes = [
   //  { path: '', redirectTo: '/journals', pathMatch: 'full' },
   { path: 'publishers', component:PublihserListComponent},
    { path: 'specific', component:SpecificPricesComponent},
-   { path: 'default', component:DefaultPricesComponent},
+  //  { path: 'default', component:DefaultPricesComponent},
    { path: 'promocode', component:PromocodeComponent},
    { path: 'increment', component:IncrementDiscountComponent},
    { path: 'setting', component:SettingsComponent},
+   { path: 'defaults', component:DefaultPriceComponent},  //new component generate 8-4-2022
    
 ];
 

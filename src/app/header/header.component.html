@@ -5,7 +5,7 @@
         <div class="nav-text">
            <img class="nav-logotype" src="../../assets/img/logotype.svg" alt="HighWire">
            <div class="nav-product-name"> Intelligent commerce</div>
-           <div class="nav-publisher ng-binding ng-hide" ng-show="authz.publisherName"></div>
+           <div class="nav-publisher ng-binding ng-hide" ng-if="authz.publisherName"> <small>{{authz.publisherName}}</small></div>
         </div>
      </a>
      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,18 +15,19 @@
 
 
 
-     <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-      <ul class="navbar-nav" *ngIf="hwpUser && jouralslect ">
+     <div class="collapse navbar-collapse" id="navbarNavDarkDropdown" *ngIf="display">
+      <!-- <ul class="navbar-nav" *ngIf=" LoginStatus$ |async as  LoginStatus"> -->
+        <ul class="navbar-nav" *ngIf="hwpUser">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="javascript void(0)" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="javascript void(0)" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" ng-hide="myVar">
             journals
           </a>
           <ul class="dropdown-menu " aria-labelledby="navbarDarkDropdownMenuLink">
             <li><a class="dropdown-item" routerLink="/journals/default"> Default Prices</a></li>
            <li><a class="dropdown-item" routerLink="/journals/specific"> Specific Prices</a></li>
-           <!-- <li><a class="dropdown-item" routerLink="/journals/promocode"> promocode </a></li> -->
-           <!-- <li><a class="dropdown-item" routerLink="/journals/increment"> increment</a></li> -->
-           <!-- <li><a class="dropdown-item" routerLink="/journals/setting">setting </a></li> -->
+           <li><a class="dropdown-item" routerLink="/journals/promocode"> promocode </a></li>
+           <li><a class="dropdown-item" routerLink="/journals/increment"> increment</a></li>
+           <li><a class="dropdown-item" routerLink="/journals/setting">setting </a></li>
           </ul>
         </li>
 
@@ -58,15 +59,17 @@
      </div>
      
    <!-- ng-show="hasPendingRequests()" -->
-  <div class="collapse navbar-collapse" id="navbarSupportedContent" >
-     <ul class="navbar-nav ms-auto  mb-lg-0" *ngIf="hwpUser && jouralslect">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="display">
+     <!-- <ul class="navbar-nav ms-auto  mb-lg-0" *ngIf=" LoginStatus$ |async as  LoginStatus"> -->
+      <ul class="navbar-nav ms-auto  mb-lg-0">
         <li class="nav-item dropdown">
-           <a class="nav-link dropdown-toggle" rhref="javascript void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           <a class="nav-link dropdown-toggle" href="javascript void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
            HighWire Press
            </a>
            <ul class="dropdown-menu dropdown-menu-end rounded-0 mb-2" aria-labelledby="navbarDropdown">
+              
               <li><a class="dropdown-item" routerLink="/journals/publishers">Switch Publisher</a></li>
-              <li><a class="dropdown-item" routerLink="/"logout>Logout</a></li>
+              <li><a class="dropdown-item" routerLink="/login/logout"logout  *ngIf="hwpUser" (click)="hidemenu()">Logout</a></li>
               
            </ul>
         </li>

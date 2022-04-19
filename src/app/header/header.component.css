@@ -25,3 +25,24 @@
         transform: rotate(359deg);
     }
 }
+.nav-product-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #A81732;
+    line-height: 16px;
+    letter-spacing: .3px;
+    font-family: Lato,Helvetica,Arial,sans-serif;
+}
+.nav-logotype {
+    margin-top: 3px;
+}
+.navbar-brand {
+  
+  
+    font-size: 18px;
+    line-height: 22px;
+    
+}
+.navbar-default .navbar-brand {
+    color: #9B9B9B;
+}

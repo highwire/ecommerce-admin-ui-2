@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {AuthresolverService} from '../auth/authresolver.service';
 import {HTTPService } from '../services/http.service';
 import { BaseService } from 'src/app/services/base.service';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { state } from '@angular/animations';
 
 @Component({
   selector: 'app-header',
@@ -10,74 +13,68 @@ import { BaseService } from 'src/app/services/base.service';
 })
 export class HeaderComponent implements OnInit {
   hwpUser: any;
-  jouralslect:any;
   authz= {
-    publisherName:''
+    publisherName:""
   }
+  // LoginStatus$ = new BehaviorSubject<boolean>(true)
+  // Username$! :Observable<string>
+
+  
+
+
   constructor(
     public base:BaseService,
     public http:HTTPService,
-    public auth: AuthresolverService
-  ) { }
+    public auth: AuthresolverService,
+    public router:Router
+  ) {}
 
   ngOnInit(): void {
-    var menu:any= localStorage.getItem('menu');
-    if(JSON.parse(menu)){
-      this.jouralslect=  true;
-    }else{
-      this.jouralslect=  false;
-    }
+var auth:any= localStorage.getItem('auth');
+
+if(JSON.parse(auth)){
+  this.hwpUser=  true;
+}else{
+  this.hwpUser=  false;
+}
+
     this.auth.authMenu.subscribe((message) => {
       this.hwpUser = message
-      localStorage.setItem('auth','true');      
-    });
-    this.joural();
-  }
-
-  joural(){
-    this.auth.jouralMenu.subscribe((message) => {
-      this.jouralslect = message;
-      localStorage.setItem('menu','true');
+      localStorage.setItem('auth','true');
       this.getCurrencyList();
-      this.getDefalutCurrencyList();
-    })
+    });
+
+// this.auth.authMenu.subscribe(state =>{
+//   this.LoginStatus$.next(state)
+// })
+//   this.Username$ = this.auth.publisherName
+
   }
-
-
 
   getCurrencyList(){
     var currency:any= localStorage.getItem('currency');
     if(currency){
-        currency= JSON.parse(currency) ;
+      currency= JSON.parse(currency)  ;
     }else{
 
-      let publisher = localStorage.getItem('publisher')  ;
-      // var name =  window.encodeURIComponent(this.basedata.element.name)
-      let URL= this.base.CURRENCY_LIST+publisher+ '/currencies';
-      this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
+    let publisher = localStorage.getItem('publisher')  ;
+    // var name =  window.encodeURIComponent(this.basedata.element.name)
+    let URL= this.base.CURRENCY_LIST+publisher+ '/currencies';
+    this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
       // this.currency  =  res;
       localStorage.setItem('currency',JSON.stringify(res));
         console.log(res);       
-      })
-    }
-  
+    })
   }
   
-  getDefalutCurrencyList(){
-    var currency:any= localStorage.getItem('defalut');
-    if(currency){
-        currency= JSON.parse(currency) ;
-    }else{
-      let publisher = localStorage.getItem('publisher')  ;
-      
-      let URL= this.base.CURRENCY_LIST+publisher+ '/defaultcurrency';
-      this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
-      // this.currency  =  res;
-      localStorage.setItem('defalut',JSON.stringify(res));
-        console.log('defalut', res);       
-      })
-    }  
   }
+
+ 
+  display:boolean=true
+  hidemenu(){
+    this.display = !this.display;
+  }
+  
   
 
 }
