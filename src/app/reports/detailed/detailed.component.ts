@@ -41,6 +41,7 @@ export class DetailedComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10, 25, 100];
   animal: any;
   name: any;
+  exporter:any
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(
@@ -209,9 +210,19 @@ extractPrice(data:any){
     });
   }
 
+
+display:boolean=false
+noresult:boolean=true
+hidetable(){
+  this.display = !this.display;
+  if(this.display)
+  this.noresult = false;
+  else
+  this.noresult = true
+ 
+
 }
-
-
+}
 
 
 

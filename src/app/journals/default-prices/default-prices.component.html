@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="container">
     <h1 style="text-transform:capitalize; color: brown;"> Manage Default</h1>
     <h5 style="color: grey; margin-top: 10px;">Selected Sites</h5>
@@ -27,7 +27,7 @@
 
                     <!-- <input type="text" class="form-control" aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm" name="{{item.price_currency+ind}}" [(ngModel)]="item.price_currency" placeholder="USD"> -->
-                </div>
+<!--  </div>
                 </td>
                 <td><label class="switch">
                         <input type="checkbox">
@@ -85,4 +85,115 @@
             </tr>        
         </table>
     </form>
+</div> -->
+
+<div class="container mt-4">
+
+    <div class="row">
+        <div class="col-md-12 clearfix">
+            <h1 class="ng-binding">Manage Default Journal Prices</h1>
+        </div>
+    </div>
+
+    <h2 class="ng-binding">Selected Site:</h2>
+    <mat-form-field appearance="fill">
+        <mat-label>Sites</mat-label>
+        <mat-select>
+            <mat-option>Search for sites..</mat-option>
+            <mat-option value="{{site.site_code}}" *ngFor="let site of sitedata" (click)="toggle()">{{site.site_name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div id="article-box" *ngIf="display">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Default Prices</h2>
+            </div>
+        </div>
+
+        <div class="row hidden-xs">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+                <h4>Currency</h4>
+            </div>
+            <div class="col-md-2">
+                <h4>For Sale</h4>
+            </div>
+
+            <div class="col-md-2">
+                <h4>Price</h4>
+            </div>
+            <div class="col-md-2">
+                <h4>Access Period</h4>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-2">
+                <div class="col-md-2 col-xs-12">
+                    <h4 class="id-as-label row-label ng-binding">issue</h4>
+                </div>
+            </div>
+            <div class="col-2">
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm" placeholder="USD">
+            </div>
+            <div class="col-2">
+                <mat-slide-toggle></mat-slide-toggle>
+            </div>
+
+
+            <div class="col-2">
+                <div class="input-group input-group-sm ">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">$</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm">
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="btn-group" role="group">
+                    <select class="mb-3 btn btn-primary dropdown-toggle">
+                        <option value='{{access.label}}' *ngFor="let access of accessPeriods">{{access.label}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-danger">Remove</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Add Price
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="javascript:void(0)" (click)="addPrice('issue')">Issue</a></li>
+                    <li><a class="dropdown-item" href="javascript:void(0)" (click)="addPrice('article')">Article</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-10">
+                <button type="button" class="btn btn-danger">Cancel</button>
+            </div>
+            <div class="col-1" style="float: right;">
+                <button type="button" class="btn btn-info">Save</button>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+    </div>
+
+
 </div>
