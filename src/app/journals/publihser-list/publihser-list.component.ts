@@ -36,11 +36,15 @@ publihserlist: any;
     this.http.getDatawithPost(this.base.PUBLISHER_LIST,'').subscribe((data:any)=>{
         console.log(data);
         this.publihserlist= data[this.base.APP_ROLE];
+        let field= 'label'
+        this.publihserlist.sort((a:any, b:any) => (a[field] || "").toString().localeCompare((b[field] || "").toString()))    
     })
 
   }
   selectPublishers(item:any){
     localStorage.setItem('publisher',item.term)
+    localStorage.setItem('publisher-label',item.label)
+    
     this.router.navigateByUrl('journals/specific');
     this.auth.jouranlselect(true);
     console.log(item);

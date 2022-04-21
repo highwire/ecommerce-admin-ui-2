@@ -4,7 +4,7 @@
     <h5 style="color: grey; margin-top: 10px;">Selected Sites</h5>
     <select class="select"name="chapter" id="chapter">
         <option value=""  selected="selected">Please select site</option>
-        <option value="{{site.site_code}}" *ngFor="let site of sitedata" selected="selected">{{site.site_name}}</option>
+        <option value="{{site.corpus}}" *ngFor="let site of sitedata" selected="selected">{{site.title}}</option>
       </select>          
     <form class="form">
         <h5 style="color: grey; margin-top: 10px;">Default Price</h5>

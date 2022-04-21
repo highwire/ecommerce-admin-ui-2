@@ -121,6 +121,7 @@ export class AddNewPriceComponent implements OnInit {
   
 }
 
+
 apicall(){
   this.requestDataFromMultipleSources().subscribe(responseList => {
     console.log(responseList);

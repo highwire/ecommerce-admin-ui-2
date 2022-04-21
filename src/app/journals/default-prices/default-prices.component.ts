@@ -62,17 +62,28 @@ sitedata:any;
   }
 
   selectAllPublishers(){
-    let publisher = localStorage.getItem('publisher')  ;
-    let URL= this.base.SITE_LIST;
-    var data={
-      pubTerm: publisher,
-      role: "Intelligent Commerce Pricing and Reporting UI",
-      userId: "2"
+    // let publisher = localStorage.getItem('publisher')  ;
+    // let URL= this.base.SITE_LIST;
+    // var data={
+    //   pubTerm: publisher,
+    //   role: "Intelligent Commerce Pricing and Reporting UI",
+    //   userId: "2"
+    // }
+    // this.http.getDatawithPost(URL,data).subscribe((data:any)=>{
+    //     console.log(data);             
+    //     this.sitedata =  data.sites;
+    // })
+
+
+    var site:any= localStorage.getItem('siteData');
+    if(site){
+      this.sitedata= JSON.parse(site) ;
+      console.log('this.sitedata ${this.sitedata}')
     }
-    this.http.getDatawithPost(URL,data).subscribe((data:any)=>{
-        console.log(data);             
-        this.sitedata =  data.sites;
-    })
+
+
+    
+
   }
 
 
