@@ -2,9 +2,9 @@
 <div class="container">
     <h1 style="text-transform:capitalize; color: brown;"> Manage Default</h1>
     <h5 style="color: grey; margin-top: 10px;">Selected Sites</h5>
-    <select class="select"name="chapter" id="chapter">
+    <select class="select"name="chapter" id="chapter" (change)="dropDownChange($event.target)">
         <option value=""  selected="selected">Please select site</option>
-        <option value="{{site.corpus}}" *ngFor="let site of sitedata" selected="selected">{{site.title}}</option>
+        <option value="{{site.corpus}}"  *ngFor="let site of sitedata" selected="selected">{{site.title}}</option>
       </select>          
     <form class="form">
         <h5 style="color: grey; margin-top: 10px;">Default Price</h5>
@@ -35,8 +35,8 @@
                     </label></td>
                 <td>
                     <div class="input-group input-group-sm ">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">$</span>
-                        <input type="text" class="form-control"  name="{{item.price_amount+ind}}" [(ngModel)]="item.price_amount"  aria-label="Sizing example input"
+                        <!-- <span class="input-group-text" id="inputGroup-sizing-sm">{{ item.price_amount | currency:item.price_currency}}</span> -->
+                        <input type="text" class="form-control"  name="{{item.price_amount+ind}}" [ngModel]="item.price_amount | currency:item.price_currency"  aria-label="Sizing example input"
                             aria-describedby="inputGroup-sizing-sm" >
                     </div>
                 </td>

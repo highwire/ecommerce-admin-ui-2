@@ -33,52 +33,23 @@
 
 
                               <div class="dropdown">	
-                                <button type="button" class="dropbtn">ALL<i class="fa fa-sort-down" style="font-size:12px; vertical-align: 3px;"></i></button>	
+                                <button type="button" class="dropbtn">{{selectedCurrency}}<i class="fa fa-sort-down" style="font-size:12px; vertical-align: 3px;"></i></button>	
                                 <div class="dropdown-content" role="menu">	
-                                  <a class="dropdown-item" *ngFor= "let item  of currency"  >{{item}}</a>
+                                  <a class="dropdown-item" (click)="currencySelect('ALL')"   >ALL</a>
+                                  <a class="dropdown-item" *ngFor= "let item  of currency" (click)="currencySelect(item)"  >{{item}}</a>
                                 </div>	
 
-                                <button type="button" class="dropbtn">Currency<i class="fa fa-sort-down" style="font-size:12px; vertical-align: 3px;"></i></button>	
+                                <!-- <button type="button" class="dropbtn">Currency<i class="fa fa-sort-down" style="font-size:12px; vertical-align: 3px;"></i></button>	 -->
                                 <!-- <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false"> -->
                                   
                                 <!-- </button> -->
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" *ngFor= "let item  of currency"  >{{item}}</a></li>
-                                </ul>
+                                <!-- <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" *ngFor= "let item  of currency"  (click)="currencySelect(item)" >{{item}}</a></li>
+                                </ul> -->
 
                                 <!-- <button type="button" class="btn btn-primary" (click)="addData()" href="javascript:void(0)">ADD</button> -->
                                 <button type="button"  (click)="addData()" class="dropbtn">ADD</button>	
-                              </div>	
-                          
-
-
-
-
-<!-- 
-                              <div class="btn-group">
-                                <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  Currency
-                                </button>
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" *ngFor= "let item  of currency"  >{{item}}</a></li>
-                                </ul>
-                              </div>
- -->
-
-                                
-                                  
-
-                              <!-- <button type="button" class="btn btn-primary" (click)="addData()" href="javascript:void(0)">ADD</button> -->
-                                <!-- <button type="button" class="btn btn-primary">USD($)</button>
-                                <button type="button" class="btn btn-primary" (click)="addData()" href="javascript:void(0)">ADD</button>
-                                
-                                
-                                <div class="serch" style="width: 60%; margin-left: 250px;">
-                                    
-                                    <input style="width:90%; border:1px solid grey;" type="text" placeholder="Search.." name="search">
-                                    <button type="submit"><i class="fa fa-search"></i></button>    
-                                </div> -->
-                                
+                              </div>	                                                          
                             </div>
                                 
                                 
@@ -122,7 +93,8 @@
 
                 <ng-container matColumnDef="price_amount">
                   <th mat-header-cell *matHeaderCellDef>Price</th>
-                  <td mat-cell *matCellDef="let element">{{element.price_amount}}</td>
+                  <td mat-cell *matCellDef="let element">{{element.price_amount| currency:element.price_currency}}</td>
+                  <!-- <p>A: {{a | currency:'CAD'}}</p> -->
                 </ng-container>
 
 

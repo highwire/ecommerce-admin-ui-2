@@ -9,6 +9,7 @@ import { BaseService } from 'src/app/services/base.service';
   styleUrls: ['./default-prices.component.css']
 })
 export class DefaultPricesComponent implements OnInit {
+  masterData:any;
   currency=[]
   pricearray:any;
   displayedColumns: string[] = ['name', 'description','options', 'productType','price_interval','price_amount'];  
@@ -99,25 +100,33 @@ sitedata:any;
   filterDOI(data:any)
   {
     var self= this;
-    data= data.filter((entry:any)=>{
+    // data= data.filter((entry:any)=>{
       debugger;
     // return  self.hwv.doi(item.name);
-      return(entry.productType=='ebook' )
+      // return(entry.productType=='ebook' )
       // && entry.name=='chapter-price' ) ||
       // (entry.productType=='ebook' && entry.name=='edition-price' )
-    });
+    // });
   // console.log('filterDOI',data);
-  this.extractPrice(data);
+  this.masterData= data
+  
 
 }
-extractPrice(data:any){
+dropDownChange(value:any){
+  console.log(value.value);
+  this.extractPrice(this.masterData, value.value);
+
+}
+
+extractPrice(data:any, pub:any){
+  debugger;
   var self= this;
   var pricearray:any= [];
   data.forEach((element:any) => {
     // console.log(element);
-    if(element.prices && Array.isArray(element.prices)){
+    if(element.prices && Array.isArray(element.prices) && element.name==pub ){
       element.prices.forEach((elements:any) => {   
-        if(elements.name=='chapter-price'  || elements.name=='edition-price' )
+        // if(elements.name=='chapter-price'  || elements.name=='edition-price' )
       // (entry.productType=='ebook' && entry.name=='edition-price' )
         pricearray.push({
           name: element.name,

@@ -40,6 +40,14 @@ export class HeaderComponent implements OnInit {
     }else{
       this.jouralslect=  false;
     }
+    var auth:any= localStorage.getItem('auth');
+    if(auth && JSON.parse(auth)){
+      this.hwpUser=  true;
+    }else{
+      this.hwpUser=  false;
+    }
+
+
     this.auth.authMenu.subscribe((message) => {
       this.hwpUser = message
       localStorage.setItem('auth','true');      
@@ -107,7 +115,7 @@ export class HeaderComponent implements OnInit {
       let URL= this.base.CURRENCY_LIST+publisher+ '/defaultcurrency';
       this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
       // this.currency  =  res;
-      localStorage.setItem('currency',JSON.stringify(res));
+      localStorage.setItem('defaultcurrency',JSON.stringify(res));
         console.log('currency', res);       
       })
     }  
@@ -115,7 +123,7 @@ export class HeaderComponent implements OnInit {
   
   apicall(){
     this.requestDataFromMultipleSources().subscribe((responseList:any) => {
-      debugger;
+      // debugger;
       console.log(responseList);
       localStorage.setItem('siteData',JSON.stringify(responseList));
       
@@ -123,10 +131,10 @@ export class HeaderComponent implements OnInit {
   }
   getSiteData(){
 
-    var siteData:any= localStorage.getItem('siteData');
-    if(siteData){
-      siteData= JSON.parse(siteData) ;
-    }else{
+    // var siteData:any= localStorage.getItem('siteData');
+    // if(siteData){
+      // siteData= JSON.parse(siteData) ;
+    // }else{
 
     let publisher = localStorage.getItem('publisher')  ;
     let URL= this.base.SITE_LIST;
@@ -140,7 +148,7 @@ export class HeaderComponent implements OnInit {
         this.sitedata=  data.sites;
         this.apicall()
     })
-  }
+  // }
   }
 
   public requestDataFromMultipleSources(): Observable<any[]> {

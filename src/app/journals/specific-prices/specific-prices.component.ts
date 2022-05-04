@@ -15,6 +15,7 @@ import {hwValidator} from '../../services/hwvalidator.service'
 // import { } from '../'
 
 import {AddNewPriceComponent}  from '../template/add-new-price/add-new-price.component';
+// import { debug } from 'console';
 
 
 
@@ -33,7 +34,9 @@ interface USER {
 })
 export class SpecificPricesComponent implements OnInit {
   displayedColumns: string[] = ['name', 'description', 'productType','price_interval','price_amount','options',];
-  currency:any;
+  currency:any=[];
+  selectedCurrency:any= 'ALL';
+  masterdata:any;
   dataSource: MatTableDataSource<USER> = new MatTableDataSource();
   freeLabel= 'Free';
   notForSaleLabel= 'Not for Sale';
@@ -41,7 +44,7 @@ export class SpecificPricesComponent implements OnInit {
   products: any;
   isLoading = false;
   totalRows = 0;
-  pageSize = 5;
+  pageSize = 25;
   currentPage = 0;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   animal: any;
@@ -59,7 +62,10 @@ export class SpecificPricesComponent implements OnInit {
   ngOnInit(): void {
     this.selectAllPublishers();
     var curr= localStorage.getItem('currency')+'';
+    if(curr)
+    // debugger;
     this.currency=  JSON.parse(curr);
+
   }
   
 
@@ -94,25 +100,49 @@ filterDOI(data:any)
   this.extractPrice(data);
 
 }
-extractPrice(data:any){
-  debugger;
+extractPrice(data:any, currencies?:any){
+  
   var self= this;
   var pricearray:any= [];
+  this.masterdata=data;
   data.forEach((element:any) => {
     // console.log(element);
-    if(element.prices && Array.isArray(element.prices)){
+    if(element.prices && Array.isArray(element.prices)  && element.productType=='article'){
+      debugger
+      
        element.prices.forEach((elements:any) => {      
-        pricearray.push({
-          name: element.name,
-          productType:element.productType,
-          description:element.description,      
-          identifier: element.identifier,
-          price_amount: self.formatAmountDisplay (elements.amount),
-          price_currency:elements.currency,
-          price_interval:elements.interval,
-          price_name:elements.name,
-          price:elements
-        })  
+        // if(elements.name== "article-price"){
+            // return false;
+        // }
+        if( currencies){
+          if(elements.currency.toUpperCase()==currencies)
+          pricearray.push({
+            name: element.name,
+            productType:element.productType,
+            description:element.description,      
+            identifier: element.identifier,
+            price_amount: self.formatAmountDisplay (elements.amount),
+            price_currency:elements.currency,
+            price_interval:elements.interval,
+            price_name:elements.name,
+            price:elements
+          })  
+        }else{
+          pricearray.push({
+            name: element.name,
+            productType:element.productType,
+            description:element.description,      
+            identifier: element.identifier,
+            price_amount: self.formatAmountDisplay (elements.amount),
+            price_currency:elements.currency,
+            price_interval:elements.interval,
+            price_name:elements.name,
+            price:elements
+          })  
+        // }
+      }
+        
+      
       });      
     }    
   });
@@ -142,7 +172,13 @@ extractPrice(data:any){
     element.symbol = value;
   }
 
-
+  currencySelect(currency:any){
+    this.selectedCurrency= currency
+    console.log(currency);
+    
+    this.extractPrice(this.masterdata, currency=='ALL' ? '':currency);
+  }
+    // this.masterdata=data;
 
 
   delete(element:any){

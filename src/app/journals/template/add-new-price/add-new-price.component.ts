@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 })
 export class AddNewPriceComponent implements OnInit {
   entry:any;
-  currency:any;
+  currency:any=[];
   sitedata:any;
   pricedata:any= [];
   fromModel = new FormGroup({
@@ -58,6 +58,7 @@ export class AddNewPriceComponent implements OnInit {
     // console.log(this.basedata.prices);
     this.getSiteData();    
     var curr= localStorage.getItem('currency')+'';
+    if(curr)
     this.currency=  JSON.parse(curr);
   }
   

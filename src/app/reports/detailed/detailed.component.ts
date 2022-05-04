@@ -118,7 +118,7 @@ filterDOI(data:any)
 
 }
 extractPrice(data:any){
-  debugger;
+  // debugger;
   var self= this;
   var pricearray:any= [];
   data.forEach((element:any) => {
@@ -184,7 +184,7 @@ extractPrice(data:any){
   getCurrentPrices(element:any){
     let prices:any
       prices=[]
-     debugger;
+    //  debugger;
     this.dataSource.data.forEach((item:any) => {
       if(element.name==item.name){        
         prices.push(item);
