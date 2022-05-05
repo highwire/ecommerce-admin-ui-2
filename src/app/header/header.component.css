@@ -37,56 +37,64 @@
     line-height: 15px;
     letter-spacing: .3px;
 }
-/* li.nav-item.dropdown.highRight {
-    margin-left: 582px;
-} */
-/* @media screen and (min-width: 900px){
-    li.nav-item.dropdown.highRight {
-        
-    margin-left: 10px!important;}
-} */
 
-/* @media only screen and (max-width: 767px){
-    button.navbar-toggler.collapsed , button.navbar-toggler{
-        margin-left: 80px!important;
-    }
-    .navbar {
-       
-        flex-wrap: unset;
-    }
 
-    @media only screen and (min-width:767), ( max-width: 1024px){
-        button.navbar-toggler.collapsed , button.navbar-toggler{
-            margin-left: 230px!important;
-        }
-        } */
 
-        @media screen and (min-device-width: 80px) and (max-device-width: 520px) { 
+@media screen and (min-device-width: 80px) and (max-device-width: 520px) { 
             .navbar-brand {
            
                 margin-right: -1rem!important} 
+
+
+                
         }
         
-        @media screen and (min-device-width: 521px) and (max-device-width: 1300px) { 
+@media screen and (min-device-width: 521px) and (max-device-width: 1300px) { 
             button.navbar-toggler{
                 margin-left:220px!important;
             }
         }
 
-        @media screen and (max-device-width: 1024px) {
+@media screen and (max-device-width: 1024px) {
         .highRight,li.nav-item.dropdown{ width: 109px!important;}
     }
 
-    @media screen and (max-device-width: 320px) {
+ @media screen and (max-device-width: 320px) {
     a.navbar-brand.d-flex {
         width: 149px;
     }}
-    @media only screen and (max-width: 767px){
+@media only screen and (max-width: 767px){
 button.navbar-toggler.collapsed, button.navbar-toggler {
     margin-left: 112px!important;
-}}
+}
+
+}
 
 @media screen and (min-device-width: 80px) and (max-device-width: 520px){
 .navbar-brand {
     margin-right: -3rem!important;
-}}
+}
+
+}
+ 
+.nav-publisher{
+      
+    overflow-x: hidden;
+    width: 11%;
+    position: absolute;
+  
+    height: 31px;
+}
+
+@media screen and (min-device-width: 120px) and (max-device-width: 768px) { 
+    a.navbar-brand.d-flex {
+        width: 40%;
+    }  
+    
+    .nav-publisher {
+      
+        overflow-x: hidden;
+        width: 50%;
+    }
+
+}
