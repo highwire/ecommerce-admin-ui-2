@@ -119,5 +119,16 @@
   
   .dropdown:hover .dropbtn {background-color:blue;}
 
+  .dropbtn{
+    
+    padding: 8px 24px;
+    font-size: 16px;
+    
+    margin: 2px!important;
+}
+
+td.mat-cell {
+  padding: 10px;}
+
 
   

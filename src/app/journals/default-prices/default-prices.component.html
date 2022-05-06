@@ -1,12 +1,11 @@
-
 <div class="container">
-    <h1 style="text-transform:capitalize; color: brown;"> Manage Default</h1>
+    <h1 style="text-transform:capitalize; color: brown;" class="pt-2"> Manage Default</h1>
     <h5 style="color: grey; margin-top: 10px;">Selected Sites</h5>
-    <select class="select"name="chapter" id="chapter" (change)="dropDownChange($event.target)">
-        <option value=""  selected="selected">Please select site</option>
-        <option value="{{site.corpus}}"  *ngFor="let site of sitedata" selected="selected">{{site.title}}</option>
-      </select>          
-    <form class="form">
+    <select class="select" name="chapter" id="chapter" (change)="dropDownChange($event.target)">
+        <option value="" selected="selected">Please select site</option>
+        <option value="{{site.corpus}}" *ngFor="let site of sitedata" selected="selected">{{site.title}}</option>
+    </select>
+    <form class="form" class="form_list">
         <h5 style="color: grey; margin-top: 10px;">Default Price</h5>
         <table class=" table">
             <tr class="thline">
@@ -16,18 +15,19 @@
                 <th>Price</th>
                 <th>Access Panel</th>
             </tr>
-            <tr  *ngFor="let item of pricearray;let ind=index">
+            <tr *ngFor="let item of pricearray;let ind=index">
                 <td class="isar">{{item.productType}}</td>
-                <td> 
-                     <div class="input-group input-group-sm ">
+                <td>
+                    <div class="input-group input-group-sm ">
 
-                    <select class="mb-3 btn btn-primary dropdown-toggle" name="{{item.price_currency+ind}}" [(ngModel)]="item.price_currency"  >                            
-                        <option *ngFor="let curr of currency" value="{{curr}}">{{curr}}</option>                            
-                      </select>
+                        <select class="mb-3 btn btn-primary dropdown-toggle" name="{{item.price_currency+ind}}"
+                            [(ngModel)]="item.price_currency">
+                            <option *ngFor="let curr of currency" value="{{curr}}">{{curr}}</option>
+                        </select>
 
-                    <!-- <input type="text" class="form-control" aria-label="Sizing example input"
+                        <!-- <input type="text" class="form-control" aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm" name="{{item.price_currency+ind}}" [(ngModel)]="item.price_currency" placeholder="USD"> -->
-                </div>
+                    </div>
                 </td>
                 <td><label class="switch">
                         <input type="checkbox">
@@ -36,53 +36,60 @@
                 <td>
                     <div class="input-group input-group-sm ">
                         <!-- <span class="input-group-text" id="inputGroup-sizing-sm">{{ item.price_amount | currency:item.price_currency}}</span> -->
-                        <input type="text" class="form-control"  name="{{item.price_amount+ind}}" [ngModel]="item.price_amount | currency:item.price_currency"  aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-sm" >
+                        <input type="text" class="form-control" name="{{item.price_amount+ind}}"
+                            [ngModel]="item.price_amount | currency:item.price_currency"
+                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                     </div>
                 </td>
                 <td>
                     <div class="btn-group" role="group">
 
-                        <select class="mb-3 btn btn-primary dropdown-toggle" name="{{item.price_interval+ind}}" [(ngModel)]="item.price_interval"  >                            
-                            <option *ngFor="let item1 of accessPeriods" value={{item1.value}} >{{item1.label}}</option>                            
-                          </select>
+                        <select class="mb-3 btn btn-primary dropdown-toggle" name="{{item.price_interval+ind}}"
+                            [(ngModel)]="item.price_interval">
+                            <option *ngFor="let item1 of accessPeriods" value={{item1.value}}>{{item1.label}}</option>
+                        </select>
 
-                       
+
                     </div>
                 </td>
-                <td><button type="button" class="btn btn-danger" (click)="removeitem(ind)" >Remove</button></td>
-                
+                <td><button type="button" class="btn btn-danger" (click)="removeitem(ind)">Remove</button></td>
+
             </tr>
 
             <tr>
+                
                 <td>
-                    <td>
                     <div class="dropdown">
-                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             Add Price
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                          <li><a class="dropdown-item"  href="javascript:void(0)" (click)="addPrice('issue')">Issue</a></li>
-                          <li><a class="dropdown-item"  href="javascript:void(0)" (click)="addPrice('article')">Article</a></li>
-                          
+                            <li><a class="dropdown-item" href="javascript:void(0)" (click)="addPrice('issue')">Issue</a>
+                            </li>
+                            <li><a class="dropdown-item" href="javascript:void(0)"
+                                    (click)="addPrice('article')">Article</a></li>
+
                         </ul>
-                      </div>
+                    </div>
 
 
-                    </td>
+                </td>
 
-                
+
             </tr>
-           
+
             <tr>
                 <td><button type="button" class="btn btn-danger">Cancel</button></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><div><button type="button" (click)="update()" class="btn btn-info">Save</button></div></td>
-                
-            </tr>        
+                <td>
+                    <div><button type="button" (click)="update()" class="btn btn-info">Save</button></div>
+                </td>
+
+            </tr>
         </table>
     </form>
 </div>
