@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {hwValidator} from '../../services/hwvalidator.service'
 import {HTTPService } from '../../services/http.service';
 import { BaseService } from 'src/app/services/base.service';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-default-prices',
@@ -9,6 +10,8 @@ import { BaseService } from 'src/app/services/base.service';
   styleUrls: ['./default-prices.component.css']
 })
 export class DefaultPricesComponent implements OnInit {
+
+  myControl = new FormControl();
   masterData:any;
   currency=[]
   pricearray:any;
@@ -37,20 +40,41 @@ export class DefaultPricesComponent implements OnInit {
     {label: 'Perpetual', value: -1, sort: 99999}
   ]
 
+
+
 sitedata:any;
+
+
+
+selected = [
+  
+];
+
+
+
+
+
 
   constructor(
     public http: HTTPService,
     public base: BaseService,
     public hwv: hwValidator,
   ) { 
+    // this.filteredOptions = this.myControl.valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => this._filter(value)),
+    // );
   }
 
   ngOnInit(): void {
     this.selectAllPublishers();
     this.selectAllListPublishers();
     this.getCurrencyList();
+    
+
+    
   }
+  
 
   selectAllListPublishers(){
     let publisher = localStorage.getItem('publisher')  ;
@@ -62,6 +86,17 @@ sitedata:any;
     })
   }
 
+  onSelectionChange(event:any){
+    console.log('onSelectionChange called', event.option.value);
+    
+    this.sitedata.forEach((element:any) => {
+      if(event.option.value==  element.corpus){
+        this.myControl.setValue(element.title);
+      }
+      
+    });
+    this.extractPrice(this.masterData, event.option.value);
+  }
   selectAllPublishers(){
     // let publisher = localStorage.getItem('publisher')  ;
     // let URL= this.base.SITE_LIST;
@@ -112,11 +147,7 @@ sitedata:any;
   
 
 }
-dropDownChange(value:any){
-  console.log(value.value);
-  this.extractPrice(this.masterData, value.value);
 
-}
 
 extractPrice(data:any, pub:any){
   debugger;

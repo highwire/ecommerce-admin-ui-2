@@ -6,11 +6,6 @@
     .lead {
         font-size: 21px;
     }}
-    @media (max-width: 768px){
-        .lead {
-            line-height: 1!important;
-        }}
-
     .alert {
         padding: 15px;
         margin-bottom: 22px;

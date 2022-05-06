@@ -25,6 +25,8 @@ import { CitationComponent } from './template/citation/citation.component';
 import { DeleteComponent } from './template/delete/delete.component';
 import { AddNewPriceComponent } from './template/add-new-price/add-new-price.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatProgressSpinnerModule,
     MatDialogModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    
   ]
 })
 export class JournalsModule { }

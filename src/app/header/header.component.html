@@ -1,71 +1,4 @@
-
-<nav class="custom-nav navbar navbar-expand-md navbar-light b header-shadow bg-light py-0">
-  <div class="container">
-    <!--logo name-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand d-flex" routerLink="/"  >
-          <img src="../../assets/img/logo.svg" height="57" alt="image">
-          <div class="nav-text">
-             <img class="nav-logotype" src="../../assets/img/logotype.svg" alt="HighWire">
-             <div class="nav-product-name"> Intelligent commerce</div>
-             <div class="nav-publisher" *ngIf="publisher">{{publisher}}</div>
-          </div>
-
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-         <!--report and journal button-->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="hwpUser && jouralslect ">
-           
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="javascript void(0)" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                journals
-              </a>
-              <ul class="dropdown-menu " aria-labelledby="navbarDarkDropdownMenuLink">
-                <li><a class="dropdown-item" routerLink="/journals/default"> Default Prices</a></li>
-               <li><a class="dropdown-item" routerLink="/journals/specific"> Specific Prices</a></li>
-               
-            </ul>
-            </li>
-
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle"  href="javascript: void(0)"  id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Reports
-              </a>
-              <ul class="dropdown-menu " aria-labelledby="navbarDarkDropdownMenuLink">
-                <li><a class="dropdown-item" routerLink="/reports/detailed"> Detailed  </a></li>
-                <li><a class="dropdown-item" routerLink="/reports/mostpopular">Most Popular</a></li>
-                <li><a class="dropdown-item" routerLink="/reports/charts">Charts</a></li>
-              </ul>
-            </li>
-            <!--higwirebutton-->    
-            <div class="highRight" style="width: 735px;">
-            <li class="nav-item dropdown" style="float: right;">
-              <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                HighWire Press
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end rounded-0 mb-2" aria-labelledby="navbarDropdown">
-                   <li><a class="dropdown-item" routerLink="/journals/publishers">Switch Publisher</a></li>
-                   <li><a class="dropdown-item"  href="javascript:void(0)" (click)="goToLogout()" >Logout</a></li>
-                   
-                </ul>
-            </li>
-            </div>
-          
-            
-          </ul>
-         
-        </div>
-      </div>
-    </nav>
-    </div>
-    </nav>
-
-
-<!-- <nav class="custom-nav navbar navbar-expand-md navbar-light  header-shadow bg-light py-0">
+<nav class="custom-nav navbar navbar-expand-md navbar-light bg-white header-shadow bg-light py-0">
   <div class="container">
      <a class="navbar-brand d-flex" routerLink="/">
         <img src="../../assets/img/logo.svg" height="57" alt="image">
@@ -90,16 +23,16 @@
           </a>
           <ul class="dropdown-menu " aria-labelledby="navbarDarkDropdownMenuLink">
             <li><a class="dropdown-item" routerLink="/journals/default"> Default Prices</a></li>
-           <li><a class="dropdown-item" routerLink="/journals/specific"> Specific Prices</a></li> -->
+           <li><a class="dropdown-item" routerLink="/journals/specific"> Specific Prices</a></li>
            <!-- <li><a class="dropdown-item" routerLink="/journals/promocode"> promocode </a></li> -->
            <!-- <li><a class="dropdown-item" routerLink="/journals/increment"> increment</a></li> -->
            <!-- <li><a class="dropdown-item" routerLink="/journals/setting">setting </a></li> -->
-          <!-- </ul>
-        </li> -->
+          </ul>
+        </li>
 
   
 
-        <!-- <li class="nav-item dropdown">
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle"  href="javascript: void(0)"  id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Reports
           </a>
@@ -111,7 +44,7 @@
         </li>
        
       </ul>
-    </div> -->
+    </div>
 
 
     <!-- <div class="spinner-border text-dark" role="status">
@@ -119,13 +52,13 @@
     </div> -->
 
 
-     <!-- <div class="spinner-frame">
+     <div class="spinner-frame">
         <img src="../../assets/img/hwprocessing_black.png"
         class="icon-spin-reverse" />
      </div>
-      -->
+     
    <!-- ng-show="hasPendingRequests()" -->
-  <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" >
      <ul class="navbar-nav ms-auto  mb-lg-0" *ngIf="hwpUser && jouralslect">
         <li class="nav-item dropdown">
            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -139,10 +72,8 @@
         </li>
      </ul>
   </div>
-
-  
   </div>
-</nav> -->
+</nav>
 
 
 

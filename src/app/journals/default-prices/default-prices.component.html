@@ -1,12 +1,32 @@
 
 <div class="container">
     <h1 style="text-transform:capitalize; color: brown;"> Manage Default</h1>
-    <h5 style="color: grey; margin-top: 10px;">Selected Sites</h5>
+
+
+  
+
+    <!-- <h5 style="color: grey; margin-top: 10px;">Selected Sites</h5>
     <select class="select"name="chapter" id="chapter" (change)="dropDownChange($event.target)">
         <option value=""  selected="selected">Please select site</option>
         <option value="{{site.corpus}}"  *ngFor="let site of sitedata" selected="selected">{{site.title}}</option>
-      </select>          
+      </select>           -->
     <form class="form">
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Selected Sites</mat-label>
+            <input type="text"
+                   placeholder="Selected Sites"
+                   aria-label="Number"
+                   matInput
+                   [formControl]="myControl"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectionChange($event)">
+              <mat-option *ngFor="let option of sitedata" [value]="option.corpus">
+                {{option.title}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
         <h5 style="color: grey; margin-top: 10px;">Default Price</h5>
         <table class=" table">
             <tr class="thline">
@@ -24,6 +44,11 @@
                     <select class="mb-3 btn btn-primary dropdown-toggle" name="{{item.price_currency+ind}}" [(ngModel)]="item.price_currency"  >                            
                         <option *ngFor="let curr of currency" value="{{curr}}">{{curr}}</option>                            
                       </select>
+
+                    
+
+
+
 
                     <!-- <input type="text" class="form-control" aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm" name="{{item.price_currency+ind}}" [(ngModel)]="item.price_currency" placeholder="USD"> -->
