@@ -103,13 +103,19 @@
   .btn-danger {
 
     background-color: brown!important;
-    padding:8px 30px;
+    /* padding:8px 30px; */
+    padding: 4px 10px;
+    margin-top: -17px;
+    border-radius: 0px;
 }
+
 
 .btn-info {
     background-color:#0d6efd!important;
   padding:8px 30px;
-  color:white
+  color:white;
+  border-radius: 0px;
+ 
 }
 .thline{text-transform: uppercase;
     color: brown;
@@ -125,5 +131,28 @@ table tr{border: none;}
 
 #chapter{width: 50%;
             padding: 5px;
-        border-radius: 5px;
+        border-radius: 0px;
         }
+@media (max-width:768px){
+  #chapter{width: 100%!important;
+
+}
+  
+}
+.btn-info{
+          
+          margin-left: -7px!important;
+          
+      }
+.btn-primary {
+      
+        border-radius: 0px;
+    }
+
+ td {
+        
+        width: 17%;
+    }
+.form_list{
+  overflow-x: scroll;
+}
