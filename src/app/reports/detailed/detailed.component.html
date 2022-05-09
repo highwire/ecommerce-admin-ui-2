@@ -1,10 +1,10 @@
 <div class="container mt-3">
     <p style="color: brown; font-size:x-large;">Ecommerce Report</p>
 
-    <div class="dateframe" style="margin-left:897px;height: 100px; width:100%">
+    <div class="dateframe" style="height: 100px; width:100%">
 
 
-        <mat-form-field appearance="legacy">
+        <mat-form-field appearance="legacy" style="float: right;">
             <mat-label style="color: white; position:relative; margin-left: 10px;">Set Date Range</mat-label>
               
             <mat-date-range-input 
@@ -18,22 +18,30 @@
             
 
             <mat-date-range-picker #picker></mat-date-range-picker>
+            <h5>
+              Start: {{dateRange.value.start | date}}
+              End: {{dateRange.value.end | date}}
+          </h5>
+
+          
+          
+
+          
         </mat-form-field>
-        <button class="btn btn-danger btn-sm" (click)="selectAllPublishers()">Run Report</button>
-        <h5>
-            Start: {{dateRange.value.start | date}}
-            End: {{dateRange.value.end | date}}
-        </h5>
+        
+        
         
         </div>
  
-        <div class="row">
-          <div class="col-md-8"></div>
-          <div class="col-md-4">
-            <button class="btn btn-info p-1" (click)="exporter.exportTable('csv')" style="color: white;">EXPORT(.CSV)</button>
+        <div class="row my-2">
+          <!-- <div class="col-md-9"></div> -->
+          <div class="col-md-12">
+            <button class="btn btn-danger btn-sm " (click)="selectAllPublishers()">Run Report</button>
+            <button class="btn btn-info p-1 mx-2" (click)="exporter.exportTable('csv')" style="color: white;">EXPORT(.CSV)</button>
             <!-- <button type="button" class="m-1 btn btn-primary" (click)="exporter.exportTable('csv')">Csv</button> -->
           </div>
         </div>
+        <hr>
 
 <div class="row">
 
