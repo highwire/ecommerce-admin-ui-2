@@ -1,69 +1,55 @@
 <div class="container">
-
     <div class="container mt-3">
-
-
         <div class="dateframe" style="height: 100px; width:100%">
             <div class="row">
                 <div class="col-sm-9">
                     <h4 style="color: #A81732; font-size:x-large;">Most Popular</h4>
                 </div>
-
                 <div class="col-sm-3">
-                    <label style="font-weight: 400;">Set Date Range</label>
+                    <small style="font-weight: 400;">Set Date Range</small>
                     <mat-form-field appearance="legacy">
                         <mat-label style="color: white; position:relative; margin-left: 10px;">Set Date Range
                         </mat-label>
-
                         <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange"
                             style="background-color: #A81732; color:white;">
                             <input matStartDate formControlName="start" placeholder="Start Date" style="color: white;">
                             <input matEndDate formControlName="end" placeholder="End Date" style="color: white;">
                         </mat-date-range-input>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-
-
                         <mat-date-range-picker #picker></mat-date-range-picker>
+                       
                     </mat-form-field>
-
-
-
                 </div>
+               
             </div>
         </div>
         <div class="row pb-3">
+            
             <div class="col-sm-9"></div>
             <div class="col-sm-3">
-                <button class="btn btn-danger btn-sm" (click)="selectAllPublishers()">Run Report</button>
+                
                 <!-- <button class="btn btn-info btn-sm mx-1" (click)="exporter.exportTable('csv')" style="color: white;">EXPORT(.CSV)</button> -->
                 <h5>
                     Start: {{dateRange.value.start | date}}
                     End: {{dateRange.value.end | date}}
                 </h5>
+                <button class="btn btn-danger btn-sm" (click)="selectAllPublishers()">Run Report</button>
             </div>
-
+           
         </div>
-
+       
         <!-- <div class="dateframe" style="height: 100px; width:100%">
-
             <div class="df" style="margin-left: 870px;">
-
                 <mat-form-field appearance="legacy">
-
                     <mat-label style="color: white; position:relative; margin-left: 10px;">Set Date Range</mat-label>
-
                     <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange"
                         style="background-color: brown; color:white;">
                         <input matStartDate formControlName="start" placeholder="Start Date" style="color: white;">
                         <input matEndDate formControlName="end" placeholder="End Date" style="color: white;">
                     </mat-date-range-input>
-
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-
                     <mat-date-range-picker #picker></mat-date-range-picker>
-
                 </mat-form-field>
-
                 <h5>
                     Start: {{dateRange.value.start | date}}
                     End: {{dateRange.value.end | date}}
@@ -72,15 +58,12 @@
         </div>
     </div>
  -->
-
-
         <div class="row rf">
             <div class="col-sm-3  text-white">
                 <ul style="width: 95%; height: 100px; border: 1px solid grey;">No.of Items sold
                     <li>{{response.qty.all}}</li>
                 </ul>
             </div>
-
             <div class="col-sm-3  text-white">
                 <ul style="width: 95%; height: 100px; border: 1px solid grey;">Total Revenue-USD
                     <li>{{response.revenue.USD}}</li>
@@ -89,7 +72,6 @@
             <div class="col-sm-3  text-white">
                 <ul style="width: 95%; height: 100px; border: 1px solid grey;">Total Issues Sold
                     <li>{{response.issue.qty}}</li>
-
                 </ul>
             </div>
             <div class="col-sm-3  text-white">
@@ -102,21 +84,13 @@
                     <li>{{response.mpInterval}}</li>
                 </ul>
             </div>
-
-
-
-
         </div>
-
         <div>
-
             <link rel="stylesheet"
                 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
             <div class="row p-2">
                 <div class="col-sm-12 p-3 " style="background-color: #A81732;; height: 10vh; color: white;">
                     <label style="font-weight: 500;">Most Popular Content</label>
-
                 </div>
             </div>
             <div class="row p-2">
@@ -129,19 +103,15 @@
                     </div>
                 </div>
             </div>
-
             <div class="row">
-
                 <div class="col-sm-6">
-
                     <!-- <button type="button" class=" btn btn-default">ALL</button> -->
-                    <button class="btn btn-default dropdown-toggle" style="width:90px" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">ALL</button>
+                    <button class="btn btn-default dropdown-toggle" style="width:90px" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">ALL</button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">All</a></li>
                         <li><a class="dropdown-item" href="#">Issue</a></li>
                         <li><a class="dropdown-item" href="#">Article</a></li>
-                       
                     </ul>
                     <!-- <button type="button" class=" btn btn-default mx-2">All CURRENCIES</button> -->
                     <button class="btn btn-default mx-2 dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -150,19 +120,12 @@
                         <li><input type="checkbox">EUR</li>
                         <li><input type="checkbox">GBP</li>
                         <li><input type="checkbox">USD</li>
-                       
                     </ul>
                     <button type="button" class=" btn btn-default" (click)="exporter.exportTable('csv')"
                         disabled>EXPORT(.Csv)</button>
                 </div>
-
-
-
                 <div class="col-sm-6">
-
-
                     <!-- <div class="serch" style="width: 60%; margin-left: 250px;"> -->
-
                     <input style="border:1px solid grey;" type="text" placeholder="Search.." name="search"
                         class="searchbar">
                     <button class="bino" type="submit" style=" border: none; margin-right: 10px;"><i
@@ -170,22 +133,14 @@
                 </div>
             </div>
         </div>
-
-
         <div class="serchbtn" style="display: flex; height: 35px;">
-
             <!-- <button type="button" class="ml-1 btn btn-primary">ALL</button>
             <button type="button" class="ml-1 btn btn-primary">USD($)</button> -->
             <!-- <button type="button" class="mr-1 btn btn-primary">EXPORT(.CSV)</button> -->
-
             <!-- <button type="button" class="m-1 btn btn-primary" (click)="exporter.exportTable('xlsx', {fileName:'test', sheet: 'sheet_name', Props: {Author: 'Talha'}})">Excel</button> -->
             <!-- <button type="button" class="ml-1 btn btn-primary" (click)="exporter.exportTable('csv')">Csv</button> -->
             <!-- <button type="button" class="m-1 btn btn-primary" (click)="exporter.exportTable('json')">Json</button> -->
             <!-- <button type="button" class="m-1 btn btn-primary" (click)="exporter.exportTable('txt')">Txt</button> -->
-
-
-
-
             <!-- <div class="serch" style="width: 60%; margin-left: 250px;">
                 <div>
                      <h5>Search Report</h5> 
@@ -195,8 +150,6 @@
                 </div>
             </div>
         </div> -->
-
-
         </div>
         <div class="row">
             <!-- <mat-table matTableExporter [dataSource]="dataSource"  [hiddenColumns]="[0]"> -->
@@ -207,68 +160,38 @@
                     <th mat-header-cell *matHeaderCellDef>DOI/ISBN/ISSN</th>
                     <td mat-cell *matCellDef="let element">{{element.contentId }}</td>
                 </ng-container>
-
                 <!-- Name Column -->
                 <ng-container matColumnDef="title">
                     <th mat-header-cell *matHeaderCellDef>Item Title</th>
                     <td mat-cell *matCellDef="let element">{{element.title }}</td>
                 </ng-container>
-
                 <ng-container matColumnDef="resourceType">
                     <th mat-header-cell *matHeaderCellDef>Publication Type</th>
                     <td mat-cell *matCellDef="let element">{{element.resourceType}}</td>
                 </ng-container>
-
-
                 <ng-container matColumnDef="amount">
                     <th mat-header-cell *matHeaderCellDef>Price</th>
                     <td mat-cell *matCellDef="let element">{{element.amount}}</td>
                 </ng-container>
-
-
-
                 <ng-container matColumnDef="interval">
                     <th mat-header-cell *matHeaderCellDef>Access Period</th>
                     <td mat-cell *matCellDef="let element">{{element.interval}}</td>
                 </ng-container>
-
-
                 <ng-container matColumnDef="qty">
                     <th mat-header-cell *matHeaderCellDef>Quality Sold</th>
                     <td mat-cell *matCellDef="let element">{{element.qty}}</td>
                 </ng-container>
-
-
-
                 <ng-container matColumnDef="revenue">
-
                     <th mat-header-cell *matHeaderCellDef>Total Revenue </th>
                     <td mat-cell *matCellDef="let element">{{element.revenue}}</td>
-
-
                 </ng-container>
-
-
-
-
-
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-
                 <tr mat-row [class.demo-row-is-clicked]="clickedRows.has(row)"
                     *matRowDef="let row; columns: displayedColumns;">
                 </tr>
             </table>
-
-
-
             <mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
                 [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
             </mat-paginator>
-
-
-
-
-
         </div>
-
     </div>
