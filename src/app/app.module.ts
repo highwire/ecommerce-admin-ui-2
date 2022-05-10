@@ -25,6 +25,7 @@ import { MessagepopupComponent } from './common/messagepopup/messagepopup.compon
 
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { NgxDateRangeModule } from 'ngx-daterange';
+import { AuthGuardService }  from './auth/auth-gaurd.service';
 
 
 export function tokenGetter() {
@@ -71,7 +72,7 @@ export function tokenGetter() {
     })
     
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

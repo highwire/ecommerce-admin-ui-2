@@ -10,26 +10,3 @@
 .table-column-200 {
     min-width: 200px;
 }
-
-mat-date-range-input-container {
-    display: flex;
-    align-items: center;
-    padding: 9px;
-}
-mat-date-range-input {
-   
-    padding: 9px;
-}
-
-button.btn.btn-danger.btn-sm {
-    margin-left: 80%!important;
-}
-
-@media  screen and (max-width:768px) {
-    button.btn.btn-danger.btn-sm{
-        margin-left: 35%!important;
-    }
-    
-}
-
-

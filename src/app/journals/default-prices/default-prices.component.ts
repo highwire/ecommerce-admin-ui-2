@@ -116,7 +116,7 @@ sitedata:any;
   {
     var self= this;
     // data= data.filter((entry:any)=>{
-      debugger;
+      // debugger;
     // return  self.hwv.doi(item.name);
       // return(entry.productType=='ebook' )
       // && entry.name=='chapter-price' ) ||
@@ -134,7 +134,7 @@ dropDownChange(value:any){
 }
 
 extractPrice(data:any, pub:any){
-  debugger;
+  // debugger;
   var self= this;
   var pricearray:any= [];
   data.forEach((element:any) => {

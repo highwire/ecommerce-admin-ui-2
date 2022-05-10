@@ -84,16 +84,4 @@ width: 93%!important;
         height: 35px;
     }
     
-
-    @media  screen and (max-width:768px) {
-        .dateframe{
-        width: 67%!important;
-            margin-bottom: 16px;}}
-    
-
-            .btn-danger {
-                
-                border-radius: 0px;
-            }
-    
     

@@ -108,7 +108,7 @@ extractPrice(data:any, currencies?:any){
   data.forEach((element:any) => {
     // console.log(element);
     if(element.prices && Array.isArray(element.prices)  && element.productType=='article'){
-      debugger
+      // debugger
       
        element.prices.forEach((elements:any) => {      
         // if(elements.name== "article-price"){

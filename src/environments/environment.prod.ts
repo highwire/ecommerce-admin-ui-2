@@ -4,10 +4,18 @@
 
 export const environment = {
   production: true,
+  
+
+
+  
   appRole: 'Collections maint',
-  loginUrl: '/login-global',
-  atomBase: '/atom',
-  apiBase: '/api',
-  taxonomyUrl: '/api/tree',
-  membershipUrl: '/api/acs/collection-citations'
+  atomBase: 'http://10.220.52.127:9000/atom',
+  apiBase: 'http://10.220.52.127:9000/api',
+  
+  loginUrl: 'http://10.220.52.127:9000/login-global',
+  taxonomyUrl: 'http://10.220.52.127:9000/api/tree',
+  membershipUrl: 'http://10.220.52.127:9000/api/acs/collection-citations'
+
+
+
 };

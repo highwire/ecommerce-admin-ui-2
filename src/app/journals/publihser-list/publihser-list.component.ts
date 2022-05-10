@@ -45,9 +45,29 @@ publihserlist: any;
     localStorage.setItem('publisher',item.term)
     localStorage.setItem('publisher-label',item.label)
     
-    this.router.navigateByUrl('journals/specific');
+    this.getCurrencyList();
     this.auth.jouranlselect(true);
     console.log(item);
+  }
+
+  getCurrencyList(){
+    var currency:any= localStorage.getItem('currency');
+    if(currency){
+        currency= JSON.parse(currency) ;
+        this.router.navigateByUrl('journals/specific');
+    }else{
+
+      let publisher = localStorage.getItem('publisher')  ;
+      // var name =  window.encodeURIComponent(this.basedata.element.name)
+      let URL= this.base.CURRENCY_LIST+publisher+ '/currencies';
+      this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
+      // this.currency  =  res;
+      localStorage.setItem('currency',JSON.stringify(res));
+        console.log(res);       
+        this.router.navigateByUrl('journals/specific');
+      })
+    }
+  
   }
 
 }

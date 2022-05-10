@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
     publisherName:''
   }
   constructor(
+    
     public base:BaseService,
     public http:HTTPService,
     public auth: AuthresolverService,
@@ -59,7 +60,7 @@ export class HeaderComponent implements OnInit {
     this.auth.jouralMenu.subscribe((message) => {
       this.jouralslect = message;
       localStorage.setItem('menu','true');
-      this.getCurrencyList();
+      // this.getCurrencyList();
       this.getDefalutCurrencyList();
       this.getSiteData();
       this.publisher= localStorage.getItem('publisher-label');
