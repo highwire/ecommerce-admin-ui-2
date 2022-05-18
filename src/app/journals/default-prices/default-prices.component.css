@@ -165,3 +165,8 @@ table tr{border: none;}
 .example-full-width {
   width: 50%;
 }
+
+.selected-item {
+       max-width: 1001px !important;
+}
+

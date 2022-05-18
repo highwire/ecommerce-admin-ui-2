@@ -47,4 +47,8 @@ SEND_RECEIPT=  environment.apiBase+   '/report/publishers/';
       data:message
     });
   }
+  clearStorage(...arr:any){
+
+    
+  }
 }

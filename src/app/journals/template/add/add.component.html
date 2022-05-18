@@ -1,10 +1,10 @@
 <div class=" container p-2 my-3 ">
     <h4>View/Add/EditPrices</h4>
-    <div class="sm-4 my-2 mx-0 row" *ngIf="data">
-       <div class="mb-3 row">
+    <div class="sm-4 my-2 mx-0 row" >
+       <div class="mb-3 row" *ngIf="data">
           <label for="inputtext" class="col-sm-5 col-form-label">Publication Details</label>
           <div class="col-sm-6">
-             <input type="text" class="form-control-plaintext p-2" class="form-control" value="{{data.title}}" placeholder="Details"
+             <input type="text" class="form-control-plaintext p-2" readonly class="form-control" value="{{data.title}}" placeholder="Details"
                 id="Details">
           </div>
        </div>
@@ -37,17 +37,29 @@
                 </td>
                 <td>
                    <label class="switch">
-                   <input type="checkbox" checked>
+                      
+                   <input type="checkbox"   (change)="onItemChange($event.target,item)"
+                    [checked]="item.price_amount=='Not for Sale' ? false:true " >
                    <span class="slider round"></span>
                    </label>
                 </td>
                 <td>
+                   
                    <div class="input-group mb-3">
-                      <span style="border-radius: 0px; border: none;" class="input-group-text" id="#">$</span>
-                      <input style="border-radius: 0px;background-color: #e9ecef ; border: none;" type="text"
-                      [(ngModel)]="item.price_amount"
-                      class="form-control"
-                         placeholder="Not for sale" aria-label="price" aria-describedby="#">
+                     <div *ngIf="item.price_amount==notForSaleLabel; then thenBlock else elseBlock"></div>
+                     <ng-template #thenBlock>{{notForSaleLabel}}  </ng-template>
+                     <ng-template #elseBlock>
+                        
+                        <span style="border-radius: 0px; border: none;" class="input-group-text" id="#">{{ item.price_currency|filterPipe}}</span>
+                        <input style="border-radius: 0px;background-color: #e9ecef ; border: none;" type="text"
+                        [(ngModel)]="item.price_amount"
+                        
+                        class="form-control"
+                           placeholder="" aria-label="price" aria-describedby="#">
+                     
+                     </ng-template>
+                     
+                     
                    </div>
                 </td>
                 <td>

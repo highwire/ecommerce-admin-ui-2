@@ -7,7 +7,42 @@
     </select> -->
     <form class="form" class="form_list">
 
-        <mat-form-field class="example-full-width" appearance="fill">
+<div class="row">
+    <div class="col-md-6">
+        <ng-multiselect-dropdown
+            [placeholder]="'Filter sites...'"
+            [settings]="dropdownSettings"
+            [data]="sitedata"
+            [(ngModel)]="selectedItems"
+            (onSelect)="onItemSelect($event)"
+            (onSelectAll)="onSelectAll($event)">
+        </ng-multiselect-dropdown>
+    </div>
+</div>
+
+        <!-- <div class="dropdown">
+            <button (click)="myFunction()" class="dropbtn">Selected Sites</button>
+            <div id="myDropdown" class="dropdown-content" *ngIf="showdrop">
+              <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+              
+              <a *ngFor="let website of sitedata " value="website.corpus">
+                {{website.title}}</a>
+              
+            </div>
+          </div> -->
+        <!-- <mat-form-field>
+            <mat-select [formControl]="myControl" placeholder="Bank" #singleSelect>
+              <mat-option>
+                <ngx-mat-select-search [formControl]="websiteFilterCtrl"></ngx-mat-select-search>
+              </mat-option>
+          
+              <mat-option *ngFor="let website of sitedata | async" [value]="website.corpus">
+                {{website.title}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> -->
+
+        <!-- <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Selected Sites</mat-label>
             <input type="text"
                    placeholder="Selected Sites"
@@ -20,7 +55,7 @@
                 {{option.title}}
               </mat-option>
             </mat-autocomplete>
-          </mat-form-field>
+          </mat-form-field> -->
 
         <h5 style="color: grey; margin-top: 10px;">Default Price</h5>
         <table class=" table">

@@ -3,6 +3,7 @@ import {hwValidator} from '../../services/hwvalidator.service'
 import {HTTPService } from '../../services/http.service';
 import { BaseService } from 'src/app/services/base.service';
 import {FormControl} from '@angular/forms';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-default-prices',
@@ -10,8 +11,12 @@ import {FormControl} from '@angular/forms';
   styleUrls: ['./default-prices.component.css']
 })
 export class DefaultPricesComponent implements OnInit {
-  myControl = new FormControl();
+  dropdownList :any= [];
+  selectedItems :any= [];
+  dropdownSettings :any= {};
 
+  myControl = new FormControl();
+  showdrop:any=  false;
   masterData:any;
   currency=[]
   pricearray:any;
@@ -53,6 +58,30 @@ sitedata:any;
     this.selectAllPublishers();
     this.selectAllListPublishers();
     this.getCurrencyList();
+    // <a *ngFor="let website of sitedata " value="website.corpus">
+    // {{website.title}}</a>
+    
+    this.selectedItems = [
+    
+    ];
+    this.dropdownSettings = {
+      singleSelection: true,
+      idField: 'corpus',
+      textField: 'title',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true,
+      
+      closeDropDownOnSelection:true
+    };
+  }
+  onItemSelect(item: any) {
+    this.extractPrice(this.masterData, item.corpus);
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
   }
 
   selectAllListPublishers(){
@@ -247,6 +276,25 @@ removeitem(index:any){
 
 }
 
+myFunction() {
+  this.showdrop= this.showdrop?false:true;
+}
+
+filterFunction() {
+  // var input, filter, ul, li, a, i;
+  // input = document.getElementById("myInput");
+  // filter = input.value.toUpperCase();
+  // div = document.getElementById("myDropdown");
+  // a = div.getElementsByTagName("a");
+  // for (i = 0; i < a.length; i++) {
+  //   txtValue = a[i].textContent || a[i].innerText;
+  //   if (txtValue.toUpperCase().indexOf(filter) > -1) {
+  //     a[i].style.display = "";
+  //   } else {
+  //     a[i].style.display = "none";
+  //   }
+  // }
+}
 
 
 }

@@ -27,6 +27,8 @@ import { AddNewPriceComponent } from './template/add-new-price/add-new-price.com
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import {FilterPipe} from '../services/currency.filter';
 @NgModule({
   declarations: [
     DefaultPricesComponent,
@@ -39,7 +41,8 @@ import { MatInputModule } from '@angular/material/input';
     AddComponent,
     CitationComponent,
     DeleteComponent,
-    AddNewPriceComponent
+    AddNewPriceComponent,
+    FilterPipe
   ],
   imports: [
     
@@ -55,7 +58,9 @@ import { MatInputModule } from '@angular/material/input';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatAutocompleteModule
-  ]
+    MatAutocompleteModule,
+    NgMultiSelectDropDownModule.forRoot(),
+  ],
+  providers: [],
 })
 export class JournalsModule { }

@@ -4,6 +4,7 @@ import { BaseService } from '../../../services/base.service';
 import { Component, OnInit,Inject } from '@angular/core';
 
 import {MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
+
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
@@ -12,6 +13,7 @@ import {MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
 export class AddComponent implements OnInit {
   currency=[]
   data:any;
+  notForSaleLabel= 'Not for Sale';
   accessPeriods= [
     {label: '24 Hours', value: 24, sort: 24},
     {label: '48 Hours', value: 48, sort: 48},
@@ -46,9 +48,24 @@ export class AddComponent implements OnInit {
     this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
       if(res && res.resource && res.resource[0]){
         this.data= res.resource[0];
+      }else{
+        this.data={}
+        this.data['title']=this.basedata.element.name;
       }        
       console.log(res);       
     })
+  }
+  onItemChange(test:any,item:any){
+    if(test.checked){
+      item.price_amount= '';
+    }else{
+      item.price_amount= this.notForSaleLabel;
+    }
+    
+    console.log(    test.checked);
+
+
+
   }
   getCurrencyList(){
     let publisher = localStorage.getItem('publisher')  ;
