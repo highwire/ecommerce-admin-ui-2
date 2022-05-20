@@ -11,6 +11,8 @@ import {MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
+  currency_stack:any;
+  productType:any;
   currency=[]
   data:any;
   notForSaleLabel= 'Not for Sale';
@@ -37,10 +39,26 @@ export class AddComponent implements OnInit {
   ngOnInit(): void {
     // console.log(this.basedata.element.name)
     console.log(this.basedata.prices);
+    if(this.basedata.prices[0])
+    this.productType=this.basedata.prices[0].productType;
+
     this.selectAllPublishers();
     this.getCurrencyList();
+    // this.calculateAccess()
   }
-
+  calculateAccess(prices:any){
+    var newPrice:any=[];
+    var ret=  true;
+    prices.forEach((element:any) => {
+      var elm:any= element.price_currency+'_'+element.price_interval
+       if(newPrice.indexOf(elm)==-1){
+        newPrice.push(elm);        
+       }else{
+        ret=  false;
+       }                    
+     });
+     return ret;    
+  }
   selectAllPublishers(){
     // let publisher = localStorage.getItem('publisher')  ;
     var name =  window.encodeURIComponent(this.basedata.element.name)
@@ -50,7 +68,7 @@ export class AddComponent implements OnInit {
         this.data= res.resource[0];
       }else{
         this.data={}
-        this.data['title']=this.basedata.element.name;
+        this.data['doi']=this.basedata.element.name;
       }        
       console.log(res);       
     })
@@ -103,8 +121,14 @@ export class AddComponent implements OnInit {
     var name = this.basedata.element.name.replace('/', '!2F')
     let URL= this.base.DELETE_PRICE+ publisher +'/products/'+ name;
     console.log(URL);
-  
+
+    if(!this.calculateAccess(this.basedata.prices))
+    {alert('Price alreay exit.')
+    return 
+  }
     var prices= this.checkPricealreayexit();
+    
+    
     var data={
         corpus: null,
         description: this.basedata.element.description,
@@ -135,6 +159,7 @@ export class AddComponent implements OnInit {
            interval: element.price_interval
         });     
     });
+
     return prices;
   }
   

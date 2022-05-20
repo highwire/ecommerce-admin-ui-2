@@ -172,7 +172,7 @@ export class FilterPipe implements PipeTransform {
     // });
     
     this.symbols.forEach((item)=>{
-        console.log(item);
+        
         if(item.key==textFields){
             
             val= item.value;

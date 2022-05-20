@@ -12,6 +12,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 })
 export class DefaultPricesComponent implements OnInit {
   dropdownList :any= [];
+  selected:any=  false;
   selectedItems :any= [];
   dropdownSettings :any= {};
 
@@ -65,7 +66,7 @@ sitedata:any;
     
     ];
     this.dropdownSettings = {
-      singleSelection: true,
+      singleSelection: false,
       idField: 'corpus',
       textField: 'title',
       selectAllText: 'Select All',
@@ -76,7 +77,21 @@ sitedata:any;
       closeDropDownOnSelection:true
     };
   }
+
+  onItemChange(test:any,item:any){
+    if(test.checked){
+      item.price_amount= '';
+    }else{
+      item.price_amount= this.notForSaleLabel;
+    }
+  }
+
+
   onItemSelect(item: any) {
+    
+    if(item.corpus){
+      this.selected= true;
+    }
     this.extractPrice(this.masterData, item.corpus);
     console.log(item);
   }
@@ -172,7 +187,8 @@ extractPrice(data:any, pub:any){
       element.prices.forEach((elements:any) => {   
         // if(elements.name=='chapter-price'  || elements.name=='edition-price' )
       // (entry.productType=='ebook' && entry.name=='edition-price' )
-        pricearray.push({
+        debugger;
+      pricearray.push({
           name: element.name,
           productType:element.productType,
           description:element.description,      
@@ -211,16 +227,32 @@ addPrice(type:any){
   this.pricearray.push(add);
   console.log('Add price',this.pricearray)
 }
-
+calculateAccess(prices:any){
+  var newPrice:any=[];
+  var ret=  true;
+  prices.forEach((element:any) => {
+    var elm:any= element.price_currency+'_'+element.price_interval
+     if(newPrice.indexOf(elm)==-1){
+      newPrice.push(elm);        
+     }else{
+      ret=  false;
+     }                    
+   });
+   return ret;    
+}
 
 update(){
   let publisher = localStorage.getItem('publisher')  ;
   var name = this.pricearray[0].name.replace('/', '!2F')
   let URL= this.base.DELETE_PRICE+ publisher +'/products/'+ name;
   console.log(URL);
-
-  var prices= this.checkPricealreayexit();
-  var data={
+  this.calculateAccess(this.pricearray);
+  if(!this.calculateAccess(this.pricearray))
+    {   alert('Price alreay exit.')
+        return 
+    }
+    var prices= this.checkPricealreayexit();
+    var data={
       corpus: null,
       description: this.pricearray[0].description,
       identifier: this.pricearray[0].identifier,

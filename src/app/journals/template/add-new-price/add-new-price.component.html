@@ -12,7 +12,7 @@
                <input type="text" [readonly]="true" class="form-control-plaintext p-2"   class="form-control" placeholder="Details" id="Details" />
             </div>
          </div>
-         <div class="p-3 row">
+         <div class="p-3 row ">
             <label for="inputtext" class="col-sm-5 col-form-label">Selected Sites</label>
             <!-- <h5 style="color: grey; margin-top: 10px;">Selected Sites</h5> -->
             <div class="col-sm-6">
@@ -53,65 +53,64 @@
             <span *ngIf="entry.doi" class="ab-doi ng-binding ng-scope">doi:{{entry.doi}}</span><!-- end ngIf: entry.doi -->
          </div>
       </div>
-   
-   <form action=""  [formGroup]="priceobj">
-      <div class="mt-3 mb-3 row">
-         <label for="inputtext" class="col-sm-5 col-form-label">Product Type</label>
-         <div class="col-sm-6">
-            <input type="text" class="form-control-plaintext p-2" formControlName="productType"
-               class="form-control" placeholder="Details" id="Details" />
-         </div>
-      </div>
-      <div class="mb-3 row">
-         <label for="inputtext" class="col-sm-5 col-form-label">Currency</label>
-         <div class="col-sm-6">
-            <div class="input-group mb-3 hour" style="width: 30%; color: white;">
-               <select class="form-select" formControlName="currency"  aria-label="Disabled select example">
-                  <option *ngFor= "let item  of currency" value="{{item}}" >{{item}}</option>
-               </select>
+      <form action=""  [formGroup]="priceobj">
+         <div class="mt-3 mb-3 row">
+            <label for="inputtext" class="col-sm-5 col-form-label">Product Type</label>
+            <div class="col-sm-6">
+               <input type="text" class="form-control-plaintext p-2" formControlName="productType"
+                  class="form-control" placeholder="Details" id="Details" />
             </div>
          </div>
-      </div>
-      <div class="mb-3 row">
-         <label for="inputtext" class="col-sm-5 col-form-label">Article Price</label>
-         <div class="col-sm-6">
-            <div class="input-group mb-3">
-               <span class="input-group-text" id="#">€</span>
-               <input type="text" class="form-control" formControlName="price"  placeholder="price" aria-label="price"
-                  aria-describedby="#">
+         <div class="mb-3 row">
+            <label for="inputtext" class="col-sm-5 col-form-label">Currency</label>
+            <div class="col-sm-6">
+               <div class="input-group mb-3 hour" style="width: 30%; color: white;">
+                  <select class="form-select" formControlName="currency"  aria-label="Disabled select example">
+                     <option *ngFor= "let item  of currency" value="{{item}}" >{{item}}</option>
+                  </select>
+               </div>
             </div>
          </div>
-      </div>
-      <div class="mb-3 row">
-         <label for="inputtext" class="col-sm-5 col-form-label">Article Access Period</label>
-         <div class="col-sm-6">
-            <div class="input-group mb-3 hour" style="width: 30%; color: white;">
-               <select class="form-select"  formControlName="accessPeriod" aria-label="Disabled select example" >
-                  <option *ngFor= "let item  of accessPeriods" value="{{item.value}}" 
-                     >{{item.label}}</option>
-               </select>
+         <div class="mb-3 row">
+            <label for="inputtext" class="col-sm-5 col-form-label">Article Price</label>
+            <div class="col-sm-6">
+               <div class="input-group mb-3">
+                  <span class="input-group-text" id="#">€</span>
+                  <input type="text" class="form-control" formControlName="price"  placeholder="price" aria-label="price"
+                     aria-describedby="#">
+               </div>
             </div>
          </div>
-      </div>
-      <div class="mb-3 row">
-         <label for="inputtext" class="col-sm-5 col-form-label">For Sale</label>
-         <div class="col-sm-6">
-            <label class="switch">
-            <input type="checkbox" formControlName="forsale"  checked>
-            <span class="slider round"></span>
-            </label>
+         <div class="mb-3 row">
+            <label for="inputtext" class="col-sm-5 col-form-label">Article Access Period</label>
+            <div class="col-sm-6">
+               <div class="input-group mb-3 hour" style="width: 30%; color: white;">
+                  <select class="form-select"  formControlName="accessPeriod" aria-label="Disabled select example" >
+                     <option *ngFor= "let item  of accessPeriods" value="{{item.value}}" 
+                        >{{item.label}}</option>
+                  </select>
+               </div>
+            </div>
          </div>
-      </div>
-   </form>
-   <div class="p-3 row">
-      <label for="inputtext" class="col-sm-5 col-form-label"></label>
-      <div class="col-sm-6 cs">
-         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <!-- <button class="btn btn-primary me-md-2 can" type="button">Cancel</button> -->
-            <button class="btn btn-primary me-md-2 can btn-danger" mat-button mat-dialog-close>Cancel</button>
-            <button class="btn btn-primary sav " (click)="addPrice()" type="button">ADD</button>
+         <div class="mb-3 row">
+            <label for="inputtext" class="col-sm-5 col-form-label">For Sale</label>
+            <div class="col-sm-6">
+               <label class="switch">
+               <input type="checkbox" formControlName="forsale"  checked>
+               <span class="slider round"></span>
+               </label>
+            </div>
+         </div>
+      </form>
+      <div class="p-3 row">
+         <label for="inputtext" class="col-sm-5 col-form-label"></label>
+         <div class="col-sm-6 cs">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+               <!-- <button class="btn btn-primary me-md-2 can" type="button">Cancel</button> -->
+               <button class="btn btn-primary me-md-2 can btn-danger" mat-button mat-dialog-close>Cancel</button>
+               <button class="btn btn-primary sav " (click)="addPrice()" type="button">ADD</button>
+            </div>
          </div>
       </div>
    </div>
-</div>
 </div>

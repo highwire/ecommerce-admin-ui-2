@@ -170,3 +170,7 @@ table tr{border: none;}
        max-width: 1001px !important;
 }
 
+.table{
+  min-height: 400px;
+
+}

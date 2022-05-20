@@ -11,7 +11,10 @@ import { BaseService } from '../../../services/base.service';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
+  notForSaleLabel= 'Not for Sale';
   price_amount:any;
+  
+  ddata:any;
   accessPeriods= [
     {label: '24 Hours', value: 24, sort: 24},
     {label: '48 Hours', value: 48, sort: 48},
@@ -32,6 +35,7 @@ export class EditComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('data',this.data.element);
+    this.selectAllPublishers();
 
   }
 //   description: "Survival of Burgess Shale-type animals in a Middle Ordovician deep-water setting"
@@ -53,6 +57,30 @@ export class EditComponent implements OnInit {
 // 0: {name: "article-price", amount: 40, currency: "USD", interval: 24}
 // 1: {name: "article-price", amount: "371", currency: "EUR", interval: 24}
 // productType: "article"
+
+selectAllPublishers(){
+  // let publisher = localStorage.getItem('publisher')  ;
+  var name =  window.encodeURIComponent(this.data.element.name)
+  let URL= this.base.OPEN_URL+name;
+  this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
+    if(res && res.resource && res.resource[0]){
+      this.ddata= res.resource[0];
+    }else{
+      this.ddata={}
+      this.ddata['doi']=this.data.element.name;
+    }        
+    console.log(res);       
+  })
+}
+
+
+onItemChange(test:any,item:any){
+  if(test.checked){
+    item.price_amount= '';
+  }else{
+    item.price_amount= this.notForSaleLabel;
+  }
+}
 
 update(){
   let publisher = localStorage.getItem('publisher')  ;
