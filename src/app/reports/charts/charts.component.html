@@ -3,57 +3,81 @@
         <h2 style="color:brown;">View Reports</h2>
     </div>
     <div class="container">
+
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <h4>JOURNALS</h4>
+                <ng-multiselect-dropdown [placeholder]="'Filter sites...'" [settings]="dropdownSettings"
+                    [data]="sitedata" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                    (onSelectAll)="onSelectAll($event)">
+                </ng-multiselect-dropdown>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-6">
-                
+
             </div>
             <div class="col">
                 <div class="journals">
-                    <h4 style="color:brown; margin-top: 10px; font-size:bold;">JOURNALS</h4>
-                    <select class="select" name="chapter" id="chapter">
+                    <!-- <h4 style="color:brown; margin-top: 10px; font-size:bold;">JOURNALS</h4> -->
+                    <!-- <select class="select" name="chapter" id="chapter">
+                        
                         <option value="" selected="selected">ALL</option>
-                    </select>
+                    </select> -->
+
+
+
+
                     <div class="date-range" style="float: right;">
-                    <div class="date-picker">
-                        <div class="dateframe" style="height: 100px; width:100%">
+                        <div class="date-picker">
+                            <div class="dateframe" style="height: 100px; width:100%">
 
 
-                            <mat-form-field appearance="legacy">
+                                <mat-form-field appearance="legacy">
 
-                                <mat-label style="color: white; position:relative; margin-left: 10px;">Set Date Range
-                                </mat-label>
+                                    <mat-label style="color: white; position:relative; margin-left: 10px;">Set Date
+                                        Range
+                                    </mat-label>
 
-                                <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange"
-                                    style="background-color: brown; color:white;">
-                                    <input matStartDate formControlName="start" placeholder="Start Date"
-                                        style="color: white;">
-                                    <input matEndDate formControlName="end" placeholder="End Date"
-                                        style="color: white;">
-                                </mat-date-range-input>
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange"
+                                        style="background-color: brown; color:white;">
+                                        <input matStartDate formControlName="start" placeholder="Start Date"
+                                            style="color: white;">
+                                        <input matEndDate formControlName="end" placeholder="End Date"
+                                            style="color: white;">
+                                    </mat-date-range-input>
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 
-                                <mat-date-range-picker #picker></mat-date-range-picker>
-                            </mat-form-field>
-                            <h5>
-                                Start: {{dateRange.value.start | date}}
-                                End: {{dateRange.value.end | date}}
-                            </h5>
+                                    <mat-date-range-picker #picker></mat-date-range-picker>
+                                </mat-form-field>
+                                <h5>
+                                    Start: {{dateRange.value.start | date}}
+                                    End: {{dateRange.value.end | date}}
+                                </h5>
+                            </div>
+                            <button class="btn btn-dark p-1" style="color: white;; border-radius: 0px;">Reset</button>
+
+                            <button class="btn btn-danger p-1" style=" margin-left:1px"
+                                style="color: white;; border-radius: 0px;" (click)="getChartData()">RunReport</button>
+
+
+                            <button class="btn btn-info p-1"
+                                style="color: white; margin-left:1px; border-radius: 0px;">USD($)</button>
+
                         </div>
-                        <button class="btn btn-info p-1" style="color: white; margin-left:150px; border-radius: 0px;">USD($)</button>
 
                     </div>
-
                 </div>
+
+
             </div>
 
 
+
+
+            <div class="chart-area mt-4">
+
+                <canvas id="myChart" height="300px"></canvas>
+            </div>
         </div>
-
-
-
-
-        <div class="chart-area mt-4">
-
-            <canvas id="my-first-chart" height="300px"></canvas>
-        </div>
-    </div>
