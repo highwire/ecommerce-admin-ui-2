@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import{Chart,registerables} from'chart.js';
+import { Component, NgModule, OnInit } from '@angular/core';
+import { Chart, registerables } from 'chart.js';
 import { FormControl, FormGroup } from '@angular/forms';
-import {HTTPService } from '../../services/http.service';
+import { HTTPService } from '../../services/http.service';
 import { BaseService } from 'src/app/services/base.service';
 import { CurrencyPipe } from '@angular/common';
 import * as moment from 'moment';
+
+
 // let twix = require('twix');
 
 
@@ -17,10 +19,32 @@ import * as moment from 'moment';
   styleUrls: ['./charts.component.css']
 })
 export class ChartsComponent implements OnInit {
-  chart:any;
 
+  dropdownList: any = [];
+  selectedItems: any = [];
+  dropdownSettings: any = {};
+
+  myControl = new FormControl();
+  showdrop: any = false;
+  masterData: any;
+  currency = []
+  pricearray: any;
+  displayedColumns: string[] = ['name', 'description', 'options', 'productType', 'price_interval', 'price_amount','date'];
+  freeLabel = 'Free';
+  notForSaleLabel = 'Not for Sale';
+  clickedRows = new Set<any>();
+  products: any;
+  isLoading = false;
+  sitedata: any;
+  // totalRows = 0;
+  // pageSize = 5;
+  // currentPage = 0;
+  // pageSizeOptions: number[] = [5, 10, 25, 100];
+  // animal: any;
+  // name: any;
 
   
+  myChart: any;
   dateRange = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
@@ -28,30 +52,180 @@ export class ChartsComponent implements OnInit {
   constructor(
     public http: HTTPService,
     public base: BaseService,
-    
+
   ) { }
 
   ngOnInit(): void {
+
+    this.dateRange.patchValue({
+      start: "2022-03-04T06:22:48.070Z",
+      end: "2022-03-11T06:22:48.070Z"
+   });
+
+    this.selectAllPublishers();
+    this.selectAllListPublishers();
+
     const date = moment();
-console.log('date',date);
-    this.chart=document.getElementById("my-first-chart");
-  Chart.register(...registerables);
-  //this.loadChart();
-  this.getChartData();
+    console.log('date.....', date);
+    // let myChart=null
+    this.myChart = document.getElementById("myChart");
+    
+    // myChart = new Chart(ctx,config)
+    
+    Chart.register(...registerables);
+    //this.loadChart();
+    this.getChartData();
+    
+    this.selectedItems = [
+
+    ];
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'corpus',
+      textField: 'title',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 2,
+      allowSearchFilter: true,
+
+      closeDropDownOnSelection: true
+    };
+
+  }
+  //////////////////
+  onItemSelect(item: any) {
+    this.extractPrice(this.masterData, item.corpus);
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
   }
 
-  getChartData(){
-    var Currency= 'USD'
+  selectAllListPublishers(){
     let publisher = localStorage.getItem('publisher')  ;
-    let URL= this.base.CHART_REPORT+publisher;
-    var data={"options":
-    {
-      "start":"2022-02-28T01:48:36.610Z",
-    "end":"2022-03-07T01:48:38.366Z",
-    "dateFormat":"day",
-    "bookSites":[],
-    "publications":[]
-    }}
+    let URL= this.base.PRODUCT_LIST+ publisher+'/products';
+    this.http.getDatawithGet(URL,publisher).subscribe((data:any)=>{
+        console.log(data);
+        this.filterDOI(data);
+       
+    })
+  }
+
+  onSelectionChange(event:any){
+    console.log('onSelectionChange called', event.option.value);
+
+    this.sitedata.forEach((element:any) => {
+      if(event.option.value==  element.corpus){
+        this.myControl.setValue(element.title);
+      }
+
+    });
+    this.extractPrice(this.masterData, event.option.value);
+  }
+
+  selectAllPublishers(){
+    // let publisher = localStorage.getItem('publisher')  ;
+    // let URL= this.base.SITE_LIST;
+    // var data={
+    //   pubTerm: publisher,
+    //   role: "Intelligent Commerce Pricing and Reporting UI",
+    //   userId: "2"
+    // }
+    // this.http.getDatawithPost(URL,data).subscribe((data:any)=>{
+    //     console.log(data);             
+    //     this.sitedata =  data.sites;
+    // })
+
+
+    var site:any= localStorage.getItem('siteData');
+    if(site){
+      this.sitedata= JSON.parse(site) ;
+      console.log('this.sitedata ${this.sitedata}')
+    }
+
+
+    
+
+  }
+
+
+  formatAmountDisplay(amount:any) {
+    if (amount === -1) {
+      return this.notForSaleLabel;
+    }
+    else if (amount === 0) {
+      return this.freeLabel;
+    }
+    return amount;
+  }
+  filterDOI(data:any)
+  {
+    var self= this;
+    // data= data.filter((entry:any)=>{
+      // debugger;
+    // return  self.hwv.doi(item.name);
+      // return(entry.productType=='ebook' )
+      // && entry.name=='chapter-price' ) ||
+      // (entry.productType=='ebook' && entry.name=='edition-price' )
+    // });
+  // console.log('filterDOI',data);
+  this.masterData= data
+  
+
+}
+dropDownChange(value:any){
+  console.log(value.values);
+  this.extractPrice(this.masterData, value.value);
+
+}
+
+extractPrice(data:any, pub:any){
+  // debugger;
+  var self= this;
+  var pricearray:any= [];
+  data.forEach((element:any) => {
+    // console.log(element);
+    if(element.prices && Array.isArray(element.prices) && element.name==pub ){
+      element.prices.forEach((elements:any) => {   
+        // if(elements.name=='chapter-price'  || elements.name=='edition-price' )
+      // (entry.productType=='ebook' && entry.name=='edition-price' )
+        pricearray.push({
+          // name: element.name,
+          // productType:element.productType,
+          // description:element.description,      
+          // identifier: element.identifier,
+          price_amount: self.formatAmountDisplay (elements.amount),
+          // price_currency:elements.currency,
+          // price_interval:elements.interval,
+          // price_name:elements.name
+        })  
+      });      
+    }    
+  });
+
+
+  this.pricearray=  pricearray;
+  console.log('this.pricearray',this.pricearray);
+
+
+} 
+/////////////////////////////////////////
+
+  getChartData() {
+    var Currency = 'USD'
+    let publisher = localStorage.getItem('publisher');
+    let URL = this.base.CHART_REPORT + publisher;
+    var data = {
+      "options":
+      {
+        "end": this.dateRange.value.end,
+      
+        "start": this.dateRange.value.start,
+        "dateFormat": "day",
+        "bookSites": [],
+        "publications": []
+      }
+    }
 
     // let DATA= {
     //   // "endDate": this.dateRange.value.s
@@ -59,64 +233,75 @@ console.log('date',date);
     //   "pub": publisher,
     //   "startDate": this.dateRange.value.start
 
-      
+
     // }
-    this.http.getDatawithPost(URL,data).subscribe((data:any)=>{
+    this.http.getDatawithPost(URL, data).subscribe((data: any) => {
       // debugger;
-      console.log('chart data', data.result.$all[Currency].values      );
-      this.genratechartdata(data.result.$all[Currency].values );
-      var reports= this.extractChartsReport(data);
-      console.log('    data            ', reports); 
-      
-      
-        
-       
+      console.log('chart data', data.result.$all[Currency].values);
+      this.genratechartdata(data.result.$all[Currency].values);
+      var reports = this.extractChartsReport(data);
+      console.log('    data            ', reports);
+
+
+
+
     })
   }
-genratechartdata(data:any){
-  var amounts:any=[];
-  var dates:any=[];
+
+  genratechartdata(data: any) {
+    var amounts: any = [];
+    var dates: any = [];
 
 
-  data.forEach((element:any) => {
-    amounts.push(element.amount);
-    dates.push(element.date);
-    
-
-    
-    
-  });
-  this.loadChart(amounts,dates);
-  console.log(amounts);
+    data.forEach((element: any) => {
+      amounts.push(element.amount);
+      dates.push(element.date);
 
 
-}
+      
+      
+    });
+    this.loadChart(amounts, dates);
+    console.log(amounts);
 
-  loadChart(amounts:any,dates:any):void{
-    new Chart(this.chart,{
-      type:'bar',
-      data:{
-        datasets:[{
+
+  }
+ 
+  
+
+  loadChart(amounts: any, dates: any): void {
+    let myChart = null
+    if(myChart!=null){
+      this.myChart.destroy();
+    }
+   
+     new Chart(this.myChart,
+       {
+      
+      type: 'bar',
+      data: {
+        datasets: [{
           label: 'Grouped',
           data: amounts,
           backgroundColor: [
             'rgba(255, 99, 132, 0.5)',
             'rgba(255, 159, 64, 0.5)',
-            'rgba(255, 205, 86, 0.5)',
-            'rgba(75, 192, 192, 0.5)',
-            'rgba(54, 162, 235, 0.5)',
-            'rgba(153, 102, 255, 0.5)',
-            'rgba(201, 203, 207, 0.5)',
-            'rgba(153, 102, 254, 0.5)',
-            'rgba(201, 203, 239, 0.5)',
-            'rgba(153, 102, 234, 0.5)',
-            'rgba(201, 203, 218, 0.5)',
-            'rgba(201, 214, 290, 0.5)',
-          ]},
-          {
-            data:[0,40,60,80,100],
-            label:'Stacked',
-            backgroundColor: [
+            // 'rgba(255, 205, 86, 0.5)',
+            // 'rgba(75, 192, 192, 0.5)',
+            // 'rgba(54, 162, 235, 0.5)',
+            // 'rgba(153, 102, 255, 0.5)',
+            // 'rgba(201, 203, 207, 0.5)',
+            // 'rgba(153, 102, 254, 0.5)',
+            // 'rgba(201, 203, 239, 0.5)',
+            // 'rgba(153, 102, 234, 0.5)',
+            // 'rgba(201, 203, 218, 0.5)',
+            // 'rgba(201, 214, 290, 0.5)',
+          ]
+        },
+        {
+          data: [0, 40, 60, 80, 100],
+          label: 'Stacked',
+          backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(255, 159, 64, 0.2)',
             'rgba(255, 205, 86, 0.2)',
@@ -129,34 +314,40 @@ genratechartdata(data:any){
             'rgba(153, 102, 234, 0.2)',
             'rgba(201, 203, 218, 0.2)',
             'rgba(201, 214, 290, 0.2)',
-            ],
-            borderColor: [
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-              'rgb(75, 192, 192)',
-              'rgb(54, 162, 235)',
-              'rgb(153, 102, 255)',
-              'rgb(201, 203, 207)'],
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            // 'rgb(255, 159, 64)',
+            // 'rgb(255, 205, 86)',
+            // 'rgb(75, 192, 192)',
+            // 'rgb(54, 162, 235)',
+            // 'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)'],
           },
           
         ],
         labels: dates,
+        
       },
       options: {
-        responsive:true,
-        maintainAspectRatio:false,
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
-            y: {
-                beginAtZero: true,
-                // display:false //agar grid hatani ho
-            }
+          y: {
+            beginAtZero: true,
+            // display:false //agar grid hatani ho
+          }
         }
-    }
+      }
+      
+      
     })
+    this.myChart.destroy()
+     
+    // this.chart.render();
+    // this.chart.destroy();
   }
 
-  
 
 
 
@@ -164,32 +355,34 @@ genratechartdata(data:any){
 
 
 
-  extractChartsReport(report:any) {
-    var self= this;
-    var 
-      corpusIdx :any= {},
+
+  extractChartsReport(report: any) {
+    // debugger
+    var self = this;
+    var
+      corpusIdx: any = {},
       max = 0,
       genericRange,
       isbnRe = /(?=[-0-9 ]{17}|[-0-9X ]{13}|[0-9X]{10})(?:97[89][- ]?)?[0-9]{1,5}[- ]?(?:[0-9]+[- ]?){2}[0-9X]/g;
-  
+
     // if (!report || !report.data || !Array.isArray(report.data.transactions)) {
     //   return '';
     // }
     report.result = {
       salesPerf: []
     };
-  
+
     // generic copy of bucket range for UI to use if necessary
     // to fill in zero-data for  currency/jcode combinations
     // not represented in the data
     genericRange = this.getRange(report);
-    report.range = genericRange.buckets.map(function cpBucket(bckt:any) {
+    report.range = genericRange.buckets.map(function cpBucket(bckt: any) {
       return {
         date: bckt.date,
         amount: bckt.amount
       }
     });
-    report.data.transactions.forEach(function processTransactn(elem:any) {
+    report.data.transactions.forEach(function processTransactn(elem: any) {
       var isbn;
       if (typeof corpusIdx[elem.journalCode] === 'undefined') {
         corpusIdx[elem.journalCode] = {};
@@ -213,19 +406,19 @@ genratechartdata(data:any){
         corpusIdx.$all[elem.currency].range = self.getRange(report);
       }
       if (typeof corpusIdx.$all[elem.currency]['$type-' + elem.resourceType] ===
-      'undefined') {
+        'undefined') {
         corpusIdx.$all[elem.currency]['$type-' + elem.resourceType] = {
           currency: elem.currency,
           max: 0
         };
         corpusIdx.$all[elem.currency]['$type-' + elem.resourceType].range =
-        self.getRange(report);
+          self.getRange(report);
       }
       corpusIdx[elem.journalCode][elem.currency].range.assign(elem);
       corpusIdx.$all[elem.currency].range.assign(elem);
       corpusIdx.$all[elem.currency]['$type-' + elem.resourceType].range.assign(elem);
       if (Array.isArray(report.bookSites) &&
-      report.bookSites.indexOf(elem.journalCode) !== -1) {
+        report.bookSites.indexOf(elem.journalCode) !== -1) {
         isbn = elem.resourceId.match(isbnRe);
         isbn = isbn ? isbn[0] : null;
         if (isbn) {
@@ -255,9 +448,9 @@ genratechartdata(data:any){
           Object.keys(corpusIdx.$all[currency]).forEach(function dpt(prop) {
             if (prop.indexOf('$type-') !== -1) {
               corpusIdx[corpus][currency][prop].values =
-              corpusIdx[corpus][currency][prop].range.buckets;
+                corpusIdx[corpus][currency][prop].range.buckets;
               corpusIdx[corpus][currency][prop].max =
-              corpusIdx[corpus][currency][prop].range.max;
+                corpusIdx[corpus][currency][prop].range.max;
               delete corpusIdx[corpus][currency][prop].range;
             }
           })
@@ -269,14 +462,14 @@ genratechartdata(data:any){
     });
     report.result = corpusIdx;
     report.max = max;
-  
+
     return report;
   };
-  
 
 
-  refreshCharts(keys:any, curr:any, labels:any, types:any,ecomReports:any,currencies:any) {
-    
+
+  refreshCharts(date:any,amount:any,keys: any, curr: any, labels: any, types: any, ecomReports: any, currencies: any) {
+
     if (!Array.isArray(keys)) {
       return;
     }
@@ -288,11 +481,20 @@ genratechartdata(data:any){
     }
     if (!labels) {
       labels = {};
+      
     }
-    
+    if (!date) {
+      date = {};
+      
+    }
+    if (!amount) {
+      amount = {};
+      
+    }
+
     Object.keys(ecomReports.charts.result).forEach(function cps(key) {
       Object.keys(ecomReports.charts.result[key]).forEach(function mc(currency) {
-        var max, currentMax, typeResult:any;
+        var max, currentMax, typeResult: any;
         if (curr.indexOf(currency) === -1) {
           return;
         }
@@ -308,7 +510,7 @@ genratechartdata(data:any){
         if (types.length > 0) {
           typeResult = {
             key: labels[key],
-            values: ecomReports.charts.range.map(function mapZero(elem:any) {
+            values: ecomReports.charts.range.map(function mapZero(elem: any) {
               return {
                 amount: 0,
                 date: elem.date,
@@ -318,14 +520,14 @@ genratechartdata(data:any){
             max: 0
           };
 
-          types.forEach(function checkType(elem:any) {
+          types.forEach(function checkType(elem: any) {
             if (typeof (
-            ecomReports.charts.result[key][currency]['$type-' + elem]=="object" ) &&
-            Array.isArray(ecomReports.charts.result[key][currency]['$type-' + elem].values)) {
+              ecomReports.charts.result[key][currency]['$type-' + elem] == "object") &&
+              Array.isArray(ecomReports.charts.result[key][currency]['$type-' + elem].values)) {
               for (var i = 0; i < ecomReports.charts.result[key][currency]['$type-' + elem].values.length; i++) {
                 if (typeResult.values[i]) {
                   typeResult.values[i].amount +=
-                  ecomReports.charts.result[key][currency]['$type-' + elem].values[i].amount;
+                    ecomReports.charts.result[key][currency]['$type-' + elem].values[i].amount;
                 }
               }
               if (typeResult.max <
@@ -337,7 +539,7 @@ genratechartdata(data:any){
           ecomReports.charts.salesPerf[currency].data.push(typeResult);
           max = typeResult.max;
           currentMax = ecomReports.charts.salesPerf[currency].max;
-          if (isFinite(max) &&  max > currentMax) {
+          if (isFinite(max) && max > currentMax) {
             ecomReports.charts.salesPerf[currency].max = max;
           }
         }
@@ -348,13 +550,13 @@ genratechartdata(data:any){
           });
           max = ecomReports.charts.result[key][currency].max;
           currentMax = ecomReports.charts.salesPerf[currency].max;
-          if (isFinite(max) &&  max > currentMax) {
+          if (isFinite(max) && max > currentMax) {
             ecomReports.charts.salesPerf[currency].max = max;
           }
         }
       });
     });
-    curr.forEach(function spk(currency:any) {
+    curr.forEach(function spk(currency: any) {
       var zeroVals;
       if (!ecomReports.charts.salesPerf[currency]) {
         ecomReports.charts.salesPerf[currency] = {
@@ -363,17 +565,17 @@ genratechartdata(data:any){
         };
       }
       if (ecomReports.charts.salesPerf[currency].data.length === 0) {
-          zeroVals = ecomReports.charts.range.map(function mapZero(elem:any) {
-            return {
-              amount: elem.amount,
-              date: elem.date,
-              key: 'Sales - ' + currency
-            };
-          });
-          ecomReports.charts.salesPerf[currency].data.push({
-            key: 'Sales - ' + currency,
-            values: zeroVals
-          })
+        zeroVals = ecomReports.charts.range.map(function mapZero(elem: any) {
+          return {
+            amount: elem.amount,
+            date: elem.date,
+            key: 'Sales - ' + currency
+          };
+        });
+        ecomReports.charts.salesPerf[currency].data.push({
+          key: 'Sales - ' + currency,
+          values: zeroVals
+        })
       }
       if (ecomReports.charts.salesPerf[currency].max === 0) {
         ecomReports.charts.d3[currency].chart.yDomain = [0, 100];
@@ -382,30 +584,33 @@ genratechartdata(data:any){
         delete ecomReports.charts.d3[currency].chart.yDomain;
       }
     });
-    
+
   };
 
 
-  getRange (options:any) {
-    var result:any = {}, range:any;
+  getRange(options: any) {
+    var result: any = {}, range: any;
     // range =  moment(options.start).twix(moment()).count('weeks');
     // var t = moment("1982-01-25T09:30").twix("1982-01-25T13:30");
-// debugger
-// let twix = require('twix');
+    // debugger
+    // let twix = require('twix');
 
-// moment()
+    // moment()
     // range = moment(options.start).twix(options.end);
     result.ranges = range.split(1, options.dateFormat);
     result.buckets = [];
     result.max = 1;
-    result.ranges.forEach(function indexBucket(rge:any) {
+    
+    result.ranges.forEach(function indexBucket(rge: any) {
       result.buckets.push({
         date: rge.start().format(),
-        amount: 0
+        amount: 0,
+        result
+    
       });
     });
-    result.assign = function assignItemToBucket(item:any) {
-      result.ranges.forEach(function checkRange(rge:any, idx:any) {
+    result.assign = function assignItemToBucket(item: any) {
+      result.ranges.forEach(function checkRange(rge: any, idx: any) {
         if (rge.contains(item.transactionDateTime)) {
           result.buckets[idx].amount += item.amount;
           if (result.buckets[idx].amount > result.max) {
@@ -420,3 +625,7 @@ genratechartdata(data:any){
 
 
 }
+function destroy() {
+  throw new Error('Function not implemented.');
+}
+
