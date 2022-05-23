@@ -51,7 +51,7 @@
         .dropbtn {
           
         
-          padding: 15px!important;
+          padding: 10px!important;
           font-size: 16px;
           
           width: 65px;
@@ -121,14 +121,47 @@
 
   .dropbtn{
     
-    padding: 8px 24px;
+    padding: 9px 27px;
     font-size: 16px;
     
     margin: 2px!important;
+    margin-top: 1px;
 }
 
 td.mat-cell {
   padding: 10px;}
+
+  .Jstitle{
+     
+    margin-top: 11px;
+    margin-bottom: 11px;
+
+    color: #A81732;
+
+    font-weight: 300;
+    letter-spacing: .3px;
+
+    font-size: 30px!important;
+
+}
+.input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+  margin-left: -43px!important;
+ 
+}
+/* .offset-md-4 {
+  margin-left: 15%!important;
+} */
+.input-group {
+ 
+  width: 369px!important;
+}
+table.mat-table.cdk-table.mat-elevation-z8.demo-table {
+  box-shadow: none;
+  border: 0.5px solid grey;
+}
+thead tr th{
+  border-width: 1px!important;
+}
 
 
   

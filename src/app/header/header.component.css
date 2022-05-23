@@ -79,9 +79,9 @@ button.navbar-toggler.collapsed, button.navbar-toggler {
  
 .nav-publisher{
       
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     width: 11%;
-    position: absolute;
+    /* position: absolute; */
   
     height: 31px;
 }
@@ -98,3 +98,13 @@ button.navbar-toggler.collapsed, button.navbar-toggler {
     }
 
 }
+
+.navbar-toggler-icon {
+   
+    background: brown;
+} 
+
+.nav-item a {
+    color: #5e5859!important;}
+    .nav-item a:hover {
+        color: #a81732!important;}

@@ -4,7 +4,7 @@
     <div class="container ng-scope" ng-show="catalog.initialized">
       <div class="totals row">
         <div class="col-md-3 col-xs-3">
-          <h3 style="color: brown;">Journal Pricing</h3>
+          <h3 class="Jstitle" style="color: brown;">Journal Pricing</h3>
         </div>
         <div class="col-md-9 col-xs-9">
           <div class="row">
@@ -17,56 +17,55 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-4">
+        <!-- <div class="dropdown">
+          <button type="button" class="dropbtn">{{selectedCurrency}}<i class="fa fa-sort-down"
+              style="font-size:12px; vertical-align: 3px;"></i></button>
+          <div class="dropdown-content" role="menu">
+            <a class="dropdown-item" (click)="currencySelect('ALL')">ALL</a>
+            <a class="dropdown-item" *ngFor="let item  of  productType" (click)="currencySelect(item)">{{item}}</a>
+          </div>
+        </div> -->
+        <div class="dropdown">
+          <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1"
+             data-bs-toggle="dropdown" aria-expanded="false" >
+          Add Price
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+             <li><a class="dropdown-item" href="javascript:void(0)" >Issue</a>
+             </li>
+             <li><a class="dropdown-item" href="javascript:void(0)"
+                >Article</a></li>
+          </ul>
+       </div>
+        <!-- <button type="button" class="dropbtn" disabled>USD($)</button>
+        <button type="button" (click)="addData()" class="dropbtn">ADD</button> -->
+        <button class="btn btn-info" type="button" 
+              aria-expanded="false" class="dropbtn " >
+          USD($)
+          </button>
+          <button class="btn btn-info" type="button" 
+              aria-expanded="false" (click)="addData()" class="dropbtn">
+          ADD
+          </button>
 
-    <div class="serchbtn" style="display: flex; justify-content:space-between;">
-
-
-      <!-- <div class="dropdown">	
-                                <button type="button" class="dropbtn">ALL<i class="fa fa-sort-down" style="font-size:12px; vertical-align: 3px;"></i></button>	
-                                <div class="dropdown-content" role="menu">	
-                                  <a href="#" >All</a>	
-                                  <a href="#" >Issue</a>	
-                                  <a href="#" >Article</a>	
-                                </div>	
-                              </div>	 -->
-
-
-
-      <div class="dropdown">
-        <button type="button" class="dropbtn">{{selectedCurrency}}<i class="fa fa-sort-down"
-            style="font-size:12px; vertical-align: 3px;"></i></button>
-        <div class="dropdown-content" role="menu">
-          <a class="dropdown-item" (click)="currencySelect('ALL')">ALL</a>
-          <a class="dropdown-item" *ngFor="let item  of currency" (click)="currencySelect(item)">{{item}}</a>
-        </div>
-
-        <!-- <button type="button" class="dropbtn">Currency<i class="fa fa-sort-down" style="font-size:12px; vertical-align: 3px;"></i></button>	 -->
-        <!-- <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false"> -->
-
-        <!-- </button> -->
-        <!-- <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" *ngFor= "let item  of currency"  (click)="currencySelect(item)" >{{item}}</a></li>
-                                </ul> -->
-
-        <!-- <button type="button" class="btn btn-primary" (click)="addData()" href="javascript:void(0)">ADD</button> -->
-        <button type="button" (click)="addData()" class="dropbtn">ADD</button>  
       </div>
-      
+      <!-- searchbar -->
+      <div class="col-md-4 offset-md-4 my-2">
+        <!-- <label class="visible-xs visible-sm" for="searchBox">Search Report</label> -->
+        <div class="input-group input-integrated-button">
+          <input type="text" id="searchBox" class="form-control ng-pristine ng-valid ng-touched"
+            ng-model="catalog.publicationTypes.journal.search.searchText" ng-model-options="{debounce: 300}"
+            placeholder="Search Report...">
+          <span class="input-group-btn">
+            <button class="btn" type="button"><i class="fa fa-search"></i></button>
+          </span>
+        </div>
+      </div>
     </div>
-
-
-
-
-
-
   </div>
-
-
-
-
-
-
-
+  <hr>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
     <!-- Position Column -->
     <ng-container matColumnDef="name">
@@ -95,15 +94,15 @@
 
     <ng-container matColumnDef="price_amount">
       <th mat-header-cell *matHeaderCellDef>Price</th>
-      
+
       <!-- <ng-container *ngIf="element.price_amount==''"> -->
-        <td mat-cell *matCellDef="let element">
-          <div *ngIf="element.price_amount==notForSaleLabel; then thenBlock else elseBlock"></div>
-            <ng-template #thenBlock>{{notForSaleLabel}}</ng-template>
-            <ng-template #elseBlock>{{element.price_amount| currency:element.price_currency}}</ng-template>
-          
-        </td>
-    <!-- </ng-container> -->
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="element.price_amount==notForSaleLabel; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>{{notForSaleLabel}}</ng-template>
+        <ng-template #elseBlock>{{element.price_amount| currency:element.price_currency}}</ng-template>
+
+      </td>
+      <!-- </ng-container> -->
       <!-- <p>A: {{a | currency:'CAD'}}</p> -->
     </ng-container>
 

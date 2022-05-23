@@ -50,6 +50,12 @@ export class SpecificPricesComponent implements OnInit {
   animal: any;
   name: any;
 
+  productType:any
+  pricearray:any
+  element:any
+
+  term:any= [];
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(
     public http: HTTPService,
@@ -287,6 +293,10 @@ extractPrice(data:any, currencies?:any){
       this.animal = result;
     });
   }
+
+  
+   
+  
 
 }
 
