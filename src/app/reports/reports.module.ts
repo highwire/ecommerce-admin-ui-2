@@ -26,6 +26,7 @@ import { ReceiptComponent } from './receipt/receipt.component';
 // DoughnutChartComponent, 
 // PieChartComponent, 
 // BarChartComponent,
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 @NgModule({
   declarations: [
    
@@ -49,7 +50,8 @@ import { ReceiptComponent } from './receipt/receipt.component';
     MatProgressSpinnerModule,
     MatDialogModule,
     FormsModule,
-    MatTableModule
+    MatTableModule,
+    NgMultiSelectDropDownModule.forRoot()
     
   ]
 })

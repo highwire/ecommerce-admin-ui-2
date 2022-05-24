@@ -35,6 +35,7 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    debugger;
     var menu:any= localStorage.getItem('menu');
     if(menu && JSON.parse(menu)){
       this.jouralslect=  true;
