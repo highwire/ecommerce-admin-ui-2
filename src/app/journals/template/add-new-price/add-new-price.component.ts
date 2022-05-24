@@ -32,6 +32,7 @@ export class AddNewPriceComponent implements OnInit {
     name:new FormControl('')
   });
 
+ 
 
   accessPeriods= [
     {label: '24 Hours', value: 24, sort: 24},
@@ -60,6 +61,8 @@ export class AddNewPriceComponent implements OnInit {
     var curr= localStorage.getItem('currency')+'';
     if(curr)
     this.currency=  JSON.parse(curr);
+
+   
   }
   
   filterPrice(){

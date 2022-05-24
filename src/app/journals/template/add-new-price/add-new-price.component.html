@@ -17,7 +17,7 @@
             <!-- <h5 style="color: grey; margin-top: 10px;">Selected Sites</h5> -->
             <div class="col-sm-6">
                <select class="select" name="chapter" formControlName="selected_site"  class="form-control p-2" id="chapter">
-                  <option value="" selected="selected">Please select site</option>
+                  <option value="" selected="selected">Filter sites..</option>
                   <option value="{{site.site_code}}" *ngFor="let site of sitedata">{{site.site_name}}</option>
                </select>
             </div>
@@ -35,7 +35,19 @@
             </div>
          </div>
       </div>
+      <div class="p-3 row">
+         <label for="inputtext" class="col-sm-5 col-form-label"></label>
+         <div class="col-sm-6 cs">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+               <!-- <button class="btn btn-primary me-md-2 can" type="button">Cancel</button> -->
+               <button class="btn btn-primary me-md-2 can btn-danger" mat-button mat-dialog-close>Cancel</button>
+               <button class="btn btn-primary sav " (click)="addPrice()" type="button">ADD</button>
+            </div>
+         </div>
+      </div>
    </form>
+
+
    <div class="col-md-12" *ngIf="entry">
       <label for="citation" class="id-as-label ng-binding">
       Article Details
