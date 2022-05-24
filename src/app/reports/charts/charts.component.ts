@@ -5,13 +5,8 @@ import { HTTPService } from '../../services/http.service';
 import { BaseService } from 'src/app/services/base.service';
 import { CurrencyPipe } from '@angular/common';
 import * as moment from 'moment';
-
-
-// let twix = require('twix');
-
-
-// require('twix');
-
+// declare var moment: any;
+// import moment from 'moment';
 
 @Component({
   selector: 'app-charts',
@@ -19,7 +14,7 @@ import * as moment from 'moment';
   styleUrls: ['./charts.component.css']
 })
 export class ChartsComponent implements OnInit {
-
+  chartinstan:any;
   dropdownList: any = [];
   selectedItems: any = [];
   dropdownSettings: any = {};
@@ -35,15 +30,7 @@ export class ChartsComponent implements OnInit {
   clickedRows = new Set<any>();
   products: any;
   isLoading = false;
-  sitedata: any;
-  // totalRows = 0;
-  // pageSize = 5;
-  // currentPage = 0;
-  // pageSizeOptions: number[] = [5, 10, 25, 100];
-  // animal: any;
-  // name: any;
-
-  
+  sitedata: any;  
   myChart: any;
   dateRange = new FormGroup({
     start: new FormControl(),
@@ -58,15 +45,14 @@ export class ChartsComponent implements OnInit {
   ngOnInit(): void {
 
     this.dateRange.patchValue({
-      start: "2022-03-04T06:22:48.070Z",
-      end: "2022-03-11T06:22:48.070Z"
+      start: "2022-05-16T06:22:48.070Z",
+      end: "2022-05-24T06:22:48.070Z"
    });
 
     this.selectAllPublishers();
     this.selectAllListPublishers();
 
-    const date = moment();
-    console.log('date.....', date);
+    
     // let myChart=null
     this.myChart = document.getElementById("myChart");
     
@@ -143,12 +129,7 @@ export class ChartsComponent implements OnInit {
       console.log('this.sitedata ${this.sitedata}')
     }
 
-
-    
-
   }
-
-
   formatAmountDisplay(amount:any) {
     if (amount === -1) {
       return this.notForSaleLabel;
@@ -159,17 +140,8 @@ export class ChartsComponent implements OnInit {
     return amount;
   }
   filterDOI(data:any)
-  {
-    var self= this;
-    // data= data.filter((entry:any)=>{
-      // debugger;
-    // return  self.hwv.doi(item.name);
-      // return(entry.productType=='ebook' )
-      // && entry.name=='chapter-price' ) ||
-      // (entry.productType=='ebook' && entry.name=='edition-price' )
-    // });
-  // console.log('filterDOI',data);
-  this.masterData= data
+  {    
+    this.masterData= data
   
 
 }
@@ -180,7 +152,7 @@ dropDownChange(value:any){
 }
 
 extractPrice(data:any, pub:any){
-  // debugger;
+  
   var self= this;
   var pricearray:any= [];
   data.forEach((element:any) => {
@@ -209,10 +181,10 @@ extractPrice(data:any, pub:any){
 
 
 } 
-/////////////////////////////////////////
+
 
   getChartData() {
-    var Currency = 'USD'
+    
     let publisher = localStorage.getItem('publisher');
     let URL = this.base.CHART_REPORT + publisher;
     var data = {
@@ -236,46 +208,50 @@ extractPrice(data:any, pub:any){
 
     // }
     this.http.getDatawithPost(URL, data).subscribe((data: any) => {
-      // debugger;
-      console.log('chart data', data.result.$all[Currency].values);
-      this.genratechartdata(data.result.$all[Currency].values);
-      var reports = this.extractChartsReport(data);
-      console.log('    data            ', reports);
-
-
-
-
+      
+      console.log('chart data', data.result);
+      
+     
+      this.genratechartdata(data.result);
+      // var reports = this.extractChartsReport(data);
+      // console.log('    data            ', reports);
     })
   }
 
-  genratechartdata(data: any) {
+  genratechartdata(data1: any) {
+    var Currency = 'USD';
+    var amountsArray=[];
+debugger;
+    let siteData:any=  localStorage.getItem('siteData') 
+
+    if(siteData){
+      siteData= JSON.parse(siteData);
+      siteData.forEach((element:any) => {
+        if(data1[element.corpus])
+        amountsArray.push(data1[element.corpus][Currency]);
+        
+      });
+      // amountsArray.
+    }
+    let data =data1. $all[Currency].values
+    
+  
     var amounts: any = [];
     var dates: any = [];
-
-
     data.forEach((element: any) => {
       amounts.push(element.amount);
-      dates.push(element.date);
-
-
-      
-      
+      dates.push( moment(element.date).format('D MMM YYYY') );          
     });
     this.loadChart(amounts, dates);
     console.log(amounts);
-
-
   }
  
-  
-
-  loadChart(amounts: any, dates: any): void {
-    let myChart = null
-    if(myChart!=null){
-      this.myChart.destroy();
+  loadChart(amounts: any, dates: any): void {   
+    if (this.chartinstan != undefined) {
+      this.chartinstan.destroy();
     }
-   
-     new Chart(this.myChart,
+    // this.chartinstan.destroy();    
+    this.chartinstan= new Chart(this.myChart,
        {
       
       type: 'bar',
@@ -286,20 +262,11 @@ extractPrice(data:any, pub:any){
           backgroundColor: [
             'rgba(255, 99, 132, 0.5)',
             'rgba(255, 159, 64, 0.5)',
-            // 'rgba(255, 205, 86, 0.5)',
-            // 'rgba(75, 192, 192, 0.5)',
-            // 'rgba(54, 162, 235, 0.5)',
-            // 'rgba(153, 102, 255, 0.5)',
-            // 'rgba(201, 203, 207, 0.5)',
-            // 'rgba(153, 102, 254, 0.5)',
-            // 'rgba(201, 203, 239, 0.5)',
-            // 'rgba(153, 102, 234, 0.5)',
-            // 'rgba(201, 203, 218, 0.5)',
-            // 'rgba(201, 214, 290, 0.5)',
+          
           ]
         },
         {
-          data: [0, 40, 60, 80, 100],
+          data: [0, 40, 60, 80, 100,120],
           label: 'Stacked',
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
@@ -338,23 +305,9 @@ extractPrice(data:any, pub:any){
             // display:false //agar grid hatani ho
           }
         }
-      }
-      
-      
-    })
-    this.myChart.destroy()
-     
-    // this.chart.render();
-    // this.chart.destroy();
+      }            
+    })    
   }
-
-
-
-
-
-
-
-
 
   extractChartsReport(report: any) {
     // debugger
@@ -368,9 +321,12 @@ extractPrice(data:any, pub:any){
     // if (!report || !report.data || !Array.isArray(report.data.transactions)) {
     //   return '';
     // }
+    
+
     report.result = {
       salesPerf: []
     };
+    
 
     // generic copy of bucket range for UI to use if necessary
     // to fill in zero-data for  currency/jcode combinations
@@ -462,10 +418,8 @@ extractPrice(data:any, pub:any){
     });
     report.result = corpusIdx;
     report.max = max;
-
     return report;
   };
-
 
 
   refreshCharts(date:any,amount:any,keys: any, curr: any, labels: any, types: any, ecomReports: any, currencies: any) {
@@ -589,23 +543,16 @@ extractPrice(data:any, pub:any){
 
 
   getRange(options: any) {
-    var result: any = {}, range: any;
-    // range =  moment(options.start).twix(moment()).count('weeks');
-    // var t = moment("1982-01-25T09:30").twix("1982-01-25T13:30");
-    // debugger
-    // let twix = require('twix');
-
-    // moment()
-    // range = moment(options.start).twix(options.end);
-    result.ranges = range.split(1, options.dateFormat);
+    var result: any = {}, range: any;    
+    result.ranges = options.range;
     result.buckets = [];
     result.max = 1;
     
     result.ranges.forEach(function indexBucket(rge: any) {
       result.buckets.push({
-        date: rge.start().format(),
-        amount: 0,
-        result
+        date:     moment(rge.date).format('D MMM YYYY'),
+        amount: rge.amount,
+        
     
       });
     });
@@ -621,9 +568,6 @@ extractPrice(data:any, pub:any){
     };
     return result;
   };
-
-
-
 }
 function destroy() {
   throw new Error('Function not implemented.');
