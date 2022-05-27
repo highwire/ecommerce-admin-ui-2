@@ -1,9 +1,39 @@
 <div class="container mt-3">
     <p style="color: brown; font-size:x-large;">Ecommerce Report</p>
+    
+    <div class="row mb-2">
+      <div class="col-12  col-sm-12">
+        <div style="float:right;">
+        <mat-form-field appearance="legacy">
+          <mat-label>Set Date Range</mat-label>
+          <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange"
+              style="background-color: brown; color:white; padding: 10px;">
+              <input  matStartDate formControlName="start" placeholder="Start Date" style="color: white;">
+              <input matEndDate formControlName="end" placeholder="End Date" style="color: white;">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+         </div>
+      </div>
 
-    <div class="dateframe" style="margin-left:897px;height: 100px; width:100%">
-
-
+      <div class="col-12 col-sm-12">
+        <div style="float:right; margin-right: 35px;">
+        <h5>
+          Start: {{dateRange.value.start | date}}
+          End: {{dateRange.value.end | date}}
+      </h5>
+      </div>
+      </div> 
+      <div class="col-12  col-sm-12">
+        <div style="float:right;">
+        <button class="btn btn-danger btn-sm p-2" (click)="selectAllPublishers()">Run Report</button>
+        <button class="btn btn-info m-1" (click)="exporter.exportTable('csv')" style="color: white;">EXPORT(.CSV)</button>
+      </div>
+      </div>
+    </div>
+    <!--previous-->
+    <!-- <div class="dateframe" style="height: 100px; width:100%">
         <mat-form-field appearance="legacy">
             <mat-label style="color: white; position:relative; margin-left: 10px;">Set Date Range</mat-label>
               
@@ -32,10 +62,10 @@
           <div class="col-md-4">
             <button class="btn btn-info p-1" (click)="exporter.exportTable('csv')" style="color: white;">EXPORT(.CSV)</button>
             <!-- <button type="button" class="m-1 btn btn-primary" (click)="exporter.exportTable('csv')">Csv</button> -->
-          </div>
-        </div>
+          <!-- </div> -->
+        <!-- </div> --> 
 
-<div class="row">
+        <div class="row">
 
         <table mat-table [dataSource]="dataSource" matTableExporter #exporter="matTableExporter" class="mat-elevation-z8 demo-table">
             <!-- Position Column -->
