@@ -19,50 +19,38 @@
     </div>
     <div class="row">
       <div class="col-md-4">
-        <!-- currency previous button -->
-         <!-- <div class="dropdown">
+        <!-- <div class="dropdown">
           <button type="button" class="dropbtn">{{selectedCurrency}}<i class="fa fa-sort-down"
               style="font-size:12px; vertical-align: 3px;"></i></button>
           <div class="dropdown-content" role="menu">
-            <a class="dropdown-item" (click)="currencySelect('ALL')">CURRENCY</a>
-            <a class="dropdown-item" *ngFor="let item  of currency" (click)="currencySelect(item)">{{item}}</a>
+            <a class="dropdown-item" (click)="currencySelect('ALL')">ALL</a>
+            <a class="dropdown-item" *ngFor="let item  of  productType" (click)="currencySelect(item)">{{item}}</a>
           </div>
-          
-          <button type="button" (click)="addData()" class="dropbtn">ADD</button>
         </div> -->
-
-
-        <!-- articlebutton -->
-        <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-          aria-expanded="false">
-          Add Price
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="javascript:void(0)">Issue</a>
-          </li>
-          <li><a class="dropdown-item" href="javascript:void(0)">Article</a></li>
-        </ul>
-
-         <!-- currency button -->
         <div class="dropdown">
-          <button class="btn btn-info currency dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            {{selectedCurrency}}
+          <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1"
+             data-bs-toggle="dropdown" aria-expanded="false" >
+          Add Price
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" (click)="currencySelect('ALL')"></a>
-            </li>
-            <li><a class="dropdown-item" href="javascript:void(0)" *ngFor="let item  of currency"
-                (click)="currencySelect(item)">{{item}}</a></li>
+             <li><a class="dropdown-item" href="javascript:void(0)" >Issue</a>
+             </li>
+             <li><a class="dropdown-item" href="javascript:void(0)"
+                >Article</a></li>
           </ul>
-        </div>
-        <!-- add button -->
-        <button class="btn btn-info currency" type="button" aria-expanded="false" (click)="addData()">
+       </div>
+        <!-- <button type="button" class="dropbtn" disabled>USD($)</button>
+        <button type="button" (click)="addData()" class="dropbtn">ADD</button> -->
+        <button class="btn btn-info" type="button" 
+              aria-expanded="false" class="dropbtn " >
+          USD($)
+          </button>
+          <button class="btn btn-info" type="button" 
+              aria-expanded="false" (click)="addData()" class="dropbtn">
           ADD
-        </button>
+          </button>
 
       </div>
-
       <!-- searchbar -->
       <div class="col-md-4 offset-md-4 my-2">
         <!-- <label class="visible-xs visible-sm" for="searchBox">Search Report</label> -->
