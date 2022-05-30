@@ -27,16 +27,33 @@
             <a class="dropdown-item" *ngFor="let item  of  productType" (click)="currencySelect(item)">{{item}}</a>
           </div>
         </div> -->
+
+
+
+        <!-- articlebutton -->
+        <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+          aria-expanded="false">
+        ALL
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="javascript:void(0)">Issue</a>
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0)">Article</a></li>
+        </ul>
+
+        <!-- currency button -->
         <div class="dropdown">
-          <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1"
-             data-bs-toggle="dropdown" aria-expanded="false" >
-          Add Price
+          <button class="btn btn-info currency dropdown-toggle" type="button" id="dropdownMenuButton1"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            {{selectedCurrency}}
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-             <li><a class="dropdown-item" href="javascript:void(0)" >Issue</a>
-             </li>
-             <li><a class="dropdown-item" href="javascript:void(0)"
-                >Article</a></li>
+            <li><a class="dropdown-item" (click)="currencySelect('Currencies')">Currency</a>
+            </li>
+            <li><a class="dropdown-item" href="javascript:void(0)" *ngFor="let item  of currency"
+                (click)="currencySelect(item)"><input type="checkbox">{{item}}</a></li>
+
+
           </ul>
        </div>
         <!-- <button type="button" class="dropbtn" disabled>USD($)</button>
@@ -55,9 +72,8 @@
       <div class="col-md-4 offset-md-4 my-2">
         <!-- <label class="visible-xs visible-sm" for="searchBox">Search Report</label> -->
         <div class="input-group input-integrated-button">
-          <input type="text" id="searchBox" class="form-control ng-pristine ng-valid ng-touched"
-            ng-model="catalog.publicationTypes.journal.search.searchText" ng-model-options="{debounce: 300}"
-            placeholder="Search Report...">
+          <input class="form-control" type="text" name="search" autocomplete="off" (keyup)="applyFilter($event.target)"
+            placeholder="Search report..">
           <span class="input-group-btn">
             <button class="btn" type="button"><i class="fa fa-search"></i></button>
           </span>

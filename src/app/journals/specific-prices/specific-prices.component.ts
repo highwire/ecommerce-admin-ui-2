@@ -4,20 +4,12 @@ import { BaseService } from 'src/app/services/base.service';
 import {AfterViewInit,  ViewChild} from '@angular/core';
 import {MatPaginator,PageEvent} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-
 import { EditComponent } from '../template/edit/edit.component';
 import { DeleteComponent } from '../template/delete/delete.component';
-
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {AddComponent} from '../template/add/add.component';
-
 import {hwValidator} from '../../services/hwvalidator.service'
-// import { } from '../'
-
 import {AddNewPriceComponent}  from '../template/add-new-price/add-new-price.component';
-// import { debug } from 'console';
-
-
 
 interface USER {
   name: string;
@@ -25,7 +17,6 @@ interface USER {
   productType: string;
 
 }
-
 
 @Component({
   selector: 'app-specific-prices',
@@ -35,7 +26,7 @@ interface USER {
 export class SpecificPricesComponent implements OnInit {
   displayedColumns: string[] = ['name', 'description', 'productType','price_interval','price_amount','options',];
   currency:any=[];
-  selectedCurrency:any= 'ALL';
+  selectedCurrency:any= 'Currencies';
   masterdata:any;
   dataSource: MatTableDataSource<USER> = new MatTableDataSource();
   freeLabel= 'Free';
@@ -73,8 +64,6 @@ export class SpecificPricesComponent implements OnInit {
     this.currency=  JSON.parse(curr);
 
   }
-  
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -93,10 +82,7 @@ export class SpecificPricesComponent implements OnInit {
        
     })
   }
-
-
-filterDOI(data:any)
-{
+  filterDOI(data:any){
   var self= this;
   data= data.filter((entry:any)=>{
     // return  self.hwv.doi(item.name);
@@ -104,9 +90,9 @@ filterDOI(data:any)
   });
   console.log('filterDOI',data);
   this.extractPrice(data);
-
-}
-extractPrice(data:any, currencies?:any){
+  }
+  
+  extractPrice(data:any, currencies?:any){
   
   var self= this;
   var pricearray:any= [];
@@ -152,25 +138,19 @@ extractPrice(data:any, currencies?:any){
       });      
     }    
   });
-
-
-  this.dataSource.data= pricearray;
-  setTimeout(() => {
+   this.dataSource.data= pricearray;
+   setTimeout(() => {
     this.paginator.pageIndex = this.currentPage;
-    this.paginator.length = data.length;
-  },1000);
-
-}
+    this.paginator.length = data.length;},1000);
+  }
 
 
   toppingList: string[] = [
     "Extra cheese",
-    "Mushroom",
-   
-  ];
+    "Mushroom"];
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter(filterValue:any) {
+    this.dataSource.filter = filterValue.value.trim().toLowerCase();
   }
   someMethod(value: any, element: any) {
     console.log("selected value", value);
@@ -179,10 +159,10 @@ extractPrice(data:any, currencies?:any){
   }
 
   currencySelect(currency:any){
+    debugger
     this.selectedCurrency= currency
     console.log(currency);
-    
-    this.extractPrice(this.masterdata, currency=='ALL' ? '':currency);
+    this.extractPrice(this.masterdata, currency=='Currencies' ? '':currency);
   }
     // this.masterdata=data;
 
@@ -250,37 +230,28 @@ extractPrice(data:any, currencies?:any){
       });
      }else{
       this.dataSource.data.forEach((item:any) => {
-        
-          prices.push(item);
-        
-      });
+         prices.push(item);});
      }
-    
-    return prices
-  }
+     return prices
+    }
 
   addData(){
     // console.log();
     var p= this.getCurrentPrices()
-   
     const dialogRef = this.dialog.open(AddNewPriceComponent, {
       width: '950px',
       height: '400px',
       data: {
         prices:p},
     });
-
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.animal = result;
     });
   }
-
-
   edit(element:any){
     // console.log(element);
     var p= this.getCurrentPrices(element)
-   
     const dialogRef = this.dialog.open(EditComponent, {
       width: '950px',
       height: '500px',
@@ -293,10 +264,5 @@ extractPrice(data:any, currencies?:any){
       this.animal = result;
     });
   }
-
-  
-   
-  
-
 }
 
