@@ -1,33 +1,71 @@
-<div class="container">
-    <h1 style="text-transform:capitalize; color: brown;" class="pt-2"> Manage Default</h1>
-    <h5 style="color: grey; margin-top: 10px;">Selected Sites</h5>
-    <form class="form" class="form_list">
-       <div class="row">
-          <div class="col-md-6">
-             <ng-multiselect-dropdown
-             [placeholder]="'Filter sites...'"
-             [settings]="dropdownSettings"
-             [data]="sitedata"
-             [(ngModel)]="selectedItems"
-             (onSelect)="onItemSelect($event)"
-             (onSelectAll)="onSelectAll($event)">
-             </ng-multiselect-dropdown>
-          </div>
-       </div>
-       <h5 style="color: grey; margin-top: 10px;">Default Price</h5>
-       <table class=" table" >
-          <tr class="thline">
+<div class="container h-auto mb-5">
+    <h1 style="text-transform:capitalize; color: brown; font-size: 30px;
+    font-family: 'Lato'; font-weight: 100;" class="pt-3"
+    >
+       Manage Default Journal Prices</h1>
+   
+    <h2 class="lead  text-muted" style="font-family: 'Lato'; font-weight: 100;">
+      Select a Site</h2>
+   
+      <div class="row">
+         <div class="col-md-4 ">
+           
+            <ng-multiselect-dropdown
+            [placeholder]="'Filter sites...'"
+            [settings]="dropdownSettings"
+            [data]="sitedata"
+            [(ngModel)]="selectedItems"
+            (onSelect)="onItemSelect($event)"
+            (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown>
+            
+         </div>
+      </div>
+   <form class="form" class="form_list">
+       <h1 class="lead  text-muted pt-3" *ngIf="selected" style="font-family: 'Lato'; font-weight: 100;">
+          Default Price</h1>
+       <table class=" table" *ngIf="selected">
+         
+          <tr class="thline" >
              <th></th>
-             <th>Currency</th>
-             <th>Forsale</th>
-             <th>Price</th>
-             <th>Access Panel</th>
+            
+             <!-- table title -->
+             <th>
+               <div class="row">
+                  <div class="col">
+                     <h3>Currency</h3>
+                  </div>   
+               </div>
+            </th>
+             <th>
+               <div class="row">
+                  <div class="col">
+                     <h3>Forsale</h3>
+                  </div>   
+               </div>
+            </th>
+            <th>
+               <div class="row ">
+                  <div class="col">
+                     <h3>Price</h3>
+                  </div>   
+               </div>
+            </th>
+             <th>
+               <div class="row">
+                  <div class="col">
+                     <h3>Access Panel</h3>
+                  </div>   
+               </div>
+            </th>
+            
+          <!-- tabledata    -->
           </tr>
           <tr *ngFor="let item of pricearray;let ind=index">
-             <td class="isar">{{item.productType}}</td>
+             <td class="isar" style="text-transform: capitalize;"><h3>{{item.productType}}</h3></td>
              <td>
-                <div class="input-group input-group-sm ">
-                   <select class="mb-3 btn btn-primary dropdown-toggle" name="{{item.price_currency+ind}}"
+                <div class="input-group input-group-sm">
+                   <select class="mb-3 btn btn-primary scurrency dropdown-toggle" name="{{item.price_currency+ind}}"
                    [(ngModel)]="item.price_currency">
                    <option *ngFor="let curr of currency" value="{{curr}}">{{curr}}</option>
                    </select>
@@ -35,7 +73,7 @@
              </td>
              <td>
                 <label class="switch">
-                <input type="checkbox"   (change)="onItemChange($event.target,item)"
+                <input type="checkbox" (change)="onItemChange($event.target,item)"
                 [checked]="item.price_amount=='Not for Sale' ? false:true " >
                 <span class="slider round"></span>
                 </label>                        
@@ -45,8 +83,8 @@
                    <div *ngIf="item.price_amount==notForSaleLabel; then thenBlock else elseBlock"></div>
                    <ng-template #thenBlock>{{notForSaleLabel}}  </ng-template>
                    <ng-template #elseBlock>
-                      <span style="border-radius: 0px; border: none;" class="input-group-text"  id="#">{{ item.price_currency|filterPipe}}</span>
-                      <input style="border-radius: 0px;background-color: #e9ecef ; border: none;" type="text"
+                      <span style="border-radius: 0px; border: 1px solid lavender; margin-bottom: 10px;" class="input-group-text"  id="#">{{ item.price_currency|filterPipe}}</span>
+                      <input style="border-radius: 0px;background-color: #ffffff ; border:1px solid lavender; margin-bottom: 10px;" type="text"
                       [(ngModel)]="item.price_amount" name="{{item.price_amount+ind}}"
                       class="form-control"
                       placeholder="" aria-label="price" aria-describedby="#">
@@ -61,8 +99,10 @@
                    </select>
                 </div>
              </td>
-             <td><button type="button" class="btn btn-danger" (click)="removeitem(ind)">Remove</button></td>
+             <td><button type="button" class="btn btn-danger bremove" (click)="removeitem(ind)">Remove</button></td>
           </tr>
+
+          <!-- buttons -->
           <tr *ngIf="selected">
              <td>
                 <div class="dropdown">
@@ -78,15 +118,22 @@
                    </ul>
                 </div>
              </td>
+             <td> <button type="button" class="btn btn-danger ">Cancel</button></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td><button type="button" (click)="update()" class="btn btn-info">Save</button></td>
           </tr>
-          <tr *ngIf="selected">
-             <td><button type="button" class="btn btn-danger">Cancel</button></td>
+          <!-- previous code -->
+          <!-- <tr *ngIf="selected" class="col-12"> -->
+             <!-- <td><button type="button" class="btn btn-danger">Cancel</button></td>
              <td></td>
              <td></td>
              <td>
                 <div><button type="button" (click)="update()" class="btn btn-info">Save</button></div>
-             </td>
-          </tr>
+             </td> -->
+            
        </table>
     </form>
+    
  </div>
