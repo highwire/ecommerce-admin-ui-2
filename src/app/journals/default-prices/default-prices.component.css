@@ -100,13 +100,15 @@
     border-radius: 50%;
   }
 
-  .btn-danger {
-
-    background-color: brown!important;
-    /* padding:8px 30px; */
-    padding: 4px 10px;
-    margin-top: -17px;
+  .bremove {
     border-radius: 0px;
+    background-color: brown;
+     margin-bottom: 15px;
+    height: 38px;
+}
+.btn-danger{
+  background-color: brown;
+  border-radius: 0px;
 }
 
 
@@ -137,8 +139,15 @@ table tr{border: none;}
   #chapter{width: 100%!important;
 
 }
+.form_list{
+  overflow-x: scroll!important;
+}
   
 }
+.scurrency{
+  padding: 9px;
+}
+
 .btn-info{
           
           margin-left: -7px!important;
@@ -153,9 +162,15 @@ table tr{border: none;}
         
         width: 17%;
     }
-.form_list{
-  overflow-x: scroll;
-}
+
+    .mb-5 {
+      margin-bottom: 170px!important;
+  }
+
+
+  form .form_list{
+    overflow-x: scroll;
+  }
 .example-form {
   min-width: 150px;
   max-width: 500px;
@@ -170,7 +185,49 @@ table tr{border: none;}
        max-width: 1001px !important;
 }
 
-.table{
-  min-height: 400px;
+/* table{
+  min-height: 0px!important;
+} */
+/* select */
+ @media screen and (min-width:768px) and (max-width:1320px){
+  :host ::ng-deep .multiselect-dropdown .dropdown-btn{
+  
+    width: 661px!important;
+   
+    border-radius: 0px!important;
+  }
+  
+  :host ::ng-deep .multiselect-dropdown{
+    
+    width: 695px!important;
+    
+  }
 
 }
+  
+
+
+:host ::ng-deep .multiselect-dropdown .dropdown-btn{
+  
+  border-radius: 0px!important;
+}
+
+
+:host ::ng-deep .multiselect-dropdown .dropdown-btn .selected-item-container .selected-item{
+  
+  padding: 0 5px!important;
+  
+  max-width: 300px!important;
+}
+:host ::ng-deep .multiselect-dropdown .dropdown-btn .dropdown-multiselect__caret {
+background-color:#4A90E2;
+height: 36.05px!important;
+  right: -5px!important;
+  transition: none!important;
+}
+:host ::ng-deep .multiselect-dropdown .dropdown-btn .dropdown-multiselect__caret::before {
+border-color: #fff transparent!important;
+color: #fff!important}
+
+
+
