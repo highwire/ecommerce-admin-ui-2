@@ -70,7 +70,7 @@ export class DetailedComponent implements OnInit {
     console.log({ event });
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex;
-    this.selectAllPublishers();
+    // this.selectAllPublishers();
   }
 
   setDate(){

@@ -33,7 +33,7 @@ export class SignupComponent implements OnInit {
     private authz: AuthresolverService,
     private base :BaseService
   ) { 
-
+    this.cleardata();
     this.registerForm = this.formBuilder.group({
       user: ['', Validators.required],      
       persistLogin: ['',],
@@ -42,6 +42,7 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
+    
   }
 
   get f() { return this.registerForm.controls; }
@@ -96,5 +97,15 @@ export class SignupComponent implements OnInit {
       //   this.authError = true;
       // }
     );
+  }
+  cleardata(){
+    localStorage.setItem('menu','');
+    localStorage.setItem('currency','');
+    localStorage.setItem('defalut','');
+    localStorage.setItem('publisher-label','');
+    localStorage.setItem('auth','');
+    localStorage.setItem('publisher','');
+    localStorage.setItem('hwp-login','');
+    localStorage.setItem('siteData','');
   }
 }
