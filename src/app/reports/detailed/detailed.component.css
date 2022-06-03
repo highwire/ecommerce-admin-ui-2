@@ -10,4 +10,11 @@
 .table-column-200 {
     min-width: 200px;
 }
+.alertbar{
+    padding:20px;
+    border-radius: 0px;
+    color: white;
+    background-color: #4A90E2;
+
+}
 
