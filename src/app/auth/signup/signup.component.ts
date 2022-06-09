@@ -14,6 +14,7 @@ import { Angulartics2 } from 'angulartics2';
 import { AuthresolverService } from '../authresolver.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { BaseService } from '../../services/base.service';
+import { AuthGuardService } from '../auth-gaurd.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -31,7 +32,8 @@ export class SignupComponent implements OnInit {
     private router: Router,
     private angulartics2: Angulartics2,
     private authz: AuthresolverService,
-    private base :BaseService
+    private base :BaseService,
+    public authguard:AuthGuardService
   ) { 
     this.cleardata();
     this.registerForm = this.formBuilder.group({
@@ -58,10 +60,7 @@ export class SignupComponent implements OnInit {
     this.authz.login(
       this.registerForm.value.user,
       this.registerForm.value.password,
-      this.registerForm.value.persistLogin,      
- 
- 
-    )
+      this.registerForm.value.persistLogin,)
     .subscribe((result:any) => {
         let pubTerms = [];
         let publishers = '';
@@ -97,7 +96,12 @@ export class SignupComponent implements OnInit {
       //   this.authError = true;
       // }
     );
+    this.authguard.isLoggedIn = !this.authguard.isLoggedIn
   }
+  get loggedIn () {
+      return this.authguard.isLoggedIn;
+    };
+
   cleardata(){
     localStorage.setItem('menu','');
     localStorage.setItem('currency','');
