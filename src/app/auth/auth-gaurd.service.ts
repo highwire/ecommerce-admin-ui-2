@@ -18,9 +18,16 @@ export class AuthGuardService implements CanActivate {
  
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-if(this.isLoggedIn){
-  return true;
-}else{
+    if (this.isLoggedIn) {
+      console.log('login successfully')
+      return true;
+    }
+    var currency: any = localStorage.getItem('currency');
+    if (currency) {
+      currency = JSON.parse(currency);
+      return true
+    }
+    else{
   console.log('please login first') 
   this.router.navigate([''])
   return false
