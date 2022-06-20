@@ -42,11 +42,12 @@ export class SpecificPricesComponent implements OnInit {
   animal: any;
   name: any;
 
-  productType:any
+  productType:any=[]
+  selectedType:any= 'All';
   pricearray:any
   element:any
 
-  term:any= [];
+  
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!:MatSort
@@ -62,8 +63,11 @@ export class SpecificPricesComponent implements OnInit {
     this.selectAllPublishers();
     var curr= localStorage.getItem('currency')+'';
     if(curr)
-    // debugger;
     this.currency=  JSON.parse(curr);
+
+    var pro = localStorage.getItem('productType') + '';
+    if(pro)
+    this.productType = JSON.parse(pro)
 
   }
   ngAfterViewInit() {
@@ -169,7 +173,12 @@ export class SpecificPricesComponent implements OnInit {
     this.extractPrice(this.masterdata, currency=='Currencies' ? '':currency);
   }
     // this.masterdata=data;
-
+  productSelect(productType:any){
+    debugger
+    this.selectedType = productType
+    console.log(productType);
+    this.extractPrice(this.masterdata, productType == 'All' ? '': productType)
+  }
 
   delete(element:any){
     // console.log(element);
