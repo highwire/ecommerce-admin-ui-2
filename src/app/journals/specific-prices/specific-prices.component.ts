@@ -10,6 +10,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import {AddComponent} from '../template/add/add.component';
 import {hwValidator} from '../../services/hwvalidator.service'
 import {AddNewPriceComponent}  from '../template/add-new-price/add-new-price.component';
+import {MatSort} from '@angular/material/sort';
 
 interface USER {
   name: string;
@@ -48,6 +49,7 @@ export class SpecificPricesComponent implements OnInit {
   term:any= [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!:MatSort
   constructor(
     public http: HTTPService,
     public base: BaseService,
@@ -66,6 +68,7 @@ export class SpecificPricesComponent implements OnInit {
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort
   }
   pageChanged(event: PageEvent) {
     console.log({ event });
@@ -82,6 +85,7 @@ export class SpecificPricesComponent implements OnInit {
        
     })
   }
+
   filterDOI(data:any){
   var self= this;
   data= data.filter((entry:any)=>{

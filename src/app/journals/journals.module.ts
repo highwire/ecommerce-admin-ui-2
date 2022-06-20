@@ -29,6 +29,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {FilterPipe} from '../services/currency.filter';
+import { MatSortModule } from '@angular/material/sort';
 @NgModule({
   declarations: [
     DefaultPricesComponent,
@@ -60,6 +61,7 @@ import {FilterPipe} from '../services/currency.filter';
     MatInputModule,
     MatAutocompleteModule,
     NgMultiSelectDropDownModule.forRoot(),
+    MatSortModule
   ],
   providers: [],
 })
