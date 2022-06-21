@@ -27,7 +27,7 @@ interface USER {
 export class SpecificPricesComponent implements OnInit {
   displayedColumns: string[] = ['name', 'description', 'productType','price_interval','price_amount','options',];
   currency:any=[];
-  selectedCurrency:any= 'Currencies';
+  selectedCurrency:any= '  All CURRENCIES';
   masterdata:any;
   dataSource: MatTableDataSource<USER> = new MatTableDataSource();
   freeLabel= 'Free';
@@ -43,12 +43,13 @@ export class SpecificPricesComponent implements OnInit {
   name: any;
   
   productTypes:any=[
-    {key:"article-price",value:'Artile'},
+    {key:"",value:'All'},
     {key:"issue-price",value:'Issue'},
-    {key:"",value:'All'}
+    {key:"article-price",value:'Article'},
+    
     
   ];
-  selectedType:any= 'All';
+  selectedType:any= 'ALL';
   pricearray:any
   element:any
 
