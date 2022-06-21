@@ -6,7 +6,8 @@
         <div class="dateframe" style="height: 100px; width:100%">
             <div class="row">
                 <div class="col-sm-9">
-                    <h4 style="color: #A81732; font-size:x-large;">Most Popular</h4>
+                    <h3 class="Jstitle" style="color: brown;">Most Popular</h3>
+                    <!-- <h4 style="color: #A81732; font-size:x-large;">Most Popular</h4> -->
                 </div>
 
                 <div class="col-sm-3">
@@ -74,7 +75,7 @@
  -->
 
 
-        <div class="row rf">
+        <!-- <div class="row rf">
             <div class="col-sm-3  text-white">
                 <ul style="width: 95%; height: 100px; border: 1px solid grey;">No.of Items sold
                     <li>{{response.qty.all}}</li>
@@ -106,6 +107,75 @@
 
 
 
+        </div> -->
+        <div class="container">
+            <div class="row g-2">
+                <div class="col-3">
+                    <div class="p-3 border ">
+                        <div class="ground">
+                            <h4 class="fw-light"> No.of Items sold</h4>
+                            <p #value style="font-size: 36px; color: #A81732; margin-top: 10px;">0</p>
+                            <p *ngif="!value" style="font-size: 36px; color: #A81732; margin-top: 10px;"> {{response.qty.all}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="p-3 border">
+                        <div class="ground">
+                            <h4 class="fw-light"> Total Revenue-USD</h4>
+                            <p #value style="font-size: 36px; color: #A81732; margin-top: 10px;">$0</p>
+                            <p *ngif="!value" style="font-size: 36px; color: #A81732; margin-top: 10px;">{{response.revenue.USD}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="p-3 border ">
+                        <div class="ground">
+                            <h4 class="fw-light">Total Issues Sold</h4>
+                            <p #value  style="font-size: 36px; color: #A81732; margin-top: 10px;">0</p>
+                            <p *ngif="!value" style="font-size: 36px; color: #A81732; margin-top: 10px;">{{response.issue.qty}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="p-3 border">
+                        <div class="ground">
+                            <h4 class="fw-light">Total Article Sold</h4>
+                            <p #value  style="font-size: 36px; color: #A81732; margin-top: 10px;">0</p>
+                            <p *ngif="!value" style="font-size: 36px; color: #A81732; margin-top: 10px;">{{response.article.qty}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 my-2">
+                <!-- <div class="col-3">
+                  <div class="p-3 border ">
+                      <div class="ground">
+                        <h4 class="fw-light">Most Popular Access Period</h4>
+                        <p style="font-size: 36px; color: #A81732; margin-top: 10px;">{{response.mpInterval}}</p>
+                      </div>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="p-3 border">
+                    <div class="ground">
+                        <h4 class="fw-light">Total Article Sold</h4>
+                        <p style="font-size: 36px; color: #A81732; margin-top: 10px;">{{response.article.qty}}</p>
+                    </div>
+                  </div>
+                </div> -->
+
+                <div class="col-6">
+                    <div class="p-3 border">
+                        <div class="ground">
+                            <h4 class="fw-light">Most Popular Access Period</h4>
+                            <p #value  style="font-size: 36px; color: #A81732; margin-top: 10px;">0</p>
+                            <p  *ngif="!value" style="font-size: 36px; color: #A81732; margin-top: 10px;">{{response.mpInterval}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div>
@@ -135,22 +205,22 @@
                 <div class="col-sm-6">
 
                     <!-- <button type="button" class=" btn btn-default">ALL</button> -->
-                    <button class="btn btn-default dropdown-toggle" style="width:90px" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">ALL</button>
+                    <button class="btn btn-default dropdown-toggle" style="width:90px" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">ALL</button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">All</a></li>
                         <li><a class="dropdown-item" href="#">Issue</a></li>
                         <li><a class="dropdown-item" href="#">Article</a></li>
-                       
+
                     </ul>
                     <!-- <button type="button" class=" btn btn-default mx-2">All CURRENCIES</button> -->
                     <button class="btn btn-default mx-2 dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">All CURRENCIE</button>
+                        aria-expanded="false">All CURRENCIES</button>
                     <ul class="dropdown-menu">
                         <li><input type="checkbox">EUR</li>
                         <li><input type="checkbox">GBP</li>
                         <li><input type="checkbox">USD</li>
-                       
+
                     </ul>
                     <button type="button" class=" btn btn-default" (click)="exporter.exportTable('csv')"
                         disabled>EXPORT(.Csv)</button>
@@ -200,41 +270,41 @@
         </div>
         <div class="row">
             <!-- <mat-table matTableExporter [dataSource]="dataSource"  [hiddenColumns]="[0]"> -->
-            <table mat-table [dataSource]="dataSource" matTableExporter #exporter="matTableExporter"
+            <table mat-table [dataSource]="dataSource" matSort matTableExporter #exporter="matTableExporter"
                 class="mat-elevation-z8 demo-table">
                 <!-- Position Column -->
                 <ng-container matColumnDef="contentId">
-                    <th mat-header-cell *matHeaderCellDef>DOI/ISBN/ISSN</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header >DOI/ISBN/ISSN</th>
                     <td mat-cell *matCellDef="let element">{{element.contentId }}</td>
                 </ng-container>
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="title">
-                    <th mat-header-cell *matHeaderCellDef>Item Title</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Item Title</th>
                     <td mat-cell *matCellDef="let element">{{element.title }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="resourceType">
-                    <th mat-header-cell *matHeaderCellDef>Publication Type</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Publication Type</th>
                     <td mat-cell *matCellDef="let element">{{element.resourceType}}</td>
                 </ng-container>
 
 
                 <ng-container matColumnDef="amount">
-                    <th mat-header-cell *matHeaderCellDef>Price</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
                     <td mat-cell *matCellDef="let element">{{element.amount}}</td>
                 </ng-container>
 
 
 
                 <ng-container matColumnDef="interval">
-                    <th mat-header-cell *matHeaderCellDef>Access Period</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Access Period</th>
                     <td mat-cell *matCellDef="let element">{{element.interval}}</td>
                 </ng-container>
 
 
                 <ng-container matColumnDef="qty">
-                    <th mat-header-cell *matHeaderCellDef>Quality Sold</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Quality Sold</th>
                     <td mat-cell *matCellDef="let element">{{element.qty}}</td>
                 </ng-container>
 
@@ -242,7 +312,7 @@
 
                 <ng-container matColumnDef="revenue">
 
-                    <th mat-header-cell *matHeaderCellDef>Total Revenue </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Revenue </th>
                     <td mat-cell *matCellDef="let element">{{element.revenue}}</td>
 
 

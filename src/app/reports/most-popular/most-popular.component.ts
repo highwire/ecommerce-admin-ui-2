@@ -37,6 +37,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {hwValidator} from '../../services/hwvalidator.service'
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-most-popular',
@@ -87,6 +88,7 @@ export class MostPopularComponent implements OnInit {
   name: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!:MatSort
   constructor(
     public http: HTTPService,
     public base: BaseService,
@@ -110,6 +112,7 @@ export class MostPopularComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort
   }
   pageChanged(event: PageEvent) {
     console.log({ event });

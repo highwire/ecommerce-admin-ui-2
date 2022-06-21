@@ -27,6 +27,7 @@ import { ReceiptComponent } from './receipt/receipt.component';
 // PieChartComponent, 
 // BarChartComponent,
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { MatSortModule } from '@angular/material/sort';
 @NgModule({
   declarations: [
    
@@ -51,7 +52,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     MatDialogModule,
     FormsModule,
     MatTableModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    MatSortModule
     
   ]
 })

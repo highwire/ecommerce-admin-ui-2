@@ -73,7 +73,7 @@ width: 93%!important;
       .btn.btn-default {
         background: #E6E6E6;
         border-radius: 0px;
-        width: 136px;
+        width: 146px;
         padding: 7px;
 
         
@@ -82,6 +82,24 @@ width: 93%!important;
         width: 99%;
         border: 1px solid grey;
         height: 35px;
+    }
+    .ground{
+        height: 92px;
+        padding: 10px;
+        text-align: center;
+    }
+    .Jstitle{
+      
+        margin-top: 11px;
+        margin-bottom: 11px;
+    
+        color: #A81732;
+    
+        font-weight: 300;
+        letter-spacing: .3px;
+    
+        font-size: 30px!important;
+    
     }
     
     
