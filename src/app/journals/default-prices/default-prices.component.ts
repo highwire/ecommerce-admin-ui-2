@@ -66,7 +66,7 @@ sitedata:any;
     
     ];
     this.dropdownSettings = {
-      singleSelection: false,
+      singleSelection: true,
       idField: 'corpus',
       textField: 'title',
       selectAllText: 'Select All',

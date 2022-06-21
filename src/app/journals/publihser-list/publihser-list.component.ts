@@ -42,12 +42,21 @@ publihserlist: any;
 
   }
   selectPublishers(item:any){
-    localStorage.setItem('publisher',item.term)
+    debugger;
+    if(item=='*'){
+      localStorage.setItem('publisher','*')
+      localStorage.setItem('publisher-label','All Publishers')
+    }else{
+      localStorage.setItem('publisher',item.term)
     localStorage.setItem('publisher-label',item.label)
     
+
+    }
     this.getCurrencyList();
     this.auth.jouranlselect(true);
     console.log(item);
+    
+    
   }
 
   getCurrencyList(){
