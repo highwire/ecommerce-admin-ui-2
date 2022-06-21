@@ -27,7 +27,7 @@ interface USER {
 export class SpecificPricesComponent implements OnInit {
   displayedColumns: string[] = ['name', 'description', 'productType','price_interval','price_amount','options',];
   currency:any=[];
-  selectedCurrency:any= 'Currencies';
+  selectedCurrency:any= '  All CURRENCIES';
   masterdata:any;
   dataSource: MatTableDataSource<USER> = new MatTableDataSource();
   freeLabel= 'Free';
@@ -41,9 +41,15 @@ export class SpecificPricesComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10, 25, 100];
   animal: any;
   name: any;
-
-  productType:any=[]
-  selectedType:any= 'All';
+  
+  productTypes:any=[
+    {key:"",value:'All'},
+    {key:"issue-price",value:'Issue'},
+    {key:"article-price",value:'Article'},
+    
+    
+  ];
+  selectedType:any= 'ALL';
   pricearray:any
   element:any
 
@@ -66,8 +72,8 @@ export class SpecificPricesComponent implements OnInit {
     this.currency=  JSON.parse(curr);
 
     var pro = localStorage.getItem('productType') + '';
-    if(pro)
-    this.productType = JSON.parse(pro)
+    // if(pro)
+    // this.productType = JSON.parse(pro)
 
   }
   ngAfterViewInit() {
@@ -97,10 +103,10 @@ export class SpecificPricesComponent implements OnInit {
     return(self.hwv.doi(entry.name) || self.hwv.pisaId(entry.name) ||self.hwv.isbn(entry.name) || self.hwv.resourceId(entry.name))
   });
   console.log('filterDOI',data);
-  this.extractPrice(data);
+  this.extractPrice(data,'','');
   }
   
-  extractPrice(data:any, currencies?:any){
+  extractPrice(data:any, currencies?:any,productType?:any){
   
   var self= this;
   var pricearray:any= [];
@@ -114,7 +120,23 @@ export class SpecificPricesComponent implements OnInit {
         // if(elements.name== "article-price"){
             // return false;
         // }
-        if( currencies){
+        if(productType){
+          if(elements.name==productType)
+          pricearray.push({
+            name: element.name,
+            productType:element.productType,
+            description:element.description,      
+            identifier: element.identifier,
+            price_amount: self.formatAmountDisplay (elements.amount),
+            price_currency:elements.currency,
+            price_interval:elements.interval,
+            price_name:elements.name,
+            price:elements
+          })  
+        }
+
+
+        else if( currencies){
           if(elements.currency.toUpperCase()==currencies)
           pricearray.push({
             name: element.name,
@@ -170,14 +192,14 @@ export class SpecificPricesComponent implements OnInit {
     debugger
     this.selectedCurrency= currency
     console.log(currency);
-    this.extractPrice(this.masterdata, currency=='Currencies' ? '':currency);
+    this.extractPrice(this.masterdata, currency=='Currencies' ? '':currency, '');
   }
     // this.masterdata=data;
   productSelect(productType:any){
-    debugger
-    this.selectedType = productType
+    
+    this.selectedType = productType.value
     console.log(productType);
-    this.extractPrice(this.masterdata, productType == 'All' ? '': productType)
+    this.extractPrice(this.masterdata,'', productType.key == 'All' ? '': productType.key)
   }
 
   delete(element:any){

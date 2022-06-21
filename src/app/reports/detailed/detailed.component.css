@@ -17,4 +17,10 @@
     background-color: #4A90E2;
 
 }
+.btn-primary{
+    border-radius: 0px;
+}
+.btn-danger{
+    border-radius: 0px;
+}
 
