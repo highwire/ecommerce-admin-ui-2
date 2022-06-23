@@ -1,344 +1,396 @@
 <div class="container">
-
-    <div class="container mt-3">
-
-
-        <div class="dateframe" style="height: 100px; width:100%">
-            <div class="row">
-                <div class="col-sm-9">
-                    <h3 class="Jstitle" style="color: brown;">Most Popular</h3>
-                    <!-- <h4 style="color: #A81732; font-size:x-large;">Most Popular</h4> -->
-                </div>
-
-                <div class="col-sm-3">
-                    <label style="font-weight: 400;">Set Date Range</label>
-                    <mat-form-field appearance="legacy">
-                        <mat-label style="color: white; position:relative; margin-left: 10px;">Set Date Range
-                        </mat-label>
-
-                        <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange"
-                            style="background-color: #A81732; color:white;">
-                            <input matStartDate formControlName="start" placeholder="Start Date" style="color: white;">
-                            <input matEndDate formControlName="end" placeholder="End Date" style="color: white;">
-                        </mat-date-range-input>
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-
-
-                        <mat-date-range-picker #picker></mat-date-range-picker>
-                    </mat-form-field>
-
-
-
-                </div>
-            </div>
-        </div>
-        <div class="row pb-3">
-            <div class="col-sm-9"></div>
-            <div class="col-sm-3">
-                <button class="btn btn-danger btn-sm" (click)="selectAllPublishers()">Run Report</button>
-                <!-- <button class="btn btn-info btn-sm mx-1" (click)="exporter.exportTable('csv')" style="color: white;">EXPORT(.CSV)</button> -->
-                <h5>
-                    Start: {{dateRange.value.start | date}}
-                    End: {{dateRange.value.end | date}}
-                </h5>
-            </div>
-
+  <div class="container mt-3">
+    <div class="dateframe">
+      <div class="row">
+        <div class="col-sm-9">
+          <h3 class="Jstitle" style="color: brown">Most Popular</h3>
+          <!-- <h4 style="color: #A81732; font-size:x-large;">Most Popular</h4> -->
         </div>
 
-        <!-- <div class="dateframe" style="height: 100px; width:100%">
+        <div class="col-sm-3">
+          <label style="font-weight: 400">Set Date Range</label>
+          <mat-form-field appearance="legacy">
+            <mat-label
+              style="color: white; position: relative; margin-left: 10px"
+              >Set Date Range
+            </mat-label>
 
-            <div class="df" style="margin-left: 870px;">
+            <mat-date-range-input
+              [rangePicker]="picker"
+              [formGroup]="dateRange"
+              style="background-color: #a81732; color: white"
+            >
+              <input
+                matStartDate
+                formControlName="start"
+                placeholder="Start Date"
+                style="color: white"
+              />
+              <input
+                matEndDate
+                formControlName="end"
+                placeholder="End Date"
+                style="color: white"
+              />
+            </mat-date-range-input>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
 
-                <mat-form-field appearance="legacy">
-
-                    <mat-label style="color: white; position:relative; margin-left: 10px;">Set Date Range</mat-label>
-
-                    <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange"
-                        style="background-color: brown; color:white;">
-                        <input matStartDate formControlName="start" placeholder="Start Date" style="color: white;">
-                        <input matEndDate formControlName="end" placeholder="End Date" style="color: white;">
-                    </mat-date-range-input>
-
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-
-                    <mat-date-range-picker #picker></mat-date-range-picker>
-
-                </mat-form-field>
-
-                <h5>
-                    Start: {{dateRange.value.start | date}}
-                    End: {{dateRange.value.end | date}}
-                </h5>
-            </div>
+            <button
+              class="btn btn-danger btn-sm my-2"
+              (click)="selectAllPublishers()"
+            >
+              Run Report
+            </button>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
         </div>
+      </div>
     </div>
- -->
-
-
-        <!-- <div class="row rf">
-            <div class="col-sm-3  text-white">
-                <ul style="width: 95%; height: 100px; border: 1px solid grey;">No.of Items sold
-                    <li>{{response.qty.all}}</li>
-                </ul>
-            </div>
-
-            <div class="col-sm-3  text-white">
-                <ul style="width: 95%; height: 100px; border: 1px solid grey;">Total Revenue-USD
-                    <li>{{response.revenue.USD}}</li>
-                </ul>
-            </div>
-            <div class="col-sm-3  text-white">
-                <ul style="width: 95%; height: 100px; border: 1px solid grey;">Total Issues Sold
-                    <li>{{response.issue.qty}}</li>
-
-                </ul>
-            </div>
-            <div class="col-sm-3  text-white">
-                <ul style="width: 95%; height: 100px; border: 1px solid grey;">Total Article Sold
-                    <li>{{response.article.qty}}</li>
-                </ul>
-            </div>
-            <div class="col-sm-6 my-4 text-white">
-                <ul style="width: 98%; height: 100px; border: 1px solid grey;">Most Popular Access Period
-                    <li>{{response.mpInterval}}</li>
-                </ul>
-            </div>
-
-
-
-
-        </div> -->
-        <div class="container">
-            <div class="row g-2">
-                <div class="col-3">
-                    <div class="p-3 border ">
-                        <div class="ground">
-                            <h4 class="fw-light"> No.of Items sold</h4>
-                            <p #value style="font-size: 36px; color: #A81732; margin-top: 10px;">0</p>
-                            <p *ngif="!value" style="font-size: 36px; color: #A81732; margin-top: 10px;"> {{response.qty.all}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="p-3 border">
-                        <div class="ground">
-                            <h4 class="fw-light"> Total Revenue-USD</h4>
-                            <p #value style="font-size: 36px; color: #A81732; margin-top: 10px;">$0</p>
-                            <p *ngif="!value" style="font-size: 36px; color: #A81732; margin-top: 10px;">{{response.revenue.USD}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="p-3 border ">
-                        <div class="ground">
-                            <h4 class="fw-light">Total Issues Sold</h4>
-                            <p #value  style="font-size: 36px; color: #A81732; margin-top: 10px;">0</p>
-                            <p *ngif="!value" style="font-size: 36px; color: #A81732; margin-top: 10px;">{{response.issue.qty}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="p-3 border">
-                        <div class="ground">
-                            <h4 class="fw-light">Total Article Sold</h4>
-                            <p #value  style="font-size: 36px; color: #A81732; margin-top: 10px;">0</p>
-                            <p *ngif="!value" style="font-size: 36px; color: #A81732; margin-top: 10px;">{{response.article.qty}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row g-2 my-2">
-                <!-- <div class="col-3">
-                  <div class="p-3 border ">
-                      <div class="ground">
-                        <h4 class="fw-light">Most Popular Access Period</h4>
-                        <p style="font-size: 36px; color: #A81732; margin-top: 10px;">{{response.mpInterval}}</p>
-                      </div>
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div class="p-3 border">
-                    <div class="ground">
-                        <h4 class="fw-light">Total Article Sold</h4>
-                        <p style="font-size: 36px; color: #A81732; margin-top: 10px;">{{response.article.qty}}</p>
-                    </div>
-                  </div>
-                </div> -->
-
-                <div class="col-6">
-                    <div class="p-3 border">
-                        <div class="ground">
-                            <h4 class="fw-light">Most Popular Access Period</h4>
-                            <p #value  style="font-size: 36px; color: #A81732; margin-top: 10px;">0</p>
-                            <p  *ngif="!value" style="font-size: 36px; color: #A81732; margin-top: 10px;">{{response.mpInterval}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div>
-
-            <link rel="stylesheet"
-                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-            <div class="row p-2">
-                <div class="col-sm-12 p-3 " style="background-color: #A81732;; height: 10vh; color: white;">
-                    <label style="font-weight: 500;">Most Popular Content</label>
-
-                </div>
-            </div>
-            <div class="row p-2">
-                <div class="col-6"></div>
-                <div class="col-6">
-                    <div class="text b">
-                        <label
-                            style="font-weight: 500; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Search
-                            Report</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-
-                <div class="col-sm-6">
-
-                    <!-- <button type="button" class=" btn btn-default">ALL</button> -->
-                    <button class="btn btn-default dropdown-toggle" style="width:90px" type="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">ALL</button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">All</a></li>
-                        <li><a class="dropdown-item" href="#">Issue</a></li>
-                        <li><a class="dropdown-item" href="#">Article</a></li>
-
-                    </ul>
-                    <!-- <button type="button" class=" btn btn-default mx-2">All CURRENCIES</button> -->
-                    <button class="btn btn-default mx-2 dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">All CURRENCIES</button>
-                    <ul class="dropdown-menu">
-                        <li><input type="checkbox">EUR</li>
-                        <li><input type="checkbox">GBP</li>
-                        <li><input type="checkbox">USD</li>
-
-                    </ul>
-                    <button type="button" class=" btn btn-default" (click)="exporter.exportTable('csv')"
-                        disabled>EXPORT(.Csv)</button>
-                </div>
-
-
-
-                <div class="col-sm-6">
-
-
-                    <!-- <div class="serch" style="width: 60%; margin-left: 250px;"> -->
-
-                    <input style="border:1px solid grey;" type="text" placeholder="Search.." name="search"
-                        class="searchbar">
-                    <button class="bino" type="submit" style=" border: none; margin-right: 10px;"><i
-                            class="fa fa-search"></i></button>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="serchbtn" style="display: flex; height: 35px;">
-
-            <!-- <button type="button" class="ml-1 btn btn-primary">ALL</button>
-            <button type="button" class="ml-1 btn btn-primary">USD($)</button> -->
-            <!-- <button type="button" class="mr-1 btn btn-primary">EXPORT(.CSV)</button> -->
-
-            <!-- <button type="button" class="m-1 btn btn-primary" (click)="exporter.exportTable('xlsx', {fileName:'test', sheet: 'sheet_name', Props: {Author: 'Talha'}})">Excel</button> -->
-            <!-- <button type="button" class="ml-1 btn btn-primary" (click)="exporter.exportTable('csv')">Csv</button> -->
-            <!-- <button type="button" class="m-1 btn btn-primary" (click)="exporter.exportTable('json')">Json</button> -->
-            <!-- <button type="button" class="m-1 btn btn-primary" (click)="exporter.exportTable('txt')">Txt</button> -->
-
-
-
-
-            <!-- <div class="serch" style="width: 60%; margin-left: 250px;">
-                <div>
-                     <h5>Search Report</h5> 
-                    <input style="width:90%; border:1px solid grey;" type="text" placeholder="Search.."
-                        name="Search Report">
-                    <button type="submit"><i class="fa fa-search"></i></button>
-                </div>
-            </div>
-        </div> -->
-
-
-        </div>
-        <div class="row">
-            <!-- <mat-table matTableExporter [dataSource]="dataSource"  [hiddenColumns]="[0]"> -->
-            <table mat-table [dataSource]="dataSource" matSort matTableExporter #exporter="matTableExporter"
-                class="mat-elevation-z8 demo-table">
-                <!-- Position Column -->
-                <ng-container matColumnDef="contentId">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header >DOI/ISBN/ISSN</th>
-                    <td mat-cell *matCellDef="let element">{{element.contentId }}</td>
-                </ng-container>
-
-                <!-- Name Column -->
-                <ng-container matColumnDef="title">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Item Title</th>
-                    <td mat-cell *matCellDef="let element">{{element.title }}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="resourceType">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Publication Type</th>
-                    <td mat-cell *matCellDef="let element">{{element.resourceType}}</td>
-                </ng-container>
-
-
-                <ng-container matColumnDef="amount">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
-                    <td mat-cell *matCellDef="let element">{{element.amount}}</td>
-                </ng-container>
-
-
-
-                <ng-container matColumnDef="interval">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Access Period</th>
-                    <td mat-cell *matCellDef="let element">{{element.interval}}</td>
-                </ng-container>
-
-
-                <ng-container matColumnDef="qty">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Quality Sold</th>
-                    <td mat-cell *matCellDef="let element">{{element.qty}}</td>
-                </ng-container>
-
-
-
-                <ng-container matColumnDef="revenue">
-
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Revenue </th>
-                    <td mat-cell *matCellDef="let element">{{element.revenue}}</td>
-
-
-                </ng-container>
-
-
-
-
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-
-                <tr mat-row [class.demo-row-is-clicked]="clickedRows.has(row)"
-                    *matRowDef="let row; columns: displayedColumns;">
-                </tr>
-            </table>
-
-
-
-            <mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
-                [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
-            </mat-paginator>
-
-
-
-
-
-        </div>
-
+    <div class="row my-2">
+      <div class="col-md-9"></div>
+      <div class="col-sm-3 my-2">
+        <!-- <button class="btn btn-info btn-sm mx-1" (click)="exporter.exportTable('csv')" style="color: white;">EXPORT(.CSV)</button> -->
+        <h5>
+          Start: {{ dateRange.value.start | date }} End:
+          {{ dateRange.value.end | date }}
+        </h5>
+      </div>
     </div>
+
+    <div class="container">
+      <div class="row g-2">
+        <div class="col-3">
+          <div class="p-3 border">
+            <div class="ground">
+              <h4 class="fw-light">No.of Items sold</h4>
+              <!-- <p
+                #mp
+                style="font-size: 36px; color: #a81732; margin-top: 10px"
+                class="display-6"
+              > -->
+              <!-- 0 -->
+              <!-- </p> -->
+              <p style="font-size: 36px; color: #a81732; margin-top: 10px">
+                {{ response.qty.all }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="p-3 border">
+            <div class="ground">
+              <h4 class="fw-light">Total Revenue-EUR</h4>
+              <p
+                #mp
+                style="font-size: 36px; color: #a81732; margin-top: 10px"
+                class="display-6"
+              >
+                €0
+              </p>
+              <p
+                *ngIf="!mp"
+                style="font-size: 36px; color: #a81732; margin-top: 10px"
+              >
+                {{ response.revenue.USD }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="p-3 border">
+            <div class="ground">
+              <h4 class="fw-light">Total Revenue-GBP</h4>
+              <p
+                #mp
+                style="font-size: 36px; color: #a81732; margin-top: 10px"
+                class="display-6"
+              >
+                £0
+              </p>
+              <p
+                *ngIf="!mp"
+                style="font-size: 36px; color: #a81732; margin-top: 10px"
+              >
+                {{ response.revenue.USD }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="p-3 border">
+            <div class="ground">
+              <h4 class="fw-light">Total Revenue-USD</h4>
+              <p
+                #mp
+                style="font-size: 36px; color: #a81732; margin-top: 10px"
+                class="display-6"
+              >
+                $0
+              </p>
+              <p
+                *ngIf="!mp"
+                style="font-size: 36px; color: #a81732; margin-top: 10px"
+              >
+                {{ response.revenue.USD }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-2 my-2">
+        <div class="col-3">
+          <div class="p-3 border">
+            <div class="ground">
+              <h4 class="fw-light">Total Issues Sold</h4>
+              <p
+                #mp
+                style="font-size: 36px; color: #a81732; margin-top: 10px"
+                class="display-6"
+              >
+                0
+              </p>
+              <p
+                *ngIf="!mp"
+                style="font-size: 36px; color: #a81732; margin-top: 10px"
+              >
+                {{ response.issue.qty }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="p-3 border">
+            <div class="ground">
+              <h4 class="fw-light">Total Article Sold</h4>
+              <p
+                #mp
+                style="font-size: 36px; color: #a81732; margin-top: 10px"
+                class="display-6"
+              >
+                0
+              </p>
+              <p
+                *ngIf="!mp"
+                style="font-size: 36px; color: #a81732; margin-top: 10px"
+              >
+                {{ response.article.qty }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="p-3 border">
+            <div class="ground">
+              <h4 class="fw-light">Most Popular Access Period</h4>
+              <p
+                #mp
+                style="font-size: 36px; color: #a81732; margin-top: 10px"
+                class="display-6"
+              >
+                0
+              </p>
+              <p
+                *ngIf="!mp"
+                style="font-size: 36px; color: #a81732; margin-top: 10px"
+              >
+                {{ response.mpInterval }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      />
+
+      <div class="row p-2">
+        <div
+          class="col-sm-12 p-3"
+          style="background-color: #a81732; height: 10vh; color: white"
+        >
+          <label style="font-weight: 500">Most Popular Content</label>
+        </div>
+      </div>
+      <div class="row p-2">
+        <div class="col-6"></div>
+        <div class="col-6">
+          <div class="text b">
+            <label
+              style="
+                font-weight: 500;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+                  sans-serif;
+              "
+              >Search Report</label
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <!-- <button type="button" class=" btn btn-default">ALL</button> -->
+          <button
+            class="btn btn-default dropdown-toggle"
+            style="width: 90px"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{ selectedType }}
+          </button>
+          <ul class="dropdown-menu">
+            <a
+              class="dropdown-item"
+              href="javascript:void(0)"
+              *ngFor="let items of productTypes"
+              (click)="productSelect(items)"
+              >{{ items.value }}</a
+            >
+            <!-- <li><a class="dropdown-item" href="#">All</a></li>
+                      <li><a class="dropdown-item" href="#">Issue</a></li>
+                      <li><a class="dropdown-item" href="#">Article</a></li> -->
+          </ul>
+          <!-- <button type="button" class=" btn btn-default mx-2">All CURRENCIES</button> -->
+          <button
+            class="btn btn-default mx-2 dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{ selectedCurrency }}
+          </button>
+          <ul class="dropdown-menu">
+            <a
+              (click)="currencySelect(item)"
+              class="dropdown-item"
+              href="javascript:void(0)"
+              *ngFor="let item of currency"
+              ><input
+                type="checkbox"
+                style="border-radius: 0px"
+              />&nbsp;&nbsp;&nbsp;{{ item }}</a
+            >
+            <!-- <li><input type="checkbox">EUR</li>
+                      <li><input type="checkbox">GBP</li>
+                      <li><input type="checkbox">USD</li> -->
+          </ul>
+          <button
+            type="button"
+            class="btn btn-default"
+            (click)="exporter.exportTable('csv')"
+          >
+            EXPORT(.Csv)
+          </button>
+        </div>
+
+        <div class="col-sm-6">
+          <!-- <div class="serch" style="width: 60%; margin-left: 250px;"> -->
+
+          <input
+            style="border: 1px solid grey"
+            type="text"
+            placeholder="Search.."
+            name="search"
+            class="searchbar"
+            (keyup)="applyFilter($event.target)"
+          />
+          <button
+            class="bino"
+            type="submit"
+            style="border: none; margin-right: 10px"
+          >
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row tableData mt-4">
+      <!-- <mat-table matTableExporter [dataSource]="dataSource"  [hiddenColumns]="[0]"> -->
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        matSort
+        matTableExporter
+        #exporter="matTableExporter"
+        class="mat-elevation-z8 demo-table"
+      >
+        <!-- Position Column -->
+        <ng-container matColumnDef="contentId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            DOI/ISBN/ISSN
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.contentId }}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Item Title</th>
+          <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="resourceType">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Publication Type
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.resourceType }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+          <td mat-cell *matCellDef="let element">{{ element.amount }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="interval">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Access Period
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.interval }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="qty">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Quality Sold
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.qty }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="revenue">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Total Revenue
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.revenue }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+        <tr
+          mat-row
+          [class.demo-row-is-clicked]="clickedRows.has(row)"
+          *matRowDef="let row; columns: displayedColumns"
+        ></tr>
+      </table>
+
+      <mat-paginator
+        #paginator
+        [length]="totalRows"
+        [pageIndex]="currentPage"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="pageChanged($event)"
+        aria-label="Select page"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</div>
