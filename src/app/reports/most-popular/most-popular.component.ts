@@ -37,7 +37,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {hwValidator} from '../../services/hwvalidator.service'
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
-import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-most-popular',
@@ -86,9 +85,17 @@ export class MostPopularComponent implements OnInit {
   pageSizeOptions: number[] = [10, 25, 100];
   animal: any;
   name: any;
+  currency:any=[]	
+  selectedCurrency:any= '  All CURRENCIES';	
+  masterdata:any	
+  productTypes:any=[	
+    {key:"",value:'All'},	
+    {key:"issue",value:'Issue'},	
+    {key:"article",value:'Article'},	
+  ];	
+  selectedType:any= 'ALL';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!:MatSort
   constructor(
     public http: HTTPService,
     public base: BaseService,
@@ -106,13 +113,16 @@ export class MostPopularComponent implements OnInit {
       start: "2022-03-04T06:22:48.070Z",
       end: "2022-03-11T06:22:48.070Z"
    });
+   debugger;
     this.selectAllPublishers();
+    var curr= localStorage.getItem('currency')+'';
+    if(curr)
+    this.currency=  JSON.parse(curr);
   }
   
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort
   }
   pageChanged(event: PageEvent) {
     console.log({ event });
@@ -149,7 +159,24 @@ export class MostPopularComponent implements OnInit {
     }}
     this.http.getDatawithPost(URL,DATA).subscribe((data:any)=>{
       this.dataSource.data= data.data;
+      
+      debugger;
       this.response= data;
+      if(!this.response.issue){
+        this.response['issue']={qty: 0};
+            //  response.issue.qty 
+      }
+      if(!this.response.article){
+        this.response['article']={qty: 0};
+            //  response.issue.qty 
+      }
+      if(!this.response.revenue){
+        
+        this.response['revenue']={USD: 0};
+            //  response.issue.qty 
+      }
+      // revenue.USD
+      this.masterdata=this.dataSource.data
       setTimeout(() => {
         this.paginator.pageIndex = this.currentPage;
         this.paginator.length = data.total;
@@ -169,39 +196,52 @@ filterDOI(data:any)
   });
   console.log('filterDOI',data);
   this.extractPrice(data);
+  //  this.masterdata=pricearray;	
 
 }
-extractPrice(data:any){
-  debugger;
-  var self= this;
-  var pricearray:any= [];
-  data.forEach((element:any) => {
-    // console.log(element);
-    if(element.prices && Array.isArray(element.prices)){
-       element.prices.forEach((elements:any) => {      
-        pricearray.push({
-          name: element.name,
-          productType:element.productType,
-          description:element.description,      
-          identifier: element.identifier,
-          price_amount: self.formatAmountDisplay (elements.amount),
-          price_currency:elements.currency,
-          price_interval:elements.interval,
-          price_name:elements.name,
-          price:elements
-        })  
-      });      
-    }    
-  });
 
 
-  this.dataSource.data= pricearray;
-  setTimeout(() => {
-    this.paginator.pageIndex = this.currentPage;
-    this.paginator.length = data.length;
-  },1000);
+extractPrice(data:any, currencies?:any,productType?:any){	
+  	
+  var self= this;	
+  var pricearray:any= [];	
+  // this.masterdata=data;	
+  data.forEach((elements:any) => {	
+    // console.log(element);	
+    // if(element.resourceType=='article'){	
+      // debugger	
+      	
+      //  element.prices.forEach((elements:any) => {      	
+        // if(elements.name== "article-price"){	
+            // return false;	
+        // }	
+        if(productType){	
+          if(elements.resourceType==productType)	
+          pricearray.push(
+            elements
+          )  	
+        }	
+        else if( currencies){	
+          if(elements.currency.toUpperCase()==currencies)	
+          pricearray.push(elements)  	
+        }else{	
+          pricearray.push(elements)  	
+      }	
+        	
+      	
+      // });      	
+    // }    	
+  });	
+   this.dataSource.data= pricearray;	
+  //  this.masterdata=pricearray;	
+   setTimeout(() => {	
+    this.paginator.pageIndex = this.currentPage;	
+    this.paginator.length = data.length;},1000);	
+  }	
 
-}
+
+
+
 
 
   toppingList: string[] = [
@@ -209,10 +249,10 @@ extractPrice(data:any){
     "Mushroom",
    
   ];
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter(filterValue:any) {	
+    this.dataSource.filter = filterValue.value.trim().toLowerCase();	
   }
+  
   someMethod(value: any, element: any) {
     console.log("selected value", value);
     console.log("selected element", element);
@@ -247,8 +287,21 @@ extractPrice(data:any){
     return prices
   }
 
+  currencySelect(currency:any){	
+    debugger	
+    this.selectedCurrency= currency	
+    console.log(currency);	
+    this.extractPrice(this.masterdata, currency=='Currencies' ? '':currency, '');	
+  }	
+  // article button	
+  productSelect(productType:any){	
+    	
+    this.selectedType = productType.value	
+    console.log(productType);	
+    this.extractPrice(this.masterdata,'', productType.key == 'All' ? '': productType.key)
 
 
+  }
 }
 
 

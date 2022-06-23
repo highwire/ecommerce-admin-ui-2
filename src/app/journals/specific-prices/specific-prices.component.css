@@ -71,7 +71,11 @@
    table th{    font-size: 16px;
                
    }
-   
+     thead {
+      
+       border-width: 1px;
+       
+   }
  
    table.mat-table.cdk-table.mat-elevation-z8.demo-table {
      box-shadow: none;
@@ -147,10 +151,10 @@
  /* .offset-md-4 {
    margin-left: 15%!important;
  } */
- /* .input-group {
+ .input-group {
   
    width: 369px!important;
- } */
+ }
  table.mat-table.cdk-table.mat-elevation-z8.demo-table {
    box-shadow: none;
    border: 0.5px solid grey;
@@ -174,7 +178,7 @@
    }
   .btn-info{
     background-color:#4a90e2;
-    padding: 6px 27px;
+    padding: 9px 27px;
     color: #fff;
   }
  
