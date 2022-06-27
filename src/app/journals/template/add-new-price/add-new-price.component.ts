@@ -8,7 +8,6 @@ import {MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-
 @Component({
   selector: 'app-add-new-price',
   templateUrl: './add-new-price.component.html',
@@ -19,14 +18,9 @@ export class AddNewPriceComponent implements OnInit {
   currency:any=[];
   sitedata:any;
   pricedata:any= [];
-  currValue:any 
-
-  notForSaleLabel= 'Not for Sale';
-    
   fromModel = new FormGroup({
     doi : new FormControl(''),
-    selected_site : new FormControl(''),
-    
+    selected_site : new FormControl('')
   });
 
   priceobj= new FormGroup({
@@ -36,7 +30,6 @@ export class AddNewPriceComponent implements OnInit {
     forsale:  new FormControl(''),
     currency: new FormControl(''),
     name:new FormControl('')
-
   });
 
  
@@ -71,7 +64,6 @@ export class AddNewPriceComponent implements OnInit {
 
    
   }
-
   
   filterPrice(){
     

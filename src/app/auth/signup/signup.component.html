@@ -1,69 +1,72 @@
 <div class="mid-wrapper">
-    <div class="bg-primary fs-4 p-3 text-center text-white fw-light">Enter your login credentials below. 1
-    </div>
-    <div class="login-box">
-
-
-        <div class="container my-5">
-
-            <div class="row justify-content-end">
-                <div class="col-lg-6 col-md-7 col-sm-10 col-xl-5 ">
-
-                    <form class="border  p-4" novalidate  [formGroup]="registerForm"   >
-                        <!-- (ngSubmit)="login()" -->
-                        <div class="mb-3 row">
-                            <label for="exampleInputEmail1" class="col-sm-3 col-form-label text-md-end">User Name</label>
-                            <div class="col-sm-9">
-                                <input class="form-control"
-                                id="inputEmail1"
-                                name="username"
-                                formControlName="user"   
-                                 
-                                required autofocus
-                             />
-                            
-                            
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="exampleInputPassword1" class="col-sm-3 col-form-label text-md-end">Password</label>
-                            <div class="col-sm-9">
-                                <input class="form-control"
-                         id="inputPassword1"
-                         type="password"
-                         name="password"
-                             
-                         formControlName="password"   
-                         required
-                      />
-                         
-                      
-                            </div>
-                        </div>
-                        <div class="mb-3 form-check d-flex justify-content-end">
-                            <div class="col-sm-9  ">
-                                <input type="checkbox"
-                                id="persistLogin"
-                                name="persistLogin"
-                                formControlName="persistLogin"          
-                                 />
-                                 
-                      
-                         <label for="persistLogin">Keep me logged in</label>
-                            </div>
-                        </div>
-                        <!-- <button class="btn btn-danger rounded-0 w-100 btn-block" type="submit" >LOG-IN </button> -->
-                        <!-- [disabled]="!registerForm.valid" -->
-                        <a (click)="onSubmit()"
-                        class="btn btn-danger rounded-0 w-100 btn-block">LOG-IN l</a>
-                    </form>
-                </div>
+  <div class="bg-primary fs-4 p-3 text-center text-white fw-light">
+    Enter your login credentials below.
+  </div>
+  <div class="login-box">
+    <div class="container my-5">
+      <div class="row justify-content-end">
+        <div class="col-lg-6 col-md-7 col-sm-10 col-xl-5">
+          <form class="border p-4" novalidate [formGroup]="registerForm">
+            <!-- (ngSubmit)="login()" -->
+            <div class="mb-3 row">
+              <label
+                for="exampleInputEmail1"
+                class="col-sm-3 col-form-label text-md-end"
+                >User Name</label
+              >
+              <div class="col-sm-9">
+                <input
+                  class="form-control"
+                  id="inputEmail1"
+                  name="username"
+                  formControlName="user"
+                  required
+                  autofocus
+                />
+              </div>
             </div>
+            <div class="mb-3 row">
+              <label
+                for="exampleInputPassword1"
+                class="col-sm-3 col-form-label text-md-end"
+                >Password</label
+              >
+              <div class="col-sm-9">
+                <input
+                  class="form-control"
+                  id="inputPassword1"
+                  type="password"
+                  name="password"
+                  formControlName="password"
+                  required
+                />
+              </div>
+            </div>
+            <div class="mb-3 form-check d-flex justify-content-end">
+              <div class="col-sm-9">
+                <input
+                  type="checkbox"
+                  id="persistLogin"
+                  name="persistLogin"
+                  formControlName="persistLogin"
+                />
+
+                <label for="persistLogin">Keep me logged in</label>
+              </div>
+            </div>
+            <!-- <button class="btn btn-danger rounded-0 w-100 btn-block" type="submit" >LOG-IN </button> -->
+            <!-- [disabled]="!registerForm.valid" -->
+            <a
+              (click)="onSubmit()"
+              class="btn btn-danger rounded-0 w-100 btn-block"
+              >LOG-IN
+            </a>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </div>
-
-
 
 <!-- 
 <div class="taxonomy container-fluid">

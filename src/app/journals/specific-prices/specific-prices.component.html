@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <!-- <div class="dropdown">
           <button type="button" class="dropbtn">{{selectedCurrency}}<i class="fa fa-sort-down"
               style="font-size:12px; vertical-align: 3px;"></i></button>
@@ -34,7 +34,7 @@
 
         <!-- articlebutton -->
         <button
-          class="btn btn-info dropdown-toggle"
+          class="btn btn-danger dropdown-toggle"
           type="button"
           id="dropdownMenuButton1"
           data-bs-toggle="dropdown"
@@ -79,7 +79,7 @@
                 href="javascript:void(0)"
                 *ngFor="let item of currency"
                 (click)="currencySelect(item)"
-                ><input type="checkbox" (click)="currencySelect(item)" style="border-radius: 0px;">&nbsp;&nbsp;&nbsp;{{ item }}</a
+                ><input type="checkbox" />{{ item }}</a
               >
             </li>
           </ul>
@@ -95,7 +95,7 @@
         </button>
       </div>
       <!-- searchbar -->
-      <div class="col-md-6">
+      <div class="col-md-4 offset-md-4 my-2">
         <!-- <label class="visible-xs visible-sm" for="searchBox">Search Report</label> -->
         <div class="input-group input-integrated-button">
           <input

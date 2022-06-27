@@ -75,11 +75,10 @@
          </div>
          <div class="mb-3 row">
             <label for="inputtext" class="col-sm-5 col-form-label">Currency</label>
-            <div class="col-sm-6" >
-               <div class="input-group mb-3 hour" style="width: 30%; color: white;" >
-                  <select class="form-select" formControlName="currency"  placeholder="CURRENCY" [(ngModel)]="currValue">
-                     
-                     <option *ngFor= "let item  of currency" value="{{item}}">{{item}}</option>
+            <div class="col-sm-6">
+               <div class="input-group mb-3 hour" style="width: 30%; color: white;">
+                  <select class="form-select" formControlName="currency"  aria-label="Disabled select example">
+                     <option *ngFor= "let item  of currency" value="{{item}}" >{{item}}</option>
                   </select>
                </div>
             </div>
@@ -87,8 +86,8 @@
          <div class="mb-3 row">
             <label for="inputtext" class="col-sm-5 col-form-label">Article Price</label>
             <div class="col-sm-6">
-               <div class="input-group mb-3" >
-                  <span class="input-group-text" id="#">{{currValue| filterPipe}}</span>
+               <div class="input-group mb-3">
+                  <span class="input-group-text" id="#">€</span>
                   <input type="text" class="form-control" formControlName="price"  placeholder="price" aria-label="price"
                      aria-describedby="#">
                </div>
@@ -108,11 +107,10 @@
          <div class="mb-3 row">
             <label for="inputtext" class="col-sm-5 col-form-label">For Sale</label>
             <div class="col-sm-6">
-               <!-- <label class="switch">
+               <label class="switch">
                <input type="checkbox" formControlName="forsale"  checked>
                <span class="slider round"></span>
-               </label> -->
-               <mat-slide-toggle  formControlName="forsale" ></mat-slide-toggle>
+               </label>
             </div>
          </div>
       </form>
