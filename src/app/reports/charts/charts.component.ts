@@ -5,6 +5,7 @@ import { HTTPService } from '../../services/http.service';
 import { BaseService } from 'src/app/services/base.service';
 import { CurrencyPipe } from '@angular/common';
 import * as moment from 'moment';
+import { __values } from 'tslib';
 // declare var moment: any;
 // import moment from 'moment';
 
@@ -22,7 +23,7 @@ export class ChartsComponent implements OnInit {
   myControl = new FormControl();
   showdrop: any = false;
   masterData: any;
-  currency = []
+  currency:any[] = []
   pricearray: any;
   displayedColumns: string[] = ['name', 'description', 'options', 'productType', 'price_interval', 'price_amount','date'];
   freeLabel = 'Free';
@@ -30,7 +31,9 @@ export class ChartsComponent implements OnInit {
   clickedRows = new Set<any>();
   products: any;
   isLoading = false;
-  sitedata: any;  
+  sitedata: any; 
+  selectedCurrency:any= '  All Currencies';	
+  masterdata:any 
   myChart: any;
   dateRange = new FormGroup({
     start: new FormControl(),
@@ -51,6 +54,9 @@ export class ChartsComponent implements OnInit {
 
     this.selectAllPublishers();
     this.selectAllListPublishers();
+    var curr= localStorage.getItem('currency')+'';
+    if(curr)
+    this.currency=  JSON.parse(curr);
 
     
     // let myChart=null
@@ -86,6 +92,13 @@ export class ChartsComponent implements OnInit {
   onSelectAll(items: any) {
     console.log(items);
   }
+
+  currencySelect(currency:any){	
+    debugger	
+    this.selectedCurrency= currency	
+    console.log(currency);	
+    this.extractPrice(this.masterdata, currency=='Currencies' ? '':currency, '');	
+  }	
 
   selectAllListPublishers(){
     let publisher = localStorage.getItem('publisher')  ;
@@ -151,7 +164,7 @@ dropDownChange(value:any){
 
 }
 
-extractPrice(data:any, pub:any){
+extractPrice(data:any, pub:any, currencies?:any){
   
   var self= this;
   var pricearray:any= [];
@@ -172,19 +185,25 @@ extractPrice(data:any, pub:any){
           // price_name:elements.name
         })  
       });      
-    }    
-  });
+    }
+    else if( currencies){	
+      if(element.currency.toUpperCase()==currencies)	
+      pricearray.push(element)  	
+    }else{	
+      pricearray.push(element)  	
+  }	
+
 
 
   this.pricearray=  pricearray;
   console.log('this.pricearray',this.pricearray);
 
 
-} 
+})}
 
 
   getChartData() {
-    
+    debugger
     let publisher = localStorage.getItem('publisher');
     let URL = this.base.CHART_REPORT + publisher;
     var data = {

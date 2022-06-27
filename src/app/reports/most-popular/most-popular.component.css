@@ -101,5 +101,22 @@ width: 93%!important;
         font-size: 30px!important;
     
     }
-    
+    .btn-danger, .btn-light{
+        padding:3px 8px;
+        border-radius: 0px ;
+        /* margin-bottom: 17px;
+        text-align: center; */
+    }
+
+    .btn-dark {
+        color: #fff;
+        background-color: #949ba1;
+        border-color: #949ba1 !important;
+        border-radius: 0px!important;
+        padding: 3px 12px !important;
+        margin-left: 2px;
+    }
+    .aceButton{
+        padding: 4px!important;
+    }
     
