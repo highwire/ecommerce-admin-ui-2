@@ -9,56 +9,68 @@
 
         <div class="col-sm-3">
           <label style="font-weight: 400">Set Date Range</label>
-          <mat-form-field appearance="legacy">
-            <mat-label
-              style="color: white; position: relative; margin-left: 10px"
-              >Set Date Range
+          <!-- <mat-form-field appearance="legacy">
+            <mat-label style="color: white; position: relative; margin-left: 10px">Set Date Range
             </mat-label>
 
-            <mat-date-range-input
-              [rangePicker]="picker"
-              [formGroup]="dateRange"
-              style="background-color: #a81732; color: white"
-            >
-              <input
-                matStartDate
-                formControlName="start"
-                placeholder="Start Date"
-                style="color: white"
-              />
-              <input
-                matEndDate
-                formControlName="end"
-                placeholder="End Date"
-                style="color: white"
-              />
+            <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange"
+              style="background-color: #a81732; color: white">
+              <input matStartDate formControlName="start" placeholder="Start Date" style="color: white" />
+              <input matEndDate formControlName="end" placeholder="End Date" style="color: white" />
             </mat-date-range-input>
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
+            <mat-datepicker-toggle matSuffix [for]="picker">
 
-            <button
-              class="btn btn-danger btn-sm my-2"
-              (click)="selectAllPublishers()"
-            >
+
+            </mat-datepicker-toggle>
+
+
+            <mat-date-range-picker #picker></mat-date-range-picker>
+            <h5>
+              Start: {{ dateRange.value.start | date }} End:
+              {{ dateRange.value.end | date }}
+            </h5>
+
+            <button class="btn btn-danger btn-sm my-2" (click)="selectAllPublishers()">
               Run Report
             </button>
+
+          </mat-form-field> -->
+          <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [formGroup]="dateRange" [rangePicker]="picker">
+              <input matStartDate formControlName="start" placeholder="Start date">
+              <input matEndDate formControlName="end" placeholder="End date" (keyup)="selectAllPublishers()">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
-          </mat-form-field>
+          
+            <mat-error *ngIf="dateRange.controls['start'].hasError('matStartDateInvalid')">Invalid start date</mat-error>
+            <mat-error *ngIf="dateRange.controls['end'].hasError('matEndDateInvalid')">Invalid end date</mat-error>
+          </mat-form-field><h5>
+          Start: {{ dateRange.value.start | date }}
+           End: {{ dateRange.value.end | date }}
+           <button class="btn btn-danger btn-sm" (click)="selectAllPublishers()">
+            Run Report
+          </button>
+          <button class="btn btn-dark btn-sm " value="reset">
+            Reset</button>
+        </h5> 
+      
+          
+
         </div>
       </div>
     </div>
-    <div class="row my-2">
+    <!-- <div class="row my-2">
       <div class="col-md-9"></div>
       <div class="col-sm-3 my-2">
         <!-- <button class="btn btn-info btn-sm mx-1" (click)="exporter.exportTable('csv')" style="color: white;">EXPORT(.CSV)</button> -->
-        <h5>
+    <!--<h5>
           Start: {{ dateRange.value.start | date }} End:
           {{ dateRange.value.end | date }}
         </h5>
       </div>
-    </div>
+    </div> -->
 
     <div class="container">
       <div class="row g-2">
@@ -73,7 +85,7 @@
               > -->
               <!-- 0 -->
               <!-- </p> -->
-              <p style="font-size: 36px; color: #a81732; margin-top: 10px">
+              <p style="font-size: 36px; color: #a81732; margin-top: 10px"  class="display-6">
                 {{ response.qty.all }}
               </p>
             </div>
@@ -83,17 +95,10 @@
           <div class="p-3 border">
             <div class="ground">
               <h4 class="fw-light">Total Revenue-EUR</h4>
-              <p
-                #mp
-                style="font-size: 36px; color: #a81732; margin-top: 10px"
-                class="display-6"
-              >
+              <p #mp style="font-size: 36px; color: #a81732; margin-top: 10px" class="display-6">
                 €0
               </p>
-              <p
-                *ngIf="!mp"
-                style="font-size: 36px; color: #a81732; margin-top: 10px"
-              >
+              <p *ngIf="!mp" style="font-size: 36px; color: #a81732; margin-top: 10px"  class="display-6">
                 {{ response.revenue.USD }}
               </p>
             </div>
@@ -103,17 +108,10 @@
           <div class="p-3 border">
             <div class="ground">
               <h4 class="fw-light">Total Revenue-GBP</h4>
-              <p
-                #mp
-                style="font-size: 36px; color: #a81732; margin-top: 10px"
-                class="display-6"
-              >
+              <p #mp style="font-size: 36px; color: #a81732; margin-top: 10px" class="display-6">
                 £0
               </p>
-              <p
-                *ngIf="!mp"
-                style="font-size: 36px; color: #a81732; margin-top: 10px"
-              >
+              <p *ngIf="!mp" style="font-size: 36px; color: #a81732; margin-top: 10px"  class="display-6">
                 {{ response.revenue.USD }}
               </p>
             </div>
@@ -123,17 +121,10 @@
           <div class="p-3 border">
             <div class="ground">
               <h4 class="fw-light">Total Revenue-USD</h4>
-              <p
-                #mp
-                style="font-size: 36px; color: #a81732; margin-top: 10px"
-                class="display-6"
-              >
+              <p #mp style="font-size: 36px; color: #a81732; margin-top: 10px" class="display-6">
                 $0
               </p>
-              <p
-                *ngIf="!mp"
-                style="font-size: 36px; color: #a81732; margin-top: 10px"
-              >
+              <p *ngIf="!mp" style="font-size: 36px; color: #a81732; margin-top: 10px"  class="display-6">
                 {{ response.revenue.USD }}
               </p>
             </div>
@@ -146,17 +137,10 @@
           <div class="p-3 border">
             <div class="ground">
               <h4 class="fw-light">Total Issues Sold</h4>
-              <p
-                #mp
-                style="font-size: 36px; color: #a81732; margin-top: 10px"
-                class="display-6"
-              >
+              <p #mp style="font-size: 36px; color: #a81732; margin-top: 10px" class="display-6">
                 0
               </p>
-              <p
-                *ngIf="!mp"
-                style="font-size: 36px; color: #a81732; margin-top: 10px"
-              >
+              <p *ngIf="!mp" style="font-size: 36px; color: #a81732; margin-top: 10px"  class="display-6">
                 {{ response.issue.qty }}
               </p>
             </div>
@@ -166,17 +150,10 @@
           <div class="p-3 border">
             <div class="ground">
               <h4 class="fw-light">Total Article Sold</h4>
-              <p
-                #mp
-                style="font-size: 36px; color: #a81732; margin-top: 10px"
-                class="display-6"
-              >
+              <p #mp style="font-size: 36px; color: #a81732; margin-top: 10px" class="display-6">
                 0
               </p>
-              <p
-                *ngIf="!mp"
-                style="font-size: 36px; color: #a81732; margin-top: 10px"
-              >
+              <p *ngIf="!mp" style="font-size: 36px; color: #a81732; margin-top: 10px"  class="display-6">
                 {{ response.article.qty }}
               </p>
             </div>
@@ -187,17 +164,10 @@
           <div class="p-3 border">
             <div class="ground">
               <h4 class="fw-light">Most Popular Access Period</h4>
-              <p
-                #mp
-                style="font-size: 36px; color: #a81732; margin-top: 10px"
-                class="display-6"
-              >
+              <p #mp style="font-size: 36px; color: #a81732; margin-top: 10px" class="display-6">
                 0
               </p>
-              <p
-                *ngIf="!mp"
-                style="font-size: 36px; color: #a81732; margin-top: 10px"
-              >
+              <p *ngIf="!mp" style="font-size: 36px; color: #a81732; margin-top: 10px"  class="display-6">
                 {{ response.mpInterval }}
               </p>
             </div>
@@ -207,16 +177,11 @@
     </div>
 
     <div>
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-      />
+      <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
       <div class="row p-2">
-        <div
-          class="col-sm-12 p-3"
-          style="background-color: #a81732; height: 10vh; color: white"
-        >
+        <div class="col-sm-12 p-3" style="background-color: #a81732; height: 10vh; color: white">
           <label style="font-weight: 500">Most Popular Content</label>
         </div>
       </div>
@@ -224,14 +189,11 @@
         <div class="col-6"></div>
         <div class="col-6">
           <div class="text b">
-            <label
-              style="
+            <label style="
                 font-weight: 500;
                 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
                   sans-serif;
-              "
-              >Search Report</label
-            >
+              ">Search Report</label>
           </div>
         </div>
       </div>
@@ -239,56 +201,31 @@
       <div class="row">
         <div class="col-sm-6">
           <!-- <button type="button" class=" btn btn-default">ALL</button> -->
-          <button
-            class="btn btn-default dropdown-toggle"
-            style="width: 90px"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
+          <button class="btn btn-default dropdown-toggle aceButton" style="width: 90px" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
             {{ selectedType }}
           </button>
           <ul class="dropdown-menu">
-            <a
-              class="dropdown-item"
-              href="javascript:void(0)"
-              *ngFor="let items of productTypes"
-              (click)="productSelect(items)"
-              >{{ items.value }}</a
-            >
+            <a class="dropdown-item" href="javascript:void(0)" *ngFor="let items of productTypes"
+              (click)="productSelect(items)">{{ items.value }}</a>
             <!-- <li><a class="dropdown-item" href="#">All</a></li>
                       <li><a class="dropdown-item" href="#">Issue</a></li>
                       <li><a class="dropdown-item" href="#">Article</a></li> -->
           </ul>
           <!-- <button type="button" class=" btn btn-default mx-2">All CURRENCIES</button> -->
-          <button
-            class="btn btn-default mx-2 dropdown-toggle"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
+          <button class="btn btn-default mx-2 dropdown-toggle aceButton" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
             {{ selectedCurrency }}
           </button>
           <ul class="dropdown-menu">
-            <a
-              (click)="currencySelect(item)"
-              class="dropdown-item"
-              href="javascript:void(0)"
-              *ngFor="let item of currency"
-              ><input
-                type="checkbox"
-                style="border-radius: 0px"
-              />&nbsp;&nbsp;&nbsp;{{ item }}</a
-            >
+            <a (click)="currencySelect(item)" class="dropdown-item" href="javascript:void(0)"
+              *ngFor="let item of currency"><input type="checkbox" style="border-radius: 0px" />&nbsp;&nbsp;&nbsp;{{
+              item }}</a>
             <!-- <li><input type="checkbox">EUR</li>
                       <li><input type="checkbox">GBP</li>
                       <li><input type="checkbox">USD</li> -->
           </ul>
-          <button
-            type="button"
-            class="btn btn-default"
-            (click)="exporter.exportTable('csv')"
-          >
+          <button type="button" class="btn btn-default aceButton" (click)="exporter.exportTable('csv')">
             EXPORT(.Csv)
           </button>
         </div>
@@ -296,19 +233,9 @@
         <div class="col-sm-6">
           <!-- <div class="serch" style="width: 60%; margin-left: 250px;"> -->
 
-          <input
-            style="border: 1px solid grey"
-            type="text"
-            placeholder="Search.."
-            name="search"
-            class="searchbar"
-            (keyup)="applyFilter($event.target)"
-          />
-          <button
-            class="bino"
-            type="submit"
-            style="border: none; margin-right: 10px"
-          >
+          <input style="border: 1px solid grey" type="text" placeholder="Search.." name="search" class="searchbar"
+            (keyup)="applyFilter($event.target)" />
+          <button class="bino" type="submit" style="border: none; margin-right: 10px">
             <i class="fa fa-search"></i>
           </button>
         </div>
@@ -317,14 +244,8 @@
 
     <div class="row tableData mt-4">
       <!-- <mat-table matTableExporter [dataSource]="dataSource"  [hiddenColumns]="[0]"> -->
-      <table
-        mat-table
-        [dataSource]="dataSource"
-        matSort
-        matTableExporter
-        #exporter="matTableExporter"
-        class="mat-elevation-z8 demo-table"
-      >
+      <table mat-table [dataSource]="dataSource" matSort matTableExporter #exporter="matTableExporter"
+        class="mat-elevation-z8 demo-table">
         <!-- Position Column -->
         <ng-container matColumnDef="contentId">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -374,22 +295,12 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 
-        <tr
-          mat-row
-          [class.demo-row-is-clicked]="clickedRows.has(row)"
-          *matRowDef="let row; columns: displayedColumns"
-        ></tr>
+        <tr mat-row [class.demo-row-is-clicked]="clickedRows.has(row)" *matRowDef="let row; columns: displayedColumns">
+        </tr>
       </table>
 
-      <mat-paginator
-        #paginator
-        [length]="totalRows"
-        [pageIndex]="currentPage"
-        [pageSize]="pageSize"
-        [pageSizeOptions]="pageSizeOptions"
-        (page)="pageChanged($event)"
-        aria-label="Select page"
-      >
+      <mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
       </mat-paginator>
     </div>
   </div>
