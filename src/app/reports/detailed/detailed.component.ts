@@ -10,6 +10,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import {hwValidator} from '../../services/hwvalidator.service'
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { ReceiptComponent } from '../receipt/receipt.component';
+import {MatSort} from '@angular/material/sort';
 @Component({
   selector: 'app-detailed',
   templateUrl: './detailed.component.html',
@@ -42,10 +43,13 @@ export class DetailedComponent implements OnInit {
   animal: any;
   name: any;
   exporter:any;
+  disable:boolean=true
+  
   
 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!:MatSort
   constructor(
     public http: HTTPService,
     public base: BaseService,
@@ -68,6 +72,7 @@ export class DetailedComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort
   }
   pageChanged(event: PageEvent) {
     console.log({ event });
@@ -211,11 +216,14 @@ extractPrice(data:any){
       this.animal = result;
     });
   }
+  resetDate(){
+    this.dateRange.reset();
+  }
+
+ 
 
 }
 
 
 
 
-
-// amount:
