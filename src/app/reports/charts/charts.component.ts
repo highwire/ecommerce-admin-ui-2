@@ -6,8 +6,7 @@ import { BaseService } from 'src/app/services/base.service';
 import { CurrencyPipe } from '@angular/common';
 import * as moment from 'moment';
 import { __values } from 'tslib';
-// declare var moment: any;
-// import moment from 'moment';
+
 
 @Component({
   selector: 'app-charts',
@@ -94,7 +93,7 @@ export class ChartsComponent implements OnInit {
   }
 
   currencySelect(currency:any){	
-    debugger	
+    	
     this.selectedCurrency= currency	
     console.log(currency);	
     this.extractPrice(this.masterdata, currency=='Currencies' ? '':currency, '');	
@@ -203,7 +202,7 @@ extractPrice(data:any, pub:any, currencies?:any){
 
 
   getChartData() {
-    debugger
+    
     let publisher = localStorage.getItem('publisher');
     let URL = this.base.CHART_REPORT + publisher;
     var data = {
@@ -226,19 +225,29 @@ extractPrice(data:any, pub:any, currencies?:any){
 
 
     // }
-    this.http.getDatawithPost(URL, data).subscribe((data: any) => {
-      
-      console.log('chart data', data.result);
-      
-     
-      this.genratechartdata(data.result,data.range);
-      // var reports = this.extractChartsReport(data);
-      // console.log('    data            ', reports);
+    this.http.getDatawithPost(URL, data).subscribe((data: any) => {      
+      console.log('chart data', data.result);      
+      this.genratechartdata(data.result,data.range);      
     })
   }
 
   genratechartdata(data1: any,daterange:any) {
-    var Currency = 'USD';
+    // var Currency = 'USD';
+    var defaultcurrency:any=  localStorage.getItem('defaultcurrency') ;
+    if(defaultcurrency){
+      defaultcurrency= JSON.parse(defaultcurrency) ;
+      defaultcurrency= defaultcurrency.currency
+    }
+    // var curr= localStorage.getItem('currency')+'';
+    // if(curr)
+    // this.currency=  JSON.parse(curr);
+    var Currency:any=  localStorage.getItem('currency') ;
+    if(Currency){
+      Currency= JSON.parse(Currency) ;
+      console.log('Currency',Currency);
+      // Currency= Currency.currency
+    }
+    // debugger;
     var amountsArray:any=[];
     let siteData:any=  localStorage.getItem('siteData') 
     if(siteData){
@@ -248,7 +257,7 @@ extractPrice(data:any, pub:any, currencies?:any){
           var obj:any={};
           obj['amount']=[];
           obj['date']=[]
-            data1[element.corpus][Currency].values.forEach((element:any) => {          
+            data1[element.corpus][defaultcurrency].values.forEach((element:any) => {          
               obj['amount'].push(element.amount) ,
               obj['date'].push(moment(element.date).format('D MMM YYYY') )               
             });            
@@ -257,36 +266,26 @@ extractPrice(data:any, pub:any, currencies?:any){
           }      
       });     
       console.log('amountsArray',amountsArray);
-    }
-    let data =data1. $all[Currency].values  
-    var amounts: any = [];
-    var dates: any = [];
-    data.forEach((element: any) => {
-      amounts.push(element.amount);
-      dates.push( moment(element.date).format('D MMM YYYY') );          
-    });
-
+    }   
     let datesrages:any= [];
     daterange.forEach((element:any) => {
       console.log(element.date);
       datesrages.push(moment(element.date).format('D MMM YYYY') ) 
     });
-    this.loadChart(amounts, dates,amountsArray,datesrages);
-    console.log(amounts);
+    this.loadChart(amountsArray,datesrages);
+    // console.log(amounts);
   }
   random(number:any){
     return Math.floor(Math.random()*number);;
 }
 
 random_rgba(){
-  // random_rgba() {
-    // var o = Math.round, r = Math.random, s = 255;
-    // return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+  
     return 'rgb('+this.random(255)+','+this.random(255)+','+this.random(255)+')';    
 
 }
  
-loadChart(amounts: any, dates: any, amountsArray:any,datesrages:any): void {   
+loadChart( amountsArray:any,datesrages:any): void {   
     if (this.chartinstan != undefined) {
       this.chartinstan.destroy();
     }
@@ -333,238 +332,6 @@ loadChart(amounts: any, dates: any, amountsArray:any,datesrages:any): void {
     })    
   }
 
-  // extractChartsReport(report: any) {
-  //   // debugger
-  //   var self = this;
-  //   var
-  //     corpusIdx: any = {},
-  //     max = 0,
-  //     genericRange,
-  //     isbnRe = /(?=[-0-9 ]{17}|[-0-9X ]{13}|[0-9X]{10})(?:97[89][- ]?)?[0-9]{1,5}[- ]?(?:[0-9]+[- ]?){2}[0-9X]/g;
-
-  //   // if (!report || !report.data || !Array.isArray(report.data.transactions)) {
-  //   //   return '';
-  //   // }
-    
-
-  //   report.result = {
-  //     salesPerf: []
-  //   };
-    
-
-  //   // generic copy of bucket range for UI to use if necessary
-  //   // to fill in zero-data for  currency/jcode combinations
-  //   // not represented in the data
-  //   genericRange = this.getRange(report);
-  //   report.range = genericRange.buckets.map(function cpBucket(bckt: any) {
-  //     return {
-  //       date: bckt.date,
-  //       amount: bckt.amount
-  //     }
-  //   });
-  //   report.data.transactions.forEach(function processTransactn(elem: any) {
-  //     var isbn;
-  //     if (typeof corpusIdx[elem.journalCode] === 'undefined') {
-  //       corpusIdx[elem.journalCode] = {};
-  //     }
-  //     if (typeof corpusIdx.$all === 'undefined') {
-  //       corpusIdx.$all = {};
-  //     }
-  //     if (typeof corpusIdx[elem.journalCode][elem.currency] === 'undefined') {
-  //       corpusIdx[elem.journalCode][elem.currency] = {
-  //         currency: elem.currency,
-  //         corpus: elem.journalCode,
-  //         max: 0
-  //       };
-  //       corpusIdx[elem.journalCode][elem.currency].range = self.getRange(report);
-  //     }
-  //     if (typeof corpusIdx.$all[elem.currency] === 'undefined') {
-  //       corpusIdx.$all[elem.currency] = {
-  //         currency: elem.currency,
-  //         max: 0
-  //       };
-  //       corpusIdx.$all[elem.currency].range = self.getRange(report);
-  //     }
-  //     if (typeof corpusIdx.$all[elem.currency]['$type-' + elem.resourceType] ===
-  //       'undefined') {
-  //       corpusIdx.$all[elem.currency]['$type-' + elem.resourceType] = {
-  //         currency: elem.currency,
-  //         max: 0
-  //       };
-  //       corpusIdx.$all[elem.currency]['$type-' + elem.resourceType].range =
-  //         self.getRange(report);
-  //     }
-  //     corpusIdx[elem.journalCode][elem.currency].range.assign(elem);
-  //     corpusIdx.$all[elem.currency].range.assign(elem);
-  //     corpusIdx.$all[elem.currency]['$type-' + elem.resourceType].range.assign(elem);
-  //     if (Array.isArray(report.bookSites) &&
-  //       report.bookSites.indexOf(elem.journalCode) !== -1) {
-  //       isbn = elem.resourceId.match(isbnRe);
-  //       isbn = isbn ? isbn[0] : null;
-  //       if (isbn) {
-  //         if (typeof corpusIdx[isbn] === 'undefined') {
-  //           corpusIdx[isbn] = {};
-  //         }
-  //         if (typeof corpusIdx[isbn][elem.currency] === 'undefined') {
-  //           corpusIdx[isbn][elem.currency] = {
-  //             currency: elem.currency,
-  //             corpus: elem.journalCode,
-  //             isbn: isbn
-  //           }
-  //           corpusIdx[isbn][elem.currency].range = self.getRange(report);
-  //         }
-  //         corpusIdx[isbn][elem.currency].range.assign(elem);
-  //       }
-  //     }
-  //     if (isFinite(elem.amount)) {
-  //       if (elem.amount > max) {
-  //         max = elem.amount;
-  //       }
-  //     }
-  //   });
-  //   Object.keys(corpusIdx).forEach(function cps(corpus) {
-  //     Object.keys(corpusIdx[corpus]).forEach(function mc(currency) {
-  //       if (corpus === '$all') {
-  //         Object.keys(corpusIdx.$all[currency]).forEach(function dpt(prop) {
-  //           if (prop.indexOf('$type-') !== -1) {
-  //             corpusIdx[corpus][currency][prop].values =
-  //               corpusIdx[corpus][currency][prop].range.buckets;
-  //             corpusIdx[corpus][currency][prop].max =
-  //               corpusIdx[corpus][currency][prop].range.max;
-  //             delete corpusIdx[corpus][currency][prop].range;
-  //           }
-  //         })
-  //       }
-  //       corpusIdx[corpus][currency].values = corpusIdx[corpus][currency].range.buckets;
-  //       corpusIdx[corpus][currency].max = corpusIdx[corpus][currency].range.max;
-  //       delete corpusIdx[corpus][currency].range;
-  //     });
-  //   });
-  //   report.result = corpusIdx;
-  //   report.max = max;
-  //   return report;
-  // };
-
-
-  refreshCharts(date:any,amount:any,keys: any, curr: any, labels: any, types: any, ecomReports: any, currencies: any) {
-
-    if (!Array.isArray(keys)) {
-      return;
-    }
-    if (!Array.isArray(curr)) {
-      curr = [currencies.default];
-    }
-    if (!Array.isArray(types)) {
-      types = [];
-    }
-    if (!labels) {
-      labels = {};
-      
-    }
-    if (!date) {
-      date = {};
-      
-    }
-    if (!amount) {
-      amount = {};
-      
-    }
-
-    Object.keys(ecomReports.charts.result).forEach(function cps(key) {
-      Object.keys(ecomReports.charts.result[key]).forEach(function mc(currency) {
-        var max, currentMax, typeResult: any;
-        if (curr.indexOf(currency) === -1) {
-          return;
-        }
-        if (keys.indexOf(key) === -1) {
-          return;
-        }
-        if (!ecomReports.charts.salesPerf[currency]) {
-          ecomReports.charts.salesPerf[currency] = {
-            data: [],
-            max: 0
-          };
-        }
-        if (types.length > 0) {
-          typeResult = {
-            key: labels[key],
-            values: ecomReports.charts.range.map(function mapZero(elem: any) {
-              return {
-                amount: 0,
-                date: elem.date,
-                key: labels[key]
-              };
-            }),
-            max: 0
-          };
-
-          types.forEach(function checkType(elem: any) {
-            if (typeof (
-              ecomReports.charts.result[key][currency]['$type-' + elem] == "object") &&
-              Array.isArray(ecomReports.charts.result[key][currency]['$type-' + elem].values)) {
-              for (var i = 0; i < ecomReports.charts.result[key][currency]['$type-' + elem].values.length; i++) {
-                if (typeResult.values[i]) {
-                  typeResult.values[i].amount +=
-                    ecomReports.charts.result[key][currency]['$type-' + elem].values[i].amount;
-                }
-              }
-              if (typeResult.max <
-                ecomReports.charts.result[key][currency]['$type-' + elem].max) {
-                typeResult.max = ecomReports.charts.result[key][currency]['$type-' + elem].max;
-              }
-            }
-          });
-          ecomReports.charts.salesPerf[currency].data.push(typeResult);
-          max = typeResult.max;
-          currentMax = ecomReports.charts.salesPerf[currency].max;
-          if (isFinite(max) && max > currentMax) {
-            ecomReports.charts.salesPerf[currency].max = max;
-          }
-        }
-        else {
-          ecomReports.charts.salesPerf[currency].data.push({
-            key: labels[key],
-            values: ecomReports.charts.result[key][currency].values
-          });
-          max = ecomReports.charts.result[key][currency].max;
-          currentMax = ecomReports.charts.salesPerf[currency].max;
-          if (isFinite(max) && max > currentMax) {
-            ecomReports.charts.salesPerf[currency].max = max;
-          }
-        }
-      });
-    });
-    curr.forEach(function spk(currency: any) {
-      var zeroVals;
-      if (!ecomReports.charts.salesPerf[currency]) {
-        ecomReports.charts.salesPerf[currency] = {
-          data: [],
-          max: 0
-        };
-      }
-      if (ecomReports.charts.salesPerf[currency].data.length === 0) {
-        zeroVals = ecomReports.charts.range.map(function mapZero(elem: any) {
-          return {
-            amount: elem.amount,
-            date: elem.date,
-            key: 'Sales - ' + currency
-          };
-        });
-        ecomReports.charts.salesPerf[currency].data.push({
-          key: 'Sales - ' + currency,
-          values: zeroVals
-        })
-      }
-      if (ecomReports.charts.salesPerf[currency].max === 0) {
-        ecomReports.charts.d3[currency].chart.yDomain = [0, 100];
-      }
-      else {
-        delete ecomReports.charts.d3[currency].chart.yDomain;
-      }
-    });
-
-  };
-
   dateFormat(dateRange:any) {
     var time, days;
     if (!dateRange || !dateRange.value.start || !dateRange.value.end) {
@@ -579,10 +346,7 @@ loadChart(amounts: any, dates: any, amountsArray:any,datesrages:any): void {
         typeof dateRange.value.start === 'number') {
       dateRange.value.end = new Date(dateRange.value.end);
     }
-    // if (!angular.isDate(dateRange.value.start) || !angular.isDate(dateRange.value.end)) {
-      // return false;
-    // }
-    // time difference
+    
     time = Math.abs(dateRange.value.start.getTime() - dateRange.value.end.getTime());
     // calc days
     days = Math.ceil(time / (1000 * 3600 * 24));
