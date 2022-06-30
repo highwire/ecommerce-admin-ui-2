@@ -25,7 +25,7 @@ interface USER {
   styleUrls: ['./sites-specific-prices.component.css']
 })
 export class SitesSpecificPricesComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'description', 'productType','price_interval','price_amount','options',];
+  displayedColumns: string[] = ['description', 'productType','price_interval','price_amount','options',];
   currency:any=[];
   selectedCurrency:any= '  All CURRENCIES';
   masterdata:any;
@@ -272,11 +272,12 @@ export class SitesSpecificPricesComponent implements OnInit {
     }
 
   addData(){
+    // SitesAddComponent
     // console.log();
     var p= this.getCurrentPrices()
-    const dialogRef = this.dialog.open(SitesAddNewPriceComponent, {
-      width: '950px',
-      height: '400px',
+    const dialogRef = this.dialog.open(SitesAddComponent, {
+      width: '1050px',
+      height: '600px',
       data: {
         prices:p},
     });
@@ -289,7 +290,7 @@ export class SitesSpecificPricesComponent implements OnInit {
     // console.log(element);
     var p= this.getCurrentPrices(element)
     const dialogRef = this.dialog.open(SitesEditComponent, {
-      width: '950px',
+      width: '1050px',
       height: '500px',
       data: {element,
         prices:p},
