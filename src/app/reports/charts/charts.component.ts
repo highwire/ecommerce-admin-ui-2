@@ -364,7 +364,9 @@ loadChart( amountsArray:any,datesrages:any): void {
       return 'year';
     }
   };
-
+  resetDate(){
+    this.dateRange.reset();
+  }
 
   getRange(options: any) {
     var result: any = {}, range: any;    
@@ -396,6 +398,7 @@ loadChart( amountsArray:any,datesrages:any): void {
 function destroy() {
   throw new Error('Function not implemented.');
 }
+
 
 
 
