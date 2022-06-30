@@ -1,0 +1,67 @@
+<div>
+  <div
+    class="text-center alert"
+    ng-show="lead && !loading"
+    ng-class="{ 'alert-info': !error, 'alert-danger': error }"
+  >
+    <p class="lead">
+      {{ lead }}<span class="sublead" *ngIf="sublead"><br />{{ sublead }}</span>
+    </p>
+  </div>
+  <div
+    class="container loginMainContainer"
+    style="margin-top: 2%"
+    ng-hide="loading || showLoginSelector"
+  >
+    <div class="row">
+      <div class="col-lg-6 col-md-6"></div>
+      <!--<single-pub-login-box hwp-publisher="singlePub"></single-pub-login-box>-->
+      <!-- <global-login-box ></global-login-box> -->
+      <!--ng-class="{'disabled': hasPendingRequest()}"&ndash;&gt;-->
+    </div>
+  </div>
+  <div class="container" ng-show="showLoginSelector && !loading">
+    <div class="panel panel-default col-md-6 offset-md-3">
+      <h2>
+        Multiple valid logins found<br />
+        <small>Please select one below:</small>
+      </h2>
+      <div>
+        <!-- ddt specific options -->
+        <div class="list-group">
+          <a
+            href="javascript:void(0);"
+            class="list-group-item"
+            (click)="selectPublishers('*')"
+          >
+            All Publishers
+          </a>
+        </div>
+      </div>
+      <hr />
+      <div>
+        <div class="list-group">
+          <a
+            href="javascript:void(0);"
+            (click)="selectPublishers(item)"
+            class="list-group-item"
+            *ngFor="let item of publihserlist"
+          >
+            {{ item.label }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay-frame" ng-show="loading">
+    <div class="loading-overlay">
+      <p class="lead">
+        <img
+          src="../../../assets/img/hwprocessing.png"
+          class="icon-spin-reverse"
+        />
+        {{ loadingMessage }}
+      </p>
+    </div>
+  </div>
+</div>

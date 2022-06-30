@@ -22,7 +22,7 @@ export class BaseService {
   
   MOST_POPULAR= environment.apiBase+ '/reports/product/';
 SEND_RECEIPT=  environment.apiBase+   '/report/publishers/';  
-
+CATALOG_CHECK=environment.apiBase+  '/catalog/opts/';
 
 
 
