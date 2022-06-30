@@ -33,7 +33,6 @@
       *ngIf="hwpUser && jouralslect"
     >
       <ul class="nav navbar-nav me-auto mb-2 mb-lg-0">
-        <!-- <ul class="nav navbar-nav"> -->
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -42,21 +41,91 @@
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            >journals</a
           >
-            journals
-          </a>
           <ul
             class="dropdown-menu"
             aria-labelledby="navbarDarkDropdownMenuLink"
           >
             <li>
-              <a class="dropdown-item" routerLink="/journals/default">
-                Default Prices</a
+              <a class="dropdown-item" routerLink="/journals/default"
+                >Default Prices</a
               >
             </li>
             <li>
-              <a class="dropdown-item" routerLink="/journals/specific">
-                Specific Prices</a
+              <a class="dropdown-item" routerLink="/journals/specific"
+                >Specific Prices</a
+              >
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown" *ngIf="model.subscriptions">
+          <a
+            class="nav-link dropdown-toggle"
+            href="javascript void(0)"
+            id="navbarDarkDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >Books</a
+          >
+          <ul
+            class="dropdown-menu"
+            aria-labelledby="navbarDarkDropdownMenuLink"
+          >
+            <li>
+              <a class="dropdown-item" routerLink="/book/default"
+                >Default Prices</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/book/specific"
+                >Specific Prices</a
+              >
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown" *ngIf="model.refwork">
+          <a
+            class="nav-link dropdown-toggle"
+            href="javascript void(0)"
+            id="navbarDarkDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >References</a
+          >
+          <ul
+            class="dropdown-menu"
+            aria-labelledby="navbarDarkDropdownMenuLink"
+          >
+            <li>
+              <a class="dropdown-item" routerLink="/references/specific"
+                >Specific Prices</a
+              >
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown" *ngIf="model.site">
+          <a
+            class="nav-link dropdown-toggle"
+            href="javascript void(0)"
+            id="navbarDarkDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >Sites</a
+          >
+          <ul
+            class="dropdown-menu"
+            aria-labelledby="navbarDarkDropdownMenuLink"
+          >
+            <li>
+              <a class="dropdown-item" routerLink="/sites/specific"
+                >Site Subscription</a
               >
             </li>
           </ul>
@@ -137,265 +206,3 @@
     </div>
   </div>
 </nav>
-<!-- </div>
-    </nav> -->
-
-<!-- <nav class="custom-nav navbar navbar-expand-md navbar-light  header-shadow bg-light py-0">
-  <div class="container">
-     <a class="navbar-brand d-flex" routerLink="/">
-        <img src="../../assets/img/logo.svg" height="57" alt="image">
-        <div class="nav-text">
-           <img class="nav-logotype" src="../../assets/img/logotype.svg" alt="HighWire">
-           <div class="nav-product-name"> Intelligent commerce</div>
-           <div class="nav-publisher" *ngIf="publisher">{{publisher}}</div>
-        </div>
-     </a>
-     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-     <span class="navbar-toggler-icon"></span>
-     </button>
-    
-
-
-
-     <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-      <ul class="navbar-nav" *ngIf="hwpUser && jouralslect ">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="javascript void(0)" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            journals
-          </a>
-          <ul class="dropdown-menu " aria-labelledby="navbarDarkDropdownMenuLink">
-            <li><a class="dropdown-item" routerLink="/journals/default"> Default Prices</a></li>
-           <li><a class="dropdown-item" routerLink="/journals/specific"> Specific Prices</a></li> -->
-<!-- <li><a class="dropdown-item" routerLink="/journals/promocode"> promocode </a></li> -->
-<!-- <li><a class="dropdown-item" routerLink="/journals/increment"> increment</a></li> -->
-<!-- <li><a class="dropdown-item" routerLink="/journals/setting">setting </a></li> -->
-<!-- </ul>
-        </li> -->
-
-<!-- <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle"  href="javascript: void(0)"  id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Reports
-          </a>
-          <ul class="dropdown-menu " aria-labelledby="navbarDarkDropdownMenuLink">
-            <li><a class="dropdown-item" routerLink="/reports/detailed"> Detailed  </a></li>
-            <li><a class="dropdown-item" routerLink="/reports/mostpopular">Most Popular</a></li>
-            <li><a class="dropdown-item" routerLink="/reports/charts">Charts</a></li>
-          </ul>
-        </li>
-       
-      </ul>
-    </div> -->
-
-<!-- <div class="spinner-border text-dark" role="status">
-      <span class="sr-only">Loading...</span>
-    </div> -->
-
-<!-- <div class="spinner-frame">
-        <img src="../../assets/img/hwprocessing_black.png"
-        class="icon-spin-reverse" />
-     </div>
-      -->
-<!-- ng-show="hasPendingRequests()" -->
-<!-- <div class="collapse navbar-collapse" id="navbarSupportedContent" >
-     <ul class="navbar-nav ms-auto  mb-lg-0" *ngIf="hwpUser && jouralslect">
-        <li class="nav-item dropdown">
-           <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-           HighWire Press
-           </a>
-           <ul class="dropdown-menu dropdown-menu-end rounded-0 mb-2" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" routerLink="/journals/publishers">Switch Publisher</a></li>
-              <li><a class="dropdown-item"  href="javascript:void(0)" (click)="goToLogout()" >Logout</a></li>
-              
-           </ul>
-        </li>
-     </ul>
-  </div>
-
-  
-  </div>
-</nav> -->
-
-<!-- 
-
-<div class="header">
-    <div class="navbar navbar-default navbar-static-top" ng-controller="capAppHeaderCtrl">
-        <div class="container">
-            <div class="navbar-header">
-                <div class="navbar-brand">
-                    <a routerLink="/" ng-click="home()">
-                      <img class="nav-logo"
-                           src="bower_components/highwire-style/dist/images/logo.svg"
-                           alt="HighWire Press, Inc." />
-                    </a>
-
-                    <div class="nav-text">
-                      <a routerLink="/" ng-click="home()">
-                        <img class="nav-logotype" src="bower_components/highwire-style/dist/images/logotype.svg"
-                             alt="HighWire">
-
-                        <div class="nav-product-name">Intelligent Commerce</div>
-                        <div class="nav-publisher" ng-if="authz.publisherName">
-                          {{authz.publisherName}}
-                        </div>
-                      </a>
-                    </div>
-                </div>
-                <div class="mobile-spinner" ng-show="hasPendingRequests()" >
-                  <img src="/images/hwprocessing_black.png"
-                       ng-class="{'icon-spin-reverse': hasPendingRequests()}" />
-                </div>
-                <div >
-                  <button type="button" class="navbar-toggle"
-                          ng-click="isNavCollapsed = !isNavCollapsed"
-                          aria-expanded="false">
-                      <span class="sr-only">Toggle navigation</span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                  </button>
-                </div>
-            </div>
-            <div class="collapse navbar-collapse"
-                 uib-collapse="isNavCollapsed">
-              <ul class="nav navbar-nav navbar-nav"
-                  uib-dropdown-menu
-                  >
-                  <li ng-class="{active:isActive('/admin')}" class="dropdown"
-                      ng-show="cmodel.journalSites.length > 0"
-                      uib-dropdown
-                      is-open="journalDropdownOpen">
-                    <a class="dropdown-toggle"
-                       id="journal-menu"
-                       uib-dropdown-toggle
-                       ng-click="journalDropdownOpen=true"
-                       role="button"
-                       aria-haspopup="true"
-                       aria-expanded="true">Journals<span class="caret"></span></a>
-                      <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li>
-                          <a href="/"
-                             ui-sref="journal-defaults({pubId: authz.publisherId})"
-                             id="journal-default">
-                               Default Prices
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/"
-                             ui-sref="admin({pubId: authz.publisherId})"
-                             id="journal-specific">
-                             Specific Prices
-                           </a>
-                        </li>
-                        <li ng-show="copts.subscriptions">
-                          <a href="/"
-                             ui-sref="subscriptions({pubId: authz.publisherId})"
-                             id="journal-subscription">
-                             Journal Subscriptions
-                          </a>
-                        </li>
-
-                       
-                      </ul>
-                  </li>
-                  <li ng-class="{active:isActive('/book-admin')}" class="dropdown"
-                      ng-show="cmodel.bookSites.length > 0"
-                      uib-dropdown
-                      is-open="bookDropdownOpen">
-                    <a class="dropdown-toggle"
-                       uib-dropdown-toggle
-                       id="book-menu"
-                       ng-click="bookDropdownOpen=true"
-                       role="button"
-                       aria-haspopup="true"
-                       aria-expanded="true">Books<span class="caret"></span></a>
-                      <ul class="dropdown-menu" uib-dropdown-menu>
-                          <li>
-                            <a href="/"
-                               ui-sref="book-defaults({pubId: authz.publisherId})"
-                               id="book-defaults">Default Prices</a>
-                          </li>
-                          <li>
-                            <a href="/"
-                               ui-sref="book-admin({pubId: authz.publisherId})"
-                               id="book-specific">Specific Prices</a>
-                          </li>
-                      </ul>
-                  </li>
-                  <li ng-class="{active:isActive('/refwork-admin')}" class="dropdown"
-                      ng-show="copts.refwork"
-                      uib-dropdown
-                      is-open="refworkDropdownOpen">
-                    <a class="dropdown-toggle"
-                       uib-dropdown-toggle
-                       id="refwork-menu"
-                       ng-click="refworkDropdownOpen=true"
-                       role="button"
-                       aria-haspopup="true"
-                       aria-expanded="true">References<span class="caret"></span></a>
-                      <ul class="dropdown-menu" uib-dropdown-menu>
-                          <li>
-                            <a href="/"
-                               ui-sref="refwork-admin({pubId: authz.publisherId})"
-                               id="refwork-specific">Specific Prices</a>
-                          </li>
-                      </ul>
-                  </li>
-                  <li ng-class="{active:isActive('/site-admin')}" class="dropdown"
-                      ng-show="copts.site"
-                      uib-dropdown
-                      is-open="siteDropdownOpen">
-                    <a class="dropdown-toggle"
-                       uib-dropdown-toggle
-                       id="site-menu"
-                       ng-click="siteDropdownOpen=true"
-                       role="button"
-                       aria-haspopup="true"
-                       aria-expanded="true">Sites<span class="caret"></span></a>
-                      <ul class="dropdown-menu" uib-dropdown-menu>
-                          <li>
-                            <a href="/"
-                               ui-sref="site-admin({pubId: authz.publisherId})"
-                               id="site-subscription">Site Subscription</a>
-                          </li>
-                      </ul>
-                  </li>
-                  <li ng-class="{active:isActive('/report')}" class="dropdown"
-                      uib-dropdown
-                      is-open="reportDropdownOpen">
-                    <a class="dropdown-toggle"
-                       uib-dropdown-toggle
-                       id="report-menu"
-                       ng-click="reportDropdownOpen=true"
-                       role="button"
-                       aria-haspopup="true"
-                       aria-expanded="true">Reports<span class="caret"></span>
-                    
-                       <ul class="dropdown-menu" uib-dropdown-menu>
-                         <li>
-                           <a ui-sref="report({pubId: authz.publisherId})"
-                              id="report-detailed">Detailed</a>
-                          </li>
-                         <li ng-show="cmodel.journalSites.length > 0 ||
-                           cmodel.bookSites.length > 0">
-                           <a ui-sref="products({pubId: authz.publisherId})"
-                              id="report-products">Most Popular</a>
-                         </li>
-                         <li ng-show="cmodel.journalSites.length > 0 ||
-                           cmodel.bookSites.length > 0">
-                           <a ui-sref="charts({pubId: authz.publisherId})"
-                              id="report-charts">Charts</a>
-                         </li>
-                      </ul>
-                    </a>
-                  </li>
-              </ul>
-             
-              <div class="spinner-frame">
-                <img src="/images/hwprocessing_black.png"
-                     ng-show="hasPendingRequests()"
-                     ng-class="{'icon-spin-reverse': hasPendingRequests()}" />
-              </div>
-            </div>
-        </div>
-    </div>
-</div> -->

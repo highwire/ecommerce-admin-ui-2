@@ -18,6 +18,12 @@ import {Router} from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  
+  model = {
+    subscriptions: false,
+    refwork: false,
+    site: false
+  };
   publisher:any;
   hwpUser: any;
   sitedata:any;
@@ -52,9 +58,12 @@ export class HeaderComponent implements OnInit {
 
     this.auth.authMenu.subscribe((message) => {
       this.hwpUser = message
-      localStorage.setItem('auth','true');      
+      localStorage.setItem('auth','true');   
+      this.catalogOptsFactory();   
     });
     this.joural();
+    this.catalogOptsFactory();
+    
   }
 
   joural(){
@@ -65,7 +74,8 @@ export class HeaderComponent implements OnInit {
       this.getDefalutCurrencyList();
       this.getSiteData();
       this.publisher= localStorage.getItem('publisher-label');
-      
+      this.catalogOptsFactory();
+      // this.catalogOptsFactory();
     })
   }
 
@@ -177,6 +187,46 @@ export class HeaderComponent implements OnInit {
   
 }
 
-  
 
+catalogOptsFactory() {
+  this.model = {
+    subscriptions: false,
+    refwork: false,
+    site: false
+  };
+  
+  let publisher = localStorage.getItem('publisher')  ;
+  if(!publisher)return ;
+  
+  
+  let URL= this.base.CATALOG_CHECK+publisher;
+  
+  this.http.getDatawithGet(URL,'').subscribe((response:any)=>{
+    
+
+    console.log('response',response);
+        var opts:any = {};
+        if (response ) {
+          opts = response;
+        }
+        if (opts['highwire.ecommercesvc.journal.subscriptions.enabled'] &&
+        opts['highwire.ecommercesvc.journal.subscriptions.enabled'] !== 'false') {
+          this.model.subscriptions = true;
+        }
+        if (opts['highwire.ecommercesvc.refwork.enabled'] &&
+        opts['highwire.ecommercesvc.refwork.enabled'] !== 'false') {
+          this.model.refwork = true;
+        }
+        if (opts['highwire.ecommercesvc.site.subscriptions.enabled'] &&
+        opts['highwire.ecommercesvc.site.subscriptions.enabled'] !== 'false') {
+          this.model.site = true;
+        }
+        
+      
+  
+      })
+
+
+  
+    }
 }

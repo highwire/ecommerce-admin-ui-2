@@ -1,0 +1,162 @@
+<div class="container p-2 my-3">
+  <h4>View/Add/EditPrices</h4>
+  <div class="sm-4 my-2 mx-0 row">
+    <div class="mb-3 row" *ngIf="data">
+      <label for="inputtext" class="col-sm-5 col-form-label"
+        >Publication Details</label
+      >
+      <div class="col-sm-6">
+        <div *ngIf="data.title; then thenBlock; else elseBlock"></div>
+        <ng-template #thenBlock>
+          {{ data.authorsList[0].personLastName }}. ({{
+            data.publicationDate | date: "yyyy"
+          }}). {{ data.title }}.
+          <i> {{ data.journalName }}().</i>
+          doi:{{ data.doi }}
+        </ng-template>
+        <ng-template #elseBlock>Identifier:{{ data.doi }}</ng-template>
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="inputtext" class="col-sm-5 col-form-label"
+        >Product Type</label
+      >
+      <div class="col-sm-6">
+        {{ productType | titlecase }}
+      </div>
+    </div>
+    <!--  title name -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Price Type</th>
+          <th scope="col">CURRENCY</th>
+          <th scope="col">FOR SALE</th>
+          <th scope="col">PRICE</th>
+          <th scope="col">ACCESS PERIOD</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody *ngIf="basedata.prices">
+        <tr *ngFor="let item of basedata.prices; let ind = index">
+          <th scope="col">{{ item.productType | titlecase }}</th>
+          <td>
+            <select
+              id="dropdown"
+              class="form-select"
+              aria-label="#"
+              [(ngModel)]="item.price_currency"
+            >
+              <option *ngFor="let curr of currency" value="{{ curr }}">
+                {{ curr }}
+              </option>
+            </select>
+          </td>
+          <td>
+            <label class="switch">
+              <input
+                type="checkbox"
+                (change)="onItemChange($event.target, item)"
+                [checked]="item.price_amount == 'Not for Sale' ? false : true"
+              />
+              <span class="slider round"></span>
+            </label>
+          </td>
+          <td>
+            <div class="input-group mb-3">
+              <div
+                *ngIf="
+                  item.price_amount == notForSaleLabel;
+                  then thenBlock;
+                  else elseBlock
+                "
+              ></div>
+              <ng-template #thenBlock>{{ notForSaleLabel }} </ng-template>
+              <ng-template #elseBlock>
+                <span
+                  style="border-radius: 0px; border: none"
+                  class="input-group-text"
+                  id="#"
+                  >{{ item.price_currency | bookfilterPipe }}</span
+                >
+                <input
+                  style="
+                    border-radius: 0px;
+                    background-color: #e9ecef;
+                    border: none;
+                  "
+                  type="text"
+                  [(ngModel)]="item.price_amount"
+                  class="form-control"
+                  placeholder=""
+                  aria-label="price"
+                  aria-describedby="#"
+                />
+              </ng-template>
+            </div>
+          </td>
+          <td>
+            <div class="input-group mb-3 hour">
+              <select
+                id="dropdown"
+                [(ngModel)]="item.price_interval"
+                class="form-select"
+                aria-label="#"
+              >
+                <option
+                  *ngFor="let inter of accessPeriods"
+                  value="{{ inter.value }}"
+                >
+                  {{ inter.label }}
+                </option>
+              </select>
+            </div>
+          </td>
+          <td>
+            <button
+              class="btn btn-primary me-md-2 can"
+              type="button"
+              (click)="removeitem(ind)"
+            >
+              <i class="fa-solid fa-minus"></i>REMOVE
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="input-group mb-3 hour">
+              <button
+                class="btn btn-primary mx-2 sav"
+                (click)="addPrice()"
+                type="button"
+              >
+                Article
+              </button>
+              <!-- <select id='dropdown' class="form-select" aria-label="#"> -->
+              <!-- <option selected (click)="addPrice()">Article </option> -->
+              <!-- </select> -->
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="button_td">
+            <button
+              class="btn btn-primary can"
+              (click)="closeDialog(false)"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              class="btn btn-primary mx-2 sav"
+              type="button"
+              (click)="update()"
+            >
+              Save
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

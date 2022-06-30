@@ -1,0 +1,68 @@
+<div class="container p-2 my-3 " >
+    <h6>Delete Price</h6>
+    <div class="alert alert-dark" role="alert">
+        Are you sure you want to delete the price below?
+      </div>
+     <div class="sm-4 my-2 mx-0 row" style="border: 1px solid grey;" *ngIf="data.element">
+       <div class="mb-3 row">
+          <label for="inputtext" class="col-sm-5 col-form-label">Publication Details</label>
+          <div class="col-sm-6">
+             <input type="text" [readonly]="true" class="form-control-plaintext p-2" value="{{data.element.description}}"  class="form-control"  placeholder="Details"
+                id="Details">
+          </div>
+       </div>
+       <div class="mb-3 row">
+          <label for="inputtext" class="col-sm-5 col-form-label">Price Type</label>
+          <div class="col-sm-6">
+             <input type="text" [readonly]="true" class="form-control p-2" class="form-control" value="{{data.element.productType}}" placeholder="Article" id="Details">
+          </div>
+       </div>
+       <div class="mb-3 row">
+          <label for="inputtext" class="col-sm-5 col-form-label">Currency</label>
+          <div class="col-sm-6">
+             <input type="text" [readonly]="true" class="form-control p-2" value="{{data.element.price_currency}}" class="form-control"  placeholder="EUR" id="Details">
+          </div>
+       </div>
+       <div class="mb-3 row">
+          <label for="inputtext" class="col-sm-5 col-form-label">Article Price</label>
+          <div class="col-sm-6">
+             <div class="input-group mb-3">
+                <span class="input-group-text" id="#">€</span>
+                <input type="text" [readonly]="true" class="form-control" value="{{data.element.price_amount}}" placeholder="price" aria-label="price"
+                   aria-describedby="#">
+             </div>
+          </div>
+       </div>
+       <div class="mb-3 row">
+          <label for="inputtext" class="col-sm-5 col-form-label">Article Access Period</label>
+          <div class="col-sm-6">
+             <div class="input-group mb-3 hour" style="width: 30%; color: white;">
+                <select class="form-select" value="{{data.element.price_interval}}" aria-label="Disabled select example" disabled>
+                   <option *ngFor= "let item  of accessPeriods" value="{{item.value}}" selected>{{item.label}}</option>
+                </select>
+             </div>
+          </div>
+       </div>
+       <!-- <div class="mb-3 row">
+          <label for="inputtext" class="col-sm-5 col-form-label">For Sale</label>
+          <div class="col-sm-6">
+             <label class="switch">
+             <input type="checkbox" checked>
+             <span class="slider round"></span>
+             </label>
+          </div>
+       </div> -->
+    </div>
+    <div class="mb-3 row">
+       <label for="inputtext" class="col-sm-5 col-form-label"></label>
+       <div class="col-sm-6 cs">
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+             <!-- <button class="btn btn-primary me-md-2 can" type="button">Cancel</button> -->
+             <button class="btn btn-primary me-md-2 can" mat-button mat-dialog-close>Cancel</button>
+
+             <button class="btn btn-primary sav" (click)="delete()" type="button">Delete</button>
+          </div>
+       </div>
+    </div>
+ </div>
+ 

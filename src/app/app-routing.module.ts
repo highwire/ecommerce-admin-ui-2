@@ -11,6 +11,21 @@ const routes: Routes = [
    { path: 'journals',
   canActivate:[AuthGuardService],
    loadChildren: () => import('./journals/journals.module').then(m => m.JournalsModule)},
+
+   { path: 'book',
+   canActivate:[AuthGuardService],
+    loadChildren: () => import('./books/books.module').then(m => m.BooksModule)},
+ 
+    { path: 'references',
+   canActivate:[AuthGuardService],
+    loadChildren: () => import('./references/references-journals.module').then(m => m.ReferencesModule)},
+ 
+    { path: 'sites',
+   canActivate:[AuthGuardService],
+    loadChildren: () => import('./sites/sites-journals.module').then(m => m.SitesModule)},
+ 
+
+
    { path: 'reports',
    canActivate:[AuthGuardService],
    loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule)},
