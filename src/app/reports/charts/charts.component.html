@@ -102,11 +102,11 @@
                 </mat-form-field>
                 <h5>
                     Start: {{ dateRange.value.start | date }}
-                    End: {{ dateRange.value.end | date }}
+                    End: {{ dateRange.value.end | date }}</h5>
                     <button class="btn btn-danger btn-sm" (click)="getChartData()">
                         Run Report
                     </button>
-                    <button class="btn btn-dark btn-sm " value="reset">
+                    <button class="btn btn-dark btn-sm " value="reset" (click)="resetDate()">
                         Reset</button>
 
                     <button class="btn btn-primary  btn-sm  dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -122,7 +122,7 @@
                             </a>
 
                     </ul>
-                </h5>
+                
 
 
 

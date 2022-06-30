@@ -302,6 +302,9 @@ extractPrice(data:any, currencies?:any,productType?:any){
 
 
   }
+  resetDate(){
+    this.dateRange.reset();
+  }
 }
 
 
