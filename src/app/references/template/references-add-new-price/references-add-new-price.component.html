@@ -16,7 +16,7 @@
             [readonly]="true"
             class="form-control-plaintext p-2"
             class="form-control"
-            placeholder="Details"
+            placeholder="Reference"
             id="Details"
           />
         </div>
@@ -25,7 +25,7 @@
         <label for="inputtext" class="col-sm-5 col-form-label"
           >Selected Sites</label
         >
-        <!-- <h5 style="color: grey; margin-top: 10px;">Selected Sites</h5> -->
+
         <div class="col-sm-6">
           <select
             class="select"
@@ -35,8 +35,11 @@
             id="chapter"
           >
             <option value="" selected="selected">Filter sites..</option>
-            <option value="{{ site.site_code }}" *ngFor="let site of sitedata">
-              {{ site.site_name }}
+            <option
+              value="{{ site.entry.corpus }}"
+              *ngFor="let site of sitedata"
+            >
+              {{ site.entry.title }}
             </option>
           </select>
         </div>
@@ -44,14 +47,24 @@
       <div class="p-3 row">
         <!-- <label for="inputtext" class="col-sm-4 col-form-label">Currency</label> -->
         <div class="col-sm-4">
-          <input
+          <select
+            class="select"
+            name="DOI"
+            formControlName="EisbnorDoi"
+            class="form-control p-2"
+          >
+            <option value="doi" selected="selected">DOI</option>
+            <option value="eisbn">EISBN</option>
+          </select>
+
+          <!-- <input
             type="text"
             [readonly]="true"
             class="form-control p-2"
             class="form-control"
             placeholder="DOI"
             id="Details"
-          />
+          /> -->
         </div>
         <div class="col-sm-4">
           <input
@@ -64,7 +77,11 @@
           />
         </div>
         <div class="col-sm-4">
-          <button class="btn btn-danger sav" (click)="update()" type="button">
+          <button
+            class="btn btn-danger sav"
+            (click)="lookupupdate()"
+            type="button"
+          >
             Look up
           </button>
         </div>
