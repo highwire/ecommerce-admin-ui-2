@@ -56,15 +56,19 @@ sitedata:any;
   }
 
   ngOnInit(): void {
-    this.selectAllPublishers();
+    // this.selectAllPublishers();
     this.selectAllListPublishers();
     this.getCurrencyList();
+    this.getSiteData();
     // <a *ngFor="let website of sitedata " value="website.corpus">
     // {{website.title}}</a>
     
     this.selectedItems = [
     
     ];
+    // corpus: element.entry.corpus,
+    // title: element.entry.title,
+    
     this.dropdownSettings = {
       singleSelection: true,
       idField: 'corpus',
@@ -76,6 +80,32 @@ sitedata:any;
       
       closeDropDownOnSelection:true
     };
+  }
+  
+  getSiteData(){
+    let publisher = localStorage.getItem('publisher')  ;
+    let URL= this.base.SITE_TYPE_SERVICE_POINT;
+    var data={
+      publisher: publisher,
+      siteType: "ItemSet"
+    }
+    this.http.getDatawithPost(URL,data).subscribe((data:any)=>{
+let  localdata:any=[];
+        console.log('sitedata',data);             
+        localdata=  JSON.parse(data).feed   ;
+        this.sitedata= [];
+        localdata.forEach((element:any) => {
+          
+          this.sitedata.push({
+            corpus: element.entry.corpus,
+            title: element.entry.title,
+          })
+          
+        });
+        
+        
+       
+    })
   }
 
   onItemChange(test:any,item:any){
@@ -190,7 +220,7 @@ extractPrice(data:any, pub:any){
         debugger;
       pricearray.push({
           name: element.name,
-          productType:element.productType,
+          productType:elements.name,
           description:element.description,      
           identifier: element.identifier,
           price_amount: self.formatAmountDisplay (elements.amount),

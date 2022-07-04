@@ -26,6 +26,7 @@ interface USER {
 })
 export class ReferencesSpecificPricesComponent implements OnInit {
   displayedColumns: string[] = ['name', 'description', 'productType','price_interval','price_amount','options',];
+  
   currency:any=[];
   selectedCurrency:any= '  All CURRENCIES';
   masterdata:any;

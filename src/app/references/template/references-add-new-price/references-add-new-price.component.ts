@@ -26,6 +26,7 @@ export class ReferencesAddNewPriceComponent implements OnInit {
   fromModel = new FormGroup({
     doi : new FormControl(''),
     selected_site : new FormControl(''),
+    EisbnorDoi: new FormControl('')
     
   });
 
@@ -90,19 +91,20 @@ export class ReferencesAddNewPriceComponent implements OnInit {
       name:this.pricedata[0].price_name,
    });
   }
-
+  // https://ecommerce-service.highwire.org/api/catalogadm/sites/springer
+  // https://ecommerce-dev.highwire.org/api/catalogadm/sites/springer
   getSiteData(){
     let publisher = localStorage.getItem('publisher')  ;
-    let URL= this.base.SITE_LIST;
+    let URL= this.base.SITE_TYPE_SERVICE_POINT;
     var data={
-      pubTerm: publisher,
-      role: "Intelligent Commerce Pricing and Reporting UI",
-      userId: "2"
+      publisher: publisher,
+      
+        siteType: "ItemSet"
     }
     this.http.getDatawithPost(URL,data).subscribe((data:any)=>{
+
         console.log('sitedata',data);             
-        this.sitedata=  data.sites;
-        this.apicall()
+        this.sitedata=  JSON.parse(data).feed        
     })
   }
   catchError(e:any){
@@ -135,6 +137,7 @@ export class ReferencesAddNewPriceComponent implements OnInit {
 
 
 apicall(){
+  
   this.requestDataFromMultipleSources().subscribe(responseList => {
     console.log(responseList);
     
@@ -180,7 +183,7 @@ priceArray.prices= []
   closeDialog(update:any) {
     this.dialogRef.close(update);
   }
-  update(){
+  lookupupdate(){
     if(!this.fromModel.value.doi){
       this.base.openSnackBar(5,'Please enter doi.');
       return;
@@ -190,11 +193,12 @@ priceArray.prices= []
       this.base.openSnackBar(5,'Please select site.');
       return;
     }
+    
     this.filterPrice();
 
     let publisher = this.fromModel.value.selected_site //localStorage.getItem('publisher')  ;
     // var name = this.basedata.element.name.replace('/', '!2F')
-    let URL= this.base.ATOM_LOOKUP+ publisher +'?'+'doi='+this.fromModel.value.doi;  
+    let URL= this.base.ATOM_LOOKUP+ publisher +'?'+this.fromModel.value.EisbnorDoi+'='+this.fromModel.value.doi;  
     this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
       this.getUriData(res);
 
@@ -203,6 +207,12 @@ priceArray.prices= []
   }
   getUriData(data:any){
     // var arr= data.splite('/')
+    if(!data.results){
+      this.base.openSnackBar(3,"Identifier not found. ");
+      return;
+
+
+    }
     // console.log(arr);
     var URL= this.base.ATOM_LITE_TWO+data.results.entry.uri;
     console.log(URL);

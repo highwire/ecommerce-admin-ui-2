@@ -23,6 +23,9 @@ export class BaseService {
   MOST_POPULAR= environment.apiBase+ '/reports/product/';
 SEND_RECEIPT=  environment.apiBase+   '/report/publishers/';  
 CATALOG_CHECK=environment.apiBase+  '/catalog/opts/';
+CATALOG_SITES = environment.apiBase+ '/catalogadm/sites/';
+
+// /  = '/atom/site-type';
 
 
 
@@ -33,6 +36,7 @@ CATALOG_CHECK=environment.apiBase+  '/catalog/opts/';
   ATOM_LOOKUP=environment.atomBase+ '/lookup/corpus/';
   ATOM_LITE=environment.atomBase+ '/lite/';
   ATOM_LITE_TWO=environment.atomBase+ '/lite'
+  SITE_TYPE_SERVICE_POINT = environment.atomBase+ '/site-type';
  
   // constructor(private _snackBar: MatSnackBar) {}
   constructor(
