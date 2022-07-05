@@ -33,7 +33,7 @@
         </div> -->
 
         <!-- articlebutton -->
-        <button
+        <!-- <button
           class="btn btn-info dropdown-toggle"
           type="button"
           id="dropdownMenuButton1"
@@ -41,11 +41,11 @@
           aria-expanded="false"
         >
           {{ selectedType }}
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        </button> -->
+        <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"> -->
           <!-- <li><a class="dropdown-item" href="javascript:void(0)" (click)="productSelect('All')">All</a> -->
           <!-- </li> -->
-          <li>
+          <!-- <li>
             <a
               class="dropdown-item"
               href="javascript:void(0)"
@@ -54,7 +54,7 @@
               >{{ items.value }}</a
             >
           </li>
-        </ul>
+        </ul> -->
 
         <!-- currency button -->
         <div class="dropdown">
@@ -64,8 +64,9 @@
             id="dropdownMenuButton1"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            disabled
           >
-            {{ selectedCurrency }}
+            {{defaultcurrency}}
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li>
@@ -151,7 +152,7 @@
     <ng-container matColumnDef="price_interval">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Access Period</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.price_interval }} Hours
+        {{ element.price_interval }}
       </td>
     </ng-container>
 
