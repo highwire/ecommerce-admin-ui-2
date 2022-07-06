@@ -25,9 +25,9 @@ interface USER {
   styleUrls: ['./sites-specific-prices.component.css']
 })
 export class SitesSpecificPricesComponent implements OnInit {
-  displayedColumns: string[] = ['description', 'productType','price_interval','price_amount','options',];
+  displayedColumns: string[] = ['description', 'productType' ,'price_amount','price_interval','options',];
   currency:any=[];
-  selectedCurrency:any= '  All CURRENCIES';
+  selectedCurrency:any= 'USD ($)';
   masterdata:any;
   dataSource: MatTableDataSource<USER> = new MatTableDataSource();
   freeLabel= 'Free';
@@ -41,6 +41,9 @@ export class SitesSpecificPricesComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10, 25, 100];
   animal: any;
   name: any;
+  interval:any
+  priceType:any='Site Subscription'
+  productType:any
   
   productTypes:any=[
     {key:"",value:'All'},
@@ -52,7 +55,7 @@ export class SitesSpecificPricesComponent implements OnInit {
   selectedType:any= 'ALL';
   pricearray:any
   element:any
-
+  
   
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -62,6 +65,7 @@ export class SitesSpecificPricesComponent implements OnInit {
     public base: BaseService,
     public dialog: MatDialog,
     public hwv: hwValidator,
+    
     
   ) { }
 
@@ -95,6 +99,35 @@ export class SitesSpecificPricesComponent implements OnInit {
        
     })
   }
+   
+  period(interval:any=[]){
+    var hours = interval;
+    var days = hours/24;
+    var year = days/365
+    var month = hours * .0015
+    // console.log(month + " month");
+    // console.log(year + " year");
+    // console.log(hours)
+    if(hours > 8700){
+      return `${Math.floor(year)} Year `;
+    }
+    if(hours > 699  ){
+      return `${Math.floor(month)} Month`;}
+    else{
+      return `${hours} Hours`;
+    }
+    }
+    
+     priceFormat(priceType:any) {
+      // console.log(priceType)
+      if (priceType === 'site') {
+        return this.priceType;
+      }
+      else  {
+        return this.productType;
+      }
+      
+    }
 
   filterDOI(data:any){
   var self= this;
@@ -125,7 +158,7 @@ export class SitesSpecificPricesComponent implements OnInit {
           if(elements.name==productType)
           pricearray.push({
             name: element.name,
-            productType:element.productType,
+            productType:self.priceFormat(element.productType),
             description:element.description,      
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
@@ -141,7 +174,7 @@ export class SitesSpecificPricesComponent implements OnInit {
           if(elements.currency.toUpperCase()==currencies)
           pricearray.push({
             name: element.name,
-            productType:element.productType,
+            productType:self.priceFormat(element.productType),
             description:element.description,      
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
@@ -153,12 +186,12 @@ export class SitesSpecificPricesComponent implements OnInit {
         }else{
           pricearray.push({
             name: element.name,
-            productType:element.productType,
+            productType:self.priceFormat(element.productType),
             description:element.description,      
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
-            price_interval:elements.interval,
+            price_interval:self.period(elements.interval),
             price_name:elements.name,
             price:elements
           })  
