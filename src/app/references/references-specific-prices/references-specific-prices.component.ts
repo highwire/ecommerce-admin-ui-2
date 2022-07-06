@@ -101,15 +101,15 @@ export class ReferencesSpecificPricesComponent implements OnInit {
     var hours = interval;
     var days = hours/24;
     var year = days/365
-    var month = hours *  0.001369
+    var month = hours * .0015
     // console.log(month + " month");
     // console.log(year + " year");
     // console.log(hours)
     if(hours > 8700){
-      return `${year} Year `;
+      return `${Math.floor(year)} Year `;
     }
-    if(hours > 72  ){
-      return `${month} Month`;}
+    if(hours > 699  ){
+      return `${Math.floor(month)} Month`;}
     else{
       return `${hours} Hours`;
     }
