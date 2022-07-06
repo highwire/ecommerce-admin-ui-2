@@ -99,7 +99,7 @@ update(){
 
   }
   this.http.getDatawithPut(URL,data).subscribe((res:any)=>{
-    alert(res);
+    alert('Data Updated');
 
   })
 

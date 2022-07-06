@@ -25,7 +25,7 @@ interface USER {
   styleUrls: ['./references-specific-prices.component.css']
 })
 export class ReferencesSpecificPricesComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'description', 'productType','price_interval','price_amount','options',];
+  displayedColumns: string[] = ['name', 'description', 'productType','price_amount','price_interval','options',];
   
   currency:any=[];
   selectedCurrency:any= '  All CURRENCIES';
@@ -47,13 +47,14 @@ export class ReferencesSpecificPricesComponent implements OnInit {
     {key:"",value:'All'},
     {key:"issue-price",value:'Issue'},
     {key:"article-price",value:'Article'},
-    
-    
-  ];
+    ];
   selectedType:any= 'ALL';
   pricearray:any
   element:any
-
+  defaultcurrency:any=['$USD']
+  interval:any
+  priceType:any='Reference'
+  productType:any
   
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -96,6 +97,34 @@ export class ReferencesSpecificPricesComponent implements OnInit {
        
     })
   }
+  period(interval:any=[]){
+    var hours = interval;
+    var days = hours/24;
+    var year = days/365
+    var month = hours *  0.001369
+    // console.log(month + " month");
+    // console.log(year + " year");
+    // console.log(hours)
+    if(hours > 8700){
+      return `${year} Year `;
+    }
+    if(hours > 72  ){
+      return `${month} Month`;}
+    else{
+      return `${hours} Hours`;
+    }
+    }
+    
+     priceFormat(priceType:any) {
+      // console.log(priceType)
+      if (priceType === 'refwork') {
+        return this.priceType;
+      }
+      else  {
+        return this.productType;
+      }
+      
+    }
 
   filterDOI(data:any){
   var self= this;
@@ -125,12 +154,12 @@ export class ReferencesSpecificPricesComponent implements OnInit {
           if(elements.name==productType)
           pricearray.push({
             name: element.name,
-            productType:element.productType,
+            productType:self.priceFormat(element.productType),
             description:element.description,      
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
-            price_interval:elements.interval,
+            price_interval:self.period(elements.interval),
             price_name:elements.name,
             price:elements
           })  
@@ -141,27 +170,28 @@ export class ReferencesSpecificPricesComponent implements OnInit {
           if(elements.currency.toUpperCase()==currencies)
           pricearray.push({
             name: element.name,
-            productType:element.productType,
+            productType:self.priceFormat(element.productType),
             description:element.description,      
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
-            price_interval:elements.interval,
+            price_interval:self.period(elements.interval),
             price_name:elements.name,
             price:elements
           })  
         }else{
           pricearray.push({
             name: element.name,
-            productType:element.productType,
+            productType:self.priceFormat(element.productType),
             description:element.description,      
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
-            price_interval:elements.interval,
+            price_interval:self.period(elements.interval),
             price_name:elements.name,
             price:elements
           })  
+          // console.log(pricearray) 
         // }
       }
         
