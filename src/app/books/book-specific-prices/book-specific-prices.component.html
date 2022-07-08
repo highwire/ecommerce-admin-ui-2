@@ -13,7 +13,7 @@
           <div class="row">
             <div class="col-md-3 col-xs-6">
               <h3>No. of specific prices</h3>
-              <h1 class="stat ng-binding" style="color: brown">
+              <h1 class="stat ng-binding fw-light" style="color: brown">
                 {{ this.dataSource.data.length }}&nbsp;
               </h1>
             </div>
@@ -64,8 +64,9 @@
             id="dropdownMenuButton1"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            [disabled]="disable"
           >
-            {{ selectedCurrency }}
+            {{ defCurrency }}
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li>
@@ -88,9 +89,16 @@
             </li>
           </ul>
         </div>
+       <!-- <div class="dropdown">
+        <select class="dropdown">
+          <option *ngFor="let item of currency">
+            {{item.defaultcurrency}}
+          </option>
+        </select>
+       </div> -->
 
         <button
-          class="btn btn-info"
+          class="btn btn-info" 
           type="button"
           aria-expanded="false"
           (click)="addData()"
@@ -128,7 +136,7 @@
   >
     <!-- Position Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>DOI.</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>EISBN/DOI</th>
       <td mat-cell *matCellDef="let element">{{ element.name | titlecase }}</td>
     </ng-container>
 
@@ -151,7 +159,7 @@
     <ng-container matColumnDef="price_interval">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Access Period</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.price_interval }} Hours
+        {{ element.price_interval }} 
       </td>
     </ng-container>
 
@@ -178,7 +186,7 @@
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="options">
-      <th mat-header-cell *matHeaderCellDef>options</th>
+      <th mat-header-cell *matHeaderCellDef>Action</th>
       <td mat-cell *matCellDef="let element">
         <div class="btn-group">
           <button
