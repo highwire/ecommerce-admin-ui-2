@@ -173,10 +173,12 @@
      color: white;
    }
   .btn-info{
-    background-color:#4a90e2;
-    padding: 6px 27px;
+    background-color: #4a90e2;
+    padding: 6px 9px;
     color: #fff;
-  }
+    font-size: inherit;
+}
+  
  
  
    

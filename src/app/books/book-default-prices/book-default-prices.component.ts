@@ -19,7 +19,7 @@ export class BookDefaultPricesComponent implements OnInit {
   myControl = new FormControl();
   showdrop:any=  false;
   masterData:any;
-  currency=[]
+  currency:any=[]
   pricearray:any;
   displayedColumns: string[] = ['name', 'description','options', 'productType','price_interval','price_amount'];  
   freeLabel= 'Free';
@@ -206,6 +206,14 @@ dropDownChange(value:any){
   this.extractPrice(this.masterData, value.value);
 
 }
+// currValue(defaultcurrency:any){
+//   if (defaultcurrency == this.currency){
+//     // console.log(defaultcurrency)
+//     return this.defaultcurrency
+//   }else{
+//     return this.currency
+//   }
+// }
 
 extractPrice(data:any, pub:any){
   // debugger;
@@ -217,7 +225,7 @@ extractPrice(data:any, pub:any){
       element.prices.forEach((elements:any) => {   
         // if(elements.name=='chapter-price'  || elements.name=='edition-price' )
       // (entry.productType=='ebook' && entry.name=='edition-price' )
-        debugger;
+        // debugger;
       pricearray.push({
           name: element.name,
           productType:elements.name,
@@ -229,7 +237,8 @@ extractPrice(data:any, pub:any){
           price_name:elements.name
         })  
       });      
-    }    
+    }  
+    console.log(pricearray)  
   });
 
 

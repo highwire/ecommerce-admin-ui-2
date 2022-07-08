@@ -25,7 +25,7 @@ interface USER {
   styleUrls: ['./book-specific-prices.component.css']
 })
 export class BookSpecificPricesComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'description', 'productType','price_interval','price_amount','options',];
+  displayedColumns: string[] = ['name', 'description', 'productType','price_amount','price_interval','options',];
   currency:any=[];
   selectedCurrency:any= '  All CURRENCIES';
   masterdata:any;
@@ -41,17 +41,31 @@ export class BookSpecificPricesComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10, 25, 100];
   animal: any;
   name: any;
+  defCurrency:any='USD($)'
+  disable:boolean=true
   
   productTypes:any=[
     {key:"",value:'All'},
     {key:"issue-price",value:'Issue'},
     {key:"article-price",value:'Article'},
-    
-    
-  ];
+ ];
+ 
   selectedType:any= 'ALL';
   pricearray:any
-  element:any
+  element:any;
+
+  currFormat(defCurrency:any) {
+    // console.log(priceType)
+    if (defCurrency === 'USD') {
+      return this.defCurrency;
+    }
+    else  {
+      return this.currency;
+    }
+    
+  }
+  
+  
 
   
 
@@ -67,7 +81,7 @@ export class BookSpecificPricesComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectAllPublishers();
-    var curr= localStorage.getItem('currency')+'';
+    var curr= localStorage.getItem('defaultcurrency')+'';
     if(curr)
     this.currency=  JSON.parse(curr);
 
@@ -129,7 +143,7 @@ export class BookSpecificPricesComponent implements OnInit {
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
-            price_interval:elements.interval,
+            price_interval:self.period(elements.interval),
             price_name:elements.name,
             price:elements
           })  
@@ -145,11 +159,12 @@ export class BookSpecificPricesComponent implements OnInit {
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
-            price_interval:elements.interval,
+            price_interval:self.period(elements.interval),
             price_name:elements.name,
             price:elements
           })  
         }else{
+          // debugger
           pricearray.push({
             name: element.name,
             productType:element.productType,
@@ -157,14 +172,14 @@ export class BookSpecificPricesComponent implements OnInit {
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
-            price_interval:elements.interval,
+            price_interval:self.period(elements.interval),
             price_name:elements.name,
             price:elements
           })  
         // }
       }
         
-      
+      console.log(pricearray)
       });      
     }    
   });
@@ -299,5 +314,25 @@ export class BookSpecificPricesComponent implements OnInit {
       this.animal = result;
     });
   }
+
+  period(interval:any=[]){
+    var hours = interval;
+    var days = hours/24;
+    var year = days/365
+    var month = hours * .0015
+    // console.log(month + " month");
+    // console.log(year + " year");
+    // console.log(hours)
+    if(hours > 8700){
+      return `${Math.floor(year)} Year `;
+    }
+    if(hours > 699  ){
+      return `${Math.floor(month)} Month`;}
+    if(hours < 0 ){
+        return  'Perpetual' }
+    else{
+      return `${hours} Hours`;
+    }
+    }
 }
 
