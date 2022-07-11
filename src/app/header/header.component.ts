@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthresolverService} from '../auth/authresolver.service';
 import {HTTPService } from '../services/http.service';
 import { BaseService } from 'src/app/services/base.service';
-
+import {hwValidator} from '../services/hwvalidator.service'
 import {forkJoin,map, of, catchError} from 'rxjs';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -38,6 +38,7 @@ export class HeaderComponent implements OnInit {
     public auth: AuthresolverService,
     public client :HttpClient,
     public router: Router,
+    public hwv :hwValidator,
   ) { }
 
   ngOnInit(): void {
@@ -59,10 +60,10 @@ export class HeaderComponent implements OnInit {
     this.auth.authMenu.subscribe((message) => {
       this.hwpUser = message
       localStorage.setItem('auth','true');   
-      this.catalogOptsFactory();   
+      this.selectAllPublishers();   
     });
     this.joural();
-    this.catalogOptsFactory();
+    this.selectAllPublishers();
     
   }
 
@@ -74,7 +75,7 @@ export class HeaderComponent implements OnInit {
       this.getDefalutCurrencyList();
       this.getSiteData();
       this.publisher= localStorage.getItem('publisher-label');
-      this.catalogOptsFactory();
+      this.selectAllPublishers();
       // this.catalogOptsFactory();
     })
   }
@@ -187,6 +188,48 @@ export class HeaderComponent implements OnInit {
   
 }
 
+
+selectAllPublishers(){
+  let publisher = localStorage.getItem('publisher')  ;
+  let URL= this.base.PRODUCT_LIST+ publisher+'/products';
+  this.http.getDatawithGet(URL,publisher).subscribe((data:any)=>{
+      console.log(data);
+      this.filterDOI(data);
+     
+  })
+}
+filterDOI(data:any){
+  var self= this
+  this.model = {
+    subscriptions: false,
+    refwork: false,
+    site: false
+  };
+  data= data.filter((entry:any)=>{
+    
+    return(self.hwv.doi(entry.name) || self.hwv.pisaId(entry.name) ||self.hwv.isbn(entry.name) || self.hwv.resourceId(entry.name))
+  });
+  data.forEach((element:any) => {
+    // console.log(element);
+    if(element.prices && Array.isArray(element.prices)  &&
+     (element.productType=='ebook' || element.productType=='edition') ){
+      this.model.subscriptions = true;
+
+    } 
+    if(element.prices && Array.isArray(element.prices)  && element.productType=='refwork'){
+      this.model.refwork = true;
+
+    } 
+    if(element.prices && Array.isArray(element.prices)  && element.productType=='site'){
+      this.model.site = true;
+    }
+    
+    
+    
+    
+    })
+  
+}
 
 catalogOptsFactory() {
   this.model = {
