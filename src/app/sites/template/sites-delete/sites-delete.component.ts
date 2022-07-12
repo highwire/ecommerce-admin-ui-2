@@ -1,7 +1,7 @@
 
 import { Component, OnInit,Inject } from '@angular/core';
 
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
 import {HTTPService } from '../../../services/http.service';
 import { BaseService } from '../../../services/base.service';
 
@@ -26,6 +26,7 @@ export class SitesDeleteComponent implements OnInit {
   constructor(
     public http: HTTPService,
     public base: BaseService,
+    public dialogRef: MatDialogRef<SitesDeleteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
@@ -46,8 +47,8 @@ export class SitesDeleteComponent implements OnInit {
     let URL= this.base.DELETE_PRICE+ publisher +'/products/'+ name;
     console.log(URL);
     this.http.getDatawithDelete(URL,'').subscribe((res:any)=>{
-      alert(res);
- 
+      this.base.openSnackBar(3,'Deleted Successfully.');
+      this.dialogRef.close('');
     })
 
   }
