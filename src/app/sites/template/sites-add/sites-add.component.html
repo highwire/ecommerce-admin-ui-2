@@ -41,7 +41,17 @@
         <tr *ngFor="let item of basedata.prices; let ind = index">
           <th scope="col">{{ item.productType | titlecase }}</th>
           <td>
-            <select
+            <input
+              style="
+                border-radius: 0px;
+                background-color: #e9ecef;
+                border: none;
+              "
+              type="input"
+              disabled="true"
+              [(ngModel)]="item.price_currency"
+            />
+            <!-- <select
               id="dropdown"
               class="form-select"
               aria-label="#"
@@ -50,7 +60,7 @@
               <option *ngFor="let curr of currency" value="{{ curr }}">
                 {{ curr }}
               </option>
-            </select>
+            </select> -->
           </td>
           <td>
             <label class="switch">

@@ -87,7 +87,7 @@ export class SignupComponent implements OnInit {
         //     }
         //   });
         // });
-        this.base.openSnackBar(5,'Login successfully.');
+        this.base.openSnackBar(3,'Login successfully.');
         this.router.navigateByUrl('journals/publishers');
       }
       // ,

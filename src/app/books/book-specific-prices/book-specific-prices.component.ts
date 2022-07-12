@@ -127,7 +127,7 @@ export class BookSpecificPricesComponent implements OnInit {
   this.masterdata=data;
   data.forEach((element:any) => {
     // console.log(element);
-    if(element.prices && Array.isArray(element.prices)  && element.productType=='ebook'){
+    if(element.prices && Array.isArray(element.prices)  && (element.productType=='ebook'  || element.productType=='edition' )){
       // debugger
       
        element.prices.forEach((elements:any) => {      
