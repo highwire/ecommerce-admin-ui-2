@@ -1,15 +1,13 @@
 <div class="container p-2 my-3">
-  <h4>View/Add/EditPrices</h4>
+  <h1>View/Add/EditPrices</h1>
   <div class="sm-4 my-2 mx-0 row">
     <div class="mb-3 row" *ngIf="data">
-      <label for="inputtext" class="col-sm-5 col-form-label"
-        >Publication Details</label
-      >
+      <label for="inputtext" class="col-sm-5 col-form-label">Publication Details</label>
       <div class="col-sm-6">
         <div *ngIf="data.title; then thenBlock; else elseBlock"></div>
         <ng-template #thenBlock>
           {{ data.authorsList[0].personLastName }}. ({{
-            data.publicationDate | date: "yyyy"
+          data.publicationDate | date: "yyyy"
           }}). {{ data.title }}.
           <i> {{ data.journalName }}().</i>
           doi:{{ data.doi }}
@@ -18,9 +16,7 @@
       </div>
     </div>
     <div class="mb-3 row">
-      <label for="inputtext" class="col-sm-5 col-form-label"
-        >Product Type</label
-      >
+      <label for="inputtext" class="col-sm-5 col-form-label">Product Type</label>
       <div class="col-sm-6">
         {{ productType | titlecase }}
       </div>
@@ -41,83 +37,52 @@
         <tr *ngFor="let item of basedata.prices; let ind = index">
           <th scope="col">{{ item.productType | titlecase }}</th>
           <td>
-            <select
-              id="dropdown"
-              class="form-select"
-              aria-label="#"
-              [(ngModel)]="item.price_currency"
-            >
+            <select id="dropdown" class="form-select" aria-label="#" [(ngModel)]="item.price_currency" [disabled] ="disable">
               <option *ngFor="let curr of currency" value="{{ curr }}">
                 {{ curr }}
               </option>
+              <option>{{defaultCurrency}}</option>
             </select>
+           
           </td>
           <td>
             <label class="switch">
-              <input
-                type="checkbox"
-                (change)="onItemChange($event.target, item)"
-                [checked]="item.price_amount == 'Not for Sale' ? false : true"
-              />
+              <input type="checkbox" (change)="onItemChange($event.target, item)"
+                [checked]="item.price_amount == 'Not for Sale' ? false : true" />
               <span class="slider round"></span>
             </label>
           </td>
           <td>
             <div class="input-group mb-3">
-              <div
-                *ngIf="
+              <div *ngIf="
                   item.price_amount == notForSaleLabel;
                   then thenBlock;
                   else elseBlock
-                "
-              ></div>
+                "></div>
               <ng-template #thenBlock>{{ notForSaleLabel }} </ng-template>
               <ng-template #elseBlock>
-                <span
-                  style="border-radius: 0px; border: none"
-                  class="input-group-text"
-                  id="#"
-                  >{{ item.price_currency | reffilterPipe }}</span
-                >
-                <input
-                  style="
+                <span style="border-radius: 0px; border: none" class="input-group-text" id="#">{{ item.price_currency |
+                  reffilterPipe }}</span>
+                <input style="
                     border-radius: 0px;
                     background-color: #e9ecef;
                     border: none;
-                  "
-                  type="text"
-                  [(ngModel)]="item.price_amount"
-                  class="form-control"
-                  placeholder=""
-                  aria-label="price"
-                  aria-describedby="#"
-                />
+                  " type="text" [(ngModel)]="item.price_amount" class="form-control" placeholder="" aria-label="price"
+                  aria-describedby="#" />
               </ng-template>
             </div>
           </td>
           <td>
             <div class="input-group mb-3 hour">
-              <select
-                id="dropdown"
-                [(ngModel)]="item.price_interval"
-                class="form-select"
-                aria-label="#"
-              >
-                <option
-                  *ngFor="let inter of accessPeriods"
-                  value="{{ inter.value }}"
-                >
+              <select id="dropdown" [(ngModel)]="item.price_interval" class="form-select" aria-label="#">
+                <option *ngFor="let inter of accessPeriods">
                   {{ inter.label }}
                 </option>
               </select>
             </div>
           </td>
           <td>
-            <button
-              class="btn btn-primary me-md-2 can"
-              type="button"
-              (click)="removeitem(ind)"
-            >
+            <button class="btn btn-primary me-md-2 can" type="button" (click)="removeitem(ind)">
               <i class="fa-solid fa-minus"></i>REMOVE
             </button>
           </td>
@@ -125,13 +90,22 @@
         <tr>
           <td>
             <div class="input-group mb-3 hour">
-              <button
-                class="btn btn-primary mx-2 sav"
-                (click)="addPrice()"
-                type="button"
-              >
+              <!-- <button class="btn btn-primary mx-2 sav" (click)="addPrice()" type="button">
                 Article
+              </button> -->
+              <button class="btn btn-primary sav dropdown-toggle" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Add Price
               </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                  <a class="dropdown-item" href="javascript:void(0)" (click)="addPrice()">{{productType}}</a>
+                </li>
+                <!-- <li>
+                  <a class="dropdown-item" href="javascript:void(0)" (click)="addPrice()">Chapter</a>
+                </li> -->
+
+              </ul>
               <!-- <select id='dropdown' class="form-select" aria-label="#"> -->
               <!-- <option selected (click)="addPrice()">Article </option> -->
               <!-- </select> -->
@@ -140,18 +114,10 @@
         </tr>
         <tr>
           <td class="button_td">
-            <button
-              class="btn btn-primary can"
-              (click)="closeDialog(false)"
-              type="button"
-            >
+            <button class="btn btn-primary can" (click)="closeDialog(false)" type="button">
               Cancel
             </button>
-            <button
-              class="btn btn-primary mx-2 sav"
-              type="button"
-              (click)="update()"
-            >
+            <button class="btn btn-primary mx-2 sav" type="button" (click)="update()">
               Save
             </button>
           </td>

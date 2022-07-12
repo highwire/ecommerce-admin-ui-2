@@ -99,7 +99,7 @@ input:checked+.slider:before {
 
 
 
-th,h4{
+th,h4,h1{
     color:#d6203e;
 }
 table{border-color: #fff!important;}
