@@ -196,7 +196,8 @@ extractPrice(data:any, pub:any){
           price_amount: self.formatAmountDisplay (elements.amount),
           price_currency:elements.currency,
           price_interval:elements.interval,
-          price_name:elements.name
+          price_name:elements.name,
+          showName: (elements.name=="article-price") ?'Article':'Issue'
         })  
       });      
     }    
@@ -222,6 +223,7 @@ addPrice(type:any){
       price_currency:'',
       price_interval:'',                
       productType:type,
+      showName: (type=="article") ?'Article':'Issue'
   }
   
   this.pricearray.push(add);
@@ -295,6 +297,7 @@ getCurrencyList(){
   // var name =  window.encodeURIComponent(this.basedata.element.name)
   let URL= this.base.CURRENCY_LIST+publisher+ '/currencies';
   this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
+    // debugger;
     this.currency  =  res;
       console.log(res);       
   })

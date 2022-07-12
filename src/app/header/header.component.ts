@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    debugger;
+    
     var menu:any= localStorage.getItem('menu');
     if(menu && JSON.parse(menu)){
       this.jouralslect=  true;
@@ -207,7 +207,7 @@ filterDOI(data:any){
   };
   data= data.filter((entry:any)=>{
     
-    return(self.hwv.doi(entry.name) || self.hwv.pisaId(entry.name) ||self.hwv.isbn(entry.name) || self.hwv.resourceId(entry.name))
+    return( self.hwv.doi(entry.name) || self.hwv.pisaId(entry.name) ||self.hwv.isbn(entry.name) || self.hwv.resourceId(entry.name) ||entry.name=='site_bundle')
   });
   data.forEach((element:any) => {
     // console.log(element);
@@ -215,12 +215,15 @@ filterDOI(data:any){
      (element.productType=='ebook' || element.productType=='edition') ){
       this.model.subscriptions = true;
 
-    } 
+    }
+     
     if(element.prices && Array.isArray(element.prices)  && element.productType=='refwork'){
       this.model.refwork = true;
 
     } 
+    console.log('element.productType',element.productType);
     if(element.prices && Array.isArray(element.prices)  && element.productType=='site'){
+      
       this.model.site = true;
     }
     
