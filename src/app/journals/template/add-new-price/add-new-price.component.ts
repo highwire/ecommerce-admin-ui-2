@@ -9,6 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
+
 @Component({
   selector: 'app-add-new-price',
   templateUrl: './add-new-price.component.html',
@@ -19,7 +20,7 @@ export class AddNewPriceComponent implements OnInit {
   currency:any=[];
   sitedata:any;
   pricedata:any= [];
-  currValue:any 
+  currValue:any ='USD';
 
   notForSaleLabel= 'Not for Sale';
     
@@ -99,11 +100,18 @@ export class AddNewPriceComponent implements OnInit {
       role: "Intelligent Commerce Pricing and Reporting UI",
       userId: "2"
     }
+    var site:any= localStorage.getItem('siteData');
+    if(site){
+      debugger;
+      this.sitedata= JSON.parse(site) ;
+      console.log('this.sitedata ${this.sitedata}')
+    }else{
     this.http.getDatawithPost(URL,data).subscribe((data:any)=>{
         console.log('sitedata',data);             
         this.sitedata=  data.sites;
         this.apicall()
     })
+  }
   }
   catchError(e:any){
     console.log(e);
@@ -145,13 +153,35 @@ handleResponse(res:any){
   console.log('res',res);
 
 }
+calculateAccess(prices:any){
+  var newPrice:any=[];
+  var ret=  true;
+  // this.basedata.prices
+  prices.forEach((element:any) => {
+    var elm:any= element.price_currency+'_'+element.price_interval
+     if(newPrice.indexOf(elm)==-1){
+      newPrice.push(elm);        
+     }else{
+      ret=  false;
+     }                    
+   });
+   return ret;    
+}
 
 addPrice(){
+
+  
+  // if(!this.calculateAccess(this.pricedata))
+  // {   alert('Price alreay exit.')
+  //     return 
+  // }
 var priceArray:any={};
+
 priceArray.productType = this.pricedata[0].productType;
 priceArray.corpus = this.pricedata[0].corpus;
 priceArray.name = this.pricedata[0].name;
 priceArray.description = this.pricedata[0].description;
+
 priceArray.prices= []
   this.pricedata.forEach((element:any) => {
     priceArray.prices.push(element.price)
@@ -182,12 +212,12 @@ priceArray.prices= []
   }
   update(){
     if(!this.fromModel.value.doi){
-      this.base.openSnackBar(5,'Please enter doi.');
+      this.base.openSnackBar(3,'Please enter doi.');
       return;
     }
     if(!this.fromModel.value.selected_site){
 
-      this.base.openSnackBar(5,'Please select site.');
+      this.base.openSnackBar(3,'Please select site.');
       return;
     }
     this.filterPrice();
@@ -204,6 +234,9 @@ priceArray.prices= []
   getUriData(data:any){
     // var arr= data.splite('/')
     // console.log(arr);
+    if(data.results && data.results.entry){
+
+    
     var URL= this.base.ATOM_LITE_TWO+data.results.entry.uri;
     console.log(URL);
     var token= localStorage.getItem('hwp-login');
@@ -215,11 +248,20 @@ priceArray.prices= []
     }
     this.http.getDatawithGet(URL,'',header).subscribe((res:any)=>{
       console.log('res 2     ',res);
-      this.entry=  res;
+      if(res){
+        this.entry=  res;
+      }else{
+        // this.base.openSnackBar(5,'Not found.');
+      }
+      
+      
       // alert(res.results.entry.uri);
       // this.closeDialog(true);
       
     })
+  }else{
+    this.base.openSnackBar(5,'Not found.');
+  }
   }
  
 }

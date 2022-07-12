@@ -38,8 +38,6 @@ export class ChartsComponent implements OnInit {
     start: new FormControl(),
     end: new FormControl()
   });
-  publisher:any
-
   constructor(
     public http: HTTPService,
     public base: BaseService,
@@ -58,10 +56,10 @@ export class ChartsComponent implements OnInit {
     var curr= localStorage.getItem('currency')+'';
     if(curr)
     this.currency=  JSON.parse(curr);
-     // let myChart=null
+
+    
+    // let myChart=null
     this.myChart = document.getElementById("myChart");
-    this.publisher= localStorage.getItem('publisher-label');
-    console.log("hhhhhhhhhh",this.publisher);
     
     // myChart = new Chart(ctx,config)
     
@@ -69,8 +67,9 @@ export class ChartsComponent implements OnInit {
     //this.loadChart();
     this.getChartData();
     
-    
-    this.selectedItems = [];
+    this.selectedItems = [
+
+    ];
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'corpus',
@@ -79,11 +78,12 @@ export class ChartsComponent implements OnInit {
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 2,
       allowSearchFilter: true,
+
       closeDropDownOnSelection: true
     };
 
   }
-
+  //////////////////
   onItemSelect(item: any) {
     this.extractPrice(this.masterData, item.corpus);
     console.log(item);
@@ -154,6 +154,8 @@ export class ChartsComponent implements OnInit {
   filterDOI(data:any)
   {    
     this.masterData= data
+  
+
 }
 dropDownChange(value:any){
   console.log(value.values);
@@ -392,50 +394,10 @@ loadChart( amountsArray:any,datesrages:any): void {
     };
     return result;
   };
-  // journal and book button ...
-  onJournal(){
-
-    this.selectAllPublishers();}
-  
-  onBooks(){
-    this.getSiteData();
-  }
-    //books............
-    getSiteData(){
-      let publisher = localStorage.getItem('springer')  ;
-      let URL= this.base.SITE_TYPE_SERVICE_POINT ;
-      var data={
-        // publisher: publisher,
-        siteType: "ItemSet",
-        publisher: "springer",
-        // siteType: "Books"
-      }
-      console.log(data)
-      this.http.getDatawithPost(URL,data).subscribe((data:any)=>{
-        let  localdata:any=[];
-          console.log('sitedata',data);             
-          localdata=  JSON.parse(data).feed   ;
-          this.sitedata= [];
-          localdata.forEach((element:any) => {
-            
-            this.sitedata.push({
-              corpus: element.entry.corpus,
-              title: element.entry.title,
-            })
-            
-          });
-          
-          
-         
-      })
-    }   
-  }
-
+}
 function destroy() {
   throw new Error('Function not implemented.');
 }
-
-
 
 
 

@@ -99,7 +99,7 @@ update(){
 
   }
   this.http.getDatawithPut(URL,data).subscribe((res:any)=>{
-    alert('Data Updated');
+    this.base.openSnackBar(5,'Updated successful.');
 
   })
 

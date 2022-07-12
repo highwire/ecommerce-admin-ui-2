@@ -183,11 +183,11 @@ extractPrice(data:any, pub:any){
   var pricearray:any= [];
   data.forEach((element:any) => {
     // console.log(element);
-    if(element.prices && Array.isArray(element.prices) && element.name==pub ){
+    if(element.prices && Array.isArray(element.prices) && element.name==pub        ){
       element.prices.forEach((elements:any) => {   
         // if(elements.name=='chapter-price'  || elements.name=='edition-price' )
       // (entry.productType=='ebook' && entry.name=='edition-price' )
-        debugger;
+      if(elements.name=="article-price" || elements.name=='issue-price')
       pricearray.push({
           name: element.name,
           productType:element.productType,
