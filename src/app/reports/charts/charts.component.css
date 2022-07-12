@@ -43,8 +43,8 @@
 
       .Jstitle{
       
-        margin-top: 11px;
-        margin-bottom: 11px;
+        margin-top: 19px;
+    margin-bottom: 62px;
     
         color: #A81732;
     
@@ -76,13 +76,27 @@
     padding: 3px 1px !important;
     margin-left: 2px;
 }
-  h4{
+
+h4{
       
   
-    color: #A81732;
+  color: #A81732;
 
-    font-weight: 500;
-    
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 2px;
+  
 
 }
+.btPress{background-color: #fff;
+          color:#A81732;
+          border: 2px solid brown;
+        cursor: pointer;
+        white-space: nowrap;
+        padding: 7px 15px;
+        font-weight: 400;
+      }
+.btPress:focus{ background-color: #A81732;
+                color: white;}
+
       
