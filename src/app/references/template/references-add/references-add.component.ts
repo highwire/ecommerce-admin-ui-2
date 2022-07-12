@@ -13,7 +13,7 @@ import {MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
 export class ReferencesAddComponent implements OnInit {
   currency_stack:any;
   productType:any;
-  currency=[]
+  currency:any=[]
   data:any;
   notForSaleLabel= 'Not for Sale';
   accessPeriods= [
@@ -27,6 +27,9 @@ export class ReferencesAddComponent implements OnInit {
     {label: '2 Years', value: 17520, sort: 17520},
     {label: 'Perpetual', value: -1, sort: 99999}
   ];
+  defaultCurrency:any = 'USD'
+  disable:boolean=false
+  price_interval:any
   constructor(
     public http: HTTPService,
     public base: BaseService,
@@ -45,7 +48,22 @@ export class ReferencesAddComponent implements OnInit {
     this.selectAllPublishers();
     this.getCurrencyList();
     // this.calculateAccess()
-  }
+
+  if(this.currency == ''){
+    if(this.currency == ''){
+      this.disable = true
+    }
+    else if (this.currency ==!'') {
+      this.disable = false
+    } 
+    return this.defaultCurrency
+    }
+    else if(this.currency ==!''){
+      this.defaultCurrency = this.currency
+      
+    }
+
+}
   calculateAccess(prices:any){
     var newPrice:any=[];
     var ret=  true;
@@ -80,7 +98,7 @@ export class ReferencesAddComponent implements OnInit {
       item.price_amount= this.notForSaleLabel;
     }
     
-    console.log(    test.checked);
+    console.log(test.checked);
 
 
 
@@ -103,7 +121,7 @@ export class ReferencesAddComponent implements OnInit {
         name: this.basedata.prices[0].name,
         price_name:this.basedata.prices[0].price_name,
         price_amount:'',
-        price_currency:'',
+        price_currency:this.defaultCurrency,
         price_interval:'',                
         productType:this.basedata.prices[0].productType,
     }
@@ -139,6 +157,7 @@ export class ReferencesAddComponent implements OnInit {
   
     }
     console.log(data);
+    alert('Update Successfully')
     this.http.getDatawithPut(URL,data).subscribe((res:any)=>{
       // alert(res);
       this.closeDialog(true);
