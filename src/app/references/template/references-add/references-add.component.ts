@@ -145,6 +145,8 @@ export class ReferencesAddComponent implements OnInit {
     return 
   }
     var prices= this.checkPricealreayexit();
+
+    console.log("fdsfdfdfdsffds",prices); 
     
     
     var data={
@@ -170,12 +172,14 @@ export class ReferencesAddComponent implements OnInit {
     this.basedata.prices.forEach((element:any) => {
       // if(element.price_interval==this.data.element.price_interval 
         // && element.price_currency == this.data.element.price_currency)
-        // element.price_amount=  this.data.element.price_amount    
+        // element.price_amount=  this.data.element.price_amount   
+        
+        //console.log("rajajajarrjarjarjraj",parseInt(element.price_amount));
         prices.push({
-          name: element.price_name, 
-          amount: element.price_amount,
-           currency: element.price_currency,
-           interval: element.price_interval
+          name:element.price_name, 
+          amount:parseInt(element.price_amount),
+           currency:element.price_currency,
+           interval:parseInt(element.price_interval)
         });     
     });
 

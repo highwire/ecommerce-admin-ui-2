@@ -48,7 +48,7 @@ export class BookDeleteComponent implements OnInit {
     console.log(URL);
     this.http.getDatawithDelete(URL,'').subscribe((res:any)=>{
       this.base.openSnackBar(3,'Deleted Successfully.');
-      this.dialogRef.close('');
+      this.dialogRef.close(true);
     })
 
   }

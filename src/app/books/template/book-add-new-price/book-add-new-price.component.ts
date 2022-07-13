@@ -68,13 +68,17 @@ export class BookAddNewPriceComponent implements OnInit {
     var curr= localStorage.getItem('currency')+'';
     if(curr)
     this.currency=  JSON.parse(curr);
+    // this.fromModel.patchValue({
+    //   selected_site:'DOI'
+
+    // })
 
    
   }
 
   
   filterPrice(){
-    
+    this.pricedata=[]
     this.basedata.prices.forEach((element:any) => {
       console.log(element.name,'  ',this.fromModel.value.doi);
     if(element.name==this.fromModel.value.doi){
@@ -82,6 +86,9 @@ export class BookAddNewPriceComponent implements OnInit {
     }
     });
     console.log("Filter data", this.pricedata);
+    if(this.pricedata && this.pricedata[0]){
+
+    
     this.priceobj.patchValue({
       price: this.pricedata[0].price_amount,
       currency: this.pricedata[0].price_currency,
@@ -89,25 +96,44 @@ export class BookAddNewPriceComponent implements OnInit {
       productType:this.pricedata[0].productType,
       name:this.pricedata[0].price_name,
    });
+  }else{
+    this.base.openSnackBar(5,'Not found.');
+  }
   }
 
   getSiteData(){
     let publisher = localStorage.getItem('publisher')  ;
-    let URL= this.base.SITE_LIST;
+    let URL= this.base.SITE_TYPE_SERVICE_POINT;
     var data={
-      pubTerm: publisher,
-      role: "Intelligent Commerce Pricing and Reporting UI",
-      userId: "2"
+      publisher: publisher,
+      
+        siteType: "ItemSet"
     }
     this.http.getDatawithPost(URL,data).subscribe((data:any)=>{
-        console.log('sitedata',data);             
-        this.sitedata=  data.sites;
-        this.apicall()
+
+        console.log('sitedata',data);
+        debugger;             
+        this.sitedata=  JSON.parse(data).feed        
     })
   }
-  catchError(e:any){
-    console.log(e);
-  }
+
+  // getSiteData(){
+  //   let publisher = localStorage.getItem('publisher')  ;
+  //   let URL= this.base.SITE_LIST;
+  //   var data={
+  //     pubTerm: publisher,
+  //     role: "Intelligent Commerce Pricing and Reporting UI",
+  //     userId: "2"
+  //   }
+  //   this.http.getDatawithPost(URL,data).subscribe((data:any)=>{
+  //       console.log('sitedata',data);             
+  //       this.sitedata=  data.sites;
+  //       this.apicall()
+  //   })
+  // }
+  // catchError(e:any){
+  //   console.log(e);
+  // }
 
   public requestDataFromMultipleSources(): Observable<any[]> {
     var arr: any[]=[]
@@ -191,7 +217,7 @@ priceArray.prices= []
       return;
     }
     this.filterPrice();
-
+debugger;
     let publisher = this.fromModel.value.selected_site //localStorage.getItem('publisher')  ;
     // var name = this.basedata.element.name.replace('/', '!2F')
     let URL= this.base.ATOM_LOOKUP+ publisher +'?'+'doi='+this.fromModel.value.doi;  
@@ -201,25 +227,39 @@ priceArray.prices= []
     })
   
   }
-  getUriData(data:any){
-    // var arr= data.splite('/')
-    // console.log(arr);
-    var URL= this.base.ATOM_LITE_TWO+data.results.entry.uri;
-    console.log(URL);
-    var token= localStorage.getItem('hwp-login');
-    var header:any=    {
-      'Content-Type':  'application/json',
-      'Authorization': 'Bearer '+ token,
-      'accept':'application/vnd.hw.citation-ui+json',
-      'Accept-Encoding':'gzip, deflate, br'
-    }
-    this.http.getDatawithGet(URL,'',header).subscribe((res:any)=>{
-      console.log('res 2     ',res);
-      this.entry=  res;
-      // alert(res.results.entry.uri);
-      // this.closeDialog(true);
-      
-    })
+
+
+
+getUriData(data:any){
+  
+  if(data.results && data.results){
+
+  
+  var URL= this.base.ATOM_LITE_TWO+data.results.entry.uri;
+  console.log(URL);
+  var token= localStorage.getItem('hwp-login');
+  var header:any=    {
+    'Content-Type':  'application/json',
+    'Authorization': 'Bearer '+ token,
+    'accept':'application/vnd.hw.citation-ui+json',
+    'Accept-Encoding':'gzip, deflate, br'
   }
- 
+  this.http.getDatawithGet(URL,'',header).subscribe((res:any)=>{
+    console.log('res 2     ',res);
+    if(res){
+      this.entry=  res;
+    }else{
+      // this.base.openSnackBar(5,'Not found.');
+    }
+    
+    
+    // alert(res.results.entry.uri);
+    // this.closeDialog(true);
+    
+  })
+}else{
+  this.base.openSnackBar(5,'Not found.');
+}
+}
+
 }

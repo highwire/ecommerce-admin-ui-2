@@ -248,6 +248,9 @@ export class SitesSpecificPricesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.animal = result;
+      if(result){
+        this.selectAllPublishers();
+      }
     });
   }
 
@@ -317,6 +320,9 @@ export class SitesSpecificPricesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.animal = result;
+      if(result){
+        this.selectAllPublishers();
+      }
     });
   }
   edit(element:any){
@@ -332,6 +338,9 @@ export class SitesSpecificPricesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.animal = result;
+      if(result){
+        this.selectAllPublishers();
+      }
     });
   }
 }

@@ -1,7 +1,7 @@
 
 import { Component, OnInit,Inject } from '@angular/core';
 
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
 import {HTTPService } from '../../../services/http.service';
 import { BaseService } from '../../../services/base.service';
 
@@ -30,6 +30,7 @@ export class BookEditComponent implements OnInit {
     
     public http: HTTPService,
     public base: BaseService,
+    public dialogRef: MatDialogRef<BookEditComponent>,
     ) { }
 
 
@@ -100,8 +101,9 @@ update(){
   }
   this.http.getDatawithPut(URL,data).subscribe((res:any)=>{
     this.base.openSnackBar(5,'Updated successful.');
+    this.dialogRef.close(true);
 
-  })
+  }, err => alert('Something went wrong.'))
 
 }
 checkPricealreayexit(){
@@ -113,7 +115,7 @@ checkPricealreayexit(){
       element.price_amount=  this.data.element.price_amount    
       prices.push({
         name: element.price_name, 
-        amount: element.price_amount,
+        amount: element.price_amount==this.notForSaleLabel? -1:element.price_amount,
          currency: element.price_currency,
          interval: element.price_interval
       });     

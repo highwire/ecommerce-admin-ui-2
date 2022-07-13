@@ -201,9 +201,8 @@ priceArray.prices= []
     })
   
   }
-  getUriData(data:any){
-    // var arr= data.splite('/')
-    // console.log(arr);
+  getUriData(data:any){    
+    if(data.results && data.results.entry){    
     var URL= this.base.ATOM_LITE_TWO+data.results.entry.uri;
     console.log(URL);
     var token= localStorage.getItem('hwp-login');
@@ -215,11 +214,15 @@ priceArray.prices= []
     }
     this.http.getDatawithGet(URL,'',header).subscribe((res:any)=>{
       console.log('res 2     ',res);
-      this.entry=  res;
-      // alert(res.results.entry.uri);
-      // this.closeDialog(true);
-      
+      if(res){
+        this.entry=  res;
+      }else{
+        this.base.openSnackBar(5,'Not found.');
+      }      
     })
+  }else{
+    this.base.openSnackBar(5,'Not found.');
+  }
   }
  
 }

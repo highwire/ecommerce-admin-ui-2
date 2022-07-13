@@ -30,13 +30,17 @@
           <select
             class="select"
             name="chapter"
+            placeholder="Filter sites.."
             formControlName="selected_site"
             class="form-control p-2"
             id="chapter"
           >
             <option value="" selected="selected">Filter sites..</option>
-            <option value="{{ site.site_code }}" *ngFor="let site of sitedata">
-              {{ site.site_name }}
+            <option
+              value="{{ site.entry.corpus }}"
+              *ngFor="let site of sitedata"
+            >
+              {{ site.entry.title }}
             </option>
           </select>
         </div>

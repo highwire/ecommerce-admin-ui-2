@@ -64,7 +64,7 @@ publihserlist: any;
     debugger;
     var currency:any= localStorage.getItem('currency');
     if(currency){
-        currency= JSON.parse(currency) ;
+      // this.currency= JSON.parse(currency) ;
         this.router.navigateByUrl('journals/specific');
     }else{
 
