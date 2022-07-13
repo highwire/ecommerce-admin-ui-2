@@ -52,11 +52,28 @@ publihserlist: any;
     
 
     }
-    this.getCurrencyList();
+    this.getDefalutCurrencyList();
     this.auth.jouranlselect(true);
     console.log(item);
     
     
+  }
+  getDefalutCurrencyList(){
+    var currency:any= localStorage.getItem('defalut');
+    if(currency){
+        currency= JSON.parse(currency) ;
+        this.getCurrencyList()
+    }else{
+      let publisher = localStorage.getItem('publisher')  ;
+      
+      let URL= this.base.CURRENCY_LIST+publisher+ '/defaultcurrency';
+      this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
+      // this.currency  =  res;
+      localStorage.setItem('defaultcurrency',JSON.stringify(res));
+        console.log('currency', res);     
+        this.getCurrencyList();  
+      })
+    }  
   }
 
   getCurrencyList(){
@@ -72,7 +89,13 @@ publihserlist: any;
       this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
       // this.currency  =  res;
       localStorage.setItem('currency',JSON.stringify(res));
-        console.log(res);       
+        console.log(res); 
+        if(res.length==0){
+          var local=localStorage.getItem('defaultcurrency')+'';
+          local= JSON.parse(local).currency;
+          localStorage.setItem('currency',JSON.stringify([local]));
+        }      
+        
         this.router.navigateByUrl('journals/specific');
       })
     }

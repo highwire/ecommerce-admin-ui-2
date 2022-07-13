@@ -85,7 +85,7 @@ export class HeaderComponent implements OnInit {
   getCurrencyList(){
     var currency:any= localStorage.getItem('currency');
     if(currency){
-        currency= JSON.parse(currency) ;
+        // currency= JSON.parse(currency) ;
     }else{
 
       let publisher = localStorage.getItem('publisher')  ;

@@ -234,7 +234,9 @@ extractPrice(data:any, pub:any){
           price_amount: self.formatAmountDisplay (elements.amount),
           price_currency:elements.currency,
           price_interval:elements.interval,
-          price_name:elements.name
+          price_name:elements.name,
+          
+          showName: (elements.name=='chapter-price') ?'Chapter':'Ebook'
         })  
       });      
     }  
@@ -285,7 +287,7 @@ update(){
   var name = this.pricearray[0].name.replace('/', '!2F')
   let URL= this.base.DELETE_PRICE+ publisher +'/products/'+ name;
   console.log(URL);
-  this.calculateAccess(this.pricearray);
+  // this.calculateAccess(this.pricearray);
   if(!this.calculateAccess(this.pricearray))
     {   alert('Price alreay exit.')
         return 
@@ -322,7 +324,8 @@ checkPricealreayexit(){
       // element.price_amount=  this.data.element.price_amount    
       prices.push({
         name: element.price_name, 
-        amount: element.price_amount,
+        
+        amount: element.price_amount==this.notForSaleLabel? -1:element.price_amount,
          currency: element.price_currency,
          interval: element.price_interval
       });     
@@ -330,13 +333,10 @@ checkPricealreayexit(){
   return prices;
 }
 getCurrencyList(){
-  let publisher = localStorage.getItem('publisher')  ;
-  // var name =  window.encodeURIComponent(this.basedata.element.name)
-  let URL= this.base.CURRENCY_LIST+publisher+ '/currencies';
-  this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
-    this.currency  =  res;
-      console.log(res);       
-  })
+  var currency:any= localStorage.getItem('currency');
+    if(currency){
+        this.currency= JSON.parse(currency) ;
+    }
 
 }
 removeitem(index:any){

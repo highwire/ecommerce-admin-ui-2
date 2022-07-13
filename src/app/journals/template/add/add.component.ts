@@ -86,14 +86,11 @@ export class AddComponent implements OnInit {
 
   }
   getCurrencyList(){
-    let publisher = localStorage.getItem('publisher')  ;
-    // var name =  window.encodeURIComponent(this.basedata.element.name)
-    let URL= this.base.CURRENCY_LIST+publisher+ '/currencies';
-    this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
-      this.currency  =  res;
-        console.log(res);       
-    })
-
+    var currency:any= localStorage.getItem('currency');
+      if(currency){
+        this.currency= JSON.parse(currency) ;
+      }
+  
   }
   addPrice(){
     this.basedata.prices[0]
@@ -154,7 +151,8 @@ export class AddComponent implements OnInit {
         // element.price_amount=  this.data.element.price_amount    
         prices.push({
           name: element.price_name, 
-          amount: element.price_amount,
+          
+          amount: element.price_amount==this.notForSaleLabel? -1:element.price_amount,
            currency: element.price_currency,
            interval: element.price_interval
         });     
