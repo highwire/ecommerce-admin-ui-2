@@ -260,9 +260,10 @@ addPrice(type:any){
       name: this.pricearray[0].name,
       price_name:this.pricearray[0].price_name,
       price_amount:'',
-      price_currency:'',
+      price_currency:this.currency[0],
       price_interval:'',                
       productType:type,
+      showName:type
   }
   
   this.pricearray.push(add);
