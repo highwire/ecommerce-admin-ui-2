@@ -69,6 +69,9 @@ export class ReferencesAddNewPriceComponent implements OnInit {
     var curr= localStorage.getItem('currency')+'';
     if(curr)
     this.currency=  JSON.parse(curr);
+    this.priceobj.patchValue({ 
+      EisbnorDoi:'doi'
+     });
 
    
   }
@@ -194,7 +197,7 @@ priceArray.prices= []
       return;
     }
     
-    this.filterPrice();
+    // this.filterPrice();
 
     let publisher = this.fromModel.value.selected_site //localStorage.getItem('publisher')  ;
     // var name = this.basedata.element.name.replace('/', '!2F')

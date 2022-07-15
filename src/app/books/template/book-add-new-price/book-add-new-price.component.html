@@ -48,14 +48,25 @@
       <div class="p-3 row">
         <!-- <label for="inputtext" class="col-sm-4 col-form-label">Currency</label> -->
         <div class="col-sm-4">
-          <input
+          <select
+            class="select"
+            name="doi_type"
+            placeholder="DOI"
+            formControlName="DOI_TYPE"
+            class="form-control p-2"
+          >
+            <option value="doi" selected="selected">DOI</option>
+            <option value="eisbn">EISBN</option>
+          </select>
+
+          <!-- <input
             type="text"
             [readonly]="true"
             class="form-control p-2"
             class="form-control"
             placeholder="DOI"
             id="Details"
-          />
+          /> -->
         </div>
         <div class="col-sm-4">
           <input

@@ -26,6 +26,7 @@ export class BookAddNewPriceComponent implements OnInit {
   fromModel = new FormGroup({
     doi : new FormControl(''),
     selected_site : new FormControl(''),
+    DOI_TYPE:new FormControl(''),
     
   });
 
@@ -217,10 +218,13 @@ priceArray.prices= []
       return;
     }
     this.filterPrice();
-debugger;
+// debugger;
     let publisher = this.fromModel.value.selected_site //localStorage.getItem('publisher')  ;
     // var name = this.basedata.element.name.replace('/', '!2F')
-    let URL= this.base.ATOM_LOOKUP+ publisher +'?'+'doi='+this.fromModel.value.doi;  
+    if(!this.fromModel.value.DOI_TYPE){
+      this.fromModel.value.DOI_TYPE= 'doi'
+    } 
+    let URL= this.base.ATOM_LOOKUP+ publisher +'?'+this.fromModel.value.DOI_TYPE+'='+this.fromModel.value.doi;  
     this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
       this.getUriData(res);
 
