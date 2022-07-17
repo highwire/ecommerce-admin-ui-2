@@ -1,122 +1,123 @@
 .rf div {
-    height:100px;
-    /* border: 1px solid grey; */
-    
-   
+  height: 100px;
+  /* border: 1px solid grey; */
 }
 
-.rf div ul{color: grey;
-            text-align:center;
-            
-                padding-left: rem!important;
-                padding: 12px;
-            }
+.rf div ul {
+  color: grey;
+  text-align: center;
 
-.rf div ul li {list-style: none;
-                font-size: 35px;
-            margin-top: 20px;
-            color: #A81732;}
+  padding-left: rem !important;
+  padding: 12px;
+}
 
+.rf div ul li {
+  list-style: none;
+  font-size: 35px;
+  margin-top: 20px;
+  color: #a81732;
+}
 
-@media screen and (max-width: 768px){
-.df{
-    margin-left: 0px!important;
-}}
-@media screen and (max-width: 968px){
-.serch{margin-left: 5px!important;
-position: absolute;
-display: inline-block;
-margin-top: 45px;
-width: 93%!important;
-}}
+@media screen and (max-width: 768px) {
+  .df {
+    margin-left: 0px !important;
+  }
+}
+@media screen and (max-width: 968px) {
+  .serch {
+    margin-left: 5px !important;
+    position: absolute;
+    display: inline-block;
+    margin-top: 45px;
+    width: 93% !important;
+  }
+}
 
-@media screen and (max-width: 768px){
-    .col-sm-3{
-        margin-top: 0.5rem!important;
-    margin-bottom: 0.5rem!important;
-    }}
+@media screen and (max-width: 768px) {
+  .col-sm-3 {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+}
 
 .mat-form-field {
-    
-    
-    line-height: 2.125!important;}
+  line-height: 2.125 !important;
+}
 
-    @media screen and (max-width: 968px) {
-        .serchbtn {
-            height: 50px;
-            width:100%;
-          }
-    
-            .serch {
-                margin-left: 4px!important;
-                display: contents;
-            }
-    
-    
-            .dropbtn {
-              
-            
-              padding: 15px!important;
-              font-size: 16px;
-              
-              width: 65px;
-          }
-          
-      }
-
-      .bino {
-        
-      border: none;
-      background: none;
-      margin: -33px;
+@media screen and (max-width: 968px) {
+  .serchbtn {
+    height: 50px;
+    width: 100%;
   }
-      .btn.btn-default {
-        background: #E6E6E6;
-        border-radius: 0px;
-        width: 146px;
-        padding: 7px;
 
-        
-    }
-    .searchbar{
-        width: 99%;
-        border: 1px solid grey;
-        height: 35px;
-    }
-    .ground{
-        height: 92px;
-        padding: 10px;
-        text-align: center;
-    }
-    .Jstitle{
-      
-        margin-top: 11px;
-        margin-bottom: 11px;
-    
-        color: #A81732;
-    
-        font-weight: 300;
-        letter-spacing: .3px;
-    
-        font-size: 30px!important;
-    
-    }
-    .btn-danger, .btn-light{
-        padding:3px 8px;
-        border-radius: 0px ;
-        /* margin-bottom: 17px;
+  .serch {
+    margin-left: 4px !important;
+    display: contents;
+  }
+
+  .dropbtn {
+    padding: 15px !important;
+    font-size: 16px;
+
+    width: 65px;
+  }
+}
+
+.bino {
+  border: none;
+  background: none;
+  margin: -33px;
+}
+.btn.btn-default {
+  background: #e6e6e6;
+  border-radius: 0px;
+  width: 146px;
+  padding: 7px;
+}
+.searchbar {
+  width: 99%;
+  border: 1px solid grey;
+  height: 35px;
+}
+.ground {
+  height: 92px;
+  padding: 10px;
+  text-align: center;
+}
+.Jstitle {
+  margin-top: 11px;
+  margin-bottom: 11px;
+
+  color: #a81732;
+
+  font-weight: 300;
+  letter-spacing: 0.3px;
+
+  font-size: 30px !important;
+}
+.btn-danger,
+.btn-light {
+  padding: 3px 8px;
+  border-radius: 0px;
+  /* margin-bottom: 17px;
         text-align: center; */
-    }
+}
 
-    .btn-dark {
-        color: #fff;
-        background-color: #949ba1;
-        border-color: #949ba1 !important;
-        border-radius: 0px!important;
-        padding: 3px 12px !important;
-        margin-left: 2px;
-    }
-    .aceButton{
-        padding: 4px!important;
-    }
-    
+.btn-dark {
+  color: #fff;
+  background-color: #949ba1;
+  border-color: #949ba1 !important;
+  border-radius: 0px !important;
+  padding: 3px 12px !important;
+  margin-left: 2px;
+}
+.aceButton {
+  padding: 4px !important;
+}
+
+.table-column-200 {
+  min-width: 120px;
+}
+.mat-header-cell {
+  font-size: 15px !important;
+}

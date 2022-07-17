@@ -28,6 +28,21 @@ import { ReceiptComponent } from './receipt/receipt.component';
 // BarChartComponent,
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { MatSortModule } from '@angular/material/sort';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MomentDateModule } from '@angular/material-moment-adapter';
+
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD-MM-YYYY',
+  },
+  display: {
+    dateInput: 'DD-MM-YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  },
+}; 
+
 @NgModule({
   declarations: [
    
@@ -53,8 +68,12 @@ import { MatSortModule } from '@angular/material/sort';
     FormsModule,
     MatTableModule,
     NgMultiSelectDropDownModule.forRoot(),
-    MatSortModule
+    MatSortModule,
+    MomentDateModule
     
-  ]
+  ],
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
+  ],
 })
 export class ReportsModule { }

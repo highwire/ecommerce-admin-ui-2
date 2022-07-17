@@ -1,7 +1,8 @@
 import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
-  name: 'reffilterPipe'
+  name: 'reffilterPipe',
+  
 })
 export class RefFilterPipe implements PipeTransform {
     symbols= [
