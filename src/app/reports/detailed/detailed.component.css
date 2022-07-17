@@ -1,53 +1,79 @@
-
 .mat-table {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
+  display: block;
+  width: 100%;
+  overflow-x: auto;
 }
-
-
 
 .table-column-200 {
-    min-width: 200px;
+  min-width: 170px;
 }
-.alertbar{
-    padding:15px;
-    border-radius: 0px;
-    color: white;
-    background-color: #4A90E2;
-
+.btn-primary {
+  padding: 10px;
+}
+.alertbar {
+  padding: 15px;
+  border-radius: 0px;
+  color: white;
+  background-color: #4a90e2;
 }
 .btn-dark {
-    color: #fff;
-    background-color: #949ba1;
-    border-color: #949ba1 !important;
-    border-radius: 0px!important;
-    padding: 3px 10px !important;
-    margin-left: 2px;
+  color: #fff;
+  background-color: #949ba1;
+  border-color: #949ba1 !important;
+  border-radius: 0px !important;
+  padding: 3px 10px !important;
+  margin-left: 2px;
 }
 .btn-primary {
   color: #fff;
 
-  border-radius: 0px!important;
+  border-radius: 0px !important;
   padding: 3px 1px !important;
   margin-left: 2px;
 }
-.btn-danger, .btn-light{
-    padding:3px 8px;
-    border-radius: 0px ;
-    /* margin-bottom: 17px;
+.btn-danger,
+.btn-light {
+  padding: 3px 8px;
+  border-radius: 0px;
+  /* margin-bottom: 17px;
     text-align: center; */
 }
-.Jstitle{
-      
-    margin-top: 11px;
-    margin-bottom: 11px;
+.Jstitle {
+  margin-top: 11px;
+  margin-bottom: 11px;
 
-    color: #A81732;
+  color: #a81732;
 
-    font-weight: 300;
-    letter-spacing: .3px;
+  font-weight: 300;
+  letter-spacing: 0.3px;
 
-    font-size: 30px!important;
-
+  font-size: 30px !important;
 }
+
+.mat-header-cell {
+  font-size: 15px !important;
+}
+
+/* td {
+  text-align: center !important;
+  vertical-align: middle !important;
+} */
+
+/* .mat-header-cell {
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mat-cell {
+  text-align: center;
+  justify-content: center;
+}
+
+.mat-sort-header-container {
+  cursor: pointer;
+  align-items: center;
+  letter-spacing: normal;
+  outline: 0;
+  text-align: center !important;
+  justify-content: center !important;
+} */

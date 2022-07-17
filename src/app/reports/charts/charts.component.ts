@@ -45,10 +45,11 @@ export class ChartsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    var d = new Date();
+    d.setDate(d.getDate()-5);
     this.dateRange.patchValue({
-      start: "2022-05-16T06:01:48.070Z",
-      end: "2022-05-25T06:23:52.070Z"
+      start: d,
+      end:  new Date()
    });
 
     this.selectAllPublishers();

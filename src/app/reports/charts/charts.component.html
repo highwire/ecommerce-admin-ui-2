@@ -1,40 +1,34 @@
 <div class="container">
-    <div class="View-reports mt-2">
-
-        <h3 class="Jstitle" style="color: brown">View Reports</h3>
+  <div class="View-reports mt-2">
+    <h3 class="Jstitle" style="color: brown">View Reports</h3>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-8">
+        <h4>JOURNALS</h4>
+        <ng-multiselect-dropdown
+          [placeholder]="'Filter sites...'"
+          [settings]="dropdownSettings"
+          [data]="sitedata"
+          [(ngModel)]="selectedItems"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+        >
+        </ng-multiselect-dropdown>
+      </div>
     </div>
-    <div class="container">
-
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-8">
-                <h4>JOURNALS</h4>
-                <ng-multiselect-dropdown 
-                [placeholder]="'Filter sites...'"
-                 [settings]="dropdownSettings"
-                    [data]="sitedata" 
-                    [(ngModel)]="selectedItems" 
-                    (onSelect)="onItemSelect($event)"
-                    (onSelectAll)="onSelectAll($event)">
-
-                </ng-multiselect-dropdown>
-            </div>
-        </div>
-        <div class="row mt-2">
-            <div class="col-md-9">
-
-            </div>
-            <!-- <div class="col">
+    <div class="row mt-2">
+      <div class="col-md-9"></div>
+      <!-- <div class="col">
                 <div class="journals">
-                    <!-- <h4 style="color:brown; margin-top: 10px; font-size:bold;">JOURNALS</h4> -->
+                    
             <!-- <select class="select" name="chapter" id="chapter">
                         
                         <option value="" selected="selected">ALL</option>
                     </select> -->
 
-
-
-            <!-- 
+      <!-- 
                     <div class="date-range" style="float: right;">
                         <div class="date-picker">
                             <div class="dateframe" style="height: 100px; width:100%">
@@ -62,11 +56,11 @@
                                         End: {{dateRange.value.end | date}}
                                     </h5>
                                 </mat-form-field> -->
-            <!-- <h5>
+      <!-- <h5>
                                     Start: {{dateRange.value.start | date}}
                                     End: {{dateRange.value.end | date}}
                                 </h5> -->
-            <!-- </div>
+      <!-- </div>
                             <button class="btn btn-dark p-1" style="color: white;; border-radius: 0px;">Reset</button>
 
                             <button class="btn btn-danger p-1" style=" margin-left:1px"
@@ -83,59 +77,77 @@
 
 
             </div> -->
-            <div class="col-sm-3">
-                <label style="font-weight: 400">Set Date Range</label>
+      <div class="col-sm-3">
+        <label style="font-weight: 400">Set Date Range</label>
 
-                <mat-form-field appearance="fill">
-                    <mat-label>Enter a date range</mat-label>
-                    <mat-date-range-input [formGroup]="dateRange" [rangePicker]="picker">
-                        <input matStartDate formControlName="start" placeholder="Start date">
-                        <input matEndDate formControlName="end" placeholder="End date">
-                    </mat-date-range-input>
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-date-range-picker #picker></mat-date-range-picker>
+        <mat-form-field appearance="fill">
+          <mat-label>Enter a date range</mat-label>
+          <mat-date-range-input [formGroup]="dateRange" [rangePicker]="picker">
+            <input
+              matStartDate
+              formControlName="start"
+              placeholder="Start date"
+            />
+            <input matEndDate formControlName="end" placeholder="End date" />
+          </mat-date-range-input>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
 
-                    <mat-error *ngIf="dateRange.controls['start'].hasError('matStartDateInvalid')">Invalid start date
-                    </mat-error>
-                    <mat-error *ngIf="dateRange.controls['end'].hasError('matEndDateInvalid')">Invalid end date
-                    </mat-error>
-                </mat-form-field>
-                <h5>
-                    Start: {{ dateRange.value.start | date }}
-                    End: {{ dateRange.value.end | date }}</h5>
-                    <button class="btn btn-danger btn-sm" (click)="getChartData()">
-                        Run Report
-                    </button>
-                    <button class="btn btn-dark btn-sm " value="reset" (click)="resetDate()">
-                        Reset</button>
+          <mat-error
+            *ngIf="dateRange.controls['start'].hasError('matStartDateInvalid')"
+            >Invalid start date
+          </mat-error>
+          <mat-error
+            *ngIf="dateRange.controls['end'].hasError('matEndDateInvalid')"
+            >Invalid end date
+          </mat-error>
+        </mat-form-field>
+        <h5>
+          Start: {{ dateRange.value.start | date }} End:
+          {{ dateRange.value.end | date }}
+        </h5>
+        <button class="btn btn-danger btn-sm" (click)="getChartData()">
+          Run Report
+        </button>
+        <button class="btn btn-dark btn-sm" value="reset" (click)="resetDate()">
+          Reset
+        </button>
 
-                    <button class="btn btn-primary  btn-sm  dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        {{ selectedCurrency }}
-                    </button>
-                    <ul class="dropdown-menu">
-                        <a (click)="currencySelect('All Currencies')">&nbsp;&nbsp;&nbsp; <input type="checkbox"
-                            style="border-radius: 0px" />&nbsp;&nbsp;&nbsp;ALL</a>
-                        <a (click)="currencySelect(item)" class="dropdown-item" href="javascript:void(0)"
-                            *ngFor="let item of currency"><input type="checkbox"
-                                style="border-radius: 0px" />&nbsp;&nbsp;&nbsp;{{item }}
-                            </a>
-
-                    </ul>
-                
-
-
-
-            </div>
-        </div>
+        <button
+          class="btn btn-primary btn-sm dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          {{ selectedCurrency }}
+        </button>
+        <ul class="dropdown-menu">
+          <a (click)="currencySelect('All Currencies')"
+            >&nbsp;&nbsp;&nbsp;
+            <input
+              type="checkbox"
+              style="border-radius: 0px"
+            />&nbsp;&nbsp;&nbsp;ALL</a
+          >
+          <a
+            (click)="currencySelect(item)"
+            class="dropdown-item"
+            href="javascript:void(0)"
+            *ngFor="let item of currency"
+            ><input
+              type="checkbox"
+              style="border-radius: 0px"
+            />&nbsp;&nbsp;&nbsp;{{ item }}
+          </a>
+        </ul>
+      </div>
     </div>
+  </div>
 
-
-
-
-
-    <div class="chart-area mt-4">
-
-        <canvas id="myChart" height="300px"></canvas>
-    </div>
+  <div class="chart-area mt-4">
+    <canvas id="myChart" height="300px"></canvas>
+  </div>
 </div>

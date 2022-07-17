@@ -11,6 +11,8 @@ import {hwValidator} from '../../services/hwvalidator.service'
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { ReceiptComponent } from '../receipt/receipt.component';
 import {MatSort} from '@angular/material/sort';
+import { isDelegatedFactoryMetadata } from '@angular/compiler/src/render3/r3_factory';
+import { TimeZoneService } from 'src/app/services/time-zone.service';
 @Component({
   selector: 'app-detailed',
   templateUrl: './detailed.component.html',
@@ -25,9 +27,10 @@ export class DetailedComponent implements OnInit {
 
 
   displayedColumns: string[] = ['highwireTransactionId','transactionDateTime',
-  'amount','discounts', 'currency', 'customerCountry',
+  'transactionDateTimeUTC',
+  'amount','netRevenue','discountsTotal', 'currency', 'customerCountry',
    'name','email' ,
-  'journalCode','journalName','contentId', 'edit'
+  'journalCode','journalName','title','resourceType','contentId', 'edit'
     ];
   
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
@@ -55,6 +58,7 @@ export class DetailedComponent implements OnInit {
     public base: BaseService,
     public dialog: MatDialog,
     public hwv: hwValidator,
+    public timeZoneService:TimeZoneService
     
   ) { }
 
@@ -62,9 +66,11 @@ export class DetailedComponent implements OnInit {
     //   endDate: "2022-02-17T18:30:00.000Z"
 // pub: "hw-demo"
 // startDate: "2021-11-01T18:30:00.000Z"
+    var d = new Date();
+    d.setDate(d.getDate()-7);
     this.dateRange.patchValue({
-      start: "2021-11-01T18:30:00.000Z",
-      end: "2022-02-17T18:30:00.000Z"
+      start: d,
+       end:  new Date()
    });
     this.selectAllPublishers();
   }
@@ -102,17 +108,33 @@ export class DetailedComponent implements OnInit {
       "pub": publisher,
       "startDate": this.dateRange.value.start
     }
+    
     this.http.getDatawithPost(URL,DATA).subscribe((data:any)=>{
-      this.dataSource.data= data.transactions;
-      setTimeout(() => {
-        this.paginator.pageIndex = this.currentPage;
-        this.paginator.length = data.total;
-      },1000);
+      this.fomartdata(data)
+      
         
        
     })
   }
+fomartdata(data:any){
+  var self = this;
+  
+  data.transactions.forEach((element:any) => {
+    element.discountsTotal=0;
+    element.discounts.forEach((discount:any) => {
+      element.discountsTotal+=discount
+      
+    });
+    
+    element.transactionDateTimeUTC=this.timeZoneService.utcToTenant(element.transactionDateTime); 
+  });
 
+  this.dataSource.data= data.transactions;
+      setTimeout(() => {
+        self.paginator.pageIndex = self.currentPage;
+        self.paginator.length = data.total;
+      },1000);  
+}
 
 filterDOI(data:any)
 {
@@ -150,9 +172,10 @@ extractPrice(data:any){
 
 
   this.dataSource.data= pricearray;
+  var self = this
   setTimeout(() => {
-    this.paginator.pageIndex = this.currentPage;
-    this.paginator.length = data.length;
+    self.paginator.pageIndex = self.currentPage;
+    self.paginator.length = data.length;
   },1000);
 
 }
