@@ -18,11 +18,12 @@ import {Router} from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  
+  subscriptions= false;
   model = {
-    subscriptions: false,
+    
     refwork: false,
-    site: false
+    site: false,
+    ebook:false
   };
   publisher:any;
   hwpUser: any;
@@ -61,9 +62,12 @@ export class HeaderComponent implements OnInit {
       this.hwpUser = message
       localStorage.setItem('auth','true');   
       this.selectAllPublishers();   
+      this.catalogOptsFactory();
     });
     this.joural();
     this.selectAllPublishers();
+    this.catalogOptsFactory();
+    
     
   }
 
@@ -76,7 +80,7 @@ export class HeaderComponent implements OnInit {
       this.getSiteData();
       this.publisher= localStorage.getItem('publisher-label');
       this.selectAllPublishers();
-      // this.catalogOptsFactory();
+      this.catalogOptsFactory();
     })
   }
 
@@ -201,9 +205,10 @@ selectAllPublishers(){
 filterDOI(data:any){
   var self= this
   this.model = {
-    subscriptions: false,
+    
     refwork: false,
-    site: false
+    site: false,
+    ebook:false,
   };
   data= data.filter((entry:any)=>{
     
@@ -213,7 +218,7 @@ filterDOI(data:any){
     // console.log(element);
     if(element.prices && Array.isArray(element.prices)  &&
      (element.productType=='ebook' || element.productType=='edition') ){
-      this.model.subscriptions = true;
+      this.model.ebook = true;
 
     }
      
@@ -235,11 +240,7 @@ filterDOI(data:any){
 }
 
 catalogOptsFactory() {
-  this.model = {
-    subscriptions: false,
-    refwork: false,
-    site: false
-  };
+ 
   
   let publisher = localStorage.getItem('publisher')  ;
   if(!publisher)return ;
@@ -257,16 +258,16 @@ catalogOptsFactory() {
         }
         if (opts['highwire.ecommercesvc.journal.subscriptions.enabled'] &&
         opts['highwire.ecommercesvc.journal.subscriptions.enabled'] !== 'false') {
-          this.model.subscriptions = true;
+          this.subscriptions = true;
         }
-        if (opts['highwire.ecommercesvc.refwork.enabled'] &&
-        opts['highwire.ecommercesvc.refwork.enabled'] !== 'false') {
-          this.model.refwork = true;
-        }
-        if (opts['highwire.ecommercesvc.site.subscriptions.enabled'] &&
-        opts['highwire.ecommercesvc.site.subscriptions.enabled'] !== 'false') {
-          this.model.site = true;
-        }
+        // if (opts['highwire.ecommercesvc.refwork.enabled'] &&
+        // opts['highwire.ecommercesvc.refwork.enabled'] !== 'false') {
+        //   this.model.refwork = true;
+        // }
+        // if (opts['highwire.ecommercesvc.site.subscriptions.enabled'] &&
+        // opts['highwire.ecommercesvc.site.subscriptions.enabled'] !== 'false') {
+        //   this.model.site = true;
+        // }
         
       
   

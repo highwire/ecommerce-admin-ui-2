@@ -56,10 +56,15 @@
                 >Specific Prices</a
               >
             </li>
+            <li *ngIf="subscriptions">
+              <a class="dropdown-item" routerLink="/journals/subscriptions"
+                >Journal Subscriptions</a
+              >
+            </li>
           </ul>
         </li>
 
-        <li class="nav-item dropdown" *ngIf="model.subscriptions">
+        <li class="nav-item dropdown" *ngIf="model.ebook">
           <a
             class="nav-link dropdown-toggle"
             href="javascript void(0)"

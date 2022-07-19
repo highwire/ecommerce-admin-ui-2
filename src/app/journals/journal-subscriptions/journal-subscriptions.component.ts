@@ -1,33 +1,34 @@
+
 import { Component, OnInit } from '@angular/core';
 import {HTTPService } from '../../services/http.service';
 import { BaseService } from 'src/app/services/base.service';
 import {AfterViewInit,  ViewChild} from '@angular/core';
 import {MatPaginator,PageEvent} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import { SitesEditComponent } from '../template/sites-edit/sites-edit.component';
-import { SitesDeleteComponent } from '../template/sites-delete/sites-delete.component';
+import { EditComponent } from '../template/edit/edit.component';
+import { DeleteComponent } from '../template/delete/delete.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {SitesAddComponent} from '../template/sites-add/sites-add.component';
+import {AddJournalSubscriptionComponent} from '../template/add-journal-subscription/add-journal-subscription.component';
+import{  NewAddJournalSubscriptionComponent}  from '../template/new-add-journal-subscription/new-add-journal-subscription.component'
 import {hwValidator} from '../../services/hwvalidator.service'
-import {SitesAddNewPriceComponent}  from '../template/sites-add-new-price/sites-add-new-price.component';
+import {AddNewPriceComponent}  from '../template/add-new-price/add-new-price.component';
 import {MatSort} from '@angular/material/sort';
-import {NewAddSiteSubscriptionComponent} from '../template/new-add-site-subscription/new-add-site-subscription.component';
+
 interface USER {
   name: string;
   description: string;
   productType: string;
 
 }
-
 @Component({
-  selector: 'app-sites-specific-prices',
-  templateUrl: './sites-specific-prices.component.html',
-  styleUrls: ['./sites-specific-prices.component.css']
+  selector: 'app-journal-subscriptions',
+  templateUrl: './journal-subscriptions.component.html',
+  styleUrls: ['./journal-subscriptions.component.css']
 })
-export class SitesSpecificPricesComponent implements OnInit {
-  displayedColumns: string[] = ['description', 'productType' ,'price_amount','price_interval','options',];
+export class JournalSubscriptionsComponent implements OnInit {
+  displayedColumns: string[] = ['name', 'description', 'productType','price_amount','options',];
   currency:any=[];
-  selectedCurrency:any= 'USD ($)';
+  selectedCurrency:any= '  All CURRENCIES';
   masterdata:any;
   dataSource: MatTableDataSource<USER> = new MatTableDataSource();
   freeLabel= 'Free';
@@ -41,9 +42,6 @@ export class SitesSpecificPricesComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10, 25, 100];
   animal: any;
   name: any;
-  interval:any
-  priceType:any='Site Subscription'
-  productType:any
   
   productTypes:any=[
     {key:"",value:'All'},
@@ -55,7 +53,7 @@ export class SitesSpecificPricesComponent implements OnInit {
   selectedType:any= 'ALL';
   pricearray:any
   element:any
-  
+
   
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -65,7 +63,6 @@ export class SitesSpecificPricesComponent implements OnInit {
     public base: BaseService,
     public dialog: MatDialog,
     public hwv: hwValidator,
-    
     
   ) { }
 
@@ -99,42 +96,13 @@ export class SitesSpecificPricesComponent implements OnInit {
        
     })
   }
-   
-  period(interval:any=[]){
-    var hours = interval;
-    var days = hours/24;
-    var year = days/365
-    var month = hours * .0015
-    // console.log(month + " month");
-    // console.log(year + " year");
-    // console.log(hours)
-    if(hours > 8700){
-      return `${Math.floor(year)} Year `;
-    }
-    if(hours > 699  ){
-      return `${Math.floor(month)} Month`;}
-    else{
-      return `${hours} Hours`;
-    }
-    }
-    
-     priceFormat(priceType:any) {
-      // console.log(priceType)
-      if (priceType === 'site') {
-        return this.priceType;
-      }
-      else  {
-        return this.productType;
-      }
-      
-    }
 
   filterDOI(data:any){
   var self= this;
-  // data= data.filter((entry:any)=>{
-  //   // return  self.hwv.doi(item.name);
-  //   return(self.hwv.doi(entry.name) || self.hwv.pisaId(entry.name) ||self.hwv.isbn(entry.name) || self.hwv.resourceId(entry.name))
-  // });
+  data= data.filter((entry:any)=>{
+    
+    return(self.hwv.doi(entry.name) || self.hwv.pisaId(entry.name) ||self.hwv.isbn(entry.name) || self.hwv.issn(entry.name))
+  });
   console.log('filterDOI',data);
   this.extractPrice(data,'','');
   }
@@ -145,12 +113,13 @@ export class SitesSpecificPricesComponent implements OnInit {
   var pricearray:any= [];
   this.masterdata=data;
   data.forEach((element:any) => {
-    // console.log(element);
-    if( element.productType=='site')
-    if(element.prices && Array.isArray(element.prices) ){
-      // debugger
+    debugger
+    if(element.prices && Array.isArray(element.prices)  &&
+     (element.productType=='journal'      )  ){
       
-       element.prices.forEach((elements:any) => {      
+      
+       element.prices.forEach((elements:any) => {   
+
         // if(elements.name== "article-price"){
             // return false;
         // }
@@ -158,7 +127,7 @@ export class SitesSpecificPricesComponent implements OnInit {
           if(elements.name==productType)
           pricearray.push({
             name: element.name,
-            productType:self.priceFormat(element.productType),
+            productType:element.productType,
             description:element.description,      
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
@@ -174,7 +143,7 @@ export class SitesSpecificPricesComponent implements OnInit {
           if(elements.currency.toUpperCase()==currencies)
           pricearray.push({
             name: element.name,
-            productType:self.priceFormat(element.productType),
+            productType:element.productType,
             description:element.description,      
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
@@ -186,12 +155,12 @@ export class SitesSpecificPricesComponent implements OnInit {
         }else{
           pricearray.push({
             name: element.name,
-            productType:self.priceFormat(element.productType),
+            productType:element.productType,
             description:element.description,      
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
-            price_interval:self.period(elements.interval),
+            price_interval:elements.interval,
             price_name:elements.name,
             price:elements
           })  
@@ -238,8 +207,8 @@ export class SitesSpecificPricesComponent implements OnInit {
 
   delete(element:any){
     // console.log(element);
-    
-    const dialogRef = this.dialog.open(SitesDeleteComponent, {
+
+    const dialogRef = this.dialog.open(DeleteComponent, {
       width: '950px',
       height: '500px',
       data: {element},
@@ -270,7 +239,7 @@ export class SitesSpecificPricesComponent implements OnInit {
     // console.log(element);
     var p= this.getCurrentPrices(element)
 
-    const dialogRef = this.dialog.open(SitesAddComponent, {
+    const dialogRef = this.dialog.open(AddJournalSubscriptionComponent, {
       width: '1050px',
       height: '600px',
       
@@ -308,12 +277,11 @@ export class SitesSpecificPricesComponent implements OnInit {
     }
 
   addData(){
-    // SitesAddComponent
-    // console.log();
+    console.log('addData');
     var p= this.getCurrentPrices()
-    const dialogRef = this.dialog.open(NewAddSiteSubscriptionComponent, {
+    const dialogRef = this.dialog.open(NewAddJournalSubscriptionComponent, {
       width: '1150px',
-      height: '700px',
+      height: '600px',
       data: {
         prices:p},
     });
@@ -328,8 +296,8 @@ export class SitesSpecificPricesComponent implements OnInit {
   edit(element:any){
     // console.log(element);
     var p= this.getCurrentPrices(element)
-    const dialogRef = this.dialog.open(SitesEditComponent, {
-      width: '1050px',
+    const dialogRef = this.dialog.open(EditComponent, {
+      width: '950px',
       height: '500px',
       data: {element,
         prices:p},
