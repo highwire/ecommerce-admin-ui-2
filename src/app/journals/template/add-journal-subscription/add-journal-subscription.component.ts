@@ -6,11 +6,11 @@ import { Component, OnInit,Inject } from '@angular/core';
 import {MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-sites-add',
-  templateUrl: './sites-add.component.html',
-  styleUrls: ['./sites-add.component.css']
+  selector: 'app-add-journal-subscription',
+  templateUrl: './add-journal-subscription.component.html',
+  styleUrls: ['./add-journal-subscription.component.css']
 })
-export class SitesAddComponent implements OnInit {
+export class AddJournalSubscriptionComponent implements OnInit {
   currency_stack:any;
   productType:any;
   currency=[]
@@ -30,7 +30,7 @@ export class SitesAddComponent implements OnInit {
   constructor(
     public http: HTTPService,
     public base: BaseService,
-    public dialogRef: MatDialogRef<SitesAddComponent>,
+    public dialogRef: MatDialogRef<AddJournalSubscriptionComponent>,
     
     @Inject(MAT_DIALOG_DATA) public basedata: any
   ) { }
@@ -61,7 +61,7 @@ export class SitesAddComponent implements OnInit {
   }
   selectAllPublishers(){
     // let publisher = localStorage.getItem('publisher')  ;
-    var name =  window.encodeURIComponent(this.basedata.prices[0].name)
+    var name =  window.encodeURIComponent(this.basedata.element.name)
     let URL= this.base.OPEN_URL+name;
     this.http.getDatawithGet(URL,'').subscribe((res:any)=>{
       if(res && res.resource && res.resource[0]){
@@ -88,7 +88,7 @@ export class SitesAddComponent implements OnInit {
   getCurrencyList(){
     var currency:any= localStorage.getItem('currency');
       if(currency){
-          this.currency= JSON.parse(currency) ;
+        this.currency= JSON.parse(currency) ;
       }
   
   }

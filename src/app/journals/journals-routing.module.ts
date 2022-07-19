@@ -7,7 +7,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { PromocodeComponent } from './promocode/promocode.component';
 import { IncrementDiscountComponent } from './increment-discount/increment-discount.component';
 import { AuthGuardService }  from '../auth/auth-gaurd.service';
-
+import {JournalSubscriptionsComponent} from './journal-subscriptions/journal-subscriptions.component';
 
 
 const routes: Routes = [
@@ -25,6 +25,10 @@ const routes: Routes = [
    {
       path: 'default',
       component:DefaultPricesComponent
+    },
+    {
+      path: 'subscriptions',
+      component:JournalSubscriptionsComponent
     },
    { path: 'promocode', component:PromocodeComponent},
    { path: 'increment', component:IncrementDiscountComponent},

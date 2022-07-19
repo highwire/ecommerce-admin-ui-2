@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { JournalsRoutingModule } from './journals-routing.module';
 import { DefaultPricesComponent } from './default-prices/default-prices.component';
+import {JournalSubscriptionsComponent} from './journal-subscriptions/journal-subscriptions.component';
 import { SpecificPricesComponent } from './specific-prices/specific-prices.component';
 import { SettingsComponent } from './settings/settings.component';
 import { PromocodeComponent } from './promocode/promocode.component';
@@ -21,6 +22,8 @@ import { FormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import { EditComponent } from './template/edit/edit.component';
 import { AddComponent } from './template/add/add.component';
+import{AddJournalSubscriptionComponent} from './template/add-journal-subscription/add-journal-subscription.component'
+import {NewAddJournalSubscriptionComponent} from './template/new-add-journal-subscription/new-add-journal-subscription.component';
 import { CitationComponent } from './template/citation/citation.component';
 import { DeleteComponent } from './template/delete/delete.component';
 import { AddNewPriceComponent } from './template/add-new-price/add-new-price.component';
@@ -35,6 +38,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
   declarations: [
     DefaultPricesComponent,
     SpecificPricesComponent,
+    JournalSubscriptionsComponent,
     SettingsComponent,
     PromocodeComponent,
     IncrementDiscountComponent,
@@ -44,7 +48,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     CitationComponent,
     DeleteComponent,
     AddNewPriceComponent,
-    FilterPipe
+    AddJournalSubscriptionComponent,
+    FilterPipe,
+    NewAddJournalSubscriptionComponent
   ],
   imports: [
     

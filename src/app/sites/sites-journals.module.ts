@@ -21,7 +21,7 @@ import { FormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import { SitesEditComponent } from './template/sites-edit/sites-edit.component';
 import { SitesAddComponent } from './template/sites-add/sites-add.component';
-import { SitesCitationComponent } from './template/sites-citation/sites-citation.component';
+
 import { SitesDeleteComponent } from './template/sites-delete/sites-delete.component';
 import { SitesAddNewPriceComponent } from './template/sites-add-new-price/sites-add-new-price.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -31,11 +31,12 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {SiteFilterPipe} from '../services/sitecurrency.filter';
 import { MatSortModule } from '@angular/material/sort';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { NewAddSiteSubscriptionComponent } from './template/new-add-site-subscription/new-add-site-subscription.component';
 @NgModule({
   declarations: [
     SitesEditComponent,
     SitesAddComponent,
-    SitesCitationComponent,
+
     SitesDeleteComponent,
     SitesAddNewPriceComponent,
     
@@ -43,7 +44,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     
     SitesSpecificPricesComponent,
     
-    SiteFilterPipe
+    SiteFilterPipe,
+    NewAddSiteSubscriptionComponent
   ],
   imports: [
     
