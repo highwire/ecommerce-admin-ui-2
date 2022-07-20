@@ -24,6 +24,9 @@ export class BaseService {
 SEND_RECEIPT=  environment.apiBase+   '/report/publishers/';  
 CATALOG_CHECK=environment.apiBase+  '/catalog/opts/';
 CATALOG_SITES = environment.apiBase+ '/catalogadm/sites/';
+SITE_UPDATE=environment.apiBase+'/catalogadm/catalogs/'
+
+// /api/catalogadm/catalogs/springer
 
 // /  = '/atom/site-type';
 
@@ -37,7 +40,7 @@ CATALOG_SITES = environment.apiBase+ '/catalogadm/sites/';
   ATOM_LITE=environment.atomBase+ '/lite/';
   ATOM_LITE_TWO=environment.atomBase+ '/lite'
   SITE_TYPE_SERVICE_POINT = environment.atomBase+ '/site-type';
- 
+  // CATALOG_SITES
   // constructor(private _snackBar: MatSnackBar) {}
   constructor(
     

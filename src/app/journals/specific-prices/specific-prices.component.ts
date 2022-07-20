@@ -100,7 +100,12 @@ export class SpecificPricesComponent implements OnInit {
   var self= this;
   data= data.filter((entry:any)=>{
     
-    return(self.hwv.doi(entry.name) || self.hwv.pisaId(entry.name) ||self.hwv.isbn(entry.name) || self.hwv.resourceId(entry.name))
+    return(self.hwv.doi(entry.name) ||
+     self.hwv.pisaId(entry.name)||
+     
+     self.hwv.issn(entry.name)  
+      ||self.hwv.isbn(entry.name) || 
+      self.hwv.resourceId(entry.name))
   });
   console.log('filterDOI',data);
   this.extractPrice(data,'','');
@@ -115,7 +120,7 @@ export class SpecificPricesComponent implements OnInit {
     // console.log(element);
     if(element.prices && Array.isArray(element.prices)  &&
      (element.productType=='article' || element.productType=='issue' || element.productType=='journal'      )  ){
-      // debugger
+      debugger
       
        element.prices.forEach((elements:any) => {      
         // if(elements.name== "article-price"){
