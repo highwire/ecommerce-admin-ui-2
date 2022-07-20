@@ -114,6 +114,7 @@ export class HeaderComponent implements OnInit {
   localStorage.setItem('publisher','');
   localStorage.setItem('hwp-login','');
   localStorage.setItem('siteData','');
+  localStorage.setItem('ebook','');
   
   // auth
   // publisher
@@ -219,17 +220,20 @@ filterDOI(data:any){
     if(element.prices && Array.isArray(element.prices)  &&
      (element.productType=='ebook' || element.productType=='edition') ){
       this.model.ebook = true;
+      localStorage.setItem('ebook','yes');
 
     }
      
     if(element.prices && Array.isArray(element.prices)  && element.productType=='refwork'){
       this.model.refwork = true;
+      localStorage.setItem('refwork','yes');
 
     } 
-    console.log('element.productType',element.productType);
+    // console.log('element.productType',element.productType);
     if(element.prices && Array.isArray(element.prices)  && element.productType=='site'){
       
       this.model.site = true;
+      localStorage.setItem('site','yes');
     }
     
     
@@ -259,6 +263,7 @@ catalogOptsFactory() {
         if (opts['highwire.ecommercesvc.journal.subscriptions.enabled'] &&
         opts['highwire.ecommercesvc.journal.subscriptions.enabled'] !== 'false') {
           this.subscriptions = true;
+          localStorage.setItem('subscriptions','yes');
         }
         // if (opts['highwire.ecommercesvc.refwork.enabled'] &&
         // opts['highwire.ecommercesvc.refwork.enabled'] !== 'false') {

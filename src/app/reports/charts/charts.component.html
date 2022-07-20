@@ -4,7 +4,17 @@
   </div>
   <div class="container">
     <div class="row">
-      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div *ngIf="showbook">
+          <h4>PRODUCT TYPE</h4>
+          <button class="btn btn-danger btPress" (click)="onJournal()">
+            JOURNALS
+          </button>
+          <button class="btn btn-danger btPress" (click)="onBooks()">
+            BOOKS
+          </button>
+        </div>
+      </div>
       <div class="col-md-8">
         <h4>JOURNALS</h4>
         <ng-multiselect-dropdown

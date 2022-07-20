@@ -14,6 +14,7 @@ import { __values } from 'tslib';
   styleUrls: ['./charts.component.css']
 })
 export class ChartsComponent implements OnInit {
+  showbook:any=false;
   chartinstan:any;
   dropdownList: any = [];
   selectedItems: any = [];
@@ -83,6 +84,8 @@ export class ChartsComponent implements OnInit {
       closeDropDownOnSelection: true
     };
 
+    this.showbook= localStorage.getItem('ebook')=='yes'?true:false;
+    console.log('showbook',this.showbook);
   }
   //////////////////
   onItemSelect(item: any) {
@@ -91,6 +94,12 @@ export class ChartsComponent implements OnInit {
   }
   onSelectAll(items: any) {
     console.log(items);
+  }
+  onJournal(){
+
+  }
+  onBooks(){
+
   }
 
   currencySelect(currency:any){	
@@ -253,6 +262,7 @@ extractPrice(data:any, pub:any, currencies?:any){
     let siteData:any=  localStorage.getItem('siteData') 
     if(siteData){
       siteData= JSON.parse(siteData);
+      debugger;
       siteData.forEach((element:any) => {
         if(data1[element.corpus] && data1[element.corpus]!== undefined){
           var obj:any={};

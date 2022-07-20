@@ -12,6 +12,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 })
 export class DefaultPricesComponent implements OnInit {
   dropdownList :any= [];
+  selecteditem:any;
   selected:any=  false;
   selectedItems :any= [];
   dropdownSettings :any= {};
@@ -86,10 +87,12 @@ sitedata:any;
     }
   }
 
+  
 
   onItemSelect(item: any) {
     
     if(item.corpus){
+      this.selecteditem=item
       this.selected= true;
     }
     this.extractPrice(this.masterData, item.corpus);
@@ -213,6 +216,7 @@ extractPrice(data:any, pub:any){
 
 
 addPrice(type:any){
+  if(this.pricearray &&this.pricearray[0]){
   this.pricearray[0]
   var add= {
       description: this.pricearray[0].description,
@@ -220,15 +224,52 @@ addPrice(type:any){
       name: this.pricearray[0].name,
       price_name:this.pricearray[0].price_name,
       price_amount:'',
-      price_currency:'',
-      price_interval:'',                
+      price_currency:this.currency[0],
+      price_interval:this.accessPeriods[0].value,                             
       productType:type,
+      showName: (type=="article") ?'Article':'Issue'
+  }
+  this.pricearray.push(add);
+}else{
+  this.addBlankprice(type);
+}
+  
+  console.log('Add price',this.pricearray);
+
+
+
+}
+
+addBlankprice(type:any){
+  debugger;
+  this.pricearray=[];
+let journal:any;
+  this.sitedata.forEach((ele:any)=>{ 
+    if(ele.title==this.selecteditem.title)
+      console.log(ele)
+      journal= ele;
+   })
+
+  var add= {
+      description: this.selecteditem.title,
+      identifier: journal.issn.epub ,
+      name: journal.issn.epub,
+      price_name:type,
+      price_amount:'',
+      price_currency:this.currency[0],
+      price_interval:this.accessPeriods[0].value,                
+      productType:'journal',
       showName: (type=="article") ?'Article':'Issue'
   }
   
   this.pricearray.push(add);
   console.log('Add price',this.pricearray)
 }
+
+
+
+
+
 calculateAccess(prices:any){
   var newPrice:any=[];
   var ret=  true;

@@ -1,88 +1,99 @@
-
-
 .mat-date-range-input {
-   
-    height: 31px!important;
-    padding: 9px!important;}
+  height: 31px !important;
+  padding: 9px !important;
+}
 
-    @media screen and (min-width:768px) and (max-width:1320px){
-        :host ::ng-deep .multiselect-dropdown .dropdown-btn{
-        
-          /* width: 661px!important; */
-         
-          border-radius: 0px!important;
-        }
-        
-       
-      
-      }
-        
-      
-      
-      :host ::ng-deep .multiselect-dropdown .dropdown-btn{
-        
-        border-radius: 0px!important;
-      }
-      
-      
-      :host ::ng-deep .multiselect-dropdown .dropdown-btn .selected-item-container .selected-item{
-        
-        padding: 0 5px!important;
-        
-        max-width: 300px!important;
-      }
-      :host ::ng-deep .multiselect-dropdown .dropdown-btn .dropdown-multiselect__caret {
-      background-color:#4A90E2;
-      height: 36.05px!important;
-        right: -5px!important;
-        transition: none!important;
-      }
-      :host ::ng-deep .multiselect-dropdown .dropdown-btn .dropdown-multiselect__caret::before {
-      border-color: #fff transparent!important;
-      color: #fff!important}
+@media screen and (min-width: 768px) and (max-width: 1320px) {
+  :host ::ng-deep .multiselect-dropdown .dropdown-btn {
+    /* width: 661px!important; */
 
-      .Jstitle{
-      
-        margin-top: 11px;
-        margin-bottom: 11px;
-    
-        color: #A81732;
-    
-        font-weight: 300;
-        letter-spacing: .3px;
-    
-        font-size: 30px!important;
-    
-    }
-    .btn-danger, .btn-light{
-      padding:3px 8px;
-      border-radius: 0px ;
-      /* margin-bottom: 17px;
+    border-radius: 0px !important;
+  }
+}
+
+:host ::ng-deep .multiselect-dropdown .dropdown-btn {
+  border-radius: 0px !important;
+}
+
+:host
+  ::ng-deep
+  .multiselect-dropdown
+  .dropdown-btn
+  .selected-item-container
+  .selected-item {
+  padding: 0 5px !important;
+
+  max-width: 300px !important;
+}
+:host
+  ::ng-deep
+  .multiselect-dropdown
+  .dropdown-btn
+  .dropdown-multiselect__caret {
+  background-color: #4a90e2;
+  height: 36.05px !important;
+  right: -5px !important;
+  transition: none !important;
+}
+:host
+  ::ng-deep
+  .multiselect-dropdown
+  .dropdown-btn
+  .dropdown-multiselect__caret::before {
+  border-color: #fff transparent !important;
+  color: #fff !important;
+}
+
+.Jstitle {
+  margin-top: 11px;
+  margin-bottom: 11px;
+
+  color: #a81732;
+
+  font-weight: 300;
+  letter-spacing: 0.3px;
+
+  font-size: 30px !important;
+}
+.btn-danger,
+.btn-light {
+  padding: 3px 8px;
+  border-radius: 0px;
+  /* margin-bottom: 17px;
       text-align: center; */
-  }
-
-  .btn-dark {
-      color: #fff;
-      background-color: #949ba1;
-      border-color: #949ba1 !important;
-      border-radius: 0px!important;
-      padding: 3px 10px !important;
-      margin-left: 2px;
-  }
-  .btn-primary {
-    color: #fff;
-  
-    border-radius: 0px!important;
-    padding: 3px 1px !important;
-    margin-left: 2px;
 }
-  h4{
-      
-  
-    color: #A81732;
 
-    font-weight: 500;
-    
-
+.btn-dark {
+  color: #fff;
+  background-color: #949ba1;
+  border-color: #949ba1 !important;
+  border-radius: 0px !important;
+  padding: 3px 10px !important;
+  margin-left: 2px;
 }
-      
+.btn-primary {
+  color: #fff;
+
+  border-radius: 0px !important;
+  padding: 3px 1px !important;
+  margin-left: 2px;
+}
+h4 {
+  color: #a81732;
+
+  font-weight: 500;
+}
+
+.btPress {
+  background-color: #fff;
+  color: #a81732;
+  border: 2px solid brown;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 7px 15px;
+  font-weight: 400;
+}
+.btPress:focus {
+  background-color: #a81732;
+  color: white;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ChangeDetectionStrategy,ChangeDetectorRef} from '@angular/core';
 import {hwValidator} from '../../../services/hwvalidator.service'
 import {HTTPService } from '../../../services/http.service';
 import { BaseService } from 'src/app/services/base.service';
@@ -8,7 +8,9 @@ import {MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
 @Component({
   selector: 'app-new-add-site-subscription',
   templateUrl: './new-add-site-subscription.component.html',
-  styleUrls: ['./new-add-site-subscription.component.css']
+  styleUrls: ['./new-add-site-subscription.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class NewAddSiteSubscriptionComponent implements OnInit {
   selectedJournal:any;
@@ -54,11 +56,12 @@ sitedata:any;
     public base: BaseService,
     public hwv: hwValidator,
         public dialogRef: MatDialogRef<NewAddSiteSubscriptionComponent>,
+        private cd: ChangeDetectorRef
   ) { 
   }
 
   ngOnInit(): void {
-    this.selectAllPublishers();
+    this.getSiteData();
     this.selectAllListPublishers();
     this.getCurrencyList();
     // <a *ngFor="let website of sitedata " value="website.corpus">
@@ -69,8 +72,8 @@ sitedata:any;
     ];
     this.dropdownSettings = {
       singleSelection: true,
-      idField: 'corpus',
-      textField: 'title',
+      idField: 'siteNameId',
+      textField: 'siteName',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 1,
@@ -90,11 +93,12 @@ sitedata:any;
 
 
   onItemSelect(item: any) {
+    // this.selected=true
     this.selectedJournal=item;
-    if(item.corpus){
+    if(item.siteNameId){
       this.selected= true;
     }
-    this.extractPrice(this.masterData, item.title);
+    this.extractPrice(this.masterData, item.siteNameId);
     console.log(item);
   }
   onSelectAll(items: any) {
@@ -130,6 +134,22 @@ sitedata:any;
       console.log('this.sitedata ${this.sitedata}')
     }
   }
+
+
+
+  getSiteData(){
+    let publisher = localStorage.getItem('publisher')  ;
+    let URL= this.base.CATALOG_SITES+publisher;
+   
+    this.http.getDatawithGet(URL,'').subscribe((data:any)=>{
+
+        console.log('sitedata',data);
+        // debugger;             
+        this.sitedata=  data        
+    })
+  }
+
+
 
   formatAmountDisplay(amount:any) {
     if (amount === -1) {
@@ -167,12 +187,12 @@ extractPrice(data:any, pub:any){
   var pricearray:any= [];
   data.forEach((element:any) => {
     // console.log(element);
-    if(element.prices && Array.isArray(element.prices) && element.description==pub        ){
+    if(element.prices && Array.isArray(element.prices) && element.name==pub        ){
       element.prices.forEach((elements:any) => {   
         // if(elements.name=='chapter-price'  || elements.name=='edition-price' )
       // (entry.productType=='ebook' && entry.name=='edition-price' )
       console.log('elements.name',elements.name);
-      if(elements.name=="journal-price")
+      if(elements.name=="site-price")
       pricearray.push({
           name: element.name,
           productType:element.productType,
@@ -182,7 +202,7 @@ extractPrice(data:any, pub:any){
           price_currency:elements.currency,
           price_interval:elements.interval,
           price_name:elements.name,
-          showName: "journal Subscription"
+          showName: "Site Subscription"
         })  
       });      
     }    
@@ -199,27 +219,37 @@ this.addBlankprice(this.selectedJournal)
 
 } 
 addBlankprice(obj:any){
-  this.pricearray=[];
+  // this.pricearray=[];
+  let ar=[]
 let journal:any;
   this.sitedata.forEach((ele:any)=>{ 
-    if(ele.title==this.selectedJournal.title)
+    if(ele.siteName==this.selectedJournal.siteName)
       console.log(ele)
       journal= ele;
    })
+  //  corpus: ""
+  //  description: "Springer Connect"
+  //  identifier: "springer_connect"
+  //  name: "springer_connect"
 
+//   description: "smart-sgrworks-stage"
+// identifier: "/sgrehpp.atom"
+// name: "/sgrehpp.atom"
+debugger;
   var add= {
-      description: this.selectedJournal.title,
-      identifier: journal.issn.epub ,
-      name: journal.issn.epub,
-      price_name:'journal-price',
+      description: this.selectedJournal.siteName,
+      identifier: journal.name? journal.name:journal.siteNameId,
+      name: journal.name? journal.name:journal.siteNameId,
+      price_name:'site-price',
       price_amount:'',
       price_currency:this.currency[0],
       price_interval:this.accessPeriods[0].value,                
-      productType:'journal',
-      showName: 'journal Subscription'
+      productType:'site',
+      showName: 'Site Subscription'
   }
-  
-  this.pricearray.push(add);
+  ar.push(add)
+  this.pricearray=ar;
+  this.cd.detectChanges();
   console.log('Add price',this.pricearray)
 }
 
@@ -235,11 +265,12 @@ addPrice(type:any){
       price_currency:'',
       price_interval:'',                
       productType:type,
-      showName: 'journal Subscription'
+      showName: 'Site Subscription'
   }
   
   this.pricearray.push(add);
   console.log('Add price',this.pricearray)
+  
 }
 calculateAccess(prices:any){
   var newPrice:any=[];
@@ -258,8 +289,13 @@ calculateAccess(prices:any){
 update(){
   let publisher = localStorage.getItem('publisher')  ;
   var name = this.pricearray[0].name.replace('/', '!2F')
+  // https://ecommerce-service.highwire.org/api/catalogadm/publishers/springer/products/!2Fsgrvv.atom
+    //https://ecommerce-dev.highwire.org   /api/catalogadm/catalogs/springer/products
+//   let URL= this.base.SITE_UPDATE+ publisher +'/products';
+// var name = this.pricearray[0].name.replace('/', '!2F')
   let URL= this.base.DELETE_PRICE+ publisher +'/products/'+ name;
   console.log(URL);
+  
   this.calculateAccess(this.pricearray);
   if(!this.calculateAccess(this.pricearray))
     {   alert('Price alreay exit.')
