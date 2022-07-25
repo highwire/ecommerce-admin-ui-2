@@ -102,7 +102,7 @@ td.mat-cell {
 
   color: #a81732;
 
-  font-weight: 300;
+  font-weight: 100;
   letter-spacing: 0.3px;
 
   font-size: 30px !important;
@@ -142,6 +142,14 @@ thead tr th {
 }
 .btn-info {
   background-color: #4a90e2;
-  padding: 6px 27px;
+  padding: 6px 12px;
   color: #fff;
+  font-size: inherit;
+  
+}
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+h3{
+  color: rgb(143, 141, 141);
 }

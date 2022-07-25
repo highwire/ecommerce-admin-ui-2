@@ -1,14 +1,11 @@
 <div class="container p-2 my-3">
-  <h1
-    style="
+  <h1 style="
       text-transform: capitalize;
       color: brown;
       font-size: 30px;
       font-family: 'Lato';
       font-weight: 100;
-    "
-    class="pt-3"
-  >
+    " class="pt-3">
     Add Journal Subscription
   </h1>
   <hr />
@@ -20,14 +17,8 @@
       </h2>
     </div>
     <div class="col-md-10">
-      <ng-multiselect-dropdown
-        [placeholder]="'Filter sites...'"
-        [settings]="dropdownSettings"
-        [data]="sitedata"
-        [(ngModel)]="selectedItems"
-        (onSelect)="onItemSelect($event)"
-        (onSelectAll)="onSelectAll($event)"
-      >
+      <ng-multiselect-dropdown [placeholder]="'Filter sites...'" [settings]="dropdownSettings" [data]="sitedata"
+        [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
       </ng-multiselect-dropdown>
     </div>
   </div>
@@ -74,11 +65,8 @@
         </td>
         <td>
           <div class="input-group input-group-sm">
-            <select
-              class="mb-3 btn btn-primary scurrency dropdown-toggle"
-              name="{{ item.price_currency + ind }}"
-              [(ngModel)]="item.price_currency"
-            >
+            <select class="mb-3 btn btn-primary scurrency dropdown-toggle" name="{{ item.price_currency + ind }}"
+              [(ngModel)]="item.price_currency">
               <option *ngFor="let curr of currency" value="{{ curr }}">
                 {{ curr }}
               </option>
@@ -87,75 +75,47 @@
         </td>
         <td>
           <label class="switch">
-            <input
-              type="checkbox"
-              (change)="onItemChange($event.target, item)"
-              [checked]="item.price_amount == 'Not for Sale' ? false : true"
-            />
+            <input type="checkbox" (change)="onItemChange($event.target, item)"
+              [checked]="item.price_amount == 'Not for Sale' ? false : true" />
             <span class="slider round"></span>
           </label>
         </td>
         <td>
           <div class="input-group input-group-sm">
-            <div
-              *ngIf="
+            <div *ngIf="
                 item.price_amount == notForSaleLabel;
                 then thenBlock;
                 else elseBlock
-              "
-            ></div>
+              "></div>
             <ng-template #thenBlock>{{ notForSaleLabel }} </ng-template>
             <ng-template #elseBlock>
-              <span
-                style="
+              <span style="
                   border-radius: 0px;
                   border: 1px solid lavender;
                   margin-bottom: 10px;
-                "
-                class="input-group-text"
-                id="#"
-                >{{ item.price_currency | filterPipe }}</span
-              >
-              <input
-                style="
+                " class="input-group-text" id="#">{{ item.price_currency | filterPipe }}</span>
+              <input style="
                   border-radius: 0px;
                   background-color: #ffffff;
                   border: 1px solid lavender;
                   margin-bottom: 10px;
-                "
-                type="text"
-                [(ngModel)]="item.price_amount"
-                name="{{ item.price_amount + ind }}"
-                class="form-control"
-                placeholder=""
-                aria-label="price"
-                aria-describedby="#"
-              />
+                " type="text" [(ngModel)]="item.price_amount" name="{{ item.price_amount + ind }}" class="form-control"
+                placeholder="" aria-label="price" aria-describedby="#" />
             </ng-template>
           </div>
         </td>
         <td>
           <div class="btn-group" role="group">
-            <select
-              class="mb-3 btn btn-primary dropdown-toggle"
-              name="{{ item.price_interval + ind }}"
-              [(ngModel)]="item.price_interval"
-            >
-              <option
-                *ngFor="let item1 of accessPeriods"
-                value="{{ item1.value }}"
-              >
+            <select class="mb-3 btn btn-primary dropdown-toggle" name="{{ item.price_interval + ind }}"
+              [(ngModel)]="item.price_interval">
+              <option *ngFor="let item1 of accessPeriods" value="{{ item1.value }}">
                 {{ item1.label }}
               </option>
             </select>
           </div>
         </td>
         <td>
-          <button
-            type="button"
-            class="btn btn-danger bremove"
-            (click)="removeitem(ind)"
-          >
+          <button type="button" class="btn btn-danger bremove" (click)="removeitem(ind)">
             Remove
           </button>
         </td>
@@ -165,24 +125,18 @@
       <tr *ngIf="selected">
         <td>
           <div class="dropdown">
-            <button
-              class="btn btn-info dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton1"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
+            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1"
+              data-bs-toggle="dropdown" aria-expanded="false">
               Add Price
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li>
-                <a
-                  class="dropdown-item"
-                  href="javascript:void(0)"
-                  (click)="addPrice('journal-price')"
-                  >journal Subscription</a
-                >
+                <a class="dropdown-item" href="javascript:void(0)" (click)="addPrice('journal-price')">journal
+                  Subscription</a>
               </li>
+
+
+
               <!-- <li>
                 <a
                   class="dropdown-item"
@@ -192,13 +146,23 @@
                 >
               </li> -->
             </ul>
+
           </div>
+        </td>
+        <td>
+          <button
+                class="btn btn-danger can"
+                (click)="closeDialog(false)"
+                type="button"
+              >
+                Cancel
+              </button>
         </td>
         <td></td>
         <td></td>
         <td></td>
-        <td></td>
         <td>
+
           <button type="button" (click)="update()" class="btn btn-info">
             Save
           </button>
