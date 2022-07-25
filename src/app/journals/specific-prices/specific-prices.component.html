@@ -64,6 +64,8 @@
             id="dropdownMenuButton1"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            *ngIf="currency.length !> 1 else elseBlock"
+          
           >
             {{ selectedCurrency }}
           </button>
@@ -78,12 +80,15 @@
                 class="dropdown-item"
                 href="javascript:void(0)"
                 *ngFor="let item of currency"
-                (click)="currencySelect(item)"
+              
                 ><input type="checkbox" (click)="currencySelect(item)" style="border-radius: 0px;">&nbsp;&nbsp;&nbsp;{{ item }}</a
               >
             </li>
           </ul>
-        </div>
+          <ng-template #elseBlock>
+            <button class="btn btn-info currency" type="button"  disabled>USD($)</button>
+            </ng-template>
+          </div>
 
         <button
           class="btn btn-info"
@@ -147,7 +152,7 @@
     <ng-container matColumnDef="price_interval">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Access Period</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.price_interval }} Hours
+        {{ element.price_interval }}
       </td>
     </ng-container>
 
@@ -174,7 +179,7 @@
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="options">
-      <th mat-header-cell *matHeaderCellDef>options</th>
+      <th mat-header-cell *matHeaderCellDef>Action</th>
       <td mat-cell *matCellDef="let element">
         <div class="btn-group">
           <button
