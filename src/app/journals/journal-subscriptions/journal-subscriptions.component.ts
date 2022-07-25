@@ -26,7 +26,7 @@ interface USER {
   styleUrls: ['./journal-subscriptions.component.css']
 })
 export class JournalSubscriptionsComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'description', 'productType','price_amount','options',];
+  displayedColumns: string[] = ['name', 'description', 'productType','price_amount','price_interval','options',];
   currency:any=[];
   selectedCurrency:any= '  All CURRENCIES';
   masterdata:any;
@@ -132,7 +132,7 @@ export class JournalSubscriptionsComponent implements OnInit {
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
-            price_interval:elements.interval,
+            price_interval:self.period(elements.interval),
             price_name:elements.name,
             price:elements
           })  
@@ -148,7 +148,7 @@ export class JournalSubscriptionsComponent implements OnInit {
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
-            price_interval:elements.interval,
+            price_interval:self.period(elements.interval),
             price_name:elements.name,
             price:elements
           })  
@@ -160,7 +160,7 @@ export class JournalSubscriptionsComponent implements OnInit {
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
-            price_interval:elements.interval,
+            price_interval:self.period(elements.interval),
             price_name:elements.name,
             price:elements
           })  
@@ -311,5 +311,25 @@ export class JournalSubscriptionsComponent implements OnInit {
       }
     });
   }
+
+  period(interval:any=[]){
+    var hours = interval;
+    var days = hours/24;
+    var year = days/365
+    var month = hours * .0015
+    // console.log(month + " month");
+    // console.log(year + " year");
+    // console.log(hours)
+    if(hours > 8700){
+      return `${Math.floor(year)} Year `;
+    }
+    if(hours > 699  ){
+      return `${Math.floor(month)} Month`;}
+    if(hours < 0 ){
+        return  'Perpetual' }
+    else{
+      return `${hours} Hours`;
+    }
+    }
 }
 

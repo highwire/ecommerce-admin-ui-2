@@ -211,7 +211,7 @@ form .form_list {
   .selected-item {
   padding: 0 5px !important;
 
-  max-width: 300px !important;
+  max-width: 350px !important;
 }
 :host
   ::ng-deep
