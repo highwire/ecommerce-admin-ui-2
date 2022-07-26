@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+    this.publisher= localStorage.getItem('publisher-label');
     var menu:any= localStorage.getItem('menu');
     if(menu && JSON.parse(menu)){
       this.jouralslect=  true;

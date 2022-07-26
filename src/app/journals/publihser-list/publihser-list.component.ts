@@ -30,6 +30,7 @@ publihserlist: any;
   authorizedLogins= ['abc1','abc2','abc3'];
   ngOnInit(): void {
     this.selectAllPublishers();
+    localStorage.setItem('currency','');
   }
   selectAllPublishers(){
     
@@ -43,6 +44,7 @@ publihserlist: any;
   }
   selectPublishers(item:any){
     debugger;
+    console.log('fdsfds');
     if(item=='*'){
       localStorage.setItem('publisher','*')
       localStorage.setItem('publisher-label','All Publishers')
