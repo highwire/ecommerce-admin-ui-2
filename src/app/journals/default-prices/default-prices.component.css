@@ -217,7 +217,7 @@ table tr{border: none;}
   
   padding: 0 5px!important;
   
-  max-width: 300px!important;
+  max-width: 445px!important;
 }
 :host ::ng-deep .multiselect-dropdown .dropdown-btn .dropdown-multiselect__caret {
 background-color:#4A90E2;

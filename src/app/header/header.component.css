@@ -86,7 +86,7 @@
   }
 
   .nav-publisher {
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     width: 50%;
   }
 }
@@ -130,3 +130,8 @@
 .bg-light{
   background-color:#FBFBFB!important;
 }
+
+
+
+
+
