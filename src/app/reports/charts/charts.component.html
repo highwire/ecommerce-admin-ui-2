@@ -15,7 +15,7 @@
           </button>
         </div>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-8" *ngIf="!showbooks">
         <h4>JOURNALS</h4>
         <ng-multiselect-dropdown
           [placeholder]="'Filter sites...'"
@@ -27,66 +27,23 @@
         >
         </ng-multiselect-dropdown>
       </div>
+
+      <div class="col-md-8" *ngIf="showbooks">
+        <h4>BOOKS</h4>
+        <ng-multiselect-dropdown
+          [placeholder]="'Filter sites...'"
+          [settings]="bookdropdownSettings"
+          [data]="booksite"
+          [(ngModel)]="selectedBooks"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+        >
+        </ng-multiselect-dropdown>
+      </div>
     </div>
     <div class="row mt-2">
       <div class="col-md-9"></div>
-      <!-- <div class="col">
-                <div class="journals">
-                    
-            <!-- <select class="select" name="chapter" id="chapter">
-                        
-                        <option value="" selected="selected">ALL</option>
-                    </select> -->
 
-      <!-- 
-                    <div class="date-range" style="float: right;">
-                        <div class="date-picker">
-                            <div class="dateframe" style="height: 100px; width:100%">
-
-
-                                <mat-form-field appearance="legacy">
-
-                                    <mat-label style="color: white; position:relative; margin-left: 10px;">Set Date
-                                        Range
-                                    </mat-label>
-
-                                    <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange"
-                                        style="background-color: brown; color:white;">
-                                        <input matStartDate formControlName="start" placeholder="Start Date"
-                                            style="color: white;">
-                                        <input matEndDate formControlName="end" placeholder="End Date"
-                                            style="color: white;">
-                                    </mat-date-range-input>
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-
-                                    <mat-date-range-picker #picker></mat-date-range-picker>
-                                    
-                                    <h5>
-                                        Start: {{dateRange.value.start | date}}
-                                        End: {{dateRange.value.end | date}}
-                                    </h5>
-                                </mat-form-field> -->
-      <!-- <h5>
-                                    Start: {{dateRange.value.start | date}}
-                                    End: {{dateRange.value.end | date}}
-                                </h5> -->
-      <!-- </div>
-                            <button class="btn btn-dark p-1" style="color: white;; border-radius: 0px;">Reset</button>
-
-                            <button class="btn btn-danger p-1" style=" margin-left:1px"
-                                style="color: white;; border-radius: 0px;" (click)="getChartData()">RunReport</button>
-
-
-                            <button class="btn btn-info p-1"
-                                style="color: white; margin-left:1px; border-radius: 0px;">USD($)</button>
-
-                        </div>
-
-                    </div>
-                </div>
-
-
-            </div> -->
       <div class="col-sm-3">
         <label style="font-weight: 400">Set Date Range</label>
 
@@ -159,5 +116,8 @@
 
   <div class="chart-area mt-4">
     <canvas id="myChart" height="300px"></canvas>
+  </div>
+  <div class="chart-area mt-4">
+    <canvas id="myChart2" height="300px"></canvas>
   </div>
 </div>
