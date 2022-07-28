@@ -25,6 +25,11 @@ SEND_RECEIPT=  environment.apiBase+   '/report/publishers/';
 CATALOG_CHECK=environment.apiBase+  '/catalog/opts/';
 CATALOG_SITES = environment.apiBase+ '/catalogadm/sites/';
 SITE_UPDATE=environment.apiBase+'/catalogadm/catalogs/'
+SITE_BOOK=environment.apiBase+'/markup/'
+
+SITE_TYPE_SERVICE_POINT = environment.atomBase+'/site-type';
+
+
 
 // /api/catalogadm/catalogs/springer
 
@@ -39,7 +44,7 @@ SITE_UPDATE=environment.apiBase+'/catalogadm/catalogs/'
   ATOM_LOOKUP=environment.atomBase+ '/lookup/corpus/';
   ATOM_LITE=environment.atomBase+ '/lite/';
   ATOM_LITE_TWO=environment.atomBase+ '/lite'
-  SITE_TYPE_SERVICE_POINT = environment.atomBase+ '/site-type';
+  // SITE_TYPE_SERVICE_POINT = environment.atomBase+ '/site-type';
   // CATALOG_SITES
   // constructor(private _snackBar: MatSnackBar) {}
   constructor(

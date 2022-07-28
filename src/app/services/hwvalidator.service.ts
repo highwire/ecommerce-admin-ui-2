@@ -10,7 +10,8 @@ export class hwValidator {
  APP_ROLE=  "Intelligent Commerce Pricing and Reporting UI";
  
  slugRe = /^[A-Za-z0-9_.\-]+$/; // use to verify corpus code, slug, vol or iss number, etc.
- isbnRe = /^(97(8|9))?\d{9}(\d|X)$/; // use for eISBN or ISBN numbers
+//  isbnRe = /^(97(8|9))?\d{9}(\d|X)$/; // use for eISBN or ISBN numbers
+ isbnRe = /(?=[-0-9 ]{17}|[-0-9X ]{13}|[0-9X]{10})(?:97[89][- ]?)?[0-9]{1,5}[- ]?(?:[0-9]+[- ]?){2}[0-9X]/g;
  atomRe = /^(\/{1})(([A-Za-z0-9_.\-]+)\/{1})*(([A-Za-z0-9_.\-]+)(\.atom){1})$/; // atom URI; e.g. /pnas.atom
  resourceIdRe = /^([A-Za-z0-9_.\-])+(\/{1}[A-Za-z0-9_.\-]+)?(\/{1}[A-Za-z0-9_.\-]+){1}$/; // use for resource id; e.g. 99/1, or 99/1/426, etc.
  pisaRe = /^(([A-Za-z0-9_.\-])+){1};{1}[A-Za-z0-9_.\-]+(\/{1}[A-Za-z0-9_.\-]+)+$/;
@@ -30,6 +31,12 @@ export class hwValidator {
   isbn(id:any) {
     return this.isbnRe.test(id);
   };
+  getisbn(id:any) {
+    return id.match(this.isbnRe);
+  };
+
+  
+
 
   atomUri(id:any) {
     return this.atomRe.test(id);
