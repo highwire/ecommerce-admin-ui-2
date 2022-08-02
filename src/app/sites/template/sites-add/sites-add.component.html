@@ -47,9 +47,11 @@
                 background-color: #e9ecef;
                 border: none;
               "
+              class="crInp"
               type="input"
               disabled="true"
               [(ngModel)]="item.price_currency"
+              
             />
             <!-- <select
               id="dropdown"
@@ -128,7 +130,7 @@
               type="button"
               (click)="removeitem(ind)"
             >
-              <i class="fa-solid fa-minus"></i>REMOVE
+              -REMOVE
             </button>
           </td>
         </tr>
@@ -136,15 +138,16 @@
           <td>
             <div class="input-group mb-3 hour">
               <button
-                class="btn btn-primary mx-2 sav"
-                (click)="addPrice()"
-                type="button"
-              >
-                Add Price
-              </button>
-              <!-- <select id='dropdown' class="form-select" aria-label="#"> -->
-              <!-- <option selected (click)="addPrice()">Article </option> -->
-              <!-- </select> -->
+              class="btn btn-primary sav"
+              aria-expanded="false"
+              type="button"
+              data-bs-toggle="dropdown"
+            >
+              Add Price
+            </button>
+            <ul class="dropdown-menu">
+              <a (click)="addPrice()" type="button">{{productType}}</a>
+            </ul>
             </div>
           </td>
         </tr>

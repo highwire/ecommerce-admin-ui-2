@@ -100,7 +100,7 @@ export class SitesAddComponent implements OnInit {
         name: this.basedata.prices[0].name,
         price_name:this.basedata.prices[0].price_name,
         price_amount:'',
-        price_currency:'',
+        price_currency:this.basedata.prices[0].price_currency,
         price_interval:'',                
         productType:this.basedata.prices[0].productType,
     }
@@ -152,9 +152,9 @@ export class SitesAddComponent implements OnInit {
         prices.push({
           name: element.price_name, 
           
-          amount: element.price_amount==this.notForSaleLabel? -1:element.price_amount,
+          amount: parseInt(element.price_amount==this.notForSaleLabel? -1:element.price_amount),
            currency: element.price_currency,
-           interval: element.price_interval
+           interval: parseInt(element.price_interval)
         });     
     });
 

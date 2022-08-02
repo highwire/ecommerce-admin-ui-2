@@ -108,16 +108,18 @@ export class SitesSpecificPricesComponent implements OnInit {
     // console.log(month + " month");
     // console.log(year + " year");
     // console.log(hours)
-    if(hours > 8700){
+    if(hours >= 8700){
       return `${Math.floor(year)} Year `;
     }
-    if(hours > 699  ){
+    else if(hours > 699  ){
       return `${Math.floor(month)} Month`;}
+    else if(hours < 699 && hours > 74 ){
+        return `${Math.floor(days)} Days`;}
+   
     else{
       return `${hours} Hours`;
     }
     }
-    
      priceFormat(priceType:any) {
       // console.log(priceType)
       if (priceType === 'site') {
