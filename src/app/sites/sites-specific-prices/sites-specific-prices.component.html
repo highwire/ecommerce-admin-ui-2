@@ -64,7 +64,7 @@
             id="dropdownMenuButton1"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            disabled
+            *ngIf="currency.length !> 1 else btnBlock"
           >
             {{ selectedCurrency }}
           </button>
@@ -74,6 +74,7 @@
                 >Currency</a
               >
             </li>
+            
             <li>
               <a
                 class="dropdown-item"
@@ -88,6 +89,9 @@
               >
             </li>
           </ul>
+          <ng-template #btnBlock>
+            <button class="btn btn-info currency" type="button"  disabled>USD($)</button>
+            </ng-template>
         </div>
 
         <button

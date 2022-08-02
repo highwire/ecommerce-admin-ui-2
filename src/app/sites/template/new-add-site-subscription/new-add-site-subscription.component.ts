@@ -262,7 +262,7 @@ addPrice(type:any){
       name: this.pricearray[0].name,
       price_name:this.pricearray[0].price_name,
       price_amount:'',
-      price_currency:'',
+      price_currency:this.pricearray[0].price_currency,
       price_interval:'',                
       productType:type,
       showName: 'Site Subscription'
@@ -334,9 +334,9 @@ checkPricealreayexit(){
       prices.push({
         name: element.price_name, 
         
-        amount: element.price_amount==this.notForSaleLabel? -1:element.price_amount,
+        amount: parseInt(element.price_amount==this.notForSaleLabel? -1:element.price_amount),
          currency: element.price_currency,
-         interval: element.price_interval
+         interval: parseInt(element.price_interval)
       });     
   });
   return prices;
