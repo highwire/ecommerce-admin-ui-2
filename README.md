@@ -26,3 +26,22 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+Angular environment configuration  : 
+Access path:- https://ecommerce-stage.highwire.org/login
+
+server Path :- 10.220.52.127
+
+Github URL :- https://github.com/highwire/ecommerce-admin-ui-2/
+
+Path: /var/www
+
+ Manually deployment steps 
+
+ Angular build   'ng build ' command . Angular build command will generate dist folder 
+copy dist folder to this location  10.220.52.127/var/www
+restart apache server with command 'sudo systemctl restart httpd.service'
+
+Jenkins job for automatic deployment 
+
+ https://fa-jenkins-master-dev-01.highwire.org/job/Ecommerce-beta/configure
