@@ -83,7 +83,7 @@ export class ChartsComponent implements OnInit {
 
 	ngOnInit(): void {
 		var d = new Date();
-		d.setDate(d.getDate() - 114);
+		d.setDate(d.getDate() - 17);
 		this.dateRange.patchValue({
 			start: d,
 			end: new Date()
@@ -309,8 +309,13 @@ export class ChartsComponent implements OnInit {
 			// this.filterDOI(data);
 			data = JSON.parse(data);
 			// data.feed.forEach((element:any) => {
-			if (data && data.feed)
+        // debugger;
+			if (data && data.feed && Array.isArray(data.feed) ){
+				this.chartbookSites.push(data.feed[0].entry.corpus)
+			}else{
 				this.chartbookSites.push(data.feed.entry.corpus)
+			}
+				
 
 			// });
 
@@ -542,8 +547,14 @@ export class ChartsComponent implements OnInit {
 				borderColor: ["rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)", "rgb(75, 192, 192)", "rgb(54, 162, 235)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"]
 			})
 		});
+		if(this.showbooks){
+			this.showChart(this.bookdatasets, this.datesrages);	
+		}else{
+			this.showChart(this.datasets, this.datesrages);
+			
+		}
 
-		this.showChart(this.datasets, this.datesrages);
+		
 		// this.showChart(this.bookdatasets,this.datesrages);
 
 
