@@ -25,7 +25,7 @@ interface USER {
   styleUrls: ['./sites-specific-prices.component.css']
 })
 export class SitesSpecificPricesComponent implements OnInit {
-  displayedColumns: string[] = ['description', 'productType' ,'price_amount','price_interval','options',];
+  displayedColumns: string[] = ['description', 'productType' ,'price_amount','showPrice_interval','options',];
   currency:any=[];
   selectedCurrency:any= 'USD ($)';
   masterdata:any;
@@ -166,6 +166,9 @@ export class SitesSpecificPricesComponent implements OnInit {
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
             price_interval:elements.interval,
+            showPrice_interval:self.period(elements.interval),
+            
+            
             price_name:elements.name,
             price:elements
           })  
@@ -182,6 +185,7 @@ export class SitesSpecificPricesComponent implements OnInit {
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
             price_interval:elements.interval,
+            showPrice_interval:self.period(elements.interval),
             price_name:elements.name,
             price:elements
           })  
@@ -193,7 +197,8 @@ export class SitesSpecificPricesComponent implements OnInit {
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
-            price_interval:self.period(elements.interval),
+            price_interval:elements.interval,
+            showPrice_interval:self.period(elements.interval),
             price_name:elements.name,
             price:elements
           })  
