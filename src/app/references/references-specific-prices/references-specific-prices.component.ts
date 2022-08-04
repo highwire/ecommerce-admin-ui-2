@@ -159,7 +159,8 @@ export class ReferencesSpecificPricesComponent implements OnInit {
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
-            price_interval:self.period(elements.interval),
+             showPrice_interval:self.period(elements.interval),
+            price_interval:elements.interval,
             price_name:elements.name,
             price:elements
           })  
@@ -175,7 +176,8 @@ export class ReferencesSpecificPricesComponent implements OnInit {
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
-            price_interval:self.period(elements.interval),
+             showPrice_interval:self.period(elements.interval),
+            price_interval:elements.interval,
             price_name:elements.name,
             price:elements
           })  
@@ -187,7 +189,8 @@ export class ReferencesSpecificPricesComponent implements OnInit {
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
-            price_interval:self.period(elements.interval),
+             showPrice_interval:self.period(elements.interval),
+            price_interval:elements.interval,
             price_name:elements.name,
             price:elements
           })  

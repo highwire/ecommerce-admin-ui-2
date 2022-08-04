@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
 <div class="container" style="overflow-x: scroll">
   <div class="table">
     <div class="container ng-scope" ng-show="catalog.initialized">
@@ -115,10 +115,10 @@
       <td mat-cell *matCellDef="let element">Journal Subscription</td>
     </ng-container>
 
-    <ng-container matColumnDef="price_interval">
+    <ng-container matColumnDef="showPrice_interval">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Access Period</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.price_interval }}
+        {{ element.showPrice_interval }}
       </td>
     </ng-container>
 
