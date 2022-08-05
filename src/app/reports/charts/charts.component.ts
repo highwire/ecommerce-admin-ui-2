@@ -68,6 +68,8 @@ export class ChartsComponent implements OnInit {
 	masterdata: any
 	myChart: any;
 	myChart2: any;
+	selectedBooksitem:any=[];
+	selectedBookskeys:any=[];
 
 
 	dateRange = new FormGroup({
@@ -83,7 +85,7 @@ export class ChartsComponent implements OnInit {
 
 	ngOnInit(): void {
 		var d = new Date();
-		d.setDate(d.getDate() - 17);
+		d.setDate(d.getDate() - 47);
 		this.dateRange.patchValue({
 			start: d,
 			end: new Date()
@@ -114,7 +116,7 @@ export class ChartsComponent implements OnInit {
 
 		this.bookdropdownSettings = {
 			singleSelection: false,
-			idField: 'corpus',
+			idField: 'isbn',
 			textField: 'title',
 			selectAllText: 'Select All',
 			unSelectAllText: 'UnSelect All',
@@ -150,7 +152,6 @@ export class ChartsComponent implements OnInit {
 			// this.filterDOI(data);
 			var bookarr: any = [];
 			data.feed.forEach((element: any) => {
-
 				if (this.hw.isbn(element.entry.uri)) {
 					console.log('element.entry.uri', element.entry.uri)
 					let isbn = this.hw.getisbn(element.entry.uri)
@@ -162,29 +163,68 @@ export class ChartsComponent implements OnInit {
 						title: element.entry.title,
 						isbn: isbn
 					})
-					this.keys.push(isbn)
-					// isbn = elem.uri.match(isbnRe);
+					this.keys.push(isbn)					
 				}
-
-
-
 			});
-			this.booksite = bookarr;
-
+			
+			this.booksite = bookarr;	
+			this.selectedBooksitem= bookarr;
+			this.selectedBookskeys= this.keys;		
 			this.getChartData();
-
+			
 		})
+	}
+	
+	onSelectAllbook(item: any) {
+		
+		console.log(item);
+		this.setDatafilerSiteData(this.selectedBooks)
+	}
+	setDatafilerSiteData(item: any){
+		this.selectedBooksitem= [];
+		this.selectedBookskeys= [];
+		
+		console.log(item);
+		// if(!Array.isArray(item)){			
+		// 	this.booksite.forEach((element:any) => {
+		// 		console.log('element')			
+		// 		if(element.isbn== item.isbn){
+		// 			this.selectedBooksitem.push(item);
+		// 			this.selectedBookskeys.push(item.isbn);
+		// 		}								
+		// 	});
+
+		// }else{
+			item.forEach((element:any) => {
+				this.selectedBookskeys.push(element.isbn);
+			});
+			debugger;
+			this.booksite.forEach((element:any) => {
+				console.log('element')			
+				if(this.selectedBookskeys.includes(element.isbn)){
+					this.selectedBooksitem.push(element);
+					
+				}								
+			});
+
+		// }
+		this.genratechartdata(this.masterChartData, this.getSelectCurrency());
 
 	}
-	//////////////////
-	onItemSelect(item: any) {
-
-		// this.extractPrice(this.masterData, item.corpus);
-		console.log(item);
+	onItemSelectbook(item: any) {
+		
+		this.setDatafilerSiteData(this.selectedBooks)
+		
 	}
 	onSelectAll(items: any) {
 		console.log(items);
+		
 	}
+	onItemSelect(item:any){
+		console.log('item',item);
+	}
+
+	
 	onJournal() {
 		this.showbooks = false;
 
@@ -312,7 +352,7 @@ export class ChartsComponent implements OnInit {
         // debugger;
 			if (data && data.feed && Array.isArray(data.feed) ){
 				this.chartbookSites.push(data.feed[0].entry.corpus)
-			}else{
+			}else if(data && data.feed && data.feed.entry &&   data.feed.entry.corpus){
 				this.chartbookSites.push(data.feed.entry.corpus)
 			}
 				
@@ -357,54 +397,43 @@ export class ChartsComponent implements OnInit {
 		// }
 		this.http.getDatawithPost(URL, data).subscribe((data: any) => {
 			console.log('chart data', data.result);
-			var defaultcurrency: any = localStorage.getItem('defaultcurrency');
+			
+			this.masterChartData = data
+			this.genratechartdata(this.masterChartData, this.getSelectCurrency());
+		})
+	}
+	getSelectCurrency(){
+		var defaultcurrency: any = localStorage.getItem('defaultcurrency');
 			if (defaultcurrency) {
 				defaultcurrency = JSON.parse(defaultcurrency);
 				defaultcurrency = defaultcurrency.currency
 			}
-			this.masterChartData = data
-			this.genratechartdata(this.masterChartData, defaultcurrency);
-		})
+		return defaultcurrency;
 	}
 
 	genratechartdata(data: any, defaultcurrency: any) {
 		let data1 = data.result;
 		let daterange = data.range
-		// var Currency = 'USD';
-
-		// var curr= localStorage.getItem('currency')+'';
-		// if(curr)
-		// this.currency=  JSON.parse(curr);
 		let books: any = [];
 		var journal: any = [];
-		for (let item in data1) {
-			// console.log('item ',item)
+		for (let item in data1) {			
 			let id: any = item + '';
 			id = id.replaceAll('-', '')
 			if (this.hw.isbn(id)) {
 				books.push(data1[item])
 			} else if (item !== '$all') {
-				journal.push(data1[item])
-				// this.booksite.forEach((element:any) => {
-				// if(item==element)
-				// console.log('element',element);
-				// });
-
+				journal.push(data1[item])				
 			}
-
 		}
 		console.log('book         ', books);
 		console.log('journal         ', journal);
-
-
 		var Currency: any = localStorage.getItem('currency');
 		if (Currency) {
 			Currency = JSON.parse(Currency);
 			console.log('Currency', Currency);
 		}
 		var amountsArray: any = [];
-		let siteData: any = localStorage.getItem('siteData')
-		let journalarray: any = []
+		let siteData: any = localStorage.getItem('siteData')		
 		let booksArray: any = [];
 		if (siteData) {
 			siteData = JSON.parse(siteData);
@@ -413,13 +442,9 @@ export class ChartsComponent implements OnInit {
 				obj2['amount'] = [];
 				obj2['date'] = [];
 				if (elementn[defaultcurrency]) {
-        
-
-				
-				if (this.keys.indexOf(elementn[defaultcurrency].isbn) === -1) {
+				if (this.selectedBookskeys.indexOf(elementn[defaultcurrency].isbn) === -1) {
 					return;
 				}
-
 				var dates: any = [];
 				var mxes: any = []
 				elementn[defaultcurrency].values.forEach((elements: any) => {
@@ -427,9 +452,7 @@ export class ChartsComponent implements OnInit {
 					mxes.push(Math.round(elements.amount))
 				})
 				let title = this.getisbnTitle(elementn[defaultcurrency].isbn);
-				const maxDate = dates.reduce(function(a: any, b: any) {
-					return a > b ? a : b;
-				});
+				
 				obj2['amount'] = mxes;
 				obj2['date'] = dates
 				obj2['articel'] = this.getisbnTitle(elementn[defaultcurrency].isbn);
@@ -440,44 +463,40 @@ export class ChartsComponent implements OnInit {
 					}
 				});
 				if (pus) booksArray.push(obj2);
-      }else{
-      
-
-        obj2['amount'] = [];
+      		}else{      
+        		obj2['amount'] = [];
 				obj2['date'] = []
 				obj2['articel'] = '';
-        booksArray.push(obj2);
-      }
-			});
+        		booksArray.push(obj2);
+      		}
+		});
    
 
 
-			siteData.forEach((element: any) => {
-				// debugger;
-				if (data1[element.corpus] && data1[element.corpus] !== undefined) {
+		siteData.forEach((element: any) => {		
+			if (data1[element.corpus] && data1[element.corpus] !== undefined) {
 					var obj: any = {};
 					obj['amount'] = [];
 					obj['date'] = [];
-          obj['articel'] = '';
-          if(data1[element.corpus][defaultcurrency]){
-            data1[element.corpus][defaultcurrency].values.forEach((element: any) => {
-              obj['amount'].push(element.amount),
-                obj['date'].push(moment(element.date).format('D MMM YYYY'))
-            });
-            obj['articel'] = element.title;
-            amountsArray.push(obj);
-          }else{
-            amountsArray.push(obj);
-          }
+          		obj['articel'] = '';
+          		if(data1[element.corpus][defaultcurrency]){
+            		data1[element.corpus][defaultcurrency].values.forEach((element: any) => {
+              			obj['amount'].push(element.amount),
+                		obj['date'].push(moment(element.date).format('D MMM YYYY'))
+            		});
+            		obj['articel'] = element.title;
+            		amountsArray.push(obj);
+          		}else{
+            		amountsArray.push(obj);
+          		}
 					
-				}
-			})
+			}
+		})
    
    
 
-			console.log('booksArray', booksArray);
-			// console.log('journalarray',journalarray);
-			console.log('amountsArray', amountsArray);
+		console.log('booksArray', booksArray);			
+		console.log('amountsArray', amountsArray);
 		}
   
     
@@ -493,8 +512,10 @@ export class ChartsComponent implements OnInit {
 		return Math.floor(Math.random() * number);;
 	}
 	getisbnTitle(obj: any) {
-		let title = ''
-		this.booksite.forEach((element: any) => {
+		let title = '';
+		// this.selectedBooksitem= bookarr;
+			// this.selectedBookskeys= this.keys;	
+		this.selectedBooksitem.forEach((element: any) => {
 			if (element.isbn == obj) {
 				title = element.title
 
