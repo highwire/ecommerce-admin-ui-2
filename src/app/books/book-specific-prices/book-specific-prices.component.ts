@@ -25,7 +25,7 @@ interface USER {
   styleUrls: ['./book-specific-prices.component.css']
 })
 export class BookSpecificPricesComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'description', 'productType','price_amount','price_interval','options',];
+  displayedColumns: string[] = ['name', 'description', 'productType','price_amount','showPrice_interval','options',];
   currency:any=[];
   selectedCurrency:any= '  All CURRENCIES';
   masterdata:any;
@@ -143,7 +143,9 @@ export class BookSpecificPricesComponent implements OnInit {
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
-            price_interval:self.period(elements.interval),
+            
+            showPrice_interval:self.period(elements.interval),
+            price_interval:elements.interval,
             price_name:elements.name,
             price:elements
           })  
@@ -159,7 +161,8 @@ export class BookSpecificPricesComponent implements OnInit {
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
-            price_interval:self.period(elements.interval),
+            showPrice_interval:self.period(elements.interval),
+            price_interval:elements.interval,
             price_name:elements.name,
             price:elements
           })  
@@ -172,7 +175,8 @@ export class BookSpecificPricesComponent implements OnInit {
             identifier: element.identifier,
             price_amount: self.formatAmountDisplay (elements.amount),
             price_currency:elements.currency,
-            price_interval:self.period(elements.interval),
+            showPrice_interval:self.period(elements.interval),
+            price_interval:elements.interval,
             price_name:elements.name,
             price:elements
           })  
