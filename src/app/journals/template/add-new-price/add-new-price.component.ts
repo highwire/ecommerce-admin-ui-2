@@ -21,6 +21,7 @@ export class AddNewPriceComponent implements OnInit {
   sitedata:any;
   pricedata:any= [];
   currValue:any ='USD';
+  productType:any;
 
   notForSaleLabel= 'Not for Sale';
     
