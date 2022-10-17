@@ -121,7 +121,12 @@
                 id="#"
                 >{{ item.price_currency | filterPipe }}</span
               >
-              <input
+              <div *ngIf="item.price_amount == 'Free'; 
+                then freetab; 
+                else elsetabs">
+              </div>
+              <ng-template #freetab>
+              <input disabled=""
                 style="
                   border-radius: 0px;
                   background-color: #ffffff;
@@ -136,6 +141,16 @@
                 aria-label="price"
                 aria-describedby="#"
               />
+              </ng-template>
+              <ng-template #elsetabs>
+                <input style="
+              border-radius: 0px;
+              background-color: #ffffff;
+              border: 1px solid lavender;
+              margin-bottom: 10px;
+            " type="text" [(ngModel)]="item.price_amount" name="{{ item.price_amount + ind }}" class="form-control"
+                  placeholder="" aria-label="price" aria-describedby="#" />
+              </ng-template>
             </ng-template>
           </div>
         </td>

@@ -165,13 +165,13 @@ export class MostPopularComponent implements OnInit {
       
       this.p1= [  
         {key: 'No.of Items sold', value: 0},
-        {key: 'Total Revenue - EUR', value: 0},
-        {key: 'Total Revenue - GBP', value: 0},
-        {key: 'Total Revenue - USD', value: 0},
+        {key: 'Total Revenue - EUR', value: `€ 0`},
+        {key: 'Total Revenue - GBP', value: `£ 0`},
+        {key: 'Total Revenue - USD', value: `$ 0`},
         {key: 'Total Issue Sold', value: 0},
 
         {key: 'Total Article Sold', value: 0},
-        {key: 'Most Popular Access Period', value: '0'}
+        {key: 'Most Popular Access Period', value: 'No Data'}
       
     ]
      
@@ -261,10 +261,17 @@ extractPrice(data:any, currencies?:any,productType?:any){
     });
     return prices
   }
-
-  currencySelect(currency:any){	
-    debugger	
-    this.selectedCurrency= currency	
+  currArray:any=[]
+  currencySelect(e:any, currency:any){	
+    // debugger	
+    if(e.target.checked){
+      this.currArray.push(currency)
+    }
+    else{
+      this.currArray.splice(this.currArray.indexOf(currency))
+    }
+    console.log(this.currArray)
+    // this.selectedCurrency= currency	
     console.log(currency);	
     this.extractPrice(this.masterdata, currency=='Currencies' ? '':currency, '');	
   }	

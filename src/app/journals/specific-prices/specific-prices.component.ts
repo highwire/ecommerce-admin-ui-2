@@ -27,7 +27,7 @@ interface USER {
 export class SpecificPricesComponent implements OnInit {
   displayedColumns: string[] = ['name', 'description', 'productType','price_amount','showPrice_interval','options',];
   currency:any=[];
-  selectedCurrency:any= '  All CURRENCIES';
+  // selectedCurrency:any= '  All CURRENCIES';
   masterdata:any;
   dataSource: MatTableDataSource<USER> = new MatTableDataSource();
   freeLabel= 'Free';
@@ -41,6 +41,8 @@ export class SpecificPricesComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10, 25, 100];
   animal: any;
   name: any;
+  productArr:any = [];
+  selectCurrencies:any=['ALL CURRENCIES']
   
   productTypes:any=[
     {key:"",value:'All'},
@@ -143,21 +145,22 @@ export class SpecificPricesComponent implements OnInit {
         }
 
 
-        else if( currencies){
-          if(elements.currency.toUpperCase()==currencies)
-          pricearray.push({
-            name: element.name,
-            productType:element.productType,
-            description:element.description,      
-            identifier: element.identifier,
-            price_amount: self.formatAmountDisplay (elements.amount),
-            price_currency:elements.currency,
-            showPrice_interval:self.period(elements.interval),
-            price_interval:elements.interval,
-            price_name:elements.name,
-            price:elements
-          })  
-        }else{
+        // else if( currencies){
+        //   if(elements.currency.toUpperCase()==currencies)
+        //   pricearray.push({
+        //     name: element.name,
+        //     productType:element.productType,
+        //     description:element.description,      
+        //     identifier: element.identifier,
+        //     price_amount: self.formatAmountDisplay (elements.amount),
+        //     price_currency:elements.currency,
+        //     showPrice_interval:self.period(elements.interval),
+        //     price_interval:elements.interval,
+        //     price_name:elements.name,
+        //     price:elements
+        //   })  
+        // }
+        else{
           pricearray.push({
             name: element.name,
             productType:element.productType,
@@ -183,6 +186,41 @@ export class SpecificPricesComponent implements OnInit {
     this.paginator.length = data.length;},1000);
   }
 
+  extractPrice1(data:any, currencies:any){
+    console.log(currencies);
+    var self= this;
+    var pricearray:any= [];
+    this.masterdata=data;
+    data.forEach((element:any=[]) => {
+      // console.log(element);
+         element.prices.forEach((elements:any) => { 
+          console.log(currencies);
+          currencies.forEach((abc:any) => {
+              if(elements.currency.toUpperCase() == abc) {
+                pricearray.push({
+                  name: element.name,
+                  productType:element.productType,
+                  description:element.description,      
+                  identifier: element.identifier,
+                  price_amount: self.formatAmountDisplay (elements.amount),
+                  price_currency:elements.currency,
+                  showPrice_interval:self.period(elements.interval),
+                  price_interval:elements.interval,
+                  price_name:elements.name,
+                  price:elements
+                })   
+              }
+          })  
+        });      
+     
+    });
+    
+    this.dataSource.data= pricearray;
+     setTimeout(() => {
+      this.paginator.pageIndex = this.currentPage;
+      this.paginator.length = data.length;},1000);
+    }
+
 
   toppingList: string[] = [
     "Extra cheese",
@@ -198,11 +236,23 @@ export class SpecificPricesComponent implements OnInit {
   }
 
   currencySelect(currency:any){
-    debugger
-    this.selectedCurrency= currency
-    console.log(currency);
+    // debugger
+    // this.selectedCurrency= currency
+    // console.log(currency);
     this.extractPrice(this.masterdata, currency=='Currencies' ? '':currency, '');
   }
+
+  getCurrency(e:any, currency:any=[]) {
+    if (e.target?.checked) {
+    
+      this.productArr.push(currency);
+    } else {
+      this.productArr.splice(this.productArr.indexOf(currency), 1); 
+    }
+     // console.log(this.productArr);
+    this.extractPrice1(this.masterdata, currency=='Currencies' ? '':this.productArr);
+  }
+
     // this.masterdata=data;
   productSelect(productType:any){
     
