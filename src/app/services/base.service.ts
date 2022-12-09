@@ -26,6 +26,7 @@ CATALOG_CHECK=environment.apiBase+  '/catalog/opts/';
 CATALOG_SITES = environment.apiBase+ '/catalogadm/sites/';
 SITE_UPDATE=environment.apiBase+'/catalogadm/catalogs/'
 SITE_BOOK=environment.apiBase+'/markup/'
+PRODUCT_TYPE= environment.apiBase+'/catalogadm/producttypes'
 
 SITE_TYPE_SERVICE_POINT = environment.atomBase+'/site-type';
 

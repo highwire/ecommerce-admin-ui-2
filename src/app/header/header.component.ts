@@ -23,7 +23,10 @@ export class HeaderComponent implements OnInit {
     
     refwork: false,
     site: false,
-    ebook:false
+    ebook:false,
+    monograph:false,
+    reportguideline:false,
+    testreview:false
   };
   publisher:any;
   hwpUser: any;
@@ -115,6 +118,9 @@ export class HeaderComponent implements OnInit {
   localStorage.setItem('hwp-login','');
   localStorage.setItem('siteData','');
   localStorage.setItem('ebook','');
+  localStorage.setItem('monograph','');
+  localStorage.setItem('reportguideline','');
+  localStorage.setItem('testreview','');
   
   // auth
   // publisher
@@ -210,6 +216,9 @@ filterDOI(data:any){
     refwork: false,
     site: false,
     ebook:false,
+    monograph:false,
+    reportguideline:false,
+    testreview:false
   };
   data= data.filter((entry:any)=>{
     
@@ -231,9 +240,20 @@ filterDOI(data:any){
     } 
     // console.log('element.productType',element.productType);
     if(element.prices && Array.isArray(element.prices)  && element.productType=='site'){
-      
       this.model.site = true;
       localStorage.setItem('site','yes');
+    }
+    if(element.prices && Array.isArray(element.prices)  && element.productType=='monograph' || element.productType=='monograph-chapter'){
+      this.model.monograph = true;
+      localStorage.setItem('monograph','yes');
+    }
+    if(element.prices && Array.isArray(element.prices)  && element.productType=='report-guideline' || element.productType=='report-guideline-chapter'){
+      this.model.reportguideline = true;
+      localStorage.setItem('report-guideline','yes');
+    }
+    if(element.prices && Array.isArray(element.prices)  && element.productType=='test-review' || element.productType=='test-review-chapter'){
+      this.model.testreview = true;
+      localStorage.setItem('test-review','yes');
     }
     
     
