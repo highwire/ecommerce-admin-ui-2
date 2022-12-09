@@ -1,0 +1,139 @@
+<div class="container p-2 my-3">
+  <h1>Edit Price</h1>
+  <div class="sm-4 my-2 mx-0 row" style="border: 1px solid grey">
+    <div class="mb-3 row" *ngIf="ddata">
+      <label for="inputtext" class="col-sm-5 col-form-label"
+        >Publication Details</label
+      >
+      <div class="col-sm-6">
+        <div *ngIf="ddata.title; then thenBlock; else elseBlock"></div>
+        <ng-template #thenBlock>
+          {{ ddata.authorsList[0].personLastName }}. ({{
+            ddata.publicationDate | date: "yyyy"
+          }}). {{ ddata.title }}.
+          <i> {{ ddata.journalName }}().</i>
+          doi:{{ ddata.doi }}
+        </ng-template>
+        <ng-template #elseBlock>Identifier:{{ ddata.doi }}</ng-template>
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="inputtext" class="col-sm-5 col-form-label"
+        >Product Type</label
+      >
+      <div class="col-sm-6">
+        {{ data.element.productType | titlecase }}
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label for="inputtext" class="col-sm-5 col-form-label">Currency</label>
+      <div class="col-sm-6">
+        <input
+          type="text"
+          readonly
+          class="form-control p-2"
+          value="{{ data.element.price_currency }}"
+          class="form-control"
+          placeholder="EUR"
+          id="Details"
+        />
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="inputtext" class="col-sm-5 col-form-label"
+        >Article Price</label
+      >
+      <div class="col-sm-6">
+        <div class="input-group mb-3">
+          <!-- <span class="input-group-text" id="#">€</span>
+                <input type="text" class="form-control" name="price"  [(ngModel)]="data.element.price_amount"  placeholder="price" aria-label="price"
+                   aria-describedby="#"> -->
+
+          <div
+            *ngIf="
+              data.element.price_amount == notForSaleLabel;
+              then thenBlock;
+              else elseBlock
+            "
+          ></div>
+          <ng-template #thenBlock>{{ notForSaleLabel }} </ng-template>
+          <ng-template #elseBlock>
+            <span
+              style="border-radius: 0px; border: none"
+              class="input-group-text"
+              id="#"
+              >{{ data.element.price_currency | monofilter }}</span
+            >
+            <input
+              style="
+                border-radius: 0px;
+                background-color: #e9ecef;
+                border: none;
+              "
+              type="text"
+              [(ngModel)]="data.element.price_amount"
+              class="form-control"
+              placeholder=""
+              aria-label="price"
+              aria-describedby="#"
+            />
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="inputtext" class="col-sm-5 col-form-label"
+        >Article Access Period</label
+      >
+      <div class="col-sm-6">
+        <div class="input-group mb-3 hour" style="width: 30%; color: white">
+          <select
+            class="form-select"
+            [(ngModel)]="data.element.price_interval"
+            aria-label="Disabled select example"
+          >
+            <option *ngFor="let item of accessPeriods" value="{{ item.value }}">
+              {{ item.label }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="inputtext" class="col-sm-5 col-form-label">For Sale</label>
+      <div class="col-sm-6">
+        <!-- <label class="switch">
+             <input type="checkbox" checked>
+             <span class="slider round"></span>
+             </label> -->
+
+        <label class="switch">
+          <input
+            type="checkbox"
+            (change)="onItemChange($event.target, data.element)"
+            [checked]="
+              data.element.price_amount == 'Not for Sale' ? false : true
+            "
+          />
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="inputtext" class="col-sm-5 col-form-label"></label>
+    <div class="col-sm-6 cs">
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <!-- <button class="btn btn-primary me-md-2 can" type="button">Cancel</button> -->
+        <button class="btn btn-primary me-md-2 can" mat-button mat-dialog-close>
+          Cancel
+        </button>
+
+        <button class="btn btn-primary sav" (click)="update()" type="button">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

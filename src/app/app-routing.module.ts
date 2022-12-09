@@ -23,6 +23,11 @@ const routes: Routes = [
     { path: 'sites',
    canActivate:[AuthGuardService],
     loadChildren: () => import('./sites/sites-journals.module').then(m => m.SitesModule)},
+
+    { path: 'monograph',
+    canActivate:[AuthGuardService],
+     loadChildren: () => import('./monograph/monograph.module').then(m => m.MonographModule)},
+     
  
 
 
