@@ -26,6 +26,7 @@ import { MessagepopupComponent } from './common/messagepopup/messagepopup.compon
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { NgxDateRangeModule } from 'ngx-daterange';
 import { AuthGuardService }  from './auth/auth-gaurd.service';
+
 // import {FilterPipe} from './services/currency.filter';
 
 export function tokenGetter() {
@@ -39,6 +40,7 @@ export function tokenGetter() {
     HeaderComponent,
     FooterComponent,
     MessagepopupComponent,
+
    
    
   ],

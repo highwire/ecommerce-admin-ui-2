@@ -27,7 +27,14 @@ const routes: Routes = [
     { path: 'monograph',
     canActivate:[AuthGuardService],
      loadChildren: () => import('./monograph/monograph.module').then(m => m.MonographModule)},
-     
+
+     { path: 'reportguideline',
+    canActivate:[AuthGuardService],
+     loadChildren: () => import('./report-guideline/report-guideline.module').then(m => m.ReportGuidelineModule)},
+    
+     { path: 'testreview',
+     canActivate:[AuthGuardService],
+      loadChildren: () => import('./test-review/test-review.module').then(m => m.TestReviewModule)},
  
 
 
