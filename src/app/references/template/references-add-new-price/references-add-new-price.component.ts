@@ -70,7 +70,7 @@ export class ReferencesAddNewPriceComponent implements OnInit {
     if(curr)
     this.currency=  JSON.parse(curr);
     this.priceobj.patchValue({ 
-      EisbnorDoi:'doi'
+      //EisbnorDoi:'doi' 
      });
 
    
