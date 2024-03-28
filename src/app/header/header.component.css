@@ -96,7 +96,7 @@
 }
 
 .nav-item a {
-  color: #5e5859 !important;
+  color: #9B9B9B !important;
 }
 .nav-item a:hover {
   color: #a81732 !important;
@@ -129,6 +129,7 @@
   background-color: #fff!important;}
 .bg-light{
   background-color:#FBFBFB!important;
+  min-height: 70px;
 }
 
 
