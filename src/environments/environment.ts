@@ -1,13 +1,12 @@
 
 export const environment = {
- production: false,
+  production: false,
   appRole: 'Collections maint',
-  atomBase: 'http://localhost:8080/atom',
-  apiBase: 'http://localhost:8080/api',  
-  loginUrl: 'http://localhost:8080/login-global',
-  taxonomyUrl: 'http://localhost:8080/api/tree',
-  membershipUrl: 'http://localhost:8080/api/acs/collection-citations'
-
+  atomBase: 'http://localhost:5006/atom',
+  apiBase: 'http://localhost:5006/api',  
+  loginUrl: 'http://localhost:5006/login-global',
+  taxonomyUrl: 'http://localhost:5006/api/tree',
+  membershipUrl: 'http://localhost:5006/api/acs/collection-citations'
 
   // http://10.220.52.127:5006/login
 
@@ -19,12 +18,6 @@ export const environment = {
   // taxonomyUrl: 'http://10.220.52.127:5006/api/tree',
   // membershipUrl: 'http://10.220.52.127:5006/api/acs/collection-citations'
 
-
-
-
-
-  
-  
   // production: false,
   // appRole: 'Collections maint',
   // atomBase: 'https://ecommerce-service.highwire.org/atom',
@@ -35,6 +28,3 @@ export const environment = {
   // membershipUrl: 'https://ecommerce-service.highwire.org/api/acs/collection-citations'
   
 };
-
-
-

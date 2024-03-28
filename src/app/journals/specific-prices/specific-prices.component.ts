@@ -122,7 +122,6 @@ export class SpecificPricesComponent implements OnInit {
     // console.log(element);
     if(element.prices && Array.isArray(element.prices)  &&
      (element.productType=='article' || element.productType=='issue' || element.productType=='journal'      )  ){
-      debugger
       
        element.prices.forEach((elements:any) => {      
         // if(elements.name== "article-price"){

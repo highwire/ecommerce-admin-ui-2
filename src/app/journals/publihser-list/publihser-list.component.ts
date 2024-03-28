@@ -43,8 +43,6 @@ publihserlist: any;
 
   }
   selectPublishers(item:any){
-    debugger;
-    console.log('fdsfds');
     if(item=='*'){
       localStorage.setItem('publisher','*')
       localStorage.setItem('publisher-label','All Publishers')

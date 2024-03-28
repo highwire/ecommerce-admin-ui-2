@@ -5,7 +5,7 @@
 body {
     background: #fff;
     -webkit-font-smoothing: antialiased;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato', Helvetica, Arial, sans-serif;
     font-size: 14px;
 }
 
@@ -28,6 +28,7 @@ body {
 
 .bg-primary {
     background-color: #4a90e2!important;
+    font-size: 21px !important;
 }
 
 .btn-primary {
@@ -40,6 +41,7 @@ body {
     color: #fff;
     background-color: #a81732;
     border-color: #a81732;
+    font-size: 18px;
 }
 
 a {
@@ -59,9 +61,9 @@ a:hover {
     background: #eae8e8;
 }
 
-.mid-wrapper {
+/* .mid-wrapper {
     min-height: calc(100vh - 309px)
-}
+} */
 
 .wsn {
     white-space: normal;
@@ -81,7 +83,7 @@ a:hover {
 
 .nav-product-name {
     font-weight: 600;
-    font-size: 13px;
+    font-size: 14px;
     color: #a81732;
     line-height: 16px;
 }
@@ -112,7 +114,19 @@ th {
     }
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.list-group-item {
+    color: #555 !important;
+    padding: 10px 15px !important;
+}
 
+a.list-group-item:focus, a.list-group-item:hover, button.list-group-item:focus, button.list-group-item:hover {
+    text-decoration: none;
+    color: #555;
+    background-color: #f5f5f5;
+}
+
+.text-md-end {
+    font-weight: bold;
+}
 
